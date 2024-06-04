@@ -1,29 +1,27 @@
 package controller;
 
+import model.GenerateLadders;
 import model.Ladder;
 import view.InputView;
-import view.LadderResponse;
 import view.OutputView;
+import view.dto.LadderResponse;
+
+import java.util.Scanner;
 
 public class Controller {
-    private static final int DEFAULT_HEIGHT_OF_LADDER = 4;
-    private static final int DEFAULT_WEIGHT_OF_LADDER = 4;
 
-    private final InputView inputView;
-    private final OutputView outputView;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        InputView inputView = new InputView(scanner);
+        OutputView outputView = new OutputView();
 
-    public Controller(final InputView inputView, final OutputView outputView) {
-        this.inputView = inputView;
-        this.outputView = outputView;
-    }
+        int width = inputView.widthLadder();
+        int height = inputView.heightLadder();
 
-    public void run() {
-        Ladder ladder = Ladder.of(
-                DEFAULT_HEIGHT_OF_LADDER,
-                DEFAULT_WEIGHT_OF_LADDER
-        );
+        GenerateLadders generateLadders = new GenerateLadders();
+        Ladder ladder = generateLadders.generate(height, width);
 
-        outputView.printLadder(LadderResponse.from(ladder));
+        LadderResponse ladderResponse = new LadderResponse(ladder);
+        outputView.printLadder(ladderResponse);
     }
 }
-

@@ -1,14 +1,21 @@
 package model;
 
+<<<<<<< HEAD
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+=======
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+>>>>>>> 0c46fef (Feat:)
 class HeightTest {
 
     @Test
     void 높이_테스트() {
+<<<<<<< HEAD
 
         //given
         Height height = Height.from(5);
@@ -28,5 +35,24 @@ class HeightTest {
 
         // when&then
         assertEquals("예외 처리",exception.getMessage());
+=======
+        // given
+        int heightNumber = 3;
+        // when
+        Height height = new Height(heightNumber);
+        // then
+        Assertions.assertEquals(3,heightNumber);
+    }
+
+    @Test
+    void 높이_예외처리_테스트() {
+        // given
+        int heightNumber= -1;
+        // when
+        // then
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Height height = new Height(heightNumber);
+        });
+>>>>>>> 0c46fef (Feat:)
     }
 }

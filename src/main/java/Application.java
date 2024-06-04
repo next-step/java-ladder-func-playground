@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import controller.Controller;
 
 public class Application {
@@ -7,4 +8,8 @@ public class Application {
     public static void main(String[] args) {
         controller.run();
     }
+=======
+public class Application {
+
+>>>>>>> 0c46fef (Feat:)
 }

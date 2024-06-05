@@ -38,6 +38,7 @@ class LinesTest {
 
     @Test
     void 이전_라인이_false이면_true가_나온다() {
+
         // given
 
         // when

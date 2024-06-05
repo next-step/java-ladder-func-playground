@@ -2,14 +2,18 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
+<<<<<<< HEAD
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+=======
+>>>>>>> 6676a85 (Feat:)
 class GenerateLaddersTest {
 
     @Test
     void 사다리_생성_테스트() {
+<<<<<<< HEAD
 
         // given
         GenerateLadders generateLadders = new GenerateLadders();
@@ -33,4 +37,13 @@ class GenerateLaddersTest {
         // when&then
         assertEquals(3, ladder.getRowLines().size());
     }
+=======
+        // given
+        GenerateLadders generateLadders = new GenerateLadders();
+        // when
+        generateLadders.generate(3,4);
+        // then
+    }
+
+>>>>>>> 6676a85 (Feat:)
 }

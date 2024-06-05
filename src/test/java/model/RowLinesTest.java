@@ -1,5 +1,6 @@
 package model;
 
+<<<<<<< HEAD
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -21,5 +22,20 @@ class RowLinesTest {
         for (Lines lines : rowLines.getRowLines()) {
             assertEquals(width, lines.getLines().size());
         }
+=======
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+class RowLinesTest {
+
+    @Test
+    void 행_사다리_테스트() {
+        // given
+        int width = 5;
+        RowLines rowLines = RowLines.of(3, width);
+        RowLines rowLines1 = RowLines.of(3, width);
+        // when&then
+        Assertions.assertEquals(rowLines1, rowLines);
+>>>>>>> 6676a85 (Feat:)
     }
 }

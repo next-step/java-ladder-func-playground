@@ -9,14 +9,17 @@ class HeightTest {
     void 높이_테스트() {
         // given
         int heightNumber = 3;
+
         // when
         Height.from(heightNumber);
+
         // then
         Assertions.assertEquals(3, heightNumber);
     }
 
     @Test
     void 높이_예외처리_테스트() {
+
         // given
         int heightNumber = -1;
 

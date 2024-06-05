@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Controller {
 
-    public static void main(String[] args) {
+    public void run(){
         Scanner scanner = new Scanner(System.in);
         InputView inputView = new InputView(scanner);
         OutputView outputView = new OutputView();

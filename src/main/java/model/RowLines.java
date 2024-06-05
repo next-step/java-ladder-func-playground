@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RowLines {
-    private final List<Lines> rowLines;
     private static final int INITIAL_NUMBER = 0;
+
+    private final List<Lines> rowLines;
+
 
     private RowLines(List<Lines> rowLines) {
         this.rowLines = rowLines;

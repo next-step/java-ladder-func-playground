@@ -21,4 +21,8 @@ public class Ladder {
     public List<Lines> getRowLines() {
         return rowLines;
     }
+
+    public Height getHeight() {
+        return height;
+    }
 }

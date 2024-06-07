@@ -19,7 +19,6 @@ class GenerateLaddersTest {
         // then
         assertNotNull(ladder);
         assertEquals(5, ladder.getHeight().getHeight());
-
     }
 
     @Test

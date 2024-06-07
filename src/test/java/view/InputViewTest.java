@@ -21,5 +21,4 @@ class InputViewTest {
         assertEquals(3, inputView.widthLadder());
         assertEquals(5, inputView.heightLadder());
     }
-
 }

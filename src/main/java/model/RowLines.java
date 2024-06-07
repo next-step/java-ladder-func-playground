@@ -13,10 +13,14 @@ public class RowLines {
 
     public static RowLines of(int height, int width) {
         List<Lines> rowLines = new ArrayList<>();
+        setLadder(height, width, rowLines);
+        return new RowLines(rowLines);
+    }
+
+    private static void setLadder(final int height, final int width, final List<Lines> rowLines) {
         for (int i = INITIAL_NUMBER; i < height; i++) {
             rowLines.add(Lines.from(width));
         }
-        return new RowLines(rowLines);
     }
 
     public List<Lines> getRowLines() {

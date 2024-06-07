@@ -2,7 +2,10 @@ package view;
 
 import org.junit.jupiter.api.Test;
 
+<<<<<<< HEAD
 import java.util.List;
+=======
+>>>>>>> a5203ba (Feat:)
 import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,6 +26,7 @@ class InputViewTest {
         assertEquals(5, inputView.heightLadder());
     }
 
+<<<<<<< HEAD
     @Test
     void 사람이름_출력테스트() {
 
@@ -52,4 +56,6 @@ class InputViewTest {
         assertEquals(expectResult, inputView.winningResult());
     }
 
+=======
+>>>>>>> a5203ba (Feat:)
 }

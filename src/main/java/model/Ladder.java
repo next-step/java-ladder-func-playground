@@ -21,11 +21,4 @@ public class Ladder {
     public List<Lines> getRowLines() {
         return rowLines;
     }
-<<<<<<< HEAD
-
-    public Height getHeight() {
-        return height;
-    }
-=======
->>>>>>> 0c46fef (Feat:)
 }

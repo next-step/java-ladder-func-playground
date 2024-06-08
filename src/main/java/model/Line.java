@@ -4,10 +4,6 @@ public class Line {
 
     private final boolean hasPedal;
 
-    private Line(boolean hasPedal) {
-        this.hasPedal = hasPedal;
-    }
-
     public static Line of(boolean hasPoint) {
         return new Line(hasPoint);
     }
@@ -15,4 +11,9 @@ public class Line {
     public boolean hasPedal() {
         return hasPedal;
     }
+
+    private Line(boolean hasPedal) {
+        this.hasPedal = hasPedal;
+    }
+
 }

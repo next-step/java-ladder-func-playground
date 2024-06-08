@@ -8,9 +8,8 @@ public class RowLines {
 
     private final List<Lines> rowLines;
 
-
-    private RowLines(List<Lines> rowLines) {
-        this.rowLines = rowLines;
+    public List<Lines> getRowLines() {
+        return rowLines;
     }
 
     public static RowLines of(int height, int width) {
@@ -19,13 +18,13 @@ public class RowLines {
         return new RowLines(rowLines);
     }
 
+    private RowLines(List<Lines> rowLines) {
+        this.rowLines = rowLines;
+    }
+
     private static void setLadder(final int height, final int width, final List<Lines> rowLines) {
         for (int i = INITIAL_NUMBER; i < height; i++) {
             rowLines.add(Lines.from(width));
         }
-    }
-
-    public List<Lines> getRowLines() {
-        return rowLines;
     }
 }

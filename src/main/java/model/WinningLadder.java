@@ -2,6 +2,7 @@ package model;
 
 public class WinningLadder {
 
+<<<<<<< HEAD
     private int COUNT = 0;
     private boolean isResult;
     private int rightPoint;
@@ -39,4 +40,6 @@ public class WinningLadder {
             throw new IllegalArgumentException();
         }
     }
+=======
+>>>>>>> 6a630f1 (Fix:)
 }

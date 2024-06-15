@@ -7,10 +7,6 @@ public class Height {
 
     private final int height;
 
-    private Height(final int height) {
-        this.height = height;
-    }
-
     public static Height from(final int height) {
         if (height <= EXCEPTION_NUMBER) {
             throw new IllegalArgumentException(EXCEPTION_HANDLING);
@@ -21,4 +17,9 @@ public class Height {
     public int getHeight() {
         return height;
     }
+
+    private Height(final int height) {
+        this.height = height;
+    }
+
 }

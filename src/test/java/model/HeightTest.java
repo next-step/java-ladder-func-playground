@@ -28,4 +28,16 @@ class HeightTest {
             Height.from(heightNumber);
         });
     }
+
+    @Test
+    void 예외처리_테스트() {
+
+        // given
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->{
+            Height.from(0);
+        });
+
+        // when&then
+        assertEquals("예외 처리",exception.getMessage());
+    }
 }

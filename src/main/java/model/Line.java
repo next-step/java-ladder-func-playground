@@ -15,5 +15,4 @@ public class Line {
     private Line(boolean hasPedal) {
         this.hasPedal = hasPedal;
     }
-
 }

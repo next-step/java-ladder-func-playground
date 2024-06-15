@@ -21,5 +21,4 @@ public class Height {
     private Height(final int height) {
         this.height = height;
     }
-
 }

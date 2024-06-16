@@ -31,9 +31,25 @@ class InputViewTest {
 
         // when
         InputView inputView = new InputView(scanner);
-        List<String> expectName= List.of(new String[]{"done", "skr", "add", "e"});
+        List<String> expectName = List.of("done", "skr", "add", "e");
 
         // then
-        assertEquals(inputView.personName(),expectName);
+        assertEquals(inputView.personName(), expectName);
     }
+
+    @Test
+    void 실행결과_테스트() {
+
+        // given
+
+        Scanner scanner = new Scanner("꽝,5000,4000,꽝");
+
+        // when
+        InputView inputView = new InputView(scanner);
+        List<String> expectResult = List.of("꽝", "5000", "4000", "꽝");
+
+        // then
+        assertEquals(expectResult, inputView.winningResult());
+    }
+
 }

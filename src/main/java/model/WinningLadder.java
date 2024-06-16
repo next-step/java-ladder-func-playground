@@ -1,27 +1,42 @@
 package model;
 
-import java.util.List;
-
 public class WinningLadder {
 
-    private final List<String> winnigResult;
     private int COUNT = 0;
+    private boolean isResult;
+    private int rightPoint;
+    private int leftPoint;
 
-    public WinningLadder(final List<String> winnigResult) {
-        this.winnigResult = winnigResult;
+    public WinningLadder(final boolean isResult) {
+        this.isResult = isResult;
     }
 
-    public int rightPoint(boolean isResult) {
-        if (isResult == true) {
+    public int getLeftPoint() {
+        return leftPointResult(isResult);
+    }
+
+    public int getRightPoint() {
+        return rightPointResult(isResult);
+    }
+
+    private int rightPointResult(boolean isResult) {
+        if (isResult) {
             COUNT++;
         }
         return COUNT;
     }
 
-    public int leftPoint(boolean isResult) {
-        if (isResult == false) {
+    private int leftPointResult(boolean isResult) {
+        if (!isResult) {
+            exceptionLimitLeft();
             COUNT--;
         }
         return COUNT;
+    }
+
+    private void exceptionLimitLeft() {
+        if (COUNT <= 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }

@@ -13,7 +13,6 @@ public class OutputView {
                     .append("|")
                     .append(System.lineSeparator());
         }
-
         System.out.println(response.toString());
     }
 }

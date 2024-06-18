@@ -2,6 +2,7 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -17,17 +18,20 @@ class GenerateLaddersTest {
         Ladder ladder = generateLadders.generate(5, 3);
 
         // then
-        assertNotNull(ladder);
-        assertEquals(5, ladder.getHeight().getHeight());
+        assertAll(
+                () -> assertNotNull(ladder, "ladder는 널값이 아니다."),
+                () -> assertEquals(5, ladder.getHeight(), "사다리 높이는 5이다."),
+                () -> assertEquals(5, ladder.getRowLines().size(), "사다리의 행 개수는 5이다.")
+        );
     }
 
     @Test
     void 사다리_작동_테스트() {
 
         // given
-        Ladder ladder = Ladder.of(3,5);
+        Ladder ladder = Ladder.of(3, 5);
 
         // when&then
-        assertEquals(3,ladder.getRowLines().size());
+        assertEquals(3, ladder.getRowLines().size());
     }
 }

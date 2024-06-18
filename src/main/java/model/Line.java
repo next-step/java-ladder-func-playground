@@ -12,8 +12,7 @@ public class Line {
         return hasPedal;
     }
 
-    private Line(boolean hasPedal) {
+    public Line(boolean hasPedal) {
         this.hasPedal = hasPedal;
     }
-
 }

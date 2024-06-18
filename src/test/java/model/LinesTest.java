@@ -1,13 +1,9 @@
 package model;
 
-import org.junit.jupiter.api.DisplayNameGeneration;
-import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
-@SuppressWarnings("NonAsciiCharacters")
 class LinesTest {
 
     @Test
@@ -20,6 +16,7 @@ class LinesTest {
         // when&then
         assertEquals(expected, lines.getLines().size());
     }
+
     @Test
     void 높이_너비_테스트() {
 

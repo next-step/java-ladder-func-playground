@@ -1,43 +1,32 @@
 package model;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class HeightTest {
 
     @Test
     void 높이_테스트() {
-        // given
-        int heightNumber = 3;
 
-        // when
-        Height.from(heightNumber);
+        //given
+        Height height = Height.from(5);
 
-        // then
-        Assertions.assertEquals(3, heightNumber);
-    }
-
-    @Test
-    void 높이_예외처리_테스트() {
-
-        // given
-        int heightNumber = -1;
-
-        // when&then
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            Height.from(heightNumber);
-        });
+        //when &then
+        assertThrows(IllegalArgumentException.class, () -> Height.from(0));
+        assertEquals(5, height.getHeight());
     }
 
     @Test
     void 예외처리_테스트() {
 
         // given
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->{
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             Height.from(0);
         });
 
         // when&then
-        assertEquals("예외 처리",exception.getMessage());
+        assertEquals("높이는 1 이상이어야 합니다.", exception.getMessage());
     }
 }

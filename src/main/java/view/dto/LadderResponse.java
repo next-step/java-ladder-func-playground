@@ -19,6 +19,15 @@ public class LadderResponse {
     private final List<String> results;
     private final Map<String, String> personResults = new HashMap<>();
 
+    public LadderResponse(final Ladder ladder, final List<String> names, final List<String> results) {
+        this.lines = ladder.getRowLines().stream()
+                .map(this::convertLine)
+                .collect(Collectors.toList());
+        this.names = names;
+        this.results = results;
+        calculateResults();
+    }
+
     public List<String> getLines() {
         return lines;
     }
@@ -31,13 +40,8 @@ public class LadderResponse {
         return results;
     }
 
-    public LadderResponse(final Ladder ladder, final List<String> names, final List<String> results) {
-        this.lines = ladder.getRowLines().stream()
-                .map(this::convertLine)
-                .collect(Collectors.toList());
-        this.names = names;
-        this.results = results;
-        calculateResults();
+    public String getResultForPerson(String name) {
+        return personResults.get(name);
     }
 
     private String convertLine(final Lines lines) {
@@ -53,27 +57,33 @@ public class LadderResponse {
         return BLANK_SPACE.repeat(LadderElement.ROW.getSymbol().length());
     }
 
-
     private void calculateResults() {
         for (int i = 0; i < names.size(); i++) {
             int position = i;
-            for (String line : lines) {
-                position = move(position, line);
-            }
+            position = getPosition(position);
             personResults.put(names.get(i), results.get(position));
         }
     }
 
+    private int getPosition(int position) {
+        for (String line : lines) {
+            position = move(position, line);
+        }
+        return position;
+    }
+
     private int move(int position, String line) {
+        Integer setPosition = getInteger(position, line);
+        if (setPosition != null) return setPosition;
+        return position;
+    }
+
+    private static Integer getInteger(final int position, final String line) {
         if (position > 0 && line.charAt(position - 1) == '-') {
             return position - 1;
         } else if (position < line.length() && line.charAt(position) == '-') {
             return position + 1;
         }
-        return position;
-    }
-
-    public String getResultForPerson(String name) {
-        return personResults.get(name);
+        return null;
     }
 }

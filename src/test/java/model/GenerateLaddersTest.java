@@ -19,8 +19,9 @@ class GenerateLaddersTest {
 
         // then
         assertAll(
-                () -> assertNotNull(ladder,"ladder는 널값이 아니다."),
-                () -> assertEquals(5, ladder.getHeight(),"사다리 높이는 5이다.")
+                () -> assertNotNull(ladder, "ladder는 널값이 아니다."),
+                () -> assertEquals(5, ladder.getHeight(), "사다리 높이는 5이다."),
+                () -> assertEquals(5, ladder.getRowLines().size(), "사다리의 행 개수는 5이다.")
         );
     }
 

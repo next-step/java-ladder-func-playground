@@ -22,11 +22,11 @@ class HeightTest {
     void 예외처리_테스트() {
 
         // given
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->{
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
             Height.from(0);
         });
 
         // when&then
-        assertEquals("예외 처리",exception.getMessage());
+        assertEquals("높이는 1 이상이어야 합니다.", exception.getMessage());
     }
 }

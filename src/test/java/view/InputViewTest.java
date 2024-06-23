@@ -34,14 +34,13 @@ class InputViewTest {
         List<String> expectName = List.of("done", "skr", "add", "e");
 
         // then
-        assertEquals(inputView.personName(), expectName);
+        assertEquals(expectName, inputView.personName());
     }
 
     @Test
     void 실행결과_테스트() {
 
         // given
-
         Scanner scanner = new Scanner("꽝,5000,4000,꽝");
 
         // when
@@ -52,4 +51,15 @@ class InputViewTest {
         assertEquals(expectResult, inputView.winningResult());
     }
 
+    @Test
+    void 결과_입력_테스트() {
+        // given
+        Scanner scanner = new Scanner("all\n");
+
+        // when
+        InputView inputView = new InputView(scanner);
+
+        // then
+        assertEquals("all", inputView.askResultPerson());
+    }
 }

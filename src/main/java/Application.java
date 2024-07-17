@@ -1,13 +1,10 @@
-import domain.Ladder;
-import view.OutputView;
+import domain.LadderGame;
 
 public class Application {
 
     public static void main(String[] args) {
 
         LadderGame ladderGame = new LadderGame();
-        Ladder ladder = ladderGame.createLadder();
-        OutputView output = new OutputView();
-        output.printLadder(ladder);
+        ladderGame.runGame();
     }
 }

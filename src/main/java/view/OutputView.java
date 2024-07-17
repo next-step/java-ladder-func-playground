@@ -1,28 +1,29 @@
 package view;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import domain.Ladder;
 import domain.Line;
 
 public class OutputView {
 
-    public void printLadder(Ladder ladder) {
+    public static void printLadder(Ladder ladder) {
+        System.out.println("실행 결과\n");
         List<Line> lines = ladder.getLines();
-        for (int i = 0; i < 4; i++) {
-            System.out.println(lineToString(lines.get(i)));
-        }
+        lines.forEach(line ->
+            System.out.println(drawLine(line.getPoints()))
+        );
     }
 
-    private String lineToString(Line line) {
-        StringBuilder lineString = new StringBuilder();
-        line.getPoints().forEach(point -> {
-            if (point) {
-                lineString.append("|----");
-                return;
-            }
-            lineString.append("|    ");
-        });
-        return lineString.toString();
+    private static String drawLine(List<Boolean> points) {
+        return points.stream()
+            .map(point -> {
+                if (point) {
+                    return "|----";
+                }
+                return "|    ";
+            })
+            .collect(Collectors.joining());
     }
 }

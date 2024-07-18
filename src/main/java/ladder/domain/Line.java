@@ -5,16 +5,18 @@ import java.util.List;
 import java.util.Random;
 
 public class Line {
+
     private final Random random = new Random();
     private final List<Boolean> points = new ArrayList<>();
-    private static final int WIDTH = 4;
+    private final int width;
 
-    public Line() {
+    public Line(int width) {
+        this.width = width;
         generateLine();
     }
 
     private void generateLine() {
-        for (int i = 0; i < WIDTH; i++) {
+        for (int i = 0; i < width; i++) {
             points.add(random.nextBoolean());
             checkLeft(i);
         }
@@ -28,5 +30,9 @@ public class Line {
 
     public List<Boolean> getLine() {
         return points;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }

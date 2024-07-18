@@ -3,9 +3,12 @@ package ladder.view;
 import java.util.List;
 
 import ladder.domain.Line;
+import ladder.message.ConsoleMessage;
 
 public class OutputView {
+
     public static void printLadder(List<Line> ladder) {
+        System.out.println(ConsoleMessage.RESULT.getMessage());
         for (int i = 0; i < ladder.size(); i++) {
             printLine(ladder.get(i));
         }
@@ -13,7 +16,7 @@ public class OutputView {
 
     private static void printLine(Line line) {
         System.out.print("|");
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < line.getWidth() - 1; i++) {
             if (line.getLine().get(i)) {
                 System.out.print("-----");
             } else {

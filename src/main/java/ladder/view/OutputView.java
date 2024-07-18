@@ -26,4 +26,10 @@ public class OutputView {
         }
         System.out.println();
     }
+
+    public static void printResult(List<Integer> result){
+        for(int i = 0; i < result.size(); i++){
+            System.out.println(i + " -> " + result.get(i));
+        }
+    }
 }

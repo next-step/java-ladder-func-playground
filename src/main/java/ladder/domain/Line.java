@@ -16,7 +16,7 @@ public class Line {
     }
 
     private void generateLine() {
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < width - 1; i++) {
             points.add(random.nextBoolean());
             checkLeft(i);
         }

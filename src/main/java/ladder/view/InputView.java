@@ -16,20 +16,20 @@ public class InputView {
         return scanner.nextInt();
     }
 
-    public static List<String> getNames(){
+    public static List<String> getNames() {
         System.out.println(ConsoleMessage.INPUT_NAME.getMessage());
 
         return List.of(scanner.nextLine().split(","));
     }
 
-    public static List<String> getResult(){
+    public static List<String> getResult() {
         System.out.println();
         System.out.println(ConsoleMessage.INPUT_RESULT.getMessage());
 
         return List.of(scanner.nextLine().split(","));
     }
 
-    public static String wantResult(){
+    public static String wantResult() {
         System.out.println();
         System.out.println(ConsoleMessage.RESULT_TARGET.getMessage());
 

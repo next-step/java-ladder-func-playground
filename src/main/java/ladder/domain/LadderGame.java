@@ -29,13 +29,13 @@ public class LadderGame {
 
     private Integer moveLine(Line line, int position) {
         if (position == 0) {
-            if(line.getLine().get(position).equals(true)){
+            if (line.getLine().get(position).equals(true)) {
                 return ++position;
             }
             return position;
         }
         if (position == line.getWidth() - 1) {
-            if(line.getLine().get(position - 1).equals(true)){
+            if (line.getLine().get(position - 1).equals(true)) {
                 return --position;
             }
             return position;
@@ -50,7 +50,7 @@ public class LadderGame {
         return position;
     }
 
-    public List<Integer> getResult(){
+    public List<Integer> getResult() {
         return result;
     }
 }

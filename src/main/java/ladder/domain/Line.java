@@ -16,7 +16,7 @@ public class Line {
     }
 
     private void generateLine() {
-        while(checkEmpty()){
+        while (checkEmpty()) {
             for (int i = 0; i < width - 1; i++) {
                 points.add(random.nextBoolean());
                 checkLeft(i);
@@ -30,7 +30,7 @@ public class Line {
         }
     }
 
-    private Boolean checkEmpty(){
+    private Boolean checkEmpty() {
         return points.stream().allMatch(point -> !point);
     }
 

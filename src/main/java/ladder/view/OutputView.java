@@ -1,17 +1,29 @@
 package ladder.view;
 
 import java.util.List;
+import java.util.Map;
 
 import ladder.domain.Line;
 import ladder.message.ConsoleMessage;
 
 public class OutputView {
 
-    public static void printLadder(List<Line> ladder) {
-        System.out.println(ConsoleMessage.RESULT.getMessage());
+    public static void printLadder(List<Line> ladder, List<String> names, List<String> results) {
+        System.out.println(ConsoleMessage.LADDER_RESULT.getMessage() + "\n");
+
+        for (String name : names) {
+            System.out.print(name + " ");
+        }
+        System.out.println();
+
         for (int i = 0; i < ladder.size(); i++) {
             printLine(ladder.get(i));
         }
+
+        for (String result : results) {
+            System.out.print(result + "   ");
+        }
+        System.out.println();
     }
 
     private static void printLine(Line line) {
@@ -27,9 +39,15 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printResult(List<Integer> result){
-        for(int i = 0; i < result.size(); i++){
-            System.out.println(i + " -> " + result.get(i));
-        }
+    public static void printResult(String result) {
+        System.out.println();
+        System.out.println(ConsoleMessage.RESULT.getMessage());
+        System.out.println(result);
+    }
+
+    public static void printResult(Map<String, String> resultMap){
+        System.out.println();
+        System.out.println(ConsoleMessage.RESULT.getMessage());
+        resultMap.forEach((key,value) -> System.out.println(key + " : " + value));
     }
 }

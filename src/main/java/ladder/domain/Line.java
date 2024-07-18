@@ -16,16 +16,22 @@ public class Line {
     }
 
     private void generateLine() {
-        for (int i = 0; i < width - 1; i++) {
-            points.add(random.nextBoolean());
-            checkLeft(i);
+        while(checkEmpty()){
+            for (int i = 0; i < width - 1; i++) {
+                points.add(random.nextBoolean());
+                checkLeft(i);
+            }
         }
     }
 
     private void checkLeft(int i) {
-        if (i > 0 && points.get(i - 1).equals(points.get(i))) {
+        if (i > 0 && points.get(i - 1).equals(true) && points.get(i).equals(true)) {
             points.set(i, !points.get(i));
         }
+    }
+
+    private Boolean checkEmpty(){
+        return points.stream().allMatch(point -> !point);
     }
 
     public List<Boolean> getLine() {

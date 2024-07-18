@@ -11,18 +11,12 @@ public class OutputView {
     public static void printLadder(List<Line> ladder, List<String> names, List<String> results) {
         System.out.println(ConsoleMessage.LADDER_RESULT.getMessage() + "\n");
 
-        for (String name : names) {
-            System.out.print(name + " ");
-        }
+        names.forEach(name -> System.out.print(name + "  "));
         System.out.println();
 
-        for (int i = 0; i < ladder.size(); i++) {
-            printLine(ladder.get(i));
-        }
+        ladder.forEach(line -> printLine(line));
 
-        for (String result : results) {
-            System.out.print(result + "   ");
-        }
+        results.forEach(result -> System.out.print(result + "   "));
         System.out.println();
     }
 
@@ -45,9 +39,9 @@ public class OutputView {
         System.out.println(result);
     }
 
-    public static void printResult(Map<String, String> resultMap){
+    public static void printResult(Map<String, String> resultMap) {
         System.out.println();
         System.out.println(ConsoleMessage.RESULT.getMessage());
-        resultMap.forEach((key,value) -> System.out.println(key + " : " + value));
+        resultMap.forEach((key, value) -> System.out.println(key + " : " + value));
     }
 }

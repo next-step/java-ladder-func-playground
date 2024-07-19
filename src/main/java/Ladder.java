@@ -13,4 +13,18 @@ public class Ladder {
     public List<Line> getLines() {
         return line;
     }
+
+    public int getResult(int startPosition) {
+        int currentPosition = startPosition;
+
+        for (Line line : line) {
+            if (currentPosition > 0 && line.getPoints().get(currentPosition - 1)) {
+                currentPosition--;
+            } else if (currentPosition < line.getPoints().size() && line.getPoints().get(currentPosition)) {
+                currentPosition++;
+            }
+        }
+
+        return currentPosition;
+    }
 }

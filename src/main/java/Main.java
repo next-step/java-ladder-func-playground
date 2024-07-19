@@ -8,5 +8,6 @@ public class Main {
 
         OutputHandler outputHandler = new OutputHandler();
         outputHandler.printLadder(ladder);
+        outputHandler.printResults(ladder, width);
     }
 }

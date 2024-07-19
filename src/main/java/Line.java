@@ -7,6 +7,10 @@ public class Line {
     private Random random = new Random();
     boolean beforeHasLine = false;
 
+    public List<Boolean> getPoints() {
+        return points;
+    }
+
     public Line(int width) {
         for (int i = 1; i < width; i++) {
             boolean hasLine = random.nextBoolean();

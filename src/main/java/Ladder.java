@@ -10,9 +10,7 @@ public class Ladder {
         }
     }
 
-    public void printLadder() {
-        for (Line line : line) {
-            System.out.println(line);
-        }
+    public List<Line> getLines() {
+        return line;
     }
 }

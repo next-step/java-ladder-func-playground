@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.List;
-import java.util.stream.IntStream;
 
 import view.InputView;
 import view.OutputView;
@@ -12,48 +11,58 @@ public class LadderGame {
     private Ladder ladder;
 
     public void runGame() {
-        int width = InputView.printWidthCount();
-        int height = InputView.printHeightCount();
+        List<User> users = generateUsers(InputView.inputUsers());
+        List<Result> results = generateResults(InputView.inputResults());
+        int height = InputView.inputHeightCount();
+        int width = users.size();
+
         ladder = createLadder(width, height);
-        List<Integer> users = makeUser(width);
-        List<Integer> result = calculateResult(users);
-        OutputView.printLadder(ladder);
-        OutputView.printResult(users, result);
+        List<User> userList = calculateResult(users);
+        OutputView.printLadder(ladder, users, results);
+        OutputView.printResult(userList, results);
     }
 
     private Ladder createLadder(int width, int height) {
         return ladderMaker.createLadder(width, height);
     }
 
-    private List<Integer> makeUser(int width) {
-        return IntStream.range(0, width)
-            .boxed()
+    private List<User> generateUsers(List<String> users) {
+        return users.stream()
+            .map(user -> new User(user, users.indexOf(user)))
             .toList();
     }
 
-    private List<Integer> calculateResult(List<Integer> users) {
+    private List<Result> generateResults(List<String> results) {
+        return results.stream()
+            .map(result -> new Result(result, results.indexOf(result)))
+            .toList();
+    }
+
+    private List<User> calculateResult(List<User> users) {
         return users.stream()
             .map(this::climbLadder)
             .toList();
     }
 
-    private int climbLadder(int user) {
+    private User climbLadder(User user) {
         List<Line> lines = ladder.getLines();
+        int position = user.getNumber();
         for (Line line : lines) {
-            user = move(user, line);
+            position = move(position, line);
         }
+        user.setPosition(position);
         return user;
     }
 
-    public int move(int user, Line line) {
+    public int move(int position, Line line) {
         List<Boolean> points = line.getPoints();
-        if (points.get(user)) {
-            return ++user;
+        if (points.get(position)) {
+            return ++position;
         }
-        if (user > 0 && points.get(user - 1)) {
-            return --user;
+        if (position > 0 && points.get(position - 1)) {
+            return --position;
         }
-        return user;
+        return position;
     }
 
 }

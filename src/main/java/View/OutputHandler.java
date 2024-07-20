@@ -1,4 +1,10 @@
+package View;
+
 import java.util.List;
+
+import Domain.Ladder;
+import Domain.Line;
+import Domain.Player;
 
 public class OutputHandler {
     public void printLadder(List<Player> players, Ladder ladder, List<String> results) {

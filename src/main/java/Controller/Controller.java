@@ -1,7 +1,15 @@
+package Controller;
+
 import java.util.List;
 
-public class Main {
-    public static void main(String[] args) {
+import Domain.Ladder;
+import Domain.Player;
+import View.InputHandler;
+import View.OutputHandler;
+import View.ResultHandler;
+
+public class Controller {
+    public void run() {
         InputHandler inputHandler = new InputHandler();
 
         List<Player> players = inputHandler.askPlayers();
@@ -14,13 +22,7 @@ public class Main {
         OutputHandler outputHandler = new OutputHandler();
         outputHandler.printLadder(players, ladder, results);
 
-        while (true) {
-            String playerName = inputHandler.askPlayerName();
-            if (playerName.equals("all")) {
-                outputHandler.printAllResults(players, results, ladder);
-            } else {
-                outputHandler.printIndividualResult(playerName, players, results, ladder);
-            }
-        }
+        ResultHandler resultHandler = new ResultHandler(players, results, ladder);
+        resultHandler.handleResults(inputHandler);
     }
 }

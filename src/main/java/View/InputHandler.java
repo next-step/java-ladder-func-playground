@@ -1,6 +1,10 @@
+package View;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import Domain.Player;
 
 public class InputHandler {
     private final Scanner scanner;

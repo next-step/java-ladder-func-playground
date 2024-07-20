@@ -13,6 +13,7 @@ public class OutputView {
     public static void printLadder(Ladder ladder, List<User> users, List<Result> results) {
         System.out.println("\n실행 결과\n");
         List<Line> lines = ladder.getLines();
+
         users.forEach(user -> System.out.print(user.getName() + " "));
         System.out.println();
         lines.forEach(line -> System.out.println(drawLine(line.getPoints())));
@@ -32,9 +33,11 @@ public class OutputView {
 
     public static void printResult(List<User> users, List<Result> results) {
         System.out.println();
-        for (int i = 0; i < users.size(); i++) {
-            System.out.println(
-                String.format("%s -> %s", users.get(i).getName(), results.get(users.get(i).getPosition()).getResult()));
-        }
+        users.stream()
+            .map(user -> {
+                String result = results.get(user.getPosition()).getResult();
+                return String.format("%s -> %s", user.getName(), result);
+            })
+            .forEach(System.out::println);
     }
 }

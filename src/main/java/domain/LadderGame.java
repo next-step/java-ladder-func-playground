@@ -9,17 +9,18 @@ public class LadderGame {
 
     private final LadderMaker ladderMaker = new LadderMaker();
     private Ladder ladder;
+    private List<User> users;
 
     public void runGame() {
-        List<User> users = generateUsers(InputView.inputUsers());
+        users = generateUsers(InputView.inputUsers());
         List<Result> results = generateResults(InputView.inputResults());
         int height = InputView.inputHeightCount();
         int width = users.size();
 
         ladder = createLadder(width, height);
-        List<User> userList = calculateResult(users);
+        users.forEach(this::climbLadder);
         OutputView.printLadder(ladder, users, results);
-        OutputView.printResult(userList, results);
+        OutputView.printResult(users, results);
     }
 
     private Ladder createLadder(int width, int height) {
@@ -34,13 +35,7 @@ public class LadderGame {
 
     private List<Result> generateResults(List<String> results) {
         return results.stream()
-            .map(result -> new Result(result, results.indexOf(result)))
-            .toList();
-    }
-
-    private List<User> calculateResult(List<User> users) {
-        return users.stream()
-            .map(this::climbLadder)
+            .map(Result::new)
             .toList();
     }
 

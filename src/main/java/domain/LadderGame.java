@@ -20,7 +20,8 @@ public class LadderGame {
         ladder = createLadder(width, height);
         users.forEach(this::climbLadder);
         OutputView.printLadder(ladder, users, results);
-        OutputView.printResult(users, results);
+        String wantedUser = InputView.inputResult();
+        OutputView.printResult(wantedUser, users, results);
     }
 
     private Ladder createLadder(int width, int height) {

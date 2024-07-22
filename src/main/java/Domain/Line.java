@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Line {
     private final List<Boolean> points = new ArrayList<>();
-    private Random random = new Random();
+    private final Random random = new Random();
     boolean beforeHasLine = false;
 
     public List<Boolean> getPoints() {

@@ -22,8 +22,11 @@ public class Ladder {
         for (Line line : line) {
             if (currentPosition > 0 && line.getPoints().get(currentPosition - 1)) {
                 currentPosition--;
-            } else if (currentPosition < line.getPoints().size() && line.getPoints().get(currentPosition)) {
+                continue;
+            }
+            if (currentPosition < line.getPoints().size() && line.getPoints().get(currentPosition)) {
                 currentPosition++;
+                continue;
             }
         }
 

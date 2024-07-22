@@ -8,6 +8,7 @@ import Domain.Player;
 
 public class OutputHandler {
     public void printLadder(List<Player> players, Ladder ladder, List<String> results) {
+        System.out.println("사다리 결과");
         for (Player player : players) {
             System.out.print(String.format("%-6s", player.getName()));
         }

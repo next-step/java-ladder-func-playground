@@ -19,6 +19,11 @@ public class Controller {
     }
 
     public void start() {
-        outputView.outLadder(Ladder.of(4, 4, random));
+        int width = inputView.getWidth();
+        int height = inputView.getHeight();
+
+        Ladder ladder = Ladder.of(width, height, random);
+
+        outputView.outLadder(ladder);
     }
 }

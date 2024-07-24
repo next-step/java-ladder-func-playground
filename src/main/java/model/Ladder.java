@@ -37,7 +37,7 @@ public class Ladder {
 
     private static boolean validate(int width, List<Line> lines) {
         boolean valid = true;
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < width - 1; i++) {
             valid &= validateConnection(lines, i);
         }
 

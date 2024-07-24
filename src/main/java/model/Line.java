@@ -21,7 +21,7 @@ public class Line {
         Deque<Boolean> points = new ArrayDeque<>();
         points.addLast(false);
 
-        while (points.size() - 1 < width) {
+        while (points.size() < width) {
             points.addLast(generateNext(points.peekLast(), random));
         }
 

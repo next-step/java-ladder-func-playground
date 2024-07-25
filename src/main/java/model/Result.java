@@ -1,10 +1,12 @@
 package model;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Result {
-    private Map<String, String> result;
+    private final Map<String, String> result;
 
     private Result(Map<String, String> result) {
         this.result = result;
@@ -14,15 +16,19 @@ public class Result {
         return result.size();
     }
 
+    public Set<String> keys() {
+        return result.keySet();
+    }
+
     public String get(String name) {
         return result.get(name);
     }
 
-    public static Result from(Players players) {
+    public static Result of(Players players, List<String> choices) {
         Map<String, String> result = players.stream()
             .collect(Collectors.toMap(
                 Player::getName,
-                player -> String.valueOf(player.getX())
+                player -> choices.get(player.getX())
             ));
 
         return new Result(result);

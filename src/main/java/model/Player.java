@@ -37,7 +37,7 @@ public class Player {
         }
     }
 
-    public static Player of(int name, int x, int y) {
-        return new Player(String.valueOf(name), x, y);
+    public static Player of(String name, int x, int y) {
+        return new Player(name, x, y);
     }
 }

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Random;
 
 import model.Ladder;
-import model.Player;
 import model.Players;
 import model.Result;
 import view.InputView;
@@ -23,17 +22,30 @@ public class Controller {
     }
 
     public void start() {
-        int width = inputView.getWidth();
+        List<String> names = inputView.getNames();
+        Players players = Players.from(names);
+
+        List<String> choices = inputView.getChoices();
+
         int height = inputView.getHeight();
 
-        Ladder ladder = Ladder.of(width, height, random);
+        Ladder ladder = Ladder.of(players.size(), height, random);
 
-        Players players = Players.from(width);
         players.move(ladder);
 
-        Result result = Result.from(players);
+        Result result = Result.of(players, choices);
 
-        outputView.outLadder(ladder);
-        outputView.outResult(result);
+        outputView.outLadder(players, ladder, choices);
+        outResult(result);
+    }
+
+    private void outResult(Result result) {
+        String target = inputView.getName();
+
+        if (target.equalsIgnoreCase("all")) {
+            outputView.outAllResult(result);
+        } else {
+            outputView.outResult(target, result);
+        }
     }
 }

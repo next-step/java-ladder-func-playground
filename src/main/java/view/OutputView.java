@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 
 import model.Ladder;
 import model.Line;
+import model.Result;
 
 public class OutputView {
     public void outLadder(Ladder ladder) {
@@ -18,5 +19,12 @@ public class OutputView {
         return line.getPoints().stream()
             .map(bool -> Boolean.TRUE.equals(bool) ? "-----" : "     ")
             .collect(Collectors.joining("|", "|", "|"));
+    }
+
+    public void outResult(Result result) {
+        System.out.println();
+        for (int i = 0; i < result.size(); i++) {
+            System.out.printf("%s -> %s%n", i, result.get(String.valueOf(i)));
+        }
     }
 }

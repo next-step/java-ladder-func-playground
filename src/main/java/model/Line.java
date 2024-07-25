@@ -9,7 +9,7 @@ import java.util.Random;
 public class Line {
     private final List<Boolean> points;
 
-    public Line(List<Boolean> points) {
+    private Line(List<Boolean> points) {
         this.points = points;
     }
 

@@ -7,12 +7,24 @@ import java.util.Random;
 public class Ladder {
     private final List<Line> lines;
 
-    public Ladder(List<Line> lines) {
+    private Ladder(List<Line> lines) {
         this.lines = lines;
     }
 
     public List<Line> getLines() {
         return lines;
+    }
+
+    public int size() {
+        return lines.size();
+    }
+
+    public boolean get(int x, int y) {
+        if (x < 0 || lines.size() - 1 <= x) {
+            return false;
+        }
+
+        return lines.get(y).getPoints().get(x);
     }
 
     public static Ladder of(int width, int height, Random random) {

@@ -7,7 +7,6 @@ import java.util.Set;
 public class OutputView {
 
     private static final String START_LINE = "|";
-
     private static final String BLANK_LINE = "    |";
     private static final String RUNG_LINE = "----|";
 

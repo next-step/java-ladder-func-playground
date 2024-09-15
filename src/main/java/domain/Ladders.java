@@ -1,59 +1,45 @@
 package domain;
 
-import domain.value.Height;
+import domain.dto.LaddersDto;
+import domain.dto.LadderDto;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import util.Errors;
 
 public class Ladders {
 
     private final List<Ladder> ladders;
-    private final Height height;
 
-    private Ladders(List<Ladder> ladders, Height height) {
+    private Ladders(List<Ladder> ladders) {
         this.ladders = ladders;
-        this.height = height;
     }
 
-    public static Ladders from(int countOfLadders) {
-        final Height height = new Height();
-        final List<Ladder> initLadders = IntStream.range(0, countOfLadders)
-            .mapToObj(i -> new Ladder(height))
-            .collect(Collectors.toList());
-        return new Ladders(initLadders, height);
-    }
+    public static Ladders from(LaddersDto laddersDto, int countOfLadders, int height) {
+        List<Ladder> ladders = new ArrayList<>();
 
-    public int getCountOfLadders() {
-        return ladders.size();
-    }
-
-    public int getHeight() {
-        return height.getValue();
-    }
-
-    public Set<Integer> getRungsPositionAtLadder(int index) {
-        if (index < 0 || index >= ladders.size()) {
-            throw new IllegalArgumentException(Errors.LADDER_INDEX_OUT_OF_RANGE); // 예외처리
+        final Map<Integer, LadderDto> ladderDtoByIndex = laddersDto.getAllLadderDtoByIndex();
+        for (int index = 0; index < countOfLadders; index++) {
+            final LadderDto ladderDto = getLadderDto(ladderDtoByIndex, index);
+            final Ladder ladder = Ladder.from(ladderDto, height);
+            ladders.add(ladder);
         }
-        return ladders.get(index).getRungsPosition();
+        return new Ladders(ladders);
+    }
+
+    private static LadderDto getLadderDto(Map<Integer, LadderDto> ladderDtoByIndex, int index) {
+        if (!ladderDtoByIndex.containsKey(index)) {
+            throw new IllegalArgumentException(Errors.LADDER_DTO_NEED_TO_CREATE);
+        }
+        return ladderDtoByIndex.get(index);
     }
 
     public List<Set<Integer>> getAllRungsPositionAtLadder() {
         return ladders.stream()
-            .map(Ladder::getRungsPosition)
+            .map(Ladder::getRungPositions)
             .collect(Collectors.toList());
-    }
-
-    public void createRungsAtLadder(int index, Set<Integer> newRungsPositionAtLadder) {
-        final Ladder ladder = ladders.get(index);
-        ladder.createRungsAt(newRungsPositionAtLadder);
-    }
-
-    public void createRungsAtLadder(int index, int newRungsPositionAtLadder) {
-        final Ladder ladder = ladders.get(index);
-        ladder.createRungsAt(newRungsPositionAtLadder);
     }
 
 }

@@ -1,44 +1,44 @@
 package domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import domain.value.Height;
-import java.util.Random;
+import domain.dto.LadderDto;
 import java.util.Set;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
 import util.Errors;
 
 class LadderTest {
 
-
     @Test
-    @DisplayName("Height 이내의 값을 활용해 가로 줄을 생성할 수 있다.")
-    void createRungTest() {
+    @DisplayName("LadderDTO로 생성할 수 있다.")
+    void constructorTest() {
         // given
-        final Height height = new Height();
-        final Ladder ladder = new Ladder(height);
+        int height = 3;
+        int initialRungPosition = 1;
+        final LadderDto ladderDto = LadderDto.of(initialRungPosition);
         // when
-        Random random = new Random();
-        final int nowPosition = random.nextInt(height.getValue());
-        ladder.createRungsAt(nowPosition);
+        final Ladder ladder = Ladder.from(ladderDto, height);
         // then
-        final Set<Integer> rungsPosition = ladder.getRungsPosition();
-        assertTrue(rungsPosition.contains(nowPosition));
+        final Set<Integer> rungPositions = ladder.getRungPositions();
+        assertThat(rungPositions).contains(initialRungPosition);
     }
 
-    @ParameterizedTest(name = "{0}은 0 미만이거나 height 이상의 값이어서 가로줄을 생성할 수 없다.")
-    @ValueSource(ints = {-2, -1, 100,})
-    @DisplayName("0 미만이거나 height 이상의 값으로 가로줄을 만드려하면 예외가 반환된다.")
-    void invalidTest1(int nowPosition) {
-        final Height height = new Height();
-        final Ladder ladder = new Ladder(height);
+    @ParameterizedTest
+    @CsvSource({
+        "3, -1",
+        "3, 4"
+    })
+    @DisplayName("가로줄의 위치가 0 미만이거나 사다리의 높이(=최대 위치)를 넘어설 수 없다.")
+    void invalidConstructorTest(int height, int initialRungPosition) {
+        // given
+        final LadderDto ladderDto = LadderDto.of(initialRungPosition);
         // when
         // then
-        assertThatThrownBy(() -> ladder.createRungsAt(nowPosition))
+        assertThatThrownBy(() ->  Ladder.from(ladderDto, height))
             .isInstanceOf(IllegalArgumentException.class)
             .hasMessage(Errors.POSITION_INDEX_OUT_OF_RANGE);
     }

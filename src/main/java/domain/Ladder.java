@@ -1,34 +1,37 @@
 package domain;
 
-import domain.value.Height;
+import domain.dto.LadderDto;
 import java.util.HashSet;
 import java.util.Set;
 import util.Errors;
 
 public class Ladder {
 
-    private final Set<Integer> rungIndexes;
-    private final Height height;
+    private final Set<Integer> rungPositions;
 
-    public Ladder(Height height) {
-        this.height = height;
-        this.rungIndexes = new HashSet<>();
+    private Ladder(Set<Integer> rungPositions) {
+        this.rungPositions = new HashSet<>(rungPositions);
     }
 
-    public void createRungsAt(Set<Integer> newRungsPositionAtLadder) {
-        for (Integer position : newRungsPositionAtLadder) {
-            createRungsAt(position);
+    public static Ladder from(LadderDto ladderDto, int height) {
+        final Set<Integer> rungPositions = ladderDto.getRungPositions();
+        validateRungPositions(rungPositions, height);
+        return new Ladder(rungPositions);
+    }
+
+    private static void validateRungPositions(Set<Integer> rungPositions, int maxPosition) {
+        for (Integer rungPosition : rungPositions) {
+            validateRungPosition(rungPosition, maxPosition);
         }
     }
 
-    public void createRungsAt(int position) {
-        if (position < 0 || position >= height.getValue()) {
+    private static void validateRungPosition(Integer rungPosition, int maxPosition) {
+        if (rungPosition < 0 || rungPosition >= maxPosition) {
             throw new IllegalArgumentException(Errors.POSITION_INDEX_OUT_OF_RANGE);
         }
-        rungIndexes.add(position);
     }
 
-    public Set<Integer> getRungsPosition() {
-        return new HashSet<>(rungIndexes);
+    public Set<Integer> getRungPositions() {
+        return new HashSet<>(rungPositions);
     }
 }

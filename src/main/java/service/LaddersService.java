@@ -23,7 +23,7 @@ public class LaddersService {
         return random.nextInt(2, 6);
     }
 
-    public Ladders createLadder(int countOfLadders, int maxPosition) {
+    public Ladders createLadders(int countOfLadders, int maxPosition) {
         final LaddersDto laddersDto = createInitialLaddersDto(countOfLadders, maxPosition);
         buildRungsAtLadders(laddersDto, countOfLadders, maxPosition);
 

@@ -19,7 +19,7 @@ public class LadderGameController {
         int countOfLadders = 3;
         int height = laddersService.getHeight();
 
-        Ladders ladders = laddersService.createLadder(countOfLadders, height);
+        Ladders ladders = laddersService.createLadders(countOfLadders, height);
         outputView.printStatusOfLadders(ladders.getAllRungsPositionAtLadder(), height);
     }
 

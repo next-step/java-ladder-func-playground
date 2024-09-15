@@ -1,96 +1,88 @@
 package service;
 
+import domain.AvailablePositionsFilter;
 import domain.Ladders;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import domain.RungsBuilder;
+import domain.dto.LadderDto;
+import domain.dto.LaddersDto;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LaddersService {
 
-    private final Random random;
+    private final RungsBuilder rungsBuilder;
 
-    public LaddersService() {
-        this.random = new Random();
+    public LaddersService(RungsBuilder rungsBuilder) {
+        this.rungsBuilder = rungsBuilder;
     }
 
-    public Ladders getInitialLadders(int countOfLadders) {
-        final Ladders newLadders = Ladders.from(countOfLadders);
-        final int height = newLadders.getHeight();
-
-        for (int index = 0; index < countOfLadders; index++) {
-            final Set<Integer> rungsPositionOfLeftLadder = getRungsPositionOfLeftLadder(newLadders, index);
-            final int initialRungPosition = getInitialRungPosition(rungsPositionOfLeftLadder, height);
-            newLadders.createRungsAtLadder(index, initialRungPosition);
-        }
-        return newLadders;
+    public int getHeight() {
+        Random random = new Random();
+        return random.nextInt(2, 6);
     }
 
-    private int getInitialRungPosition(Set<Integer> rungsPositionOfLeftLadder, int height) {
-        List<Integer> possiblePositions = new ArrayList<>();
-        for (int nowPosition = 0; nowPosition < height; nowPosition++) {
-            checkIfRungCanBeCreatedAtPosition(rungsPositionOfLeftLadder, nowPosition, possiblePositions);
-        }
-        final int randomIndex = random.nextInt(possiblePositions.size());
-        return possiblePositions.get(randomIndex);
+    public Ladders createLadder(int countOfLadders, int maxPosition) {
+        final LaddersDto laddersDto = createInitialLaddersDto(countOfLadders, maxPosition);
+        buildRungsAtLadders(laddersDto, countOfLadders, maxPosition);
+
+        return Ladders.from(laddersDto, countOfLadders, maxPosition);
     }
 
-    private void checkIfRungCanBeCreatedAtPosition(Set<Integer> rungsPositionOfLeftLadder, int nowPosition,
-                                                   List<Integer> possiblePositions) {
-        if (rungsPositionOfLeftLadder.contains(nowPosition)) {
-            return;
-        }
-        possiblePositions.add(nowPosition);
-    }
-
-
-    public void setRandomRungsAtLadders(Ladders ladders) {
-        final int countOfLadders = ladders.getCountOfLadders();
-        final int laddersHeight = ladders.getHeight();
+    private LaddersDto createInitialLaddersDto(int countOfLadders, int maxPosition) {
+        final LaddersDto ladders = new LaddersDto(countOfLadders);
 
         for (int index = 0; index < countOfLadders; index++) {
             final Set<Integer> rungsPositionOfLeftLadder = getRungsPositionOfLeftLadder(ladders, index);
-            final Set<Integer> rungsPositionOfRightLadder = getRungsPositionOfRightLadder(ladders, index);
-            final Set<Integer> newRungsPosition = getNewRungsPosition(laddersHeight,
-                                                                      rungsPositionOfLeftLadder,
-                                                                      rungsPositionOfRightLadder);
-            ladders.createRungsAtLadder(index, newRungsPosition);
+            final int initialRungPosition = getInitialRungPosition(rungsPositionOfLeftLadder, maxPosition);
+
+            final LadderDto ladderDto = LadderDto.of(initialRungPosition);
+            ladders.addLadderDto(index, ladderDto);
+        }
+        return ladders;
+    }
+
+    private int getInitialRungPosition(Set<Integer> rungsPositionOfLeftLadder, int maxPosition) {
+        if (this.rungsBuilder instanceof AvailablePositionsFilter) {
+            ((AvailablePositionsFilter) this.rungsBuilder)
+                .setAvailablePositionsExcluding(rungsPositionOfLeftLadder, maxPosition);
+        }
+
+        return rungsBuilder.getPositionOfRung();
+    }
+
+    private void buildRungsAtLadders(LaddersDto ladders, int countOfLadders, int maxPosition) {
+        for (int index = 0; index < countOfLadders; index++) {
+            final Set<Integer> excludedPositionsOfRung = getExcludedPositionsOfRung(ladders, index);
+            final Set<Integer> positionsOfRungs = getRungPositions(excludedPositionsOfRung, maxPosition);
+
+            ladders.addRungsAt(index, positionsOfRungs);
         }
     }
 
-    private Set<Integer> getNewRungsPosition(int laddersHeight, Set<Integer> rungsPositionOfLeftLadder,
-                                             Set<Integer> rungsPositionOfRightLadder) {
-        Set<Integer> newRungsPosition = new HashSet<>();
-        for (int position = 0; position < laddersHeight; position++) {
-            createOrSkipRungAtPosition(position, newRungsPosition, rungsPositionOfLeftLadder,
-                                       rungsPositionOfRightLadder);
+    private Set<Integer> getRungPositions(Set<Integer> excludedPositionsOfRung, int maxPosition) {
+        if (this.rungsBuilder instanceof AvailablePositionsFilter) {
+            ((AvailablePositionsFilter) this.rungsBuilder)
+                .setAvailablePositionsExcluding(excludedPositionsOfRung, maxPosition);
         }
-        return newRungsPosition;
+        return rungsBuilder.getPositionsOfRungs();
     }
 
-    private void createOrSkipRungAtPosition(int position, Set<Integer> newRungsPosition,
-                                            Set<Integer> rungsPositionOfLeftLadder,
-                                            Set<Integer> rungsPositionOfRightLadder) {
-        if (rungsPositionOfLeftLadder.contains(position) || rungsPositionOfRightLadder.contains(position)) {
-            return;
-        }
-        if (random.nextBoolean()) {
-            newRungsPosition.add(position);
-        }
+    private Set<Integer> getExcludedPositionsOfRung(LaddersDto ladders, int index) {
+        return Stream.of(
+                getRungsPositionOfLeftLadder(ladders, index),
+                getRungsPositionOfRightLadder(ladders, index))
+            .flatMap(Set::stream)
+            .collect(Collectors.toSet());
     }
 
-    private Set<Integer> getRungsPositionOfLeftLadder(Ladders ladders, int index) {
-        if (index == 0) {
-            return new HashSet<>();
-        }
-        return ladders.getRungsPositionAtLadder(index - 1);
+    private Set<Integer> getRungsPositionOfLeftLadder(LaddersDto ladders, int index) {
+        return ladders.getRungsPositionAtLadderDto(index - 1);
     }
 
-    private Set<Integer> getRungsPositionOfRightLadder(Ladders ladders, int index) {
-        if (index == ladders.getCountOfLadders() - 1) {
-            return new HashSet<>();
-        }
-        return ladders.getRungsPositionAtLadder(index + 1);
+    private Set<Integer> getRungsPositionOfRightLadder(LaddersDto ladders, int index) {
+        return ladders.getRungsPositionAtLadderDto(index + 1);
     }
+
 }

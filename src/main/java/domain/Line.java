@@ -9,7 +9,7 @@ public class Line {
     private final Random random = new Random();
 
     public Line(int lineSize) {
-        this.points = generatePoints(lineSize);
+        this.points = generatePoints(lineSize-1);
     }
 
     public List<Point> generatePoints(int lineSize) {

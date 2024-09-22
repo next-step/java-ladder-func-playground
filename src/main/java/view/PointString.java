@@ -1,4 +1,6 @@
-package domain;
+package view;
+
+import domain.Point;
 
 public enum PointString {
     CONNECTED(true, "-----"),

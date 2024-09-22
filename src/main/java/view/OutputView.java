@@ -3,7 +3,6 @@ package view;
 import domain.Ladder;
 import domain.Line;
 import domain.Point;
-import domain.PointString;
 
 public class OutputView {
 

@@ -1,12 +1,10 @@
 package domain;
 
 public class Point {
-    private boolean isConnected;
-    private final BooleanGenerator booleanGenerator;
+    private final boolean  isConnected;
 
-    public Point(BooleanGenerator booeleanGenerator) {
-        this.booleanGenerator = booeleanGenerator;
-        this.isConnected = booeleanGenerator.generateBoolean();
+    Point(boolean connected) {
+        this.isConnected = connected;
     }
 
     public boolean isConnected() {

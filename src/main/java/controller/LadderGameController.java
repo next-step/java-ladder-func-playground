@@ -1,5 +1,7 @@
 package controller;
 
+import domain.CountOfLadders;
+import domain.Height;
 import domain.Ladders;
 import domain.RungsBuilder;
 import service.LaddersService;
@@ -16,11 +18,11 @@ public class LadderGameController {
     }
 
     public void start() {
-        int countOfLadders = 3;
-        int height = laddersService.getHeight();
+        CountOfLadders countOfLadders = new CountOfLadders(3);
+        Height height = new Height(6);
 
         Ladders ladders = laddersService.createLadders(countOfLadders, height);
-        outputView.printStatusOfLadders(ladders.getAllRungsPositionAtLadder(), height);
+        outputView.printStatusOfLadders(ladders.getRungsStatusAtLadder(), height.value());
     }
 
 }

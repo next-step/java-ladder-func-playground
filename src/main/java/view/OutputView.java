@@ -2,7 +2,6 @@ package view;
 
 
 import java.util.List;
-import java.util.Set;
 
 public class OutputView {
 
@@ -11,26 +10,29 @@ public class OutputView {
     private static final String RUNG_LINE = "----|";
 
 
-    public void printStatusOfLadders(List<Set<Integer>> rungPositionsPerLadder, int height) {
+    public void printStatusOfLadders(List<List<Boolean>> rungsStatusPerLadder, int height) {
         for (int nowPosition = height - 1; nowPosition >= 0; nowPosition--) {
             System.out.print(START_LINE);
-            printStatusAtLadderPosition(rungPositionsPerLadder, nowPosition);
+            printStatusAtLadderPosition(rungsStatusPerLadder, nowPosition);
             System.out.println();
         }
     }
 
-    private void printStatusAtLadderPosition(List<Set<Integer>> rungPositionsPerLadder, int nowPosition) {
-        for (Set<Integer> rungPositions : rungPositionsPerLadder) {
-            System.out.print(createOrSkip(rungPositions, nowPosition));
+    private void printStatusAtLadderPosition(List<List<Boolean>> rungsStatusPerLadder, int nowPosition) {
+        for (List<Boolean> rungStatus : rungsStatusPerLadder) {
+            System.out.print(createOrSkip(rungStatus, nowPosition));
         }
     }
 
-    private String createOrSkip(Set<Integer> rungPosition, int nowPosition) {
-        if (rungPosition.contains(nowPosition)) {
+    private String createOrSkip(List<Boolean> rungPosition, int nowPosition) {
+        if (doesRungExist(rungPosition, nowPosition)) {
             return RUNG_LINE;
         }
         return BLANK_LINE;
     }
 
+    private Boolean doesRungExist(List<Boolean> rungPosition, int nowPosition) {
+        return rungPosition.get(nowPosition);
+    }
 
 }

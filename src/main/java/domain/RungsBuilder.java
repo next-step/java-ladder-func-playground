@@ -1,11 +1,11 @@
 package domain;
 
-import java.util.Set;
+import java.util.List;
 
 public interface RungsBuilder {
 
-    int getPositionOfRung();
+    List<Boolean> buildAndGetRungsStatus(List<Boolean> prevRungsStatus);
 
-    Set<Integer> getPositionsOfRungs();
+    List<Boolean> buildTemporaryRungsStatus(int height);
 
 }

@@ -5,7 +5,8 @@ public class Errors {
     private Errors() {
     }
 
-    public static final String POSITION_INDEX_OUT_OF_RANGE = "가로 줄을 만들고자 하는 사다리의 position 값이 가능한 범위를 벗어났습니다.";
-    public static final String LADDER_DTO_NEED_TO_CREATE = "가로줄이 존재하지 않는 사다리가 존재합니다. 모든 사다리는 하나 이상의 가로줄을 포함해야합니다.";
+    public static final String LADDERS_MUST_CONTAINS_LEAST_ONE_LADDER = "사다리는 한 개 이상 존재해야 합니다.";
+    public static final String ALL_LADDERS_MUST_HAVE_SAME_HEIGHT = "각 사다리의 높이는 모두 동일해야합니다.";
+    public static final String ADJACENT_LADDERS_CANNOT_HAVE_RUNG_AT_SAME_POSITION = "인접한 두 사다리는 같은 위치에 가로줄을 가질 수 없습니다.";
 
 }

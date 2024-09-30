@@ -1,12 +1,9 @@
 package domain;
 
-import domain.dto.LaddersDto;
-import domain.dto.LadderDto;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import util.Errors;
 
 public class Ladders {
@@ -14,31 +11,56 @@ public class Ladders {
     private final List<Ladder> ladders;
 
     private Ladders(List<Ladder> ladders) {
-        this.ladders = ladders;
+        this.ladders = new ArrayList<>(ladders);
     }
 
-    public static Ladders from(LaddersDto laddersDto, int countOfLadders, int height) {
-        List<Ladder> ladders = new ArrayList<>();
+    public static Ladders from(List<Ladder> ladderCollection) {
+        validate(ladderCollection);
+        return new Ladders(ladderCollection);
+    }
 
-        final Map<Integer, LadderDto> ladderDtoByIndex = laddersDto.getAllLadderDtoByIndex();
-        for (int index = 0; index < countOfLadders; index++) {
-            final LadderDto ladderDto = getLadderDto(ladderDtoByIndex, index);
-            final Ladder ladder = Ladder.from(ladderDto, height);
-            ladders.add(ladder);
+    private static void validate(List<Ladder> ladders) {
+        validateLaddersHeight(ladders);
+        validateCheckConnectedRung(ladders);
+    }
+
+    private static void validateLaddersHeight(List<Ladder> ladders) {
+        boolean allSameHeight = ladders.stream()
+            .map(Ladder::getHeight)
+            .distinct()
+            .count() == 1;
+        if (!allSameHeight) {
+            throw new IllegalArgumentException(Errors.ALL_LADDERS_MUST_HAVE_SAME_HEIGHT);
         }
-        return new Ladders(ladders);
     }
 
-    private static LadderDto getLadderDto(Map<Integer, LadderDto> ladderDtoByIndex, int index) {
-        if (!ladderDtoByIndex.containsKey(index)) {
-            throw new IllegalArgumentException(Errors.LADDER_DTO_NEED_TO_CREATE);
+    private static void validateCheckConnectedRung(List<Ladder> ladders) {
+        if (isLaddersHasConnectedLadder(ladders)) {
+            throw new IllegalArgumentException(Errors.ADJACENT_LADDERS_CANNOT_HAVE_RUNG_AT_SAME_POSITION);
         }
-        return ladderDtoByIndex.get(index);
     }
 
-    public List<Set<Integer>> getAllRungsPositionAtLadder() {
+    private static boolean isLaddersHasConnectedLadder(List<Ladder> ladders) {
+        if (ladders.size() < 2) {
+            return false;
+        }
+        return IntStream.range(0, ladders.size() - 1)
+            .anyMatch(index -> isConnected(ladders.get(index), ladders.get(index + 1)));
+    }
+
+    private static boolean isConnected(Ladder currentLadder, Ladder nextLadder) {
+        final int height = currentLadder.getHeight();
+        return IntStream.range(0, height)
+            .anyMatch(position -> isConnected(currentLadder, nextLadder, position));
+    }
+
+    private static boolean isConnected(Ladder currentLadder, Ladder nextLadder, int position) {
+        return currentLadder.checkRungExistAt(position) && nextLadder.checkRungExistAt(position);
+    }
+
+    public List<List<Boolean>> getRungsStatusAtLadder() {
         return ladders.stream()
-            .map(Ladder::getRungPositions)
+            .map(Ladder::getRungsStatus)
             .collect(Collectors.toList());
     }
 

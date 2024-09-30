@@ -1,37 +1,30 @@
 package domain;
 
-import domain.dto.LadderDto;
-import java.util.HashSet;
-import java.util.Set;
-import util.Errors;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Ladder {
 
-    private final Set<Integer> rungPositions;
+    private final List<Boolean> rungs;
 
-    private Ladder(Set<Integer> rungPositions) {
-        this.rungPositions = new HashSet<>(rungPositions);
+    private Ladder(List<Boolean> rungs) {
+        this.rungs = new ArrayList<>(rungs);
     }
 
-    public static Ladder from(LadderDto ladderDto, int height) {
-        final Set<Integer> rungPositions = ladderDto.getRungPositions();
-        validateRungPositions(rungPositions, height);
-        return new Ladder(rungPositions);
+    public static Ladder from(List<Boolean> rungsStatus) {
+        return new Ladder(rungsStatus);
     }
 
-    private static void validateRungPositions(Set<Integer> rungPositions, int maxPosition) {
-        for (Integer rungPosition : rungPositions) {
-            validateRungPosition(rungPosition, maxPosition);
-        }
+    public int getHeight() {
+        return rungs.size();
     }
 
-    private static void validateRungPosition(Integer rungPosition, int maxPosition) {
-        if (rungPosition < 0 || rungPosition >= maxPosition) {
-            throw new IllegalArgumentException(Errors.POSITION_INDEX_OUT_OF_RANGE);
-        }
+    public List<Boolean> getRungsStatus() {
+        return Collections.unmodifiableList(rungs);
     }
 
-    public Set<Integer> getRungPositions() {
-        return new HashSet<>(rungPositions);
+    public boolean checkRungExistAt(int position) {
+        return rungs.get(position);
     }
 }

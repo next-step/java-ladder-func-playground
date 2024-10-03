@@ -8,7 +8,7 @@ public record CountOfLadders(int value) {
         validate(value);
     }
 
-    public void validate(int value) {
+    private void validate(int value) {
         validateIsNotEmpty(value);
     }
 

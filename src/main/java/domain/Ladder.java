@@ -6,13 +6,13 @@ import java.util.List;
 public class Ladder {
     private final List<Line> lines;
 
-    public Ladder(int ladderSize, int lineSize) {
+    public Ladder(Size ladderSize, Size lineSize) {
         this.lines = generateLines(ladderSize, lineSize);
     }
 
-    private List<Line> generateLines(int ladderSize, int lineSize) {
+    private List<Line> generateLines(Size ladderSize, Size lineSize) {
         List<Line> lines = new ArrayList<>();
-        for (int i = 0; i < ladderSize; i++) {
+        for (int i = 0; i < ladderSize.getSize(); i++) {
             lines.add(new Line(lineSize));
         }
         return lines;

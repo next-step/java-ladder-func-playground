@@ -9,7 +9,7 @@ public class LadderTest {
     @DisplayName("사다리 생성 테스트 4줄일 경우 정상 수행")
     @Test
     public void creationTest() {
-        Ladder ladder = new Ladder(4,4);
+        Ladder ladder = new Ladder(new Size(4),new Size(4));
         assertThat(ladder.getLines().size()).isEqualTo(4);
     }
 }

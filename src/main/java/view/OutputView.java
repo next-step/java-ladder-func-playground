@@ -35,4 +35,12 @@ public class OutputView {
         return rungPosition.get(nowPosition);
     }
 
+    public void printInputCountOfLaddersGuide() {
+        System.out.println("사다리의 넓이는 몇 개인가요?");
+    }
+
+    public void printInputHeightGuide() {
+        System.out.println("사다리의 높이는 몇 개인가요?");
+    }
+
 }

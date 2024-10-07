@@ -13,6 +13,11 @@ public class Line {
         duplicationCheck(this.points);
     }
 
+    public Line(List<Point> points) {
+        this.points = points;
+        duplicationCheck(this.points);
+    }
+
     public List<Point> generatePoints(Size lineSize) {
         List<Point> points = new ArrayList<>();
         for (int i = 1; i < lineSize.getSize(); i++) {

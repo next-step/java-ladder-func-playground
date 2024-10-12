@@ -29,4 +29,3 @@ public enum PointString {
         return PointString.DISCONNECTED;
     }
 }
-

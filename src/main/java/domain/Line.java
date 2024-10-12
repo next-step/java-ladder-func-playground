@@ -14,8 +14,8 @@ public class Line {
     }
 
     public Line(List<Point> points) {
+        duplicationCheck(points);
         this.points = points;
-        duplicationCheck(this.points);
     }
 
     public List<Point> generatePoints(Size lineSize) {

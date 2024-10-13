@@ -6,45 +6,14 @@ import java.util.Random;
 
 public class Line {
     private final List<Point> points;
-    private final Random random = new Random();
 
     public Line(Size lineSize) {
-        this.points = generatePoints(lineSize);
-        duplicationCheck(this.points);
+        this(PointsGenerator.generatePoints(lineSize));
     }
 
     public Line(List<Point> points) {
+        duplicationCheck(points);
         this.points = points;
-        duplicationCheck(this.points);
-    }
-
-    public List<Point> generatePoints(Size lineSize) {
-        List<Point> points = new ArrayList<>();
-        for (int i = 1; i < lineSize.getSize(); i++) {
-            generatePoint(points);
-        }
-        return points;
-    }
-
-    private void generatePoint(List<Point> points) {
-        if (points.isEmpty()) {
-            points.add(new Point(getRandomBoolean()));
-            return;
-        }
-        generateNext(points);
-    }
-
-    private void generateNext(List<Point> points) {
-        boolean isConnected = false;
-        int lastIndex = points.size() - 1;
-        if (!points.get(lastIndex).isConnected()) {
-            isConnected = getRandomBoolean();
-        }
-        points.add(new Point(isConnected));
-    }
-
-    private boolean getRandomBoolean() {
-        return random.nextBoolean();
     }
 
     private void duplicationCheck(List<Point> points) {

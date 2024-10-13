@@ -18,7 +18,7 @@ public class Line {
         this.points = points;
     }
 
-    public List<Point> generatePoints(Size lineSize) {
+    private List<Point> generatePoints(Size lineSize) {
         List<Point> points = new ArrayList<>();
         for (int i = 1; i < lineSize.getSize(); i++) {
             generatePoint(points);

@@ -12,44 +12,42 @@ public class LadderController {
     private final InputView inputView;
     private final ResultView resultView;
 
-    private Players players;
-    private Prizes prizes;
-    private Ladder ladder;
-    private LadderGame ladderGame;
-
     public LadderController(InputView inputView, ResultView resultView) {
         this.inputView = inputView;
         this.resultView = resultView;
     }
 
     public void runLadderApplication() {
-        inputLadderGameElementsInformation();
-        showLadderGameBoard();
+        Players players = inputLadderGamePlayers();
+        Prizes prizes = inputLadderGamePrizes(players);
+        Ladder ladder = createLadder(players);
 
-        playLadderGame();
+        showLadderGameBoard(players, ladder, prizes);
 
-        executeLadderResultConfirmationProcess();
+        LadderGame ladderGame = new LadderGame(players,ladder,prizes);
+        ladderGame.playLadderGame();
+
+        executeLadderResultConfirmationProcess(ladderGame);
     }
 
-    private void inputLadderGameElementsInformation() {
-        players = new Players(inputView.inputLadderGamePlayerNames());
-        prizes = new Prizes(players.Count(),inputView.inputLadderGamePrizes());
-        ladder = new Ladder(players.Count(), inputView.inputLadderHeight());
+    private Players inputLadderGamePlayers() {
+        return new Players(inputView.inputLadderGamePlayerNames());
     }
 
-    private void showLadderGameBoard() {
+    private Prizes inputLadderGamePrizes(Players players) {
+        return new Prizes(players.count(), inputView.inputLadderGamePrizes());
+    }
+
+    private Ladder createLadder(Players players) {
+        return new Ladder(players.count(), inputView.inputLadderHeight());
+    }
+
+    private void showLadderGameBoard(Players players, Ladder ladder, Prizes prizes) {
         resultView.printLadderFormWithGameElements(players,ladder,prizes);
     }
 
-    private void playLadderGame() {
-        ladderGame = new LadderGame(players,ladder,prizes);
-        ladderGame.playLadderGame();
-    }
-
-    private void executeLadderResultConfirmationProcess() {
+    private void executeLadderResultConfirmationProcess(LadderGame ladderGame) {
         String playerName = inputView.inputSelectPlayerToKnowPrize();
         resultView.printLadderResult(playerName,ladderGame);
     }
-
-
 }

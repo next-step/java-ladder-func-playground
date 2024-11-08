@@ -14,9 +14,11 @@ public class LadderTest {
         Ladder ladder = new Ladder(playerCount,ladderHeight);
 
         assertThat(ladder.getLadder()).hasSize(ladderHeight);
-        for (LadderLine ladderLine : ladder.getLadder()) {
-            assertThat(ladderLine.getLadderLine()).hasSize(playerCount);
-        }
+
+        assertThat(ladder.getLadder()).allSatisfy(
+                ladderLine ->
+                        assertThat(ladderLine.getLadderLine()).hasSize(playerCount)
+        );
     }
 
 }

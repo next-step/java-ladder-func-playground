@@ -1,5 +1,6 @@
 package model.ladder;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -23,7 +24,8 @@ public class LadderLineTest {
     }
 
     @Test
-    public void 플레이어가_이동_가능한_방향을_결정해줄_수_있다_ex_왼쪽으로_이동_가능할_경우(){
+    @DisplayName("왼쪽으로 이동 가능할 경우")
+    public void 플레이어가_이동_가능한_방향을_결정해줄_수_있다_1(){
         LadderLine ladderLine = new LadderLine(5);
 
         int leftPointPosition = 0;
@@ -40,7 +42,8 @@ public class LadderLineTest {
     }
 
     @Test
-    public void 플레이어가_이동_가능한_방향을_결정해줄_수_있다_ex_오른쪽으로_이동_가능할_경우(){
+    @DisplayName("오른쪽으로 이동 가능할 경우")
+    public void 플레이어가_이동_가능한_방향을_결정해줄_수_있다_2(){
         LadderLine ladderLine = new LadderLine(5);
         LadderPoint currentLadderPoint = LadderPoint.CONNECTED;
         LadderPoint rightLadderPoint = LadderPoint.DISCONNECTED;
@@ -57,7 +60,8 @@ public class LadderLineTest {
     }
 
     @Test
-    public void 플레이어가_이동_가능한_방향을_결정해줄_수_있다_ex_아래로_이동_가능할_경우(){
+    @DisplayName("아래로 이동 가능할 경우")
+    public void 플레이어가_이동_가능한_방향을_결정해줄_수_있다_3(){
         LadderLine ladderLine = new LadderLine(5);
         LadderPoint lefrLadderPoint = LadderPoint.DISCONNECTED;
         LadderPoint currentLadderPoint = LadderPoint.DISCONNECTED;

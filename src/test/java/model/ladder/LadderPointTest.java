@@ -1,12 +1,14 @@
 package model.ladder;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LadderPointTest {
 
     @Test
-    public void 현재_사다리의_지점에서_오른쪽_지점으로_이동할_수_있다_ex_연결상태일_경우(){
+    @DisplayName("연결상태일 경우")
+    public void 현재_사다리의_지점에서_오른쪽_지점으로_이동할_수_있다_1(){
         LadderPoint ladderPoint = LadderPoint.CONNECTED;
 
         assertThat(ladderPoint.isPossibleToMoveRight())
@@ -14,7 +16,8 @@ public class LadderPointTest {
     }
 
     @Test
-    public void 현재_사다리의_지점에서_왼쪽_지점으로_이동할_수_있다_ex_연결상태일_경우(){
+    @DisplayName("연결상태일 경우")
+    public void 현재_사다리의_지점에서_왼쪽_지점으로_이동할_수_있다_2(){
         LadderPoint ladderPoint = LadderPoint.DISCONNECTED;
         LadderPoint beforeLadderPoint = LadderPoint.CONNECTED;
 
@@ -23,7 +26,8 @@ public class LadderPointTest {
     }
 
     @Test
-    public void 현재_사다리의_지점에서_오른쪽_지점으로_이동할_수_없다_ex_연결상태가_아닌_경우(){
+    @DisplayName("연결상태가 아닐 경우")
+    public void 현재_사다리의_지점에서_오른쪽_지점으로_이동할_수_없다_1(){
         LadderPoint ladderPoint = LadderPoint.DISCONNECTED;
 
         assertThat(ladderPoint.isPossibleToMoveRight())
@@ -31,7 +35,8 @@ public class LadderPointTest {
     }
 
     @Test
-    public void 현재_사다리의_지점에서_왼쪽_지점으로_이동할_수_없다_ex_연결상태가_아닌_경우(){
+    @DisplayName("연결상태가 아닐 경우")
+    public void 현재_사다리의_지점에서_왼쪽_지점으로_이동할_수_없다_2(){
         LadderPoint ladderPoint = LadderPoint.DISCONNECTED;
         LadderPoint beforeLadderPoint = LadderPoint.DISCONNECTED;
 

@@ -15,14 +15,14 @@ import static org.mockito.Mockito.*;
 class PlayerTest {
 
     private Player player;
-    private Name name;
+    private PlayerName playerName;
     private Position position;
 
     @BeforeEach
     public void 초기_세팅() {
-        name = new Name("test");
+        playerName = new PlayerName("test");
         position = new Position(0);
-        player = new Player(name, position);
+        player = new Player(playerName, position);
     }
 
     @Test

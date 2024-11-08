@@ -1,13 +1,13 @@
 package model.player;
 
-public class Name {
+public class PlayerName {
 
    private final String name;
 
     private final static int MIN_NAME_LENGTH = 1;
     private final static int MAX_NAME_LENGTH = 5;
 
-    public Name(String name) {
+    public PlayerName(String name) {
         validateName(name);
         this.name = name;
     }

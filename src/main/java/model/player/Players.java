@@ -20,7 +20,7 @@ public class Players {
     private void generatePlayers(List<String> playerNames) {
         for (int index = 0; index < playerNames.size(); index++) {
 
-            Name playerName = new Name(playerNames.get(index));
+            PlayerName playerName = new PlayerName(playerNames.get(index));
             Position playerPosition = new Position(index);
 
             Player player = new Player(playerName,playerPosition);

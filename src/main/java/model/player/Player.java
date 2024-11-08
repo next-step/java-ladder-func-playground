@@ -5,11 +5,11 @@ import model.ladder.LadderLine;
 
 public class Player {
 
-    private final Name name;
+    private final PlayerName playerName;
     private final Position position;
 
-    public Player(Name name, Position position) {
-        this.name = name;
+    public Player(PlayerName playerName, Position position) {
+        this.playerName = playerName;
         this.position = position;
     }
 
@@ -27,7 +27,7 @@ public class Player {
     }
 
     public String getName() {
-        return name.getName();
+        return playerName.getName();
     }
 
     public int getPosition() {

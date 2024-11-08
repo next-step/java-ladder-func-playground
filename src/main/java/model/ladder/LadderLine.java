@@ -75,6 +75,6 @@ public class LadderLine {
     }
 
     public List<LadderPoint> getLadderLine() {
-        return Collections.unmodifiableList(ladderPoints);
+        return ladderPoints;
     }
 }

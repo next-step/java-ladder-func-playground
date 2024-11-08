@@ -1,6 +1,7 @@
 package model.ladder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -13,6 +14,8 @@ public class LadderLine {
     private final static int LEFT_MOVE_DIRECTION = -1;
 
     private final static int FIRST_INDEX = 0;
+
+    private final static Random random = new Random();
 
     public LadderLine(int ladderWidth) {
         this.ladderPoints = new ArrayList<>();
@@ -43,8 +46,6 @@ public class LadderLine {
     }
 
     private LadderPoint addLadderPointByRandom() {
-        Random random = new Random();
-
         if (random.nextBoolean()) {
             return LadderPoint.CONNECTED;
         }
@@ -74,6 +75,6 @@ public class LadderLine {
     }
 
     public List<LadderPoint> getLadderLine() {
-        return ladderPoints;
+        return Collections.unmodifiableList(ladderPoints);
     }
 }

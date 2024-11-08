@@ -22,7 +22,7 @@ public class LadderController {
         this.resultView = resultView;
     }
 
-    public void runLadderApplication(){
+    public void runLadderApplication() {
         inputLadderGameElementsInformation();
         showLadderGameBoard();
 

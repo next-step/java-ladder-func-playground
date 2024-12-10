@@ -3,6 +3,7 @@ package view;
 import domain.Ladder;
 import domain.Line;
 import domain.Participant;
+import domain.Participants;
 import domain.Point;
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class OutputView {
         System.out.print("|");
     }
 
-    public void printResult(List<Participant> participants){
-        for(Participant participant : participants){
+    public void printResult(Participants participants){
+        for(Participant participant : participants.getParticipants()){
             System.out.println(participant.getStart() + " -> " + participant.getEnd());
         }
     }

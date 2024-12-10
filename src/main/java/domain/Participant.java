@@ -17,7 +17,7 @@ public class Participant {
         return end;
     }
 
-    public void setEnd(int end) {
+    public void changeEnd(int end) {
         this.end = end;
     }
 }

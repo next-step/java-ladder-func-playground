@@ -4,21 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ladder {
-    private final List<Participant> participants;
     private final List<Line> lines;
 
     public Ladder(Size ladderSize, Size lineSize) {
-        this.participants = generateParticipants(lineSize);
         this.lines = generateLines(ladderSize, lineSize);
-        getResult();
     }
 
-    private List<Participant> generateParticipants(Size lineSize) {
-        List<Participant> participants = new ArrayList<>();
-        for (int i = 0; i < lineSize.getSize(); i++) {
-            participants.add(new Participant(i));
-        }
-        return participants;
+    public Ladder(List<Line> lines) {
+        this.lines = lines;
     }
 
     private List<Line> generateLines(Size ladderSize, Size lineSize) {
@@ -29,35 +22,36 @@ public class Ladder {
         return lines;
     }
 
-    private void getResult(){
+    public void getResult(Participants participants){
         for (Line line : lines) {
-            changeByLine(line);
+            changeByLine(line, participants.getParticipants());
         }
     }
 
-    private void changeByLine(Line line){
+    private void changeByLine(Line line, List<Participant> participants){
         for(int i = 0; i< line.getPoints().size() ; i++){
-            changeByPoint(i,line.getPoints().get(i));
+            changeByPoint(i,line.getPoints().get(i), participants);
         }
     }
 
-    private void changeByPoint(int idx, Point point){
+    private void changeByPoint(int idx, Point point, List<Participant> participants){
         if(point.isConnected()){
-            swapEnds(idx);
+            move(idx, participants);
         }
     }
 
-    private void swapEnds(int idx){
+    private void move(int idx, List<Participant> participants){
         int temp = participants.get(idx).getEnd();
-        participants.get(idx).setEnd(participants.get(idx+1).getEnd());
-        participants.get(idx+1).setEnd(temp);
+        participants.get(idx).changeEnd(participants.get(idx+1).getEnd());
+        participants.get(idx+1).changeEnd(temp);
     }
 
     public List<Line> getLines() {
         return lines;
     }
 
-    public List<Participant> getParticipants() {
-        return participants;
+    public int getWidth() {
+        return lines.get(0).getPoints().size()+1;
     }
+
 }

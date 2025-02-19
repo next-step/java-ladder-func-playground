@@ -8,9 +8,7 @@ import view.InputView;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mockStatic;
-
 import org.mockito.MockedStatic;
-import org.mockito.Mockito;
 
 import java.util.List;
 

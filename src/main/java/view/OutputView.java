@@ -1,3 +1,8 @@
+package view;
+
+import model.Line;
+import model.Player;
+
 import java.util.*;
 
 public class OutputView {

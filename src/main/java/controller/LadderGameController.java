@@ -1,4 +1,8 @@
+package controller;
+
 import java.util.*;
+import model.*;
+import view.*;
 
 public class LadderGameController {
     private final List<Player> players;

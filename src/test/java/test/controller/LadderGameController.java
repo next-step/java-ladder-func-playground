@@ -4,8 +4,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
 import controller.LadderGameController;
+import view.InputView;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.mockStatic;
+
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import java.util.List;
 
@@ -21,8 +26,12 @@ class LadderGameControllerTest {
 
     @Test
     void 사다리_게임_플레이() {
-        controller.play();
-        assertNotNull(controller);
+        try (MockedStatic<InputView> mockedInputView = mockStatic(InputView.class)) {
+            mockedInputView.when(InputView::getQuery).thenReturn("all");
+
+            controller.play();
+            assertNotNull(controller);
+        }
     }
 }
 

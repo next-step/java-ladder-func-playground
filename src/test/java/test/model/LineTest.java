@@ -1,8 +1,10 @@
 package test.model;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import model.Line;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 class LineTest {
 

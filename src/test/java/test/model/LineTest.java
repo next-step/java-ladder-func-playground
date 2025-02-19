@@ -11,7 +11,6 @@ class LineTest {
         Line line = new Line(3);
         int newPosition = line.move(1);
 
-        // 이동 후 위치가 유효한 범위 내인지 확인
         assertTrue(newPosition >= 0 && newPosition < 3);
     }
 }

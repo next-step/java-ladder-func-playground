@@ -10,8 +10,8 @@ public class LadderService {
     public LadderService() {
     }
 
-    public void createLadder() {
-        this.ladder = new Ladder(4, 4);
+    public void createLadder(int height, int width) {
+        this.ladder = new Ladder(height, width);
     }
 
     public GetLadderResponse getLadder() {

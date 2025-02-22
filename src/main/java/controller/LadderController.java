@@ -8,18 +8,20 @@ import view.LadderOutputView;
 public class LadderController {
 
     private final LadderService ladderService;
-    private final LadderInputView inputView;
-    private final LadderOutputView outputView;
+    private final LadderInputView ladderInputView;
+    private final LadderOutputView ladderOutputView;
 
-    public LadderController(LadderService ladderService, LadderInputView inputView, LadderOutputView outputView) {
+    public LadderController(LadderService ladderService, LadderInputView ladderInputView, LadderOutputView ladderOutputView) {
         this.ladderService = ladderService;
-        this.inputView = inputView;
-        this.outputView = outputView;
+        this.ladderInputView = ladderInputView;
+        this.ladderOutputView = ladderOutputView;
     }
 
     public void play() {
-        ladderService.createLadder();
+        int width = ladderInputView.inputLadderWidth();
+        int height = ladderInputView.inputLadderHeight();
+        ladderService.createLadder(height, width);
         GetLadderResponse getLadderResponse = ladderService.getLadder();
-        outputView.printLadder(getLadderResponse.ladders());
+        ladderOutputView.printLadder(getLadderResponse.ladders());
     }
 }

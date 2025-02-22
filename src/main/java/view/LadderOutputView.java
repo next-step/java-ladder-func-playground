@@ -1,6 +1,7 @@
 package view;
 
 import java.util.List;
+import java.util.Map;
 
 public class LadderOutputView {
 
@@ -15,6 +16,15 @@ public class LadderOutputView {
                 }
                 System.out.print("|");
             }
+            System.out.println();
+        }
+    }
+
+    public void printLadderResult(Map<Integer, Integer> result) {
+        for (Map.Entry<Integer, Integer> entry : result.entrySet()) {
+            System.out.print(entry.getKey());
+            System.out.print("->");
+            System.out.print(entry.getValue());
             System.out.println();
         }
     }

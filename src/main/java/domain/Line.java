@@ -30,4 +30,14 @@ public class Line {
     public List<Boolean> getPoints() {
         return points;
     }
+
+    public int getMovePoint(int x) {
+        if (x < points.size() && points.get(x)) {
+            return x + 1;
+        }
+        if (x > 0 && points.get(x - 1)) {
+            return x - 1;
+        }
+        return x;
+    }
 }

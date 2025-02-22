@@ -1,6 +1,7 @@
 package controller;
 
-import dto.response.GetLadderResponse;
+import dto.response.GetLadderResultResponse;
+import dto.response.GetLadderShapeResponse;
 import service.LadderService;
 import view.LadderInputView;
 import view.LadderOutputView;
@@ -21,7 +22,9 @@ public class LadderController {
         int width = ladderInputView.inputLadderWidth();
         int height = ladderInputView.inputLadderHeight();
         ladderService.createLadder(height, width);
-        GetLadderResponse getLadderResponse = ladderService.getLadder();
-        ladderOutputView.printLadder(getLadderResponse.ladders());
+        GetLadderShapeResponse getLadderShapeResponse = ladderService.getLadderShape();
+        ladderOutputView.printLadder(getLadderShapeResponse.ladders());
+        GetLadderResultResponse getLadderResultResponse = ladderService.getLadderAllResult();
+        ladderOutputView.printLadderResult(getLadderResultResponse.result());
     }
 }

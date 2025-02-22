@@ -1,7 +1,8 @@
 package service;
 
 import domain.Ladder;
-import dto.response.GetLadderResponse;
+import dto.response.GetLadderResultResponse;
+import dto.response.GetLadderShapeResponse;
 
 public class LadderService {
 
@@ -14,7 +15,11 @@ public class LadderService {
         this.ladder = new Ladder(height, width);
     }
 
-    public GetLadderResponse getLadder() {
-        return GetLadderResponse.from(ladder);
+    public GetLadderShapeResponse getLadderShape() {
+        return GetLadderShapeResponse.from(ladder);
+    }
+
+    public GetLadderResultResponse getLadderAllResult() {
+        return GetLadderResultResponse.from(ladder.getLadderAllResult());
     }
 }

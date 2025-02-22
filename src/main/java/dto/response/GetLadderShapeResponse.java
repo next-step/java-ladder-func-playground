@@ -5,12 +5,12 @@ import domain.Line;
 
 import java.util.List;
 
-public record GetLadderResponse(
+public record GetLadderShapeResponse(
         List<List<Boolean>> ladders
 ) {
 
-    public static GetLadderResponse from(Ladder ladder) {
-        return new GetLadderResponse(ladder.getLines().stream()
+    public static GetLadderShapeResponse from(Ladder ladder) {
+        return new GetLadderShapeResponse(ladder.getLines().stream()
                 .map(Line::getPoints)
                 .toList());
     }

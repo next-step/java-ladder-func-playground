@@ -1,0 +1,17 @@
+package dto.response;
+
+import domain.Ladder;
+import domain.Line;
+
+import java.util.List;
+
+public record GetLadderResponse(
+        List<List<Boolean>> ladders
+) {
+
+    public static GetLadderResponse from(Ladder ladder) {
+        return new GetLadderResponse(ladder.getLines().stream()
+                .map(Line::getPoints)
+                .toList());
+    }
+}

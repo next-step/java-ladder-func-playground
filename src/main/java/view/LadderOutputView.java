@@ -5,7 +5,11 @@ import java.util.Map;
 
 public class LadderOutputView {
 
-    public void printLadder(List<List<Boolean>> ladders) {
+    public void printLadderCanvas(List<String> names, List<List<Boolean>> ladders, List<String> results) {
+        for (String name : names) {
+            System.out.print(name + " ");
+        }
+        System.out.println();
         for (List<Boolean> l : ladders) {
             System.out.print("|");
             for (Boolean b : l) {
@@ -18,14 +22,24 @@ public class LadderOutputView {
             }
             System.out.println();
         }
+        for (String result : results) {
+            System.out.print(result + " ");
+        }
+        System.out.println();
     }
 
-    public void printLadderResult(Map<Integer, Integer> result) {
-        for (Map.Entry<Integer, Integer> entry : result.entrySet()) {
+    public void printAllLadderResult(Map<String, String> result) {
+        System.out.println("실행 결과");
+        for (Map.Entry<String, String> entry : result.entrySet()) {
             System.out.print(entry.getKey());
             System.out.print("->");
             System.out.print(entry.getValue());
             System.out.println();
         }
+    }
+
+    public void printLadderResult(String result) {
+        System.out.println("실행 결과");
+        System.out.println(result);
     }
 }

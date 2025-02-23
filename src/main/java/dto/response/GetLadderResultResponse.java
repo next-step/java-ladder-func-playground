@@ -1,12 +1,12 @@
 package dto.response;
 
-import java.util.Map;
+import domain.LadderResult;
 
 public record GetLadderResultResponse(
-        Map<Integer, Integer> result
+        String result
 ) {
 
-    public static GetLadderResultResponse from(Map<Integer, Integer> result) {
-        return new GetLadderResultResponse(result);
+    public static GetLadderResultResponse from(LadderResult result) {
+        return new GetLadderResultResponse(result.getResult());
     }
 }

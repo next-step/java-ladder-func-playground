@@ -1,25 +1,64 @@
 package service;
 
-import domain.Ladder;
+import domain.*;
+import dto.response.GetLadderAllResultResponse;
+import dto.response.GetLadderCanvasResponse;
 import dto.response.GetLadderResultResponse;
-import dto.response.GetLadderShapeResponse;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LadderService {
 
+    private Participants participants;
+    private LadderResults ladderResults;
     private Ladder ladder;
 
     public LadderService() {
     }
 
-    public void createLadder(int height, int width) {
-        this.ladder = new Ladder(height, width);
+    public void createParticipants(List<String> names) {
+        this.participants = new Participants(names);
     }
 
-    public GetLadderShapeResponse getLadderShape() {
-        return GetLadderShapeResponse.from(ladder);
+    public void createLadderResults(List<String> results) {
+        validateResultSizeEqualsParticipantCount(results);
+        this.ladderResults = new LadderResults(results);
     }
 
-    public GetLadderResultResponse getLadderAllResult() {
-        return GetLadderResultResponse.from(ladder.getLadderAllResult());
+    private void validateResultSizeEqualsParticipantCount(List<String> results) {
+        if (results.size() != participants.getParticipantCount()) {
+            throw new IllegalArgumentException("로또 결과를 참여자 수랑 동일하게 입력해주세요.");
+        }
+    }
+
+    public void createLadder(int height) {
+        this.ladder = new Ladder(height, participants.getParticipantCount());
+    }
+
+    public GetLadderCanvasResponse getLadderCanvas() {
+        return GetLadderCanvasResponse.of(participants, ladder, ladderResults);
+    }
+
+    public GetLadderResultResponse getLadderResult(String name) {
+        Participant participant = participants.getParticipant(name);
+        int endPoint = ladder.getLadderEndPoint(participant.getStartPoint());
+
+        return GetLadderResultResponse.from(ladderResults.getLadderResult(endPoint));
+    }
+
+    public GetLadderAllResultResponse getAllLadderResult() {
+        Map<String, LadderResult> results = participants.getParticipants().stream()
+                .collect(Collectors.toMap(
+                        Participant::getName,
+                        this::getLadderResultForParticipant
+                ));
+
+        return GetLadderAllResultResponse.from(results);
+    }
+
+    private LadderResult getLadderResultForParticipant(Participant participant) {
+        return ladderResults.getLadderResult(ladder.getLadderEndPoint(participant.getStartPoint()));
     }
 }

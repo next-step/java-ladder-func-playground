@@ -2,7 +2,6 @@ package controller;
 
 import domain.*;
 import view.*;
-
 import java.util.ArrayList;
 import java.util.List;
 

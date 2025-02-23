@@ -1,7 +1,6 @@
 package view;
 
 import domain.Player;
-
 import java.util.List;
 
 public class GameResultView {
@@ -31,7 +30,6 @@ public class GameResultView {
         }
         System.out.print("\n");
     }
-
 
     private void printPoint(int ladderSpace, Boolean point) {
         if(point){

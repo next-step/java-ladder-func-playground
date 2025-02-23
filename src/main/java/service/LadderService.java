@@ -51,9 +51,9 @@ public class LadderService {
 
     public GetLadderResultResponse getLadderResult(String name) {
         Participant participant = participants.getParticipant(name);
-        int endPoint = ladder.getLadderEndPoint(participant.getStartPoint());
+        LadderResult ladderResult = getLadderResultForParticipant(participant);
 
-        return GetLadderResultResponse.from(ladderResults.getLadderResult(endPoint));
+        return GetLadderResultResponse.from(ladderResult);
     }
 
     public GetLadderAllResultResponse getAllLadderResult() {

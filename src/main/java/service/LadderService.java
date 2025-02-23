@@ -5,6 +5,7 @@ import dto.response.GetLadderAllResultResponse;
 import dto.response.GetLadderCanvasResponse;
 import dto.response.GetLadderResultResponse;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -52,7 +53,9 @@ public class LadderService {
         Map<String, LadderResult> results = participants.getParticipants().stream()
                 .collect(Collectors.toMap(
                         Participant::getName,
-                        this::getLadderResultForParticipant
+                        this::getLadderResultForParticipant,
+                        (existing, replacement) -> existing,
+                        LinkedHashMap::new
                 ));
 
         return GetLadderAllResultResponse.from(results);

@@ -10,7 +10,7 @@ public class Ladder {
         this(4,4);
     }
 
-    public Ladder(int ladderHeight, int ladderWidth){
+    public Ladder(int ladderWidth, int ladderHeight){
         this.lines = new ArrayList<>();
         for(int i=0; i<ladderHeight; i++){
             lines.add(new Line(ladderWidth));

@@ -5,37 +5,34 @@ import java.util.Map;
 
 public class LadderOutputView {
 
+    public static final String LADDER_COLUMN = "l";
+    public static final String LADDER_CONNECTED = "----";
+    public static final String LADDER_UNCONNECTED = "    ";
+
     public void printLadderCanvas(List<String> names, List<List<Boolean>> ladders, List<String> results) {
-        for (String name : names) {
-            System.out.print(name + " ");
-        }
-        System.out.println();
-        for (List<Boolean> l : ladders) {
-            System.out.print("|");
-            for (Boolean b : l) {
-                if (b) {
-                    System.out.print("----");
-                } else {
-                    System.out.print("     ");
-                }
-                System.out.print("|");
-            }
-            System.out.println();
-        }
-        for (String result : results) {
-            System.out.print(result + " ");
-        }
+        System.out.println(String.join(" ", names));
+        ladders.forEach(this::printLine);
+        System.out.println(String.join(" ", results));
+    }
+
+    private void printLine(List<Boolean> line) {
+        System.out.print(LADDER_COLUMN);
+        line.stream()
+                .map(point -> convertToPoint(point) + LADDER_COLUMN)
+                .forEach(System.out::print);
         System.out.println();
     }
 
-    public void printAllLadderResult(Map<String, String> result) {
-        System.out.println("실행 결과");
-        for (Map.Entry<String, String> entry : result.entrySet()) {
-            System.out.print(entry.getKey());
-            System.out.print("->");
-            System.out.print(entry.getValue());
-            System.out.println();
+    private String convertToPoint(Boolean point) {
+        if (point) {
+            return LADDER_CONNECTED;
         }
+        return LADDER_UNCONNECTED;
+    }
+
+    public void printAllLadderResult(Map<String, String> results) {
+        System.out.println("실행 결과");
+        results.forEach((name, result) -> System.out.println(name + "->" + result));
     }
 
     public void printLadderResult(String result) {

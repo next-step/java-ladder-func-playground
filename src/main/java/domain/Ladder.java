@@ -18,12 +18,12 @@ public class Ladder {
     }
 
     public int getLadderEndPoint(int startPoint) {
-        int p = startPoint;
+        int point = startPoint;
         for (Line line : lines) {
-            p = line.getMovePoint(p);
+            point = line.getMovePoint(point);
         }
 
-        return p;
+        return point;
     }
 
     public List<Line> getLines() {

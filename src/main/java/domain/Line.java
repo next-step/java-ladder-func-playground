@@ -14,17 +14,19 @@ public class Line {
     }
 
     private List<Boolean> generatePoints(int width) {
-        List<Boolean> points = new ArrayList<>();
-
-        for (int i = 0; i < width - 1; i++) {
-            if (i > 0 && points.get(i - 1)) {
-                points.add(false);
-            } else {
-                points.add(random.nextBoolean());
-            }
+        List<Boolean> tempPoints = new ArrayList<>();
+        for (int index = 0; index < width - 1; index++) {
+            tempPoints.add(generatePoint(index, tempPoints));
         }
 
-        return points;
+        return tempPoints;
+    }
+
+    private Boolean generatePoint(int index, List<Boolean> tempPoints) {
+        if (index > 0 && tempPoints.get(index - 1)) {
+            return false;
+        }
+        return random.nextBoolean();
     }
 
     public List<Boolean> getPoints() {
@@ -32,12 +34,20 @@ public class Line {
     }
 
     public int getMovePoint(int x) {
-        if (x < points.size() && points.get(x)) {
+        if (canMoveRight(x)) {
             return x + 1;
         }
-        if (x > 0 && points.get(x - 1)) {
+        if (canMoveLeft(x)) {
             return x - 1;
         }
         return x;
+    }
+
+    private boolean canMoveRight(int x) {
+        return x < points.size() && points.get(x);
+    }
+
+    private boolean canMoveLeft(int x) {
+        return x > 0 && points.get(x - 1);
     }
 }

@@ -16,9 +16,6 @@ public class LadderService {
     private LadderResults ladderResults;
     private Ladder ladder;
 
-    public LadderService() {
-    }
-
     public void createParticipants(List<String> names) {
         this.participants = new Participants(names);
     }

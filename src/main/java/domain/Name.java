@@ -33,7 +33,7 @@ public class Name {
 
     private void validateReservedName(String name) {
         if (RESERVED_WORD.equals(name)) {
-            throw new IllegalArgumentException(String.format("%s는 지시어로 사용할 수 없습니다. 다른 이름을 입력 해주세요.", name));
+            throw new IllegalArgumentException(String.format("%s는 현재 지시어로 사용할 수 없습니다. 다른 이름을 입력 해주세요.", name));
         }
     }
 

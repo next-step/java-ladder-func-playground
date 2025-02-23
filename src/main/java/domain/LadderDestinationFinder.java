@@ -25,5 +25,4 @@ public class LadderDestinationFinder {
         }
         return destination;
     }
-
 }

@@ -7,7 +7,7 @@ public class LadderOutputView {
 
     public static final String LADDER_COLUMN = "l";
     public static final String LADDER_CONNECTED = "----";
-    public static final String LADDER_UNCONNECTED = "    ";
+    public static final String LADDER_UNCONNECTED = "     ";
 
     public void printLadderCanvas(List<String> names, List<List<Boolean>> ladders, List<String> results) {
         System.out.println(String.join(" ", names));

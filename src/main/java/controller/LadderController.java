@@ -36,7 +36,7 @@ public class LadderController {
 
     private void requestParticipantNames() {
         String inputNames = ladderInputView.inputParticipantNames();
-        List<String> names = Parser.parseStringDelimiter(inputNames, ',');
+        List<String> names = Parser.parseStringDelimiter(inputNames, DELIMITER);
         ladderService.createParticipants(names);
     }
 

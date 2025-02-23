@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Ladder {
     private final List<Line> lines;
+    private final int width;
 
     public Ladder(){
         this(4,4);
@@ -15,9 +16,14 @@ public class Ladder {
         for(int i=0; i<ladderHeight; i++){
             lines.add(new Line(ladderWidth));
         }
+        this.width = ladderWidth;
     }
 
     public List<Line> getLines(){
         return lines;
+    }
+
+    public int getWidth(){
+        return width;
     }
 }

@@ -4,6 +4,10 @@ import java.util.List;
 
 public class ResultView {
 
+    public void printString(String content){
+        System.out.println(content);
+    }
+
     public void printLadderLine(List<Boolean> points, int ladderSpace){
         System.out.print("|");
         for(Boolean point : points){
@@ -11,6 +15,10 @@ public class ResultView {
 
         }
         System.out.print("\n");
+    }
+
+    public void printLadderPlayResult(int start, int end){
+        System.out.println(String.format("%d -> %d", start, end));
     }
 
     private void printPoint(int ladderSpace, Boolean point) {

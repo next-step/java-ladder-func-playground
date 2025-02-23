@@ -5,5 +5,6 @@ public class Application {
         LadderController ladderController = new LadderController();
         ladderController.createLadderWithUserInput();
         ladderController.runLadderPrinting();
+        ladderController.runLadderResultPrinting();
     }
 }

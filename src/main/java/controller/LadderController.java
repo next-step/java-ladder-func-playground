@@ -13,9 +13,16 @@ public class LadderController {
     }
 
     public void runLadderPrinting(){
-
+        resultView.printString("실행결과");
         for(Line line : ladder.getLines()){
             resultView.printLadderLine(line.getPoints(), 5);
+        }
+    }
+
+    public void runLadderResultPrinting(){
+        LadderPlayer ladderPlayer = new LadderPlayer(ladder);
+        for(int start = 0; start < ladder.getWidth(); start++){
+            resultView.printLadderPlayResult(start, ladderPlayer.findDestinationOfLadder(start));
         }
     }
 }

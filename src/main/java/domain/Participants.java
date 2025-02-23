@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -8,9 +9,16 @@ public class Participants {
     private final List<Participant> participants;
 
     public Participants(List<String> names) {
+        validateDuplicateName(names);
         this.participants = IntStream.range(0, names.size())
                 .mapToObj(i -> new Participant(names.get(i), i))
                 .toList();
+    }
+
+    private void validateDuplicateName(List<String> names) {
+        if (names.size() != new HashSet<>(names).size()) {
+            throw new IllegalArgumentException("모두 다른 이름을 작성해주세요.");
+        }
     }
 
     public int getParticipantCount() {

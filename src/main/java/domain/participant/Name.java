@@ -1,4 +1,4 @@
-package domain;
+package domain.participant;
 
 import static constant.LadderConstant.RESERVED_WORD;
 

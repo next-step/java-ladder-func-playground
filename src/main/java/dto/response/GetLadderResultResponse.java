@@ -1,6 +1,6 @@
 package dto.response;
 
-import domain.LadderResult;
+import domain.ladder.LadderResult;
 
 public record GetLadderResultResponse(
         String result

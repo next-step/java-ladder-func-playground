@@ -1,6 +1,11 @@
 package dto.response;
 
-import domain.*;
+import domain.ladder.Ladder;
+import domain.ladder.LadderResult;
+import domain.ladder.LadderResults;
+import domain.ladder.Line;
+import domain.participant.Participant;
+import domain.participant.Participants;
 
 import java.util.List;
 

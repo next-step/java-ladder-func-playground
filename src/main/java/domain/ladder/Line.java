@@ -1,32 +1,32 @@
-package domain;
+package domain.ladder;
+
+import domain.BooleanGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Line {
 
     private final List<Boolean> points;
-    private final Random random = new Random();
 
-    public Line(int width) {
-        this.points = generatePoints(width);
+    public Line(int width, BooleanGenerator booleanGenerator) {
+        this.points = generatePoints(width, booleanGenerator);
     }
 
-    private List<Boolean> generatePoints(int width) {
+    private List<Boolean> generatePoints(int width, BooleanGenerator booleanGenerator) {
         List<Boolean> tempPoints = new ArrayList<>();
         for (int index = 0; index < width - 1; index++) {
-            tempPoints.add(generatePoint(index, tempPoints));
+            tempPoints.add(generatePoint(index, tempPoints, booleanGenerator));
         }
 
         return tempPoints;
     }
 
-    private Boolean generatePoint(int index, List<Boolean> tempPoints) {
+    private Boolean generatePoint(int index, List<Boolean> tempPoints, BooleanGenerator booleanGenerator) {
         if (index > 0 && tempPoints.get(index - 1)) {
             return false;
         }
-        return random.nextBoolean();
+        return booleanGenerator.nextBoolean();
     }
 
     public List<Boolean> getPoints() {

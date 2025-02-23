@@ -1,6 +1,11 @@
 package service;
 
-import domain.*;
+import domain.BooleanGenerator;
+import domain.ladder.Ladder;
+import domain.ladder.LadderResult;
+import domain.ladder.LadderResults;
+import domain.participant.Participant;
+import domain.participant.Participants;
 import dto.response.GetLadderAllResultResponse;
 import dto.response.GetLadderCanvasResponse;
 import dto.response.GetLadderResultResponse;
@@ -12,9 +17,14 @@ import java.util.stream.Collectors;
 
 public class LadderService {
 
+    private final BooleanGenerator booleanGenerator;
     private Participants participants;
     private LadderResults ladderResults;
     private Ladder ladder;
+
+    public LadderService(BooleanGenerator booleanGenerator) {
+        this.booleanGenerator = booleanGenerator;
+    }
 
     public void createParticipants(List<String> names) {
         this.participants = new Participants(names);
@@ -32,7 +42,7 @@ public class LadderService {
     }
 
     public void createLadder(int height) {
-        this.ladder = new Ladder(height, participants.getParticipantCount());
+        this.ladder = new Ladder(height, participants.getParticipantCount(), booleanGenerator);
     }
 
     public GetLadderCanvasResponse getLadderCanvas() {

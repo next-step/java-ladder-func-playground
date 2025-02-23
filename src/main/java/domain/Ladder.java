@@ -5,8 +5,6 @@ import java.util.List;
 
 public class Ladder {
 
-    private static final int HEIGHT = 4;
-    private static final int WIDTH = 4;
     private final List<Line> lines;
 
     public Ladder(List<Line> lines) {
@@ -17,10 +15,10 @@ public class Ladder {
         return lines;
     }
 
-    public static Ladder createLadder() {
+    public static Ladder createLadder(int width, int height) {
+        int pointCount = width - 1;
         List<Line> lines = new ArrayList<>();
-        int pointCount = WIDTH - 1;
-        for (int i = 0; i < HEIGHT; i++) {
+        for (int i = 0; i < height; i++) {
             lines.add(Line.createRandomLine(pointCount));
         }
         return new Ladder(lines);

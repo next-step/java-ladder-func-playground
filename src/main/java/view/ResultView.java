@@ -2,8 +2,6 @@ package view;
 
 import static enumurate.LadderElementEnum.*;
 
-import java.util.List;
-
 import domain.Ladder;
 import domain.Line;
 import enumurate.LadderElementEnum;
@@ -19,8 +17,7 @@ public class ResultView {
     private static void printLine(Line line) {
         StringBuilder sb = new StringBuilder();
         sb.append(VERTICAL);
-        List<Boolean> points = line.getPoints();
-        for (Boolean point : points) {
+        for (Boolean point : line.getPoints()) {
             sb.append(getElement(point));
             sb.append(VERTICAL);
         }

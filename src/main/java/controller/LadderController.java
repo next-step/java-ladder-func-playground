@@ -20,9 +20,9 @@ public class LadderController {
     }
 
     public void runLadderResultPrinting(){
-        LadderPlayer ladderPlayer = new LadderPlayer(ladder);
+        LadderDestinationFinder ladderDestinationFinder = new LadderDestinationFinder(ladder);
         for(int start = 0; start < ladder.getWidth(); start++){
-            resultView.printLadderPlayResult(start, ladderPlayer.findDestinationOfLadder(start));
+            resultView.printLadderPlayResult(start, ladderDestinationFinder.findDestinationOfLadder(start));
         }
     }
 }

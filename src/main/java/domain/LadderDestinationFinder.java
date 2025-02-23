@@ -1,9 +1,9 @@
 package domain;
 
-public class LadderPlayer {
+public class LadderDestinationFinder {
     private final Ladder ladder;
 
-    public LadderPlayer(Ladder ladder) {
+    public LadderDestinationFinder(Ladder ladder) {
         this.ladder = ladder;
     }
 

@@ -1,25 +1,24 @@
 package util;
 
 import java.util.Arrays;
-import java.util.List;
 
-import domain.Player;
-import domain.Prize;
+import domain.Players;
+import domain.Prizes;
 
 public class Parser {
 
     private static final String DELIMITER_REGEX = "\\s*,\\s*";
 
-    public static List<Player> parsePlayers(String names) {
-        return Arrays.stream(names.split(DELIMITER_REGEX))
-            .map(Player::new)
-            .toList();
+    public static Players parsePlayers(String names) {
+        return new Players(
+            Arrays.stream(names.split(DELIMITER_REGEX)).toList()
+        );
     }
 
-    public static List<Prize> parsePrizes(String prizes) {
-        return Arrays.stream(prizes.split(DELIMITER_REGEX))
-            .map(Prize::new)
-            .toList();
+    public static Prizes parsePrizes(String prizes) {
+        return new Prizes(
+            Arrays.stream(prizes.split(DELIMITER_REGEX)).toList()
+        );
     }
 
     public static int parseHeight(String height) {

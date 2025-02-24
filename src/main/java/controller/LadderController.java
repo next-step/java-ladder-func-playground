@@ -1,24 +1,38 @@
 package controller;
 
-import java.util.List;
+import java.util.Map;
 
 import domain.LadderGame;
-import domain.Player;
-import domain.Prize;
+import domain.Players;
+import domain.Prizes;
+import dto.LadderGameResponse;
 import util.Parser;
 import view.InputView;
 import view.ResultView;
 
 public class LadderController {
 
+    private static final String ALL_PLAYER = "all";
+
     public void run() {
-        List<Player> players = Parser.parsePlayers(InputView.inputPlayers());
-        List<Prize> prizes = Parser.parsePrizes(InputView.inputPrizes());
+        Players players = Parser.parsePlayers(InputView.inputPlayers());
+        Prizes prizes = Parser.parsePrizes(InputView.inputPrizes());
         int height = Parser.parseHeight(InputView.inputHeight());
 
         LadderGame ladderGame = new LadderGame(players, prizes, height);
 
-        ResultView.outputLines(ladderGame);
-        ResultView.outputResult(InputView.inputResult(), ladderGame.calculateResult());
+        ResultView.outputLadder(LadderGameResponse.from(ladderGame));
+        outputResult(ladderGame);
+    }
+
+    private void outputResult(LadderGame ladderGame) {
+        String playerName = InputView.inputPlayerName();
+        Map<String, String> ladderGameResult = ladderGame.calculateResult();
+
+        if (playerName.equals(ALL_PLAYER)) {
+            ResultView.outputAllPlayerResult(ladderGameResult);
+            return;
+        }
+        ResultView.outputPlayerResult(playerName, ladderGameResult);
     }
 }

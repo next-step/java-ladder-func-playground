@@ -1,36 +1,37 @@
 package domain;
 
-import java.util.List;
+import exception.InvalidPlayerNameException;
+import exception.PlayerPrizeSizeMismatchException;
 
 public class LadderGameData {
 
-    private final List<Player> players;
-    private final List<Prize> prizes;
+    private final Players players;
+    private final Prizes prizes;
 
-    public LadderGameData(List<Player> players, List<Prize> prizes) {
-        validatePlayersAndPrizesSize(players, prizes);
-        validateDuplication(players);
+    public LadderGameData(Players players, Prizes prizes) {
+        validateSizes(players, prizes);
+        validateNoDuplicates(players);
         this.players = players;
         this.prizes = prizes;
     }
 
-    private void validatePlayersAndPrizesSize(List<Player> players, List<Prize> prizes) {
-        if (players.size() != prizes.size()) {
-            throw new IllegalArgumentException("참여자 수와 상품 수가 일치하지 않습니다.");
+    private void validateSizes(Players players, Prizes prizes) {
+        if (players.getNames().size() != prizes.getNames().size()) {
+            throw new PlayerPrizeSizeMismatchException("참여자 수와 상품 수가 일치하지 않습니다.");
         }
     }
 
-    private void validateDuplication(List<Player> players) {
-        if (players.size() != players.stream().distinct().count()) {
-            throw new IllegalArgumentException("중복된 이름이 존재합니다.");
+    private void validateNoDuplicates(Players players) {
+        if (players.getNames().size() != players.getNames().stream().distinct().count()) {
+            throw new InvalidPlayerNameException("중복된 이름이 존재합니다.");
         }
     }
 
-    public List<Player> getPlayers() {
+    public Players getPlayers() {
         return players;
     }
 
-    public List<Prize> getPrizes() {
+    public Prizes getPrizes() {
         return prizes;
     }
 }

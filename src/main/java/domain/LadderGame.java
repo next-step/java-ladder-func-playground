@@ -1,27 +1,26 @@
 package domain;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LadderGame {
 
-    private final LadderGameData ladderGameData;
+    private final LadderGameData gameData;
     private final Ladder ladder;
 
-    public LadderGame(List<Player> players, List<Prize> prizes, int height) {
-        this.ladderGameData = new LadderGameData(players, prizes);
-        this.ladder = new Ladder(players.size(), height);
+    public LadderGame(Players players, Prizes prizes, int ladderHeight) {
+        this.gameData = new LadderGameData(players, prizes);
+        this.ladder = new Ladder(players.getNames().size(), ladderHeight);
     }
 
     public Map<String, String> calculateResult() {
-        int width = ladder.getWidth();
+        int ladderWidth = ladder.getWidth();
         Map<String, String> resultMap = new LinkedHashMap<>();
-        for (int index = 0; index < width; index++) {
-            int endIndex = movePlayer(index);
-            Player player = getPlayers().get(index);
-            Prize prize = getPrizes().get(endIndex);
-            resultMap.put(player.getName(), prize.getPrize());
+        for (int startIndex = 0; startIndex < ladderWidth; startIndex++) {
+            int endIndex = movePlayer(startIndex);
+            String playerName = gameData.getPlayers().getNames().get(startIndex);
+            String prizeName = gameData.getPrizes().getNames().get(endIndex);
+            resultMap.put(playerName, prizeName);
         }
         return resultMap;
     }
@@ -58,12 +57,8 @@ public class LadderGame {
         return line.getPoints().get(currentIndex);
     }
 
-    public List<Player> getPlayers() {
-        return ladderGameData.getPlayers();
-    }
-
-    public List<Prize> getPrizes() {
-        return ladderGameData.getPrizes();
+    public LadderGameData getGameData() {
+        return gameData;
     }
 
     public Ladder getLadder() {

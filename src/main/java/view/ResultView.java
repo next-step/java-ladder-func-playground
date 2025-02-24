@@ -1,63 +1,56 @@
 package view;
 
-import static enumurate.LadderElementEnum.*;
-
 import java.util.Map;
 
-import domain.Ladder;
-import domain.LadderGame;
-import domain.Line;
-import enumurate.LadderElementEnum;
+import dto.LadderGameResponse;
 
 public class ResultView {
 
-    public static void outputLines(LadderGame ladderGame) {
-        System.out.println(ladderGame.getPlayers());
-        for (Line line : ladderGame.getLadder().getLines()) {
+    private static final String VERTICAL = "|";
+    private static final String CONNECTED = "-----";
+    private static final String DISCONNECTED = "     ";
+
+    public static void outputLadder(LadderGameResponse ladderGameResponse) {
+        System.out.println(ladderGameResponse.formattedPlayerNames());
+        for (var line : ladderGameResponse.ladder()) {
             printLine(line);
         }
-        System.out.println(ladderGame.getPrizes());
+        System.out.println(ladderGameResponse.formattedPrizeNames());
     }
 
-    private static void printLine(Line line) {
+    private static void printLine(Iterable<Boolean> line) {
         StringBuilder sb = new StringBuilder();
         sb.append(VERTICAL);
-        for (Boolean point : line.getPoints()) {
+        for (Boolean point : line) {
             sb.append(getElement(point));
             sb.append(VERTICAL);
         }
         System.out.println(sb);
     }
 
-    private static LadderElementEnum getElement(Boolean point) {
+    private static String getElement(Boolean point) {
         if (point) {
             return CONNECTED;
         }
         return DISCONNECTED;
     }
 
-    public static void outputResult(String playerName, Map<String, String> ladderGameResult) {
-        System.out.println("실행 결과");
-        if (playerName.equals("all")) {
-            outputAllResult(ladderGameResult);
-            return;
-        }
-        outputPlayerResult(playerName, ladderGameResult);
-    }
-
-    private static void outputAllResult(Map<String, String> ladderGameResult) {
+    public static void outputAllPlayerResult(Map<String, String> ladderGameResult) {
+        outputResultHeader();
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, String> entry : ladderGameResult.entrySet()) {
-            sb.append(entry.getKey())
-                .append(" : ")
-                .append(entry.getValue())
-                .append(System.lineSeparator());
-        }
+        ladderGameResult.forEach((key, value) ->
+            sb.append(key).append(" : ").append(value).append(System.lineSeparator())
+        );
         System.out.print(sb);
     }
 
-    private static void outputPlayerResult(String player, Map<String, String> ladderGameResult) {
+    public static void outputPlayerResult(String player, Map<String, String> ladderGameResult) {
+        outputResultHeader();
         String prize = ladderGameResult.get(player);
         System.out.println(prize);
+    }
+
+    private static void outputResultHeader() {
+        System.out.println("실행결과");
     }
 }

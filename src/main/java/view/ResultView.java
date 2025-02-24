@@ -36,18 +36,18 @@ public class ResultView {
         return DISCONNECTED;
     }
 
-    public static void outputResult(String playerName, LadderGame ladderGame) {
+    public static void outputResult(String playerName, Map<String, String> ladderGameResult) {
         System.out.println("실행 결과");
         if (playerName.equals("all")) {
-            outputAllResult(ladderGame);
+            outputAllResult(ladderGameResult);
             return;
         }
-        outputPlayerResult(playerName, ladderGame);
+        outputPlayerResult(playerName, ladderGameResult);
     }
 
-    private static void outputAllResult(LadderGame ladderGame) {
+    private static void outputAllResult(Map<String, String> ladderGameResult) {
         StringBuilder sb = new StringBuilder();
-        for (Map.Entry<String, String> entry : ladderGame.getResults().entrySet()) {
+        for (Map.Entry<String, String> entry : ladderGameResult.entrySet()) {
             sb.append(entry.getKey())
                 .append(" : ")
                 .append(entry.getValue())
@@ -56,8 +56,8 @@ public class ResultView {
         System.out.print(sb);
     }
 
-    private static void outputPlayerResult(String player, LadderGame ladderGame) {
-        String prize = ladderGame.getResults().get(player);
+    private static void outputPlayerResult(String player, Map<String, String> ladderGameResult) {
+        String prize = ladderGameResult.get(player);
         System.out.println(prize);
     }
 }

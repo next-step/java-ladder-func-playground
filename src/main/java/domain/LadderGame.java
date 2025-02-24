@@ -6,35 +6,24 @@ import java.util.Map;
 
 public class LadderGame {
 
-    private final List<Player> players;
-    private final List<Prize> prizes;
+    private final LadderGameData ladderGameData;
     private final Ladder ladder;
-    private final Map<String, String> results;
 
     public LadderGame(List<Player> players, List<Prize> prizes, int height) {
-        validatePlayersAndPrizes(players, prizes);
-        this.players = players;
-        this.prizes = prizes;
+        this.ladderGameData = new LadderGameData(players, prizes);
         this.ladder = new Ladder(players.size(), height);
-        this.results = calculateResult();
     }
 
-    private Map<String, String> calculateResult() {
-        int width = players.size();
+    public Map<String, String> calculateResult() {
+        int width = ladder.getWidth();
         Map<String, String> resultMap = new LinkedHashMap<>();
         for (int index = 0; index < width; index++) {
             int endIndex = movePlayer(index);
-            Player player = players.get(index);
-            Prize prize = prizes.get(endIndex);
+            Player player = getPlayers().get(index);
+            Prize prize = getPrizes().get(endIndex);
             resultMap.put(player.getName(), prize.getPrize());
         }
         return resultMap;
-    }
-
-    private void validatePlayersAndPrizes(List<Player> players, List<Prize> prizes) {
-        if (players.size() != prizes.size()) {
-            throw new IllegalArgumentException("참여자 수와 결과 수가 일치하지 않습니다.");
-        }
     }
 
     private int movePlayer(int startIndex) {
@@ -70,18 +59,14 @@ public class LadderGame {
     }
 
     public List<Player> getPlayers() {
-        return players;
+        return ladderGameData.getPlayers();
     }
 
     public List<Prize> getPrizes() {
-        return prizes;
+        return ladderGameData.getPrizes();
     }
 
     public Ladder getLadder() {
         return ladder;
-    }
-
-    public Map<String, String> getResults() {
-        return results;
     }
 }

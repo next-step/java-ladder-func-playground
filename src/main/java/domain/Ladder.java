@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Ladder {
 
-    private final LadderSize ladderSize;
+    private final int width;
     private final List<Line> lines;
 
     public Ladder(int width, int height) {
-        this.ladderSize = new LadderSize(width, height);
+        this.width = width;
         this.lines = drawLines(width, height);
     }
 
@@ -22,8 +22,8 @@ public class Ladder {
         return lines;
     }
 
-    public LadderSize getLadderSize() {
-        return ladderSize;
+    public int getWidth() {
+        return width;
     }
 
     public List<Line> getLines() {

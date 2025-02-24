@@ -19,6 +19,6 @@ public class LadderController {
         LadderGame ladderGame = new LadderGame(players, prizes, height);
 
         ResultView.outputLines(ladderGame);
-        ResultView.outputResult(InputView.inputResult(), ladderGame);
+        ResultView.outputResult(InputView.inputResult(), ladderGame.calculateResult());
     }
 }

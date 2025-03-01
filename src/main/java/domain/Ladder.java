@@ -10,10 +10,10 @@ public class Ladder {
 
     public Ladder(int width, int height) {
         this.width = width;
-        this.lines = drawLines(width, height);
+        this.lines = generateLines(width, height);
     }
 
-    private List<Line> drawLines(int width, int height) {
+    private List<Line> generateLines(int width, int height) {
         int pointCount = width - 1;
         List<Line> lines = new ArrayList<>();
         for (int i = 0; i < height; i++) {

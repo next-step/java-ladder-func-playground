@@ -17,7 +17,7 @@ public class LadderGame {
         int ladderWidth = ladder.getWidth();
         Map<String, String> resultMap = new LinkedHashMap<>();
         for (int startIndex = 0; startIndex < ladderWidth; startIndex++) {
-            int endIndex = movePlayer(startIndex);
+            int endIndex = getFinalPosition(startIndex);
             String playerName = gameData.getPlayers().getNames().get(startIndex);
             String prizeName = gameData.getPrizes().getNames().get(endIndex);
             resultMap.put(playerName, prizeName);
@@ -25,7 +25,7 @@ public class LadderGame {
         return resultMap;
     }
 
-    private int movePlayer(int startIndex) {
+    private int getFinalPosition(int startIndex) {
         int currentIndex = startIndex;
         for (Line line : ladder.getLines()) {
             currentIndex = nextPosition(line, currentIndex);

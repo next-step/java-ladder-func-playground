@@ -1,5 +1,7 @@
 package dto;
 
+import static constants.LadderConstants.MAX_NAME_LENGTH;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,8 +13,6 @@ public record LadderGameResponse(
     List<List<Boolean>> ladder,
     List<String> prizeNames
 ) {
-
-    private static final int MAX_NAME_LENGTH = 5;
 
     public static LadderGameResponse from(LadderGame ladderGame) {
         return new LadderGameResponse(

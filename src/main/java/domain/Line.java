@@ -12,10 +12,6 @@ public class Line {
         this.points = points;
     }
 
-    public List<Boolean> getPoints() {
-        return points;
-    }
-
     public static Line createRandomLine(int count) {
         List<Boolean> points = new ArrayList<>();
         Random random = new Random();
@@ -33,7 +29,13 @@ public class Line {
     }
 
     private static boolean hasPreviousConnection(List<Boolean> previousPoints) {
-        return !previousPoints.isEmpty() && previousPoints.get(previousPoints.size() - 1);
+        if (previousPoints.isEmpty()) {
+            return false;
+        }
+        return previousPoints.get(previousPoints.size() - 1);
     }
 
+    public List<Boolean> getPoints() {
+        return points;
+    }
 }

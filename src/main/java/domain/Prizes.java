@@ -1,12 +1,14 @@
 package domain;
 
+import static constants.LadderConstants.MAX_NAME_LENGTH;
+
 import java.util.List;
 
+import exception.InvalidPlayerNameException;
 import exception.InvalidPrizeException;
 
 public class Prizes {
 
-    private static final int MAX_NAME_LENGTH = 5;
     private final List<String> names;
 
     public Prizes(List<String> names) {
@@ -18,6 +20,7 @@ public class Prizes {
         validatePrizeListNotNullOrEmpty(prizes);
         for (String prize : prizes) {
             validatePrizeNotNullOrEmpty(prize);
+            validateNameLength(prize);
         }
     }
 
@@ -28,8 +31,14 @@ public class Prizes {
     }
 
     private void validatePrizeNotNullOrEmpty(String prize) {
-        if (prize == null || prize.isEmpty()) {
-            throw new InvalidPrizeException("상품은 null이나 빈 문자열이 될 수 없습니다.");
+        if (prize == null || prize.isBlank()) {
+            throw new InvalidPrizeException("상품 이름은 null이나 빈 문자열이 될 수 없습니다.");
+        }
+    }
+
+    private void validateNameLength(String name) {
+        if (name.length() > MAX_NAME_LENGTH) {
+            throw new InvalidPlayerNameException("상품 이름은 " + MAX_NAME_LENGTH + "자 이하여야 합니다.");
         }
     }
 

@@ -1,5 +1,7 @@
 package controller;
 
+import static constants.LadderConstants.ALL_PLAYER;
+
 import java.util.Map;
 
 import domain.LadderGame;
@@ -11,8 +13,6 @@ import view.InputView;
 import view.ResultView;
 
 public class LadderController {
-
-    private static final String ALL_PLAYER = "all";
 
     public void run() {
         Players players = Parser.parsePlayers(InputView.inputPlayers());

@@ -1,18 +1,10 @@
 package model;
 
 public enum LinkStatus {
-    UNDEFINED(false),
-    ABSENT(false),
-    PRESENT(true);
-
-    private final boolean present;
-
-    LinkStatus(boolean present) {
-        this.present = present;
-    }
+    UNDEFINED, ABSENT, PRESENT;
 
     public boolean isPresent() {
-        return this.present;
+        return this == PRESENT;
     }
 
 }

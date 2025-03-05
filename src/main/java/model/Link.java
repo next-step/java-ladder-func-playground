@@ -28,7 +28,7 @@ public class Link {
 
     private void validateUpdateStatus() {
         if (isAlreadyFixed()) {
-            throw new IllegalStateException("이미 값이 결정된 링크입니다");
+            throw new UnsupportedOperationException("이미 값이 결정된 링크입니다");
         }
     }
 

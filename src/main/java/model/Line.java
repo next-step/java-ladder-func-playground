@@ -15,8 +15,7 @@ public class Line {
     public Line(int width) {
         int size = width - 1;
         List<Link> links = initializeLinks(size);
-
-        convertUndefinedValuesToSuitableStatus(links);
+        setupLinks(links);
 
         this.links = List.copyOf(links);
     }
@@ -34,7 +33,7 @@ public class Line {
         return List.copyOf(links);
     }
 
-    private void convertUndefinedValuesToSuitableStatus(List<Link> links) {
+    private void setupLinks(List<Link> links) {
         int index = getRandomStartIndex(links);
 
         while (containsUndefined(links)) {

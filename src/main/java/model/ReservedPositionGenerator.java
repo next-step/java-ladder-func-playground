@@ -11,7 +11,7 @@ public class ReservedPositionGenerator {
         List<Integer> positions = createShuffledPositions(width);
 
         assignPositions(reserved, positions);
-        System.out.println(reserved);
+
         return reserved;
     }
 

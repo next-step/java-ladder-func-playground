@@ -24,7 +24,6 @@ public class LadderValidator {
         return line.hasBridgeAt(col - 1) || line.hasBridgeAt(col);
     }
 
-
     private static void connect(Line line, int col, int width) {
         if (col == width) line.setBridgeAt(col - 1);
         else line.setBridgeAt(col);

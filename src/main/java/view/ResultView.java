@@ -39,7 +39,8 @@ public class ResultView {
     private void appendSymbolToBuilder(StringBuilder resultBuilder, String point) {
         if (point.equals("HAS_POINT")) {
             resultBuilder.append(LineCharacter.CONNECTED.getSymbol());
-        } else if (point.equals("NO_POINT")) {
+        }
+        if (point.equals("NO_POINT")) {
             resultBuilder.append(LineCharacter.DISCONNECTED.getSymbol());
         }
     }

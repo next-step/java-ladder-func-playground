@@ -40,7 +40,6 @@ public class ResultView {
         if (point.equals("HAS_POINT")) {
             resultBuilder.append(LineCharacter.CONNECTED.getSymbol());
         }
-        //else if 수정
         if (point.equals("NO_POINT")) {
             resultBuilder.append(LineCharacter.DISCONNECTED.getSymbol());
         }

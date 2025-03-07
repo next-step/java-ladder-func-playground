@@ -1,11 +1,14 @@
 import model.Ladder;
+import utils.ExceptionHandler;
+import view.LadderView;
 
 public class Application {
     public static void main(String[] args) {
-        int width = 4;
-        int height = 4;
-
-        Ladder ladder = Ladder.of(height, width);
-        ladder.print();
+        try {
+            Ladder ladder = Ladder.of(4, 4);
+            LadderView.printLadder(ladder);
+        } catch (Exception e) {
+            ExceptionHandler.handleException(e);
+        }
     }
 }

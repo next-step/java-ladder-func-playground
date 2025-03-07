@@ -1,18 +1,19 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class LineGenerator {
-    public List<Boolean> createRandomBoolean(int width) {
-        Random random = new Random();
-        List<Boolean> booleans= new ArrayList<>();
 
-        for (int i = 0; i < width-1; i++) {
-            booleans.add(random.nextBoolean());
+    public static Lines generate(int width, int height) {
+        List<Set<Integer>> reserved = ReservedPositionGenerator.generate(width - 1, height);
+        List<Line> lines = new ArrayList<>();
+
+        for (int row = 0; row < height; row++) {
+            Line line = SingleLineGenerator.generate(width - 1, reserved.get(row));
+            lines.add(line);
         }
 
-        return booleans;
+        LadderValidator.validate(lines, width - 1);
+        return new Lines(lines);
     }
 }

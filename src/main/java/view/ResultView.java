@@ -4,16 +4,16 @@ import java.util.List;
 
 public class ResultView {
 
-    public void printLadder(List<List<Boolean>> ladderChunks) {
+    public void printLadder(List<List<Boolean>> ladderRows) {
         StringBuilder resultBuilder = new StringBuilder();
         printResultHeader();
-        appendLadderChunks(ladderChunks, resultBuilder);
+        appendLadderRows(ladderRows, resultBuilder);
         System.out.println(resultBuilder);
     }
 
-    private void appendLadderChunks(List<List<Boolean>> ladderChunks, StringBuilder resultBuilder) {
-        for (List<Boolean> chunk : ladderChunks) {
-            appendChunkToResult(resultBuilder, chunk);
+    private void appendLadderRows(List<List<Boolean>> ladderRows, StringBuilder resultBuilder) {
+        for (List<Boolean> ladderRow : ladderRows) {
+            appendRowToResult(resultBuilder, ladderRow);
         }
     }
 
@@ -22,14 +22,14 @@ public class ResultView {
         System.out.println();
     }
 
-    private void appendChunkToResult(StringBuilder resultBuilder, List<Boolean> chunk) {
+    private void appendRowToResult(StringBuilder resultBuilder, List<Boolean> ladderRow) {
         resultBuilder.append(LineCharacter.VERTICAL.getSymbol());
-        appendSymbolsForPoints(chunk, resultBuilder);
+        appendSymbolsForPoints(ladderRow, resultBuilder);
         resultBuilder.append("\n");
     }
 
-    private void appendSymbolsForPoints(List<Boolean> points, StringBuilder resultBuilder) {
-        for (Boolean isExistPoint : points) {
+    private void appendSymbolsForPoints(List<Boolean> ladderPoints, StringBuilder resultBuilder) {
+        for (Boolean isExistPoint : ladderPoints) {
             if (isExistPoint) {
                 resultBuilder.append(LineCharacter.CONNECTED.getSymbol());
             }

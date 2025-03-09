@@ -4,11 +4,17 @@ import java.util.List;
 
 public class ResultView {
 
-    public void printLadder(List<String> ladderLines) {
-        printResultHeader();
+    public void printLadder(List<List<Boolean>> ladderChunks) {
         StringBuilder resultBuilder = new StringBuilder();
-        processLadderLines(resultBuilder, ladderLines);
-        outputResult(resultBuilder);
+        printResultHeader();
+        appendLadderChunks(ladderChunks, resultBuilder);
+        System.out.println(resultBuilder);
+    }
+
+    private void appendLadderChunks(List<List<Boolean>> ladderChunks, StringBuilder resultBuilder) {
+        for (List<Boolean> chunk : ladderChunks) {
+            appendChunkToResult(resultBuilder, chunk);
+        }
     }
 
     private void printResultHeader() {
@@ -16,36 +22,22 @@ public class ResultView {
         System.out.println();
     }
 
-    private void processLadderLines(StringBuilder resultBuilder, List<String> ladderLines) {
-        for (String line : ladderLines) {
-            String[] points = parseLine(line);
+    private void appendChunkToResult(StringBuilder resultBuilder, List<Boolean> chunk) {
+        resultBuilder.append(LineCharacter.VERTICAL.getSymbol());
+        appendSymbolsForPoints(chunk, resultBuilder);
+        resultBuilder.append("\n");
+    }
+
+    private void appendSymbolsForPoints(List<Boolean> points, StringBuilder resultBuilder) {
+        for (Boolean isExistPoint : points) {
+            if (isExistPoint) {
+                resultBuilder.append(LineCharacter.CONNECTED.getSymbol());
+            }
+
+            if (!isExistPoint) {
+                resultBuilder.append(LineCharacter.DISCONNECTED.getSymbol());
+            }
             resultBuilder.append(LineCharacter.VERTICAL.getSymbol());
-            appendSymbolsForPoints(points, resultBuilder);
-            resultBuilder.append("\n");
         }
-    }
-
-    private String[] parseLine(String line) {
-        return line.replaceAll("[\\[\\] ]", "").split(",");
-    }
-
-    private void appendSymbolsForPoints(String[] points, StringBuilder resultBuilder) {
-        for (String point : points) {
-            appendSymbolToBuilder(resultBuilder, point);
-            resultBuilder.append(LineCharacter.VERTICAL.getSymbol());
-        }
-    }
-
-    private void appendSymbolToBuilder(StringBuilder resultBuilder, String point) {
-        if (point.equals("HAS_POINT")) {
-            resultBuilder.append(LineCharacter.CONNECTED.getSymbol());
-        }
-        if (point.equals("NO_POINT")) {
-            resultBuilder.append(LineCharacter.DISCONNECTED.getSymbol());
-        }
-    }
-
-    private void outputResult(StringBuilder resultBuilder) {
-        System.out.println(resultBuilder);
     }
 }

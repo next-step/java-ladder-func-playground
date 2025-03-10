@@ -1,7 +1,10 @@
-package model;
+package utils.validator;
 
-import java.util.*;
-import java.util.stream.*;
+import domain.Line;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.IntStream;
+
 
 public class LadderValidator {
     private static final Random RANDOM = new Random();

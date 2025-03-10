@@ -1,4 +1,6 @@
-package model;
+package utils.generator;
+
+import domain.Lines;
 
 public class LadderGenerator {
     public static Lines generate(int width, int height) {

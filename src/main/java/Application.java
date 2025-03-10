@@ -1,5 +1,5 @@
-import model.Ladder;
-import utils.ExceptionHandler;
+import domain.Ladder;
+import utils.exception.ExceptionHandler;
 import view.LadderView;
 
 public class Application {

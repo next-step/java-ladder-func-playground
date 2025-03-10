@@ -1,4 +1,6 @@
-package model;
+package domain;
+
+import utils.generator.LadderGenerator;
 
 public class Ladder {
     private final Lines lines;

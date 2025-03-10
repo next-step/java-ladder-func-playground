@@ -1,7 +1,8 @@
-package model;
+package utils.generator;
 
+import domain.Line;
 import java.util.*;
-import java.util.stream.*;
+import java.util.stream.IntStream;
 
 public class SingleLineGenerator {
     private static final Random RANDOM = new Random();

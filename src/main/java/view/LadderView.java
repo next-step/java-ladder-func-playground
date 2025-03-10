@@ -1,6 +1,8 @@
 package view;
 
-import model.*;
+import domain.Ladder;
+import domain.Lines;
+import domain.Line;
 
 public class LadderView {
     private static final String BRIDGE = "-----|";

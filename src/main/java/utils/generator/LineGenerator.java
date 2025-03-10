@@ -1,6 +1,11 @@
-package model;
+package utils.generator;
 
-import java.util.*;
+import domain.Line;
+import domain.Lines;
+import utils.validator.LadderValidator;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 public class LineGenerator {
     public static Lines generate(int width, int height) {

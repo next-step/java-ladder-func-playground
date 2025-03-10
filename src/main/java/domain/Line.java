@@ -1,6 +1,6 @@
-package model;
+package domain;
 
-import java.util.*;
+import java.util.List;
 
 public class Line {
     private final List<Boolean> points;

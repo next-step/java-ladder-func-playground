@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -21,7 +22,7 @@ public class Line {
     }
 
     public List<Link> getLinks() {
-        return List.copyOf(links);
+        return links;
     }
 
     private List<Link> initializeLinks(int size) {

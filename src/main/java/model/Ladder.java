@@ -17,7 +17,7 @@ public class Ladder {
     }
 
     public List<Line> getLines() {
-        return List.copyOf(lines);
+        return lines;
     }
 
 }

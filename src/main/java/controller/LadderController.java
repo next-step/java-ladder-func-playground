@@ -8,6 +8,9 @@ import view.LadderOutputView;
 import java.util.List;
 
 public class LadderController {
+    private static final int DEFAULT_LADDER_HEIGHT = 4;
+    private static final int DEFAULT_LADDER_WIDTH = 4;
+
     private static final LadderController ladderController = new LadderController();
 
     private final LadderOutputView ladderOutputView = LadderOutputView.getInstance();
@@ -20,7 +23,7 @@ public class LadderController {
     }
 
     public void run() {
-        Ladder ladder = new Ladder(4, 4);
+        Ladder ladder = new Ladder(DEFAULT_LADDER_WIDTH, DEFAULT_LADDER_HEIGHT);
         List<Line> lines = ladder.getLines();
 
         ladderOutputView.printResultHeader();

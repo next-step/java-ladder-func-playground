@@ -30,18 +30,17 @@ public class Line {
             links.add(Link.getUndefinedLink());
         }
 
-        return List.copyOf(links);
+        return links;
     }
 
     private void setupLinks(List<Link> links) {
         int index = getRandomStartIndex(links);
 
         while (containsUndefined(links)) {
-            boolean connectDecider = getConnectDecider();
+            ConnectDecider connectDecider = ConnectDecider.getRandomConnectDecider();
             boolean connectable = isConnectable(index, links);
 
-            Link link = links.get(index);
-            link.setLinkStatus(connectDecider, connectable);
+            links.set(index, Link.getDefinedLink(connectDecider, connectable));
 
             index = getNextIndex(index, links);
         }
@@ -53,11 +52,7 @@ public class Line {
 
     private boolean containsUndefined(List<Link> links) {
         return links.stream()
-                .anyMatch(link -> link.getLinkstatus() == UNDEFINED);
-    }
-
-    private boolean getConnectDecider() {
-        return random.nextBoolean();
+                .anyMatch(Link::isUndefined);
     }
 
     private boolean isConnectable(int index, List<Link> links) {
@@ -92,7 +87,7 @@ public class Line {
     }
 
     private int getNextIndex(int index, List<Link> linkStatuses) {
-        return ++index % linkStatuses.size();
+        return (index + 1) % linkStatuses.size();
     }
 
 }

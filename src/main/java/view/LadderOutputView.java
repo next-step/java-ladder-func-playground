@@ -3,16 +3,15 @@ package view;
 import dto.LineDto;
 
 public class LadderOutputView {
-
     private static final String INDENTATION = "    ";
     private static final String DASH_COUPLER = "-----";
     private static final String BLANK_COUPLER = "     ";
     private static final String PILLAR = "|";
 
+    private static final LadderOutputView ladderOutputView = new LadderOutputView();
+
     private LadderOutputView() {
     }
-
-    private static final LadderOutputView ladderOutputView = new LadderOutputView();
 
     public static LadderOutputView getInstance() {
         return ladderOutputView;

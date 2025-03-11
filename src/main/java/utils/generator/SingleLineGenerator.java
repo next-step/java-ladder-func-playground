@@ -1,48 +1,20 @@
 package utils.generator;
 
 import domain.Line;
-import utils.RandomUtil;
-
-import java.util.*;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 public class SingleLineGenerator {
     public static Line generate(int width, Set<Integer> reserved, Line prev) {
         List<Boolean> points = new ArrayList<>(Collections.nCopies(width, false));
 
-        reserved.forEach(i -> {
-            if (isNotOverlap(points, prev, i)) {
-                points.set(i, true);
-            }
-        });
+        Line.applyBridges(points, reserved, prev, true);
+        Line.applyBridges(points, null, prev, false);
+        Line.ensureOneBridge(points, prev);
 
-        IntStream.range(0, width).forEach(i -> {
-            if (!points.get(i) && isNotOverlap(points, prev, i)) {
-                points.set(i, RandomUtil.nextBoolean());
-            }
-        });
-
-        ensureOneBridge(points, prev);
         return new Line(points);
     }
 
-    private static boolean isNotOverlap(List<Boolean> points, Line prev, int i) {
-        if (prev != null && prev.hasBridgeAt(i)) return false;
-        if (i > 0 && points.get(i - 1)) return false;
-        return true;
-    }
-
-    private static void ensureOneBridge(List<Boolean> points, Line prev) {
-        if (points.contains(true)) return;
-
-        IntStream.range(0, points.size())
-                .filter(i -> canSetBridge(points, prev, i))
-                .findFirst()
-                .ifPresent(i -> points.set(i, true));
-    }
-
-    private static boolean canSetBridge(List<Boolean> points, Line prev, int index) {
-        return (prev == null || !prev.hasBridgeAt(index))
-                && (index == 0 || !points.get(index - 1));
-    }
 }

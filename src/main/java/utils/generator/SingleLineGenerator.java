@@ -1,12 +1,12 @@
 package utils.generator;
 
 import domain.Line;
+import utils.RandomUtil;
+
 import java.util.*;
 import java.util.stream.IntStream;
 
 public class SingleLineGenerator {
-    private static final Random RANDOM = new Random();
-
     public static Line generate(int width, Set<Integer> reserved, Line prev) {
         List<Boolean> points = new ArrayList<>(Collections.nCopies(width, false));
 
@@ -18,7 +18,7 @@ public class SingleLineGenerator {
 
         IntStream.range(0, width).forEach(i -> {
             if (!points.get(i) && isNotOverlap(points, prev, i)) {
-                points.set(i, RANDOM.nextBoolean());
+                points.set(i, RandomUtil.nextBoolean());
             }
         });
 

@@ -1,14 +1,11 @@
 package utils.validator;
 
 import domain.Line;
+import utils.RandomUtil;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
 
-
 public class LadderValidator {
-    private static final Random RANDOM = new Random();
-
     public static void validate(List<Line> lines, int width) {
         IntStream.rangeClosed(0, width)
                 .forEach(i -> validateColumn(lines, i, width));
@@ -17,7 +14,7 @@ public class LadderValidator {
     private static void validateColumn(List<Line> lines, int col, int width) {
         boolean emptyColumn = lines.stream().noneMatch(line -> hasBridgeAt(line, col, width));
         if (emptyColumn) {
-            connect(lines.get(RANDOM.nextInt(lines.size())), col, width);
+            connect(lines.get(RandomUtil.nextInt(lines.size())), col, width);
         }
     }
 

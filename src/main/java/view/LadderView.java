@@ -1,25 +1,21 @@
 package view;
 
-import domain.Ladder;
-import domain.Lines;
-import domain.Line;
+import dto.LadderDto;
+
+import java.util.List;
 
 public class LadderView {
     private static final String BRIDGE = "-----|";
     private static final String SPACE = "     |";
     private static final String BAR = "|";
 
-    public static void printLadder(Ladder ladder) {
-        printLines(ladder.getLines());
+    public static void printLadder(LadderDto ladderDto) {
+        ladderDto.getLadderData().forEach(LadderView::printLine);
     }
 
-    private static void printLines(Lines lines) {
-        lines.getLines().forEach(LadderView::printLine);
-    }
-
-    private static void printLine(Line line) {
+    private static void printLine(List<Boolean> line) {
         System.out.print(BAR);
-        line.getPoints().forEach(LadderView::printPoint);
+        line.forEach(LadderView::printPoint);
         System.out.println();
     }
 

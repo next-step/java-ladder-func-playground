@@ -1,94 +1,67 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import static model.LinkStatus.PRESENT;
-import static model.LinkStatus.UNDEFINED;
 
 public class Line {
-    private static final Random random = new Random();
 
     private final List<Link> links;
 
-    public Line(int width) {
-        int size = width - 1;
-        List<Link> links = initializeLinks(size);
-        setupLinks(links);
-
-        this.links = List.copyOf(links);
+    public Line(LinksGenerator linksGenerator) {
+        this.links = Collections.unmodifiableList(linksGenerator.generate());
     }
 
     public List<Link> getLinks() {
         return links;
     }
 
-    private List<Link> initializeLinks(int size) {
-        List<Link> links = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            links.add(Link.getUndefinedLink());
+    public int getNextPoint(int point) {
+        if (shouldMoveToLeft(point)) {
+            return point - 1;
+        }
+        if (shouldMoveToRight(point)) {
+            return point + 1;
         }
 
-        return links;
+        return point;
     }
 
-    private void setupLinks(List<Link> links) {
-        int index = getRandomStartIndex(links);
-
-        while (containsUndefined(links)) {
-            ConnectDecider connectDecider = ConnectDecider.getRandomConnectDecider();
-            boolean connectable = isConnectable(index, links);
-
-            links.set(index, Link.getDefinedLink(connectDecider, connectable));
-
-            index = getNextIndex(index, links);
-        }
-    }
-
-    private int getRandomStartIndex(List<Link> links) {
-        return random.nextInt(links.size());
-    }
-
-    private boolean containsUndefined(List<Link> links) {
-        return links.stream()
-                .anyMatch(Link::isUndefined);
-    }
-
-    private boolean isConnectable(int index, List<Link> links) {
-        if (isFirstIndex(index)) {
-            return isRightNotPresent(index, links);
-        }
-        if (isLastIndex(index, links)) {
-            return isLeftNotPresent(index, links);
+    private boolean shouldMoveToLeft(int point) {
+        if (isFirstPoint(point)) {
+            return false;
         }
 
-        return isRightNotPresent(index, links) && isLeftNotPresent(index, links);
+        return isLeftLinkPresent(point);
     }
 
-    private boolean isFirstIndex(int index) {
-        return index == 0;
+    private boolean shouldMoveToRight(int point) {
+        if (isLastPoint(point)) {
+            return false;
+        }
+
+        return isRightLinkPresent(point);
     }
 
-    private boolean isLastIndex(int index, List<Link> links) {
-        return index == links.size() - 1;
+    private boolean isFirstPoint(int point) {
+        return point == 0;
     }
 
-    private boolean isRightNotPresent(int index, List<Link> links) {
-        Link rightLink = links.get(index + 1);
-
-        return rightLink.getLinkstatus() != PRESENT;
+    private boolean isLastPoint(int point) {
+        return point == links.size();
     }
 
-    private boolean isLeftNotPresent(int index, List<Link> links) {
+    private boolean isLeftLinkPresent(int index) {
         Link leftLink = links.get(index - 1);
 
-        return leftLink.getLinkstatus() != PRESENT;
+        return leftLink.getLinkstatus() == PRESENT;
     }
 
-    private int getNextIndex(int index, List<Link> linkStatuses) {
-        return (index + 1) % linkStatuses.size();
+    private boolean isRightLinkPresent(int index) {
+        Link rightLink = links.get(index);
+
+        return rightLink.getLinkstatus() == PRESENT;
     }
 
 }

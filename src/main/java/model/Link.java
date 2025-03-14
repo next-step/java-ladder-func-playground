@@ -1,6 +1,7 @@
 package model;
 
 public class Link {
+
     private final LinkStatus linkstatus;
 
     private Link(LinkStatus linkstatus) {
@@ -11,8 +12,8 @@ public class Link {
         return new Link(LinkStatus.UNDEFINED);
     }
 
-    public static Link getDefinedLink(ConnectDecider connectDecider, boolean connectable) {
-        if (connectDecider.isCanBeConnected() && connectable) {
+    public static Link getDefinedLink(boolean connectDecider, boolean connectable) {
+        if (connectDecider && connectable) {
             return new Link(LinkStatus.PRESENT);
         }
 

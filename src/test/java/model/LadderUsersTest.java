@@ -43,7 +43,7 @@ class LadderUsersTest {
         int actualSize = names.size();
         int expectedSize = fiveLadderUserCollection.size();
 
-        assertThat(actualSize).isSameAs(expectedSize);
+        assertThat(actualSize).isEqualTo(expectedSize);
     }
 
     @Test
@@ -57,7 +57,7 @@ class LadderUsersTest {
                     .orElseThrow();
             int expectedIndex = ladderUserCollection.indexOf(ladderUser);
 
-            assertThat(actualIndex).isSameAs(expectedIndex);
+            assertThat(actualIndex).isEqualTo(expectedIndex);
         }
     }
 

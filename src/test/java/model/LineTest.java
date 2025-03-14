@@ -17,7 +17,7 @@ class LineTest {
         Line line = new Line(DEFAULT_LINKS_GENERATOR);
         List<Link> links = line.getLinks();
 
-        Assertions.assertThat(links.size()).isSameAs(DEFAULT_SIZE);
+        Assertions.assertThat(links.size()).isEqualTo(DEFAULT_SIZE);
     }
 
 }

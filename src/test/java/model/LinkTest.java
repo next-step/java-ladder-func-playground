@@ -22,7 +22,7 @@ class LinkTest {
     void createUndefinedLink() {
         Link undefinedLink = Link.getUndefinedLink();
 
-        assertThat(undefinedLink.getLinkstatus()).isSameAs(UNDEFINED);
+        assertThat(undefinedLink.getLinkstatus()).isEqualTo(UNDEFINED);
     }
 
     @Test
@@ -30,7 +30,7 @@ class LinkTest {
     void createNotUndefinedLink() {
         Link definedLink = Link.getDefinedLink(DEFAULT_CONNECT_DECIDER, DEFAULT_CONNECTABLE);
 
-        assertThat(definedLink.getLinkstatus()).isNotSameAs(UNDEFINED);
+        assertThat(definedLink.getLinkstatus()).isNotEqualTo(UNDEFINED);
     }
 
     @Test
@@ -38,7 +38,7 @@ class LinkTest {
     void createPresentLink() {
         Link link = Link.getDefinedLink(TRUE_CONNECT_DECIDER, TRUE_CONNECTABLE);
 
-        assertThat(link.getLinkstatus()).isSameAs(PRESENT);
+        assertThat(link.getLinkstatus()).isEqualTo(PRESENT);
     }
 
     @ParameterizedTest
@@ -47,7 +47,7 @@ class LinkTest {
     void createAbsentLinkByConnectDecider(boolean connectable) {
         Link link = Link.getDefinedLink(FALSE_CONNECT_DECIDER, connectable);
 
-        assertThat(link.getLinkstatus()).isSameAs(ABSENT);
+        assertThat(link.getLinkstatus()).isEqualTo(ABSENT);
     }
 
     @ParameterizedTest
@@ -56,7 +56,7 @@ class LinkTest {
     void createAbsentLinkByConnectable(boolean connectDecider) {
         Link link = Link.getDefinedLink(connectDecider, FALSE_CONNECTABLE);
 
-        assertThat(link.getLinkstatus()).isSameAs(ABSENT);
+        assertThat(link.getLinkstatus()).isEqualTo(ABSENT);
     }
 
     @Test

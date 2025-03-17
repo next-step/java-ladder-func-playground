@@ -1,26 +1,44 @@
 package controller;
 
 import model.*;
+import view.InputView;
 import view.ResultView;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 import static model.Point.HAS_POINT;
 
 public class LadderController {
 
-    private static final int LADDER_SIZE = 4;
     private static final int CHUNK_SIZE = 3;
     private final ResultView resultView = new ResultView();
+    private final InputView inputView = new InputView();
 
     public void startLadder() {
-        PointGenerator pointGenerator = new PointGenerator(new Random());
-        LadderGame ladderGame = new LadderGame(new Size(LADDER_SIZE), new Size(LADDER_SIZE), pointGenerator);
-        List<Point> ladderPoints = ladderGame.getLadderPoints();
-        List<Boolean> points = formatLadderPoints(ladderPoints);
+        Players player = new Players(inputView.inputNames());
+        Prizes prizes = Prizes.form(inputView.inputResult(), player);
+        Height height = new Height(inputView.getMaxLadderHeight());
+        PointGenerator pointGenerator = new PointGenerator(new RandomValueGenerator());
+        LadderGame ladderGame = LadderGame.createGame(player, height, pointGenerator, prizes);
+
+        List<Boolean> points = formatLadderPoints(ladderGame.getLadderPoints());
         List<List<Boolean>> ladderLines = processLadderLines(points);
-        resultView.printLadder(ladderLines);
+        resultView.printLadder(ladderLines, player.getPlayers(), prizes.getPrize());
+        printResult(ladderGame);
+    }
+
+    private void printResult(LadderGame ladderGame) {
+        while (true) {
+            String targetPlayerName = inputView.getTargetPlayerName();
+
+            if (targetPlayerName.equals("all")) {
+                resultView.printAllResults(ladderGame.getAllResultForPlayers());
+                break;
+            }
+            if (ladderGame.hasResultForPlayer(targetPlayerName)) {
+                resultView.printSingleResult(ladderGame.getResultForPlayer(targetPlayerName));
+            }
+        }
     }
 
     private List<Boolean> formatLadderPoints(List<Point> ladderPoints) {

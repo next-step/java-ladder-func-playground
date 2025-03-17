@@ -2,7 +2,6 @@ package model;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.*;
 
 class HeightTest {
@@ -20,7 +19,7 @@ class HeightTest {
         Height height = new Height(2);
         assertThat(height.getValue()).isEqualTo(2);
     }
-    
+
     @Test
     @DisplayName("Height 객체의 높이가 2 미만일 때 예외가 발생하는지 검증한다.")
     void shouldThrowExceptionForHeightBelowMin() {

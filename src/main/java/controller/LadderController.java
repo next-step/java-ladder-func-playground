@@ -5,7 +5,6 @@ import view.InputView;
 import view.ResultView;
 import java.util.ArrayList;
 import java.util.List;
-
 import static model.Point.HAS_POINT;
 
 public class LadderController {

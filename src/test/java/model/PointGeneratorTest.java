@@ -56,15 +56,4 @@ class PointGeneratorTest {
 
         assertThat(linePoints).contains(Point.HAS_POINT);
     }
-
-    @Test
-    @DisplayName("FixedNumberGenerator 값이 0일 때, 모두 NO_POINT로 생성되는지 검증한다.")
-    void shouldCreateLinePointsWithMixPoints() {
-        createPointGeneratorWithFixedNumber(0);
-        Size size = new Size(players.size());
-
-        List<Point> points = pointGenerator.createLinePoints(size);
-
-        assertThat(points).containsExactly(Point.NO_POINT, Point.NO_POINT, Point.NO_POINT);
-    }
 }

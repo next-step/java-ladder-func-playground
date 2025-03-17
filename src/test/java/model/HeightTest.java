@@ -1,5 +1,6 @@
 package model;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -7,21 +8,24 @@ import static org.assertj.core.api.Assertions.*;
 class HeightTest {
 
     @Test
-    void testHeightValidValue() {
+    @DisplayName("Height 객체의 높이가 유효한 값일 때 정상적으로 생성되는지 검증한다.")
+    void shouldCreateHeightWithValidValue() {
         Height height = new Height(5);
         assertThat(height.getValue()).isEqualTo(5);
     }
 
     @Test
-    void testHeightInvalidValue() {
+    @DisplayName("최소값일 때 Height 객체가 정상적으로 생성되는지 검증한다.")
+    void shouldCreateHeightWithMinimumValue() {
+        Height height = new Height(2);
+        assertThat(height.getValue()).isEqualTo(2);
+    }
+    
+    @Test
+    @DisplayName("Height 객체의 높이가 2 미만일 때 예외가 발생하는지 검증한다.")
+    void shouldThrowExceptionForHeightBelowMin() {
         assertThatThrownBy(() -> new Height(1))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("사다리 높이는 2 이상이여야 합니다.");
-    }
-
-    @Test
-    void testHeightMinimumValue() {
-        Height height = new Height(2);
-        assertThat(height.getValue()).isEqualTo(2);
     }
 }

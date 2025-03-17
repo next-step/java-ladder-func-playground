@@ -16,6 +16,7 @@ public class LadderGame {
     public static LadderGame createGame(Players players, Height maxHeight,
                                         PointGenerator pointGenerator,
                                         Prizes prizes) {
+      
         Ladder ladder = new Ladder(generateLines(players.size(), maxHeight.getValue(), pointGenerator));
         LadderResult ladderResult = new LadderResult(ladder);
         ladderResult.calculateResults(players.getPlayers(), prizes);

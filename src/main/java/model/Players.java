@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Players {
 
-    private static final int MITMUM_PLAYER_LENGTH = 2;
+    private static final int MIT_PLAYER_LENGTH = 2;
     private final List<Player> players;
 
     public Players(List<String> players) {
@@ -29,7 +29,7 @@ public class Players {
     }
 
     private void validatePlayers(List<String> players) {
-        if (players.size() < MITMUM_PLAYER_LENGTH) {
+        if (players.size() < MIT_PLAYER_LENGTH) {
             throw new IllegalArgumentException("참가자는 2명 이상이여야 합니다.");
         }
     }

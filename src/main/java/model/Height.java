@@ -1,7 +1,7 @@
 package model;
 
 public class Height {
-    private static final int MINIMUM_HEIGHT = 2;
+    private static final int MIN_HEIGHT = 2;
 
     private final int value;
 
@@ -11,7 +11,7 @@ public class Height {
     }
 
     private void validateValue(int value) {
-        if (value < MINIMUM_HEIGHT) {
+        if (value < MIN_HEIGHT) {
             throw new IllegalArgumentException("사다리 높이는 2 이상이여야 합니다.");
         }
     }

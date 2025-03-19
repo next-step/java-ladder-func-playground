@@ -3,7 +3,9 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.*;
+
 import java.util.List;
 
 class LadderResultTest {
@@ -32,7 +34,7 @@ class LadderResultTest {
     }
 
     @Test
-    @DisplayName("플레이어 이름에 대한 결과를 올바르게 계산하는지 검증한다.")
+    @DisplayName("플레이어 이름에 대한 결과를 올바르게 계산한다.")
     void shouldCalculateResultsCorrectly() {
         LadderResult ladderResult = createLadderResult(player, prize);
 
@@ -40,7 +42,7 @@ class LadderResultTest {
     }
 
     @Test
-    @DisplayName("결과가 없는 플레이어에 대해 '결과 없음'을 반환하는지 검증한다.")
+    @DisplayName("결과가 없는 플레이어에 대해 '결과 없음'을 반환한다.")
     void shouldReturnNoResultWhenPlayerNotFound() {
         LadderResult ladderResult = createLadderResult(player, prize);
 

@@ -21,11 +21,16 @@ public class LadderResult {
 
         for (String playerName : playerNames) {
             int playerIndex = playerNames.indexOf(playerName);
-            for (Line line : lines) {
-                playerIndex = getNewIndexMove(playerIndex, line.getPointGroups());
-            }
+            playerIndex = getPlayerIndex(lines, playerIndex);
             results.put(playerName, prizeValues.get(playerIndex));
         }
+    }
+
+    private int getPlayerIndex(List<Line> lines, int playerIndex) {
+        for (Line line : lines) {
+            playerIndex = getNewIndexMove(playerIndex, line.getPointGroups());
+        }
+        return playerIndex;
     }
 
     private int getNewIndexMove(int currentIndex, List<Point> points) {

@@ -23,7 +23,7 @@ class PointGeneratorTest {
     }
 
     @Test
-    @DisplayName("포인트 리스트의 크기가 3인지 검증한다.")
+    @DisplayName("포인트 리스트 크기가 3으로 생성된다.")
     void shouldHaveSizeThree() {
         createPointGeneratorWithFixedNumber(0);
         Size size = new Size(players.size());
@@ -34,7 +34,7 @@ class PointGeneratorTest {
     }
 
     @Test
-    @DisplayName("FixedNumberGenerator 값이 0일 때, 모든 포인트가 NO_POINT로 생성되는지 검증한다.")
+    @DisplayName("고정된 숫자 생성기 값이 0일 때, 모든 포인트가 NO_POINT로 생성된다.")
     void shouldCreateLinePointsAllNoPoint() {
         createPointGeneratorWithFixedNumber(0);
         Size size = new Size(players.size());
@@ -45,7 +45,7 @@ class PointGeneratorTest {
     }
 
     @Test
-    @DisplayName("FixedNumberGenerator 값이 1일 때, HAS_POINT가 포함된 포인트가 생성되는지 검증한다.")
+    @DisplayName("고정된 숫자 생성기 값이 1일 때, HAS_POINT가 포함된 포인트가 생성된다.")
     void shouldCreateLinePointsWithHasPoint() {
         createPointGeneratorWithFixedNumber(1);
         Size size = new Size(players.size());

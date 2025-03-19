@@ -10,6 +10,11 @@ public class Ladder {
         this.lines = List.copyOf(lines);
     }
 
+    public static Ladder createLadder(int playerCount, int maxHeight, PointGenerator pointGenerator) {
+        List<Line> lines = Line.createLines(playerCount, maxHeight, pointGenerator);
+        return new Ladder(lines);
+    }
+
     public int move(int position) {
         for (Line line : lines) {
             position = line.move(position);

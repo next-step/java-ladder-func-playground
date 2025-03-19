@@ -16,16 +16,10 @@ public class LadderGame {
     public static LadderGame createGame(Players players, Height maxHeight,
                                         PointGenerator pointGenerator,
                                         Prizes prizes) {
-        Ladder ladder = new Ladder(generateLines(players.size(), maxHeight.getValue(), pointGenerator));
+        Ladder ladder = Ladder.createLadder(players.size(), maxHeight.getValue(), pointGenerator);
         LadderResult ladderResult = new LadderResult(ladder);
         ladderResult.calculateResults(players.getPlayers(), prizes);
         return new LadderGame(ladder, ladderResult);
-    }
-
-    private static List<Line> generateLines(int playerCount, int maxHeight, PointGenerator pointGenerator) {
-        return IntStream.range(0, maxHeight)
-                .mapToObj(i -> new Line(pointGenerator.createLinePoints(new Size(playerCount))))
-                .toList();
     }
 
     public List<Point> getLadderPoints() {

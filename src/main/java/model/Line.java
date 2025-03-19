@@ -1,12 +1,19 @@
 package model;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Line {
     private final List<Point> points;
 
     public Line(List<Point> points) {
         this.points = List.copyOf(points);
+    }
+
+    public static List<Line> createLines(int playerCount, int maxHeight, PointGenerator pointGenerator) {
+        return IntStream.range(0, maxHeight)
+                .mapToObj(i -> new Line(pointGenerator.createLinePoints(new Size(playerCount))))
+                .toList();
     }
 
     public int move(int position) {
@@ -25,7 +32,7 @@ public class Line {
     }
 
     private boolean canMoveRight(int position) {
-        return position < points.size() - 1 && points.get(position) == Point.HAS_POINT;
+        return position < points.size() && points.get(position) == Point.HAS_POINT;
 
     }
 

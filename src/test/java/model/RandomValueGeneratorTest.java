@@ -10,7 +10,7 @@ class RandomValueGeneratorTest {
     private final RandomValueGenerator generator = new RandomValueGenerator();
 
     @Test
-    @DisplayName("랜덤값을 생성하면 범위에 있는지 검증한다.")
+    @DisplayName("랜덤값이 지정된 범위 안에 생성된다.")
     void testRandomValueGenerator() {
         int randomNumber = generator.generateRandomNumber();
 

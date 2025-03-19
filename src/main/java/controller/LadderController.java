@@ -18,7 +18,7 @@ public class LadderController {
 
     public void startLadder() {
         Players players = new Players(inputView.inputNames());
-        Prizes prizes = Prizes.from(inputView.inputResult(), players);
+        Prizes prizes = Prizes.createPrizes(inputView.inputResult(), players);
         Height height = new Height(inputView.getMaxLadderHeight());
         PointGenerator pointGenerator = new PointGenerator(new RandomValueGenerator());
         LadderGame ladderGame = LadderGame.createGame(players, height, pointGenerator, prizes);

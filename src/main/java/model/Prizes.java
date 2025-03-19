@@ -10,7 +10,7 @@ public class Prizes {
         this.prize = prize;
     }
 
-    public static Prizes form(List<String> result, Players players) {
+    public static Prizes createPrizes(List<String> result, Players players) {
         validatePrize(result, players);
         return new Prizes(generatePrize(result));
     }

@@ -1,5 +1,6 @@
 package controller;
 
+
 import model.*;
 import view.InputView;
 import view.ResultView;
@@ -16,15 +17,15 @@ public class LadderController {
     private final InputView inputView = new InputView();
 
     public void startLadder() {
-        Players player = new Players(inputView.inputNames());
-        Prizes prizes = Prizes.from(inputView.inputResult(), player);
+        Players players = new Players(inputView.inputNames());
+        Prizes prizes = Prizes.from(inputView.inputResult(), players);
         Height height = new Height(inputView.getMaxLadderHeight());
         PointGenerator pointGenerator = new PointGenerator(new RandomValueGenerator());
-        LadderGame ladderGame = LadderGame.createGame(player, height, pointGenerator, prizes);
+        LadderGame ladderGame = LadderGame.createGame(players, height, pointGenerator, prizes);
 
         List<Boolean> points = formatLadderPoints(ladderGame.getLadderPoints());
-        List<List<Boolean>> ladderLines = processLadderLines(points, player.size());
-        resultView.printLadder(ladderLines, player.getPlayers(), prizes.getPrize());
+        List<List<Boolean>> ladderLines = processLadderLines(points, players.size());
+        resultView.printLadder(ladderLines, players.getPlayers(), prizes.getPrize());
         printResult(ladderGame);
     }
 

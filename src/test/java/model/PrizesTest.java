@@ -8,7 +8,7 @@ import java.util.List;
 public class PrizesTest {
 
     @Test
-    @DisplayName("유효한 값이면 Prizes 객체를 생성하는지 검증한다.")
+    @DisplayName("유효한 값이면 사다라의 실행결과 객체가 생성된다.")
     public void shouldCreatePrizesWithValidValues() {
         List<String> player = List.of("Gold", "nana", "Broze");
         List<String> prize = List.of("꽝", "3000", "5000");
@@ -20,7 +20,7 @@ public class PrizesTest {
     }
 
     @Test
-    @DisplayName("실행결과 개수와 참가자의 수가 다르면 예외를 발생시키는지 검증한다.")
+    @DisplayName("실행결과 개수와 참가자의 수가 다르면 예외를 발생한다.")
     public void shouldThrowExceptionWhenPrizeSizeDoesNotMatchPlayersSize() {
         List<String> player = List.of("Gold", "nana");
         List<String> prize = List.of("꽝", "3000", "5000");
@@ -32,7 +32,7 @@ public class PrizesTest {
     }
 
     @Test
-    @DisplayName("결과가 비어있으면 예외를 발생시키는지 검증한다.")
+    @DisplayName("결과가 비어있으면 예외를 발생한다.")
     public void shouldCreateEmptyPrizesWhenEmptyResults() {
         List<String> player = List.of("Gold", "nana");
         List<String> prize = List.of();

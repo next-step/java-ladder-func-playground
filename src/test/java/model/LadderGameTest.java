@@ -17,7 +17,7 @@ class LadderGameTest {
         List<String> playerNames = List.of("Gold", "nana", "Broze");
         List<String> prizeList = List.of("꽝", "3000", "5000");
         players = new Players(playerNames);
-        prizes = Prizes.form(prizeList, players);
+        prizes = Prizes.createPrizes(prizeList, players);
     }
 
     @Test

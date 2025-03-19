@@ -16,7 +16,7 @@ public class Prize {
     }
 
     private void validateValue(String value) {
-        if (value == null || value.isEmpty()) {
+        if (value == null || value.trim().isEmpty()) {
             throw new IllegalArgumentException(ExceptionMessage.RESULT_NOT_NULL_OR_EMPTY.getMessage());
         }
     }

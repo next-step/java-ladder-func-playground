@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.*;
 class PlayerTest {
 
     @Test
-    @DisplayName("유효한 이름으로 플레이어가 정상적으로 생성되는지 검증한다.")
+    @DisplayName("유효한 이름으로 플레이어가 정상적으로 생성된다.")
     void shouldCreatePlayerCorrectlyWhenNameIsValid() {
         String validName = "Alice";
 
@@ -17,7 +17,7 @@ class PlayerTest {
     }
 
     @Test
-    @DisplayName("플레이어 이름이 최대 길이를 초과하면 예외가 발생하는지 검증한다.")
+    @DisplayName("플레이어 이름이 최대 길이를 초과하면 예외가 발생한다.")
     void shouldThrowExceptionWhenNameMaxLength() {
         String invalidName = "LongName";
 

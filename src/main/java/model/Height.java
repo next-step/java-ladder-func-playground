@@ -1,5 +1,7 @@
 package model;
 
+import exception.ExceptionMessage;
+
 public class Height {
     private static final int MIN_HEIGHT = 2;
 
@@ -12,7 +14,7 @@ public class Height {
 
     private void validateValue(int value) {
         if (value < MIN_HEIGHT) {
-            throw new IllegalArgumentException("사다리 높이는 2 이상이여야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.LADDER_HEIGHT_TOO_SMALL.getMessage());
         }
     }
 

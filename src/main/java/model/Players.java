@@ -1,5 +1,7 @@
 package model;
 
+import exception.ExceptionMessage;
+
 import java.util.List;
 
 public class Players {
@@ -30,7 +32,7 @@ public class Players {
 
     private void validatePlayers(List<String> players) {
         if (players.size() < MIN_PLAYER_LENGTH) {
-            throw new IllegalArgumentException("참가자는 2명 이상이여야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.MIN_PLAYERS_REQUIRED.getMessage());
         }
     }
 }

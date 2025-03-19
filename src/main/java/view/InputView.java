@@ -1,5 +1,6 @@
 package view;
 
+import exception.ExceptionMessage;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -43,13 +44,13 @@ public class InputView {
         try {
             return Integer.parseInt(String.valueOf(input));
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("사다리 높이는 숫자여야 합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.LADDER_HEIGHT_NOT_NUMBER.getMessage());
         }
     }
 
     private void throwIfNamesIsNullOrEmpty(String input) {
         if (input == null || input.isEmpty()) {
-            throw new IllegalArgumentException("입력값이 null이거나 비어있을 순 없습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.NULL_OR_EMPTY_INPUT.getMessage());
         }
     }
 }

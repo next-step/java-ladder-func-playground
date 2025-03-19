@@ -1,5 +1,7 @@
 package model;
 
+import exception.ExceptionMessage;
+
 public class Prize {
 
     private final String value;
@@ -15,7 +17,7 @@ public class Prize {
 
     private void validateValue(String value) {
         if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException("실행결과는 null이거나 공백일 수는 없습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.RESULT_NOT_NULL_OR_EMPTY.getMessage());
         }
     }
 }

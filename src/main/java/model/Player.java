@@ -1,5 +1,7 @@
 package model;
 
+import exception.ExceptionMessage;
+
 public class Player {
 
     private static final int MAX_NAME_LENGTH = 5;
@@ -16,7 +18,7 @@ public class Player {
 
     private void validateValues(String values) {
         if (values.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException("참가자 이름은 5글자를 초과할 수 없습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.PLAYER_NAME_TOO_LONG.getMessage());
         }
     }
 }

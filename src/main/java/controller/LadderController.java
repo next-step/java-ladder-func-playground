@@ -23,13 +23,22 @@ public class LadderController {
         PointGenerator pointGenerator = new PointGenerator(new RandomValueGenerator());
 
         Ladder ladder = Ladder.createLadder(players.size(), height.getValue(), pointGenerator);
-        LadderResult ladderResult = new LadderResult(ladder);
-        ladderResult.calculateResults(players.getPlayers(), prizes);
+        LadderResult ladderResult = calculateLadderResult(ladder, players.getPlayers(), prizes);
 
+        printLadder(ladder, players, prizes);
+        printResult(ladderResult);
+    }
+
+    private LadderResult calculateLadderResult(Ladder ladder, List<String> players, Prizes prizes) {
+        LadderResult ladderResult = new LadderResult(ladder);
+        ladderResult.calculateResults(players, prizes);
+        return ladderResult;
+    }
+
+    private void printLadder(Ladder ladder, Players players, Prizes prizes) {
         List<Boolean> points = formatLadderPoints(ladder.getPointsFromLines());
         List<List<Boolean>> ladderLines = processLadderLines(points, players.size());
         resultView.printLadder(ladderLines, players.getPlayers(), prizes.getPrize());
-        printResult(ladderResult);
     }
 
     private void printResult(LadderResult ladderResult) {

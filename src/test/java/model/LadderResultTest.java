@@ -19,7 +19,7 @@ class LadderResultTest {
 
     private LadderResult createLadderResult(List<String> player, List<String> prize) {
         Players players = new Players(player);
-        Prizes prizes = Prizes.form(prize, players);
+        Prizes prizes = Prizes.createPrizes(prize, players);
 
         List<Line> lines = List.of(
                 new Line(List.of(Point.HAS_POINT, Point.NO_POINT)),

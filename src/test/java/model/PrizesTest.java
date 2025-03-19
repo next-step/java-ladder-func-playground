@@ -14,7 +14,7 @@ public class PrizesTest {
         List<String> prize = List.of("꽝", "3000", "5000");
         Players players = new Players(player);
 
-        Prizes prizes = Prizes.form(prize, players);
+        Prizes prizes = Prizes.createPrizes(prize, players);
 
         assertThat(prizes.getPrize()).containsExactly("꽝", "3000", "5000");
     }
@@ -26,7 +26,7 @@ public class PrizesTest {
         List<String> prize = List.of("꽝", "3000", "5000");
         Players players = new Players(player);
 
-        assertThatThrownBy(() -> Prizes.form(prize, players))
+        assertThatThrownBy(() -> Prizes.createPrizes(prize, players))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("실행결과 개수와 참가자의 수는 동일해야 합니다.");
     }
@@ -38,7 +38,7 @@ public class PrizesTest {
         List<String> prize = List.of();
         Players players = new Players(player);
 
-        assertThatThrownBy(() -> Prizes.form(prize, players))
+        assertThatThrownBy(() -> Prizes.createPrizes(prize, players))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("실행결과 개수와 참가자의 수는 동일해야 합니다.");
     }

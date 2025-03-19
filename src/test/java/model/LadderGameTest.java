@@ -3,10 +3,7 @@ package model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import test.FixedNumberGenerator;
-
 import static org.assertj.core.api.Assertions.*;
-
 import java.util.List;
 
 class LadderGameTest {
@@ -25,7 +22,7 @@ class LadderGameTest {
     @Test
     @DisplayName("게임 생성 시 정상적으로 생성된다.")
     void shouldCreateLadderGameCorrectly() {
-        PointGenerator pointGenerator = new PointGenerator(new FixedNumberGenerator(1));
+       PointGenerator pointGenerator = new PointGenerator(new FixedNumberGenerator(1));
         Height maxHeight = new Height(5);
 
         LadderGame ladderGame = LadderGame.createGame(players, maxHeight, pointGenerator, prizes);

@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 class LadderTest {
 
     @Test
-    @DisplayName("레더에서 라인들을 제대로 반환하는지 검증한다.")
+    @DisplayName("레더의 라인이 정상적으로 반환된다.")
     void shouldReturnLinesCorrectly() {
 
         List<Line> lines = Arrays.asList(new Line(Arrays.asList(Point.HAS_POINT, Point.NO_POINT)),
@@ -24,7 +24,7 @@ class LadderTest {
     }
 
     @Test
-    @DisplayName("레더에서 라인에 포함된 포인트들을 제대로 반환하는지 검증한다.")
+    @DisplayName("라인의 포인트 목록이 정상적으로 반환된다.")
     void shouldReturnPointsFromLinesCorrectly() {
 
         Line line1 = new Line(Arrays.asList(Point.HAS_POINT, Point.NO_POINT));

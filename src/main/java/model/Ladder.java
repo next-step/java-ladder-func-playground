@@ -10,6 +10,13 @@ public class Ladder {
         this.lines = List.copyOf(lines);
     }
 
+    public int move(int position) {
+        for (Line line : lines) {
+            position = line.move(position);
+        }
+        return position;
+    }
+
     public List<Point> getPointsFromLines() {
         List<Point> result = new ArrayList<>();
         for (Line line : lines) {

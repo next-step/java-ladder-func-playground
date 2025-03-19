@@ -16,39 +16,13 @@ public class LadderResult {
     }
 
     public void calculateResults(List<String> playerNames, Prizes prizes) {
-        List<Line> lines = ladder.getLines();
         List<String> prizeValues = prizes.getPrize();
 
         for (String playerName : playerNames) {
             int playerIndex = playerNames.indexOf(playerName);
-            playerIndex = getPlayerIndex(lines, playerIndex);
+            playerIndex = ladder.move(playerIndex);
             results.put(playerName, prizeValues.get(playerIndex));
         }
-    }
-
-    private int getPlayerIndex(List<Line> lines, int playerIndex) {
-        for (Line line : lines) {
-            playerIndex = getNewIndexMove(playerIndex, line.getPointGroups());
-        }
-        return playerIndex;
-    }
-
-    private int getNewIndexMove(int currentIndex, List<Point> points) {
-        if (canMoveLeft(currentIndex, points)) {
-            return currentIndex - 1;
-        }
-        if (canMoveRight(currentIndex, points)) {
-            return currentIndex + 1;
-        }
-        return currentIndex;
-    }
-
-    private boolean canMoveLeft(int currentIndex, List<Point> points) {
-        return currentIndex > 0 && points.get(currentIndex - 1) == Point.HAS_POINT;
-    }
-
-    private boolean canMoveRight(int currentIndex, List<Point> points) {
-        return currentIndex < points.size() && points.get(currentIndex) == Point.HAS_POINT;
     }
 
     public String getResultForPlayer(String name) {

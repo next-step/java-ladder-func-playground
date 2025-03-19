@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.*;
 class PlayersTest {
 
     @Test
-    @DisplayName("유효한 플레이어 리스트로 객체가 제대로 생성되는지 검증한다.")
+    @DisplayName("유효한 플레이어 리스트로 객체가 정상적으로 생성된다.")
     void shouldNotThrowExceptionWhenValidPlayers() {
         List<String> validPlayerNames = List.of("Alice", "Bob");
 
@@ -18,7 +18,7 @@ class PlayersTest {
     }
 
     @Test
-    @DisplayName("플레이어 수가 부족하면 예외가 발생하는지 검증한다.")
+    @DisplayName("플레이어 수가 부족하면 예외가 발생한다.")
     void shouldThrowExceptionWhenNotEnoughPlayers() {
         List<String> invalidPlayerNames = List.of("Alice");
 
@@ -28,7 +28,7 @@ class PlayersTest {
     }
 
     @Test
-    @DisplayName("플레이어 수가 충분하면 객체가 제대로 생성되는지 검증한다.")
+    @DisplayName("플레이어 수가 충분하면 객체가 정상적으로 생성된다.")
     void shouldContainValidPlayersWhenGenerated() {
         List<String> validPlayerNames = List.of("Alice", "Bob");
 

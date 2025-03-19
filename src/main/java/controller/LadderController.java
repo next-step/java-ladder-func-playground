@@ -21,24 +21,27 @@ public class LadderController {
         Prizes prizes = Prizes.createPrizes(inputView.inputResult(), players);
         Height height = new Height(inputView.getMaxLadderHeight());
         PointGenerator pointGenerator = new PointGenerator(new RandomValueGenerator());
-        LadderGame ladderGame = LadderGame.createGame(players, height, pointGenerator, prizes);
 
-        List<Boolean> points = formatLadderPoints(ladderGame.getLadderPoints());
+        Ladder ladder = Ladder.createLadder(players.size(), height.getValue(), pointGenerator);
+        LadderResult ladderResult = new LadderResult(ladder);
+        ladderResult.calculateResults(players.getPlayers(), prizes);
+
+        List<Boolean> points = formatLadderPoints(ladder.getPointsFromLines());
         List<List<Boolean>> ladderLines = processLadderLines(points, players.size());
         resultView.printLadder(ladderLines, players.getPlayers(), prizes.getPrize());
-        printResult(ladderGame);
+        printResult(ladderResult);
     }
 
-    private void printResult(LadderGame ladderGame) {
+    private void printResult(LadderResult ladderResult) {
         while (true) {
             String targetPlayerName = inputView.getTargetPlayerName();
 
             if (targetPlayerName.equals(ALL_PLAYERS)) {
-                resultView.printAllResults(ladderGame.getAllResultForPlayers());
+                resultView.printAllResults(ladderResult.getValue());
                 break;
             }
-            if (ladderGame.hasResultForPlayer(targetPlayerName)) {
-                resultView.printSingleResult(ladderGame.getResultForPlayer(targetPlayerName));
+            if (ladderResult.getValue().containsKey(targetPlayerName)) {
+                resultView.printSingleResult(ladderResult.getResultForPlayer(targetPlayerName));
             }
         }
     }

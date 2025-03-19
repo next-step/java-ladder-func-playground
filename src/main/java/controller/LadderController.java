@@ -11,7 +11,7 @@ import static model.Point.HAS_POINT;
 
 public class LadderController {
 
-    private static final int CHUNK_SIZE = 3;
+    private static final String ALL_PLAYERS = "all";
     private final ResultView resultView = new ResultView();
     private final InputView inputView = new InputView();
 
@@ -32,7 +32,7 @@ public class LadderController {
         while (true) {
             String targetPlayerName = inputView.getTargetPlayerName();
 
-            if (targetPlayerName.equals("all")) {
+            if (targetPlayerName.equals(ALL_PLAYERS)) {
                 resultView.printAllResults(ladderGame.getAllResultForPlayers());
                 break;
             }

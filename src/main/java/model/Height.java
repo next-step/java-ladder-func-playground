@@ -14,7 +14,7 @@ public class Height {
 
     private void validateValue(int value) {
         if (value < MIN_HEIGHT) {
-            throw new IllegalArgumentException(ExceptionMessage.LADDER_HEIGHT_TOO_SMALL.getMessage());
+            throw new IllegalArgumentException(ExceptionMessage.LADDER_HEIGHT_MIN_VALUE.getMessage());
         }
     }
 

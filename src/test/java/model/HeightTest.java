@@ -25,6 +25,6 @@ class HeightTest {
     void shouldThrowExceptionForHeightBelowMin() {
         assertThatThrownBy(() -> new Height(1))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("사다리 높이는 2 이상이여야 합니다.");
+                .hasMessage("사다리 높이는 최소 2 이상이어야 합니다.");
     }
 }

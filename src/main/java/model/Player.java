@@ -22,7 +22,7 @@ public class Player {
         }
 
         if (value.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException(ExceptionMessage.PLAYER_NAME_TOO_LONG.getMessage());
+            throw new IllegalArgumentException(ExceptionMessage.PLAYER_NAME_MAX_LENGTH_EXCEEDED.getMessage());
         }
     }
 }

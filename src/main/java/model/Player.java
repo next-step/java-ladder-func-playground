@@ -16,8 +16,12 @@ public class Player {
         return value;
     }
 
-    private void validateValues(String values) {
-        if (values.length() > MAX_NAME_LENGTH) {
+    private void validateValues(String value) {
+        if (value == null || value.trim().isEmpty()) {
+            throw new IllegalArgumentException(ExceptionMessage.NULL_OR_EMPTY_INPUT.getMessage());
+        }
+
+        if (value.length() > MAX_NAME_LENGTH) {
             throw new IllegalArgumentException(ExceptionMessage.PLAYER_NAME_TOO_LONG.getMessage());
         }
     }

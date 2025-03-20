@@ -1,4 +1,6 @@
-package model;
+package model.util;
+
+import model.RandomUtil;
 
 public class FixedNumberGenerator implements RandomUtil {
     private final int fixedNumber;

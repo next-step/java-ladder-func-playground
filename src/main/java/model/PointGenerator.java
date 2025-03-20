@@ -2,13 +2,12 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class PointGenerator {
-    private final Random random;
+    private final RandomUtil randomUtil;
 
-    public PointGenerator(Random random) {
-        this.random = random;
+    public PointGenerator(RandomUtil randomUtil) {
+        this.randomUtil = randomUtil;
     }
 
     public List<Point> createLinePoints(Size width) {
@@ -28,7 +27,7 @@ public class PointGenerator {
         if (isPreviousLine) {
             return Point.NO_POINT;
         }
-        int randomIndex = random.nextInt(points.size());
+        int randomIndex = randomUtil.generateRandomNumber();
         return points.get(randomIndex);
     }
 }

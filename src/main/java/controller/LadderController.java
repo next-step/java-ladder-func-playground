@@ -1,13 +1,17 @@
 package controller;
 
-
-import model.*;
+import model.Height;
+import model.Players;
+import model.PointGenerator;
+import model.Prizes;
+import model.Ladder;
+import model.LadderResult;
+import model.RandomValueGenerator;
+import model.Point;
 import view.InputView;
 import view.ResultView;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static model.Point.HAS_POINT;
 
 public class LadderController {

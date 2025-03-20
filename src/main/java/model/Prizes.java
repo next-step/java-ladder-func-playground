@@ -1,7 +1,6 @@
 package model;
 
 import exception.ExceptionMessage;
-
 import java.util.List;
 
 public class Prizes {

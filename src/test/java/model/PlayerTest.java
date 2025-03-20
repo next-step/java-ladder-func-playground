@@ -27,7 +27,7 @@ class PlayerTest {
 
         assertThatThrownBy(() -> new Player(invalidName))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("참가자 이름은 5글자를 초과할 수 없습니다.");
+                .hasMessage("참가자 이름은 최대 5글자를 초과할 수 없습니다.");
     }
 
     @ParameterizedTest

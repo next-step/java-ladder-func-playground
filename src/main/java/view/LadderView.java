@@ -10,6 +10,9 @@ public class LadderView {
     private static final String BAR = "|";
 
     public static void printLadder(LadderDto ladderDto) {
+        System.out.println();
+        System.out.println("실행결과");
+        System.out.println();
         ladderDto.getLadderData().forEach(LadderView::printLine);
     }
 

@@ -15,7 +15,7 @@ public class Line {
     }
 
     public List<Boolean> getPoints() {
-        return points;
+        return List.copyOf(points);
     }
 
     public boolean hasBridgeAt(int index) {

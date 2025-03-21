@@ -2,12 +2,14 @@ package controller;
 
 import domain.Ladder;
 import dto.LadderDto;
+import view.InputView;
 
 public class LadderController {
     private final Ladder ladder;
+    private final InputView inputView = new InputView();
 
-    public LadderController(int width, int height) {
-        this.ladder = Ladder.of(width, height);
+    public LadderController() {
+        this.ladder = Ladder.of(inputView.getWidth(), inputView.getHeight());
     }
 
     public LadderDto getLadderData() {

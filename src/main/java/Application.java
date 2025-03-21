@@ -6,7 +6,7 @@ import view.LadderView;
 public class Application {
     public static void main(String[] args) {
         try {
-            LadderController ladderController = new LadderController(4, 4);
+            LadderController ladderController = new LadderController();
             LadderDto ladderDto = ladderController.getLadderData();
             LadderView.printLadder(ladderDto);
         } catch (Exception e) {

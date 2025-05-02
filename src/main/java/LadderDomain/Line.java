@@ -3,17 +3,16 @@ package LadderDomain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Line {
 
     private final List<Connection> connections;
 
-    public Line(int width, Random random) {
+    public Line(int width, BooleanValueGenerator generator) {
         connections = new ArrayList<>();
         int i = 0;
         while (i < width - 1) {
-            boolean connectLadder = random.nextBoolean();
+            boolean connectLadder = generator.generate();
             connections.add(new Connection(connectLadder));
             if (connectLadder) {
                 connections.add(new Connection(false));

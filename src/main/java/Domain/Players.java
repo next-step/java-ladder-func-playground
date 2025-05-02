@@ -6,32 +6,32 @@ import java.util.stream.IntStream;
 
 public class Players {
 
-    private final List<Player> players;
+    private final List<PlayerName> playerNames;
 
-    public Players(List<Player> players) {
-        this.players = List.copyOf(players);
+    public Players(List<PlayerName> playerNames) {
+        this.playerNames = List.copyOf(playerNames);
     }
 
-    public Player get(int index) {
-        return players.get(index);
+    public PlayerName get(int index) {
+        return playerNames.get(index);
     }
 
     public int size() {
-        return players.size();
+        return playerNames.size();
     }
 
-    public int indexOf(Name name) {
-        return IntStream.range(0, players.size())
-                .filter(i -> players.get(i).getName().equals(name))
+    public int indexOf(PlayerName name) {
+        return IntStream.range(0, playerNames.size())
+                .filter(i -> playerNames.get(i).equals(name))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("해당 이름 없음"));
     }
 
-    public List<Player> getAll() {
-        return Collections.unmodifiableList(players);
+    public List<PlayerName> getAll() {
+        return Collections.unmodifiableList(playerNames);
     }
 
-    public boolean contains(Name name) {
-        return players.stream().anyMatch(player -> player.getName().equals(name));
+    public boolean contains(PlayerName name) {
+        return playerNames.stream().anyMatch(n -> n.equals(name));
     }
 }

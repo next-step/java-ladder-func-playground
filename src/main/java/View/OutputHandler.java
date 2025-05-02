@@ -1,21 +1,19 @@
 package View;
 
-import Domain.Name;
-import Domain.Player;
+import Domain.PlayerName;
 import Domain.Players;
 import Domain.Result;
-import Domain.Results;
 import LadderDomain.Ladder;
 import LadderDomain.Line;
 import java.util.Map;
 
 public class OutputHandler {
 
-    private static final int CELL_WIDTH = 6;
+    private static final int BLANK_WIDTH = 6;
 
-    public static void printLadder(Players players, Ladder ladder, Results results) {
-        for (Player player : players.getAll()) {
-            System.out.printf("%-" + CELL_WIDTH + "s", player.getName().getValue());
+    public static void printLadder(Players players, Ladder ladder, Result results) {
+        for (PlayerName playerName : players.getAll()) {
+            System.out.printf("%-" + BLANK_WIDTH + "s", playerName.getName());
         }
         System.out.println();
 
@@ -23,8 +21,8 @@ public class OutputHandler {
             printLine(line, players.size());
         }
 
-        for (Result result : results.getAll()) {
-            System.out.printf("%-" + CELL_WIDTH + "s", result.getValue());
+        for (String result : results.getAll()) {
+            System.out.printf("%-" + BLANK_WIDTH + "s", result);
         }
         System.out.println();
     }
@@ -37,14 +35,14 @@ public class OutputHandler {
         System.out.println("|");
     }
 
-    public static  void printSingleResult(Result result) {
+    public static void printSingleResult(String result) {
         System.out.println("실행 결과");
-        System.out.println(result.getValue());
+        System.out.println(result);
     }
 
-    public static void printResults(Map<Name, Result> resultMap) {
-        resultMap.forEach((name, result) ->
-                System.out.println(name.getValue() + " : " + result.getValue())
+    public static void printResults(Map<PlayerName, String> resultMap) {
+        resultMap.forEach((playerName, result) ->
+                System.out.println(playerName.getName() + " : " + result)
         );
     }
 

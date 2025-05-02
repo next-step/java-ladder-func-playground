@@ -3,26 +3,24 @@ package LadderDomain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Ladder {
 
     private final List<Line> lines;
 
     public Ladder(int height, int width) {
+        BooleanValueGenerator generator = new LadderConnectionGenerator();
         lines = new ArrayList<>();
-        Random random = new Random();
         for (int i = 0; i < height; i++) {
-            lines.add(new Line(width, random));
+            lines.add(new Line(width, generator));
         }
     }
 
     public int move(int index) {
-        int position = index;
         for (Line line : lines) {
-            position = line.move(position);
+            index = line.move(index);
         }
-        return position;
+        return index;
     }
 
     public List<Line> getLines() {

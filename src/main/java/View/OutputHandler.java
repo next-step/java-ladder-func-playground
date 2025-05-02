@@ -1,8 +1,9 @@
 package View;
 
 import Domain.PlayerName;
-import Domain.Players;
-import Domain.Result;
+import Domain.PlayerNames;
+import Domain.PrizeName;
+import Domain.PrizeNames;
 import LadderDomain.Ladder;
 import LadderDomain.Line;
 import java.util.Map;
@@ -11,18 +12,18 @@ public class OutputHandler {
 
     private static final int BLANK_WIDTH = 6;
 
-    public static void printLadder(Players players, Ladder ladder, Result results) {
-        for (PlayerName playerName : players.getAll()) {
+    public static void printLadder(PlayerNames playerNames, Ladder ladder,  PrizeNames prizeNames) {
+        for (PlayerName playerName : playerNames.getAll()) {
             System.out.printf("%-" + BLANK_WIDTH + "s", playerName.getName());
         }
         System.out.println();
 
         for (Line line : ladder.getLines()) {
-            printLine(line, players.size());
+            printLine(line, playerNames.size());
         }
 
-        for (String result : results.getAll()) {
-            System.out.printf("%-" + BLANK_WIDTH + "s", result);
+        for (PrizeName prize : prizeNames.getAll()) {
+            System.out.printf("%-" + BLANK_WIDTH + "s", prize.getValue());
         }
         System.out.println();
     }
@@ -35,15 +36,16 @@ public class OutputHandler {
         System.out.println("|");
     }
 
-    public static void printSingleResult(String result) {
+    public static void printSingleResult(PrizeName prize) {
         System.out.println("실행 결과");
-        System.out.println(result);
+        System.out.println(prize.getValue());
     }
 
-    public static void printResults(Map<PlayerName, String> resultMap) {
-        resultMap.forEach((playerName, result) ->
-                System.out.println(playerName.getName() + " : " + result)
-        );
+    public static void printResults(PlayerNames playerNames, Map<PlayerName, PrizeName> resultMap) {
+        for (PlayerName name : playerNames.getAll()) {
+            PrizeName prize = resultMap.get(name);
+            System.out.println(name.getName() + " : " + prize.getValue());
+        }
     }
 
     public static void printInvalidName() {

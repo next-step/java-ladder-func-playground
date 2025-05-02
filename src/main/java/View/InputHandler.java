@@ -1,8 +1,9 @@
 package View;
 
 import Domain.PlayerName;
-import Domain.Players;
-import Domain.Result;
+import Domain.PlayerNames;
+import Domain.PrizeName;
+import Domain.PrizeNames;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -11,7 +12,7 @@ public class InputHandler {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static Players inputPlayersName() {
+    public static PlayerNames inputPlayersName() {
         while (true) {
             try {
                 System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
@@ -19,7 +20,7 @@ public class InputHandler {
                         .map(String::trim)
                         .toList();
                 validatePlayerInput(names);
-                return new Players(names.stream()
+                return new PlayerNames(names.stream()
                         .map(PlayerName::new)
                         .toList());
             } catch (Exception e) {
@@ -28,15 +29,15 @@ public class InputHandler {
         }
     }
 
-    public static Result inputResult(int expectedSize) {
+    public static PrizeNames inputPrizeNames(int expectedSize) {
         while (true) {
             try {
                 System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
                 List<String> values = Arrays.stream(scanner.nextLine().split(","))
                         .map(String::trim)
                         .toList();
-                validateResultInput(values, expectedSize);
-                return new Result(values);
+                validatePrizeInput(values, expectedSize);
+                return new PrizeNames(values.stream().map(PrizeName::new).toList());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -56,10 +57,15 @@ public class InputHandler {
 
     private static void validatePlayerInput(List<String> names) {
         if (names.isEmpty()) throw new IllegalArgumentException("한 명 이상의 참가자를 입력해야 합니다.");
+
+        long uniqueCount = names.stream().distinct().count();
+        if (uniqueCount != names.size()) {
+            throw new IllegalArgumentException("중복된 이름이 존재합니다.");
+        }
     }
 
-    private static void validateResultInput(List<String> results, int expectedSize) {
-        if (results.size() != expectedSize) {
+    private static void validatePrizeInput(List<String> prizes, int expectedSize) {
+        if (prizes.size() != expectedSize) {
             throw new IllegalArgumentException("결과 개수는 참가자 수와 일치해야 합니다.");
         }
     }

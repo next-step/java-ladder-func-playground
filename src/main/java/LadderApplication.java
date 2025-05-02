@@ -1,20 +1,23 @@
 import Controller.LadderGameController;
-import Domain.Players;
-import Domain.Result;
+import Domain.PlayerNames;
+import Domain.PlayerResults;
+import Domain.PrizeNames;
 import LadderDomain.Ladder;
 import LadderDomain.LadderGame;
 import View.InputHandler;
 
 public class LadderApplication {
     public static void main(String[] args) {
-        Players players = InputHandler.inputPlayersName();
-        Result result = InputHandler.inputResult(players.size());
+        PlayerNames playerNames = InputHandler.inputPlayersName();
+        PrizeNames prizeNames = InputHandler.inputPrizeNames(playerNames.size());
         int height = InputHandler.inputLadderSize();
 
-        Ladder ladder = new Ladder(height, players.size());
-        LadderGame game = new LadderGame(players, ladder, result);
+        Ladder ladder = new Ladder(height, playerNames.size());
 
-        LadderGameController controller = new LadderGameController(players, game, ladder, result);
+        PlayerResults playerResults = PlayerResults.of(playerNames, ladder, prizeNames);
+        LadderGame game = new LadderGame(playerResults);
+
+        LadderGameController controller = new LadderGameController(playerNames, game, ladder, prizeNames);
         controller.run();
     }
 }

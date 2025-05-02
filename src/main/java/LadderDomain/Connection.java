@@ -2,13 +2,14 @@ package LadderDomain;
 
 public class Connection {
 
-    private final boolean right;
+    private final ConnectionStatus connectionStatus;
 
     public Connection(boolean right) {
-        this.right = right;
+        this.connectionStatus = ConnectionStatus.from(right);
     }
 
     public boolean hasRight() {
-        return right;
+        return connectionStatus.isConnected();
     }
+
 }

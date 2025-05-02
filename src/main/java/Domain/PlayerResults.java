@@ -1,7 +1,5 @@
 package Domain;
 
-import LadderDomain.Ladder;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class PlayerResults {
@@ -10,20 +8,6 @@ public class PlayerResults {
 
     public PlayerResults(Map<PlayerName, PrizeName> results) {
         this.results = Map.copyOf(results);
-    }
-
-    public static PlayerResults of(PlayerNames playerNames, Ladder ladder, PrizeNames prizeNames) {
-        Map<PlayerName, PrizeName> resultMap = new LinkedHashMap<>();
-        for (int i = 0; i < playerNames.size(); i++) {
-            int end = ladder.move(i);
-
-            if (end >= prizeNames.getAll().size()) {
-                throw new IllegalStateException("사다리 결과 인덱스가 결과 수보다 큽니다: index=" + end);
-            }
-
-            resultMap.put(playerNames.get(i), prizeNames.get(end));
-        }
-        return new PlayerResults(resultMap);
     }
 
     public PrizeName get(PlayerName name) {

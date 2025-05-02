@@ -1,6 +1,6 @@
 import Controller.LadderGameController;
+import Domain.GameInformation;
 import Domain.PlayerNames;
-import Domain.PlayerResults;
 import Domain.PrizeNames;
 import LadderDomain.Ladder;
 import LadderDomain.LadderGame;
@@ -13,11 +13,10 @@ public class LadderApplication {
         int height = InputHandler.inputLadderSize();
 
         Ladder ladder = new Ladder(height, playerNames.size());
+        GameInformation gameInformation = new GameInformation(playerNames, prizeNames);
+        LadderGame game = new LadderGame(gameInformation, ladder);
 
-        PlayerResults playerResults = PlayerResults.of(playerNames, ladder, prizeNames);
-        LadderGame game = new LadderGame(playerResults);
-
-        LadderGameController controller = new LadderGameController(playerNames, game, ladder, prizeNames);
+        LadderGameController controller = new LadderGameController(game, gameInformation);
         controller.run();
     }
 }

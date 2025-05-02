@@ -5,7 +5,7 @@ import Domain.PlayerNames;
 import Domain.PrizeName;
 import Domain.PrizeNames;
 import LadderDomain.Ladder;
-import LadderDomain.Line;
+import LadderDomain.LadderRow;
 import java.util.Map;
 
 public class OutputHandler {
@@ -18,8 +18,8 @@ public class OutputHandler {
         }
         System.out.println();
 
-        for (Line line : ladder.getLines()) {
-            printLine(line, playerNames.size());
+        for (LadderRow ladderRow : ladder.getLines()) {
+            printLine(ladderRow, playerNames.size());
         }
 
         for (PrizeName prize : prizeNames.getAll()) {
@@ -28,14 +28,25 @@ public class OutputHandler {
         System.out.println();
     }
 
-    private static void printLine(Line line, int width) {
+    private static void printLine(LadderRow ladderRow, int width) {
         for (int i = 0; i < width - 1; i++) {
             System.out.print("|");
-            System.out.print(line.getConnections().get(i).hasRight() ? "-----" : "     ");
+            printConnection(ladderRow.getConnections().get(i).hasRight());
         }
         System.out.println("|");
     }
 
+    private static void printConnection(boolean hasRight) {
+        String segment = getConnectionString(hasRight);
+        System.out.print(segment);
+    }
+
+    private static String getConnectionString(boolean connected) {
+        if (connected) {
+            return "-----";
+        }
+        return "     ";
+    }
     public static void printSingleResult(PrizeName prize) {
         System.out.println("실행 결과");
         System.out.println(prize.getValue());

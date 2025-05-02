@@ -1,6 +1,7 @@
 package Domain;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class PlayerNames {
 
@@ -24,5 +25,9 @@ public class PlayerNames {
 
     public boolean contains(PlayerName name) {
         return playerNames.stream().anyMatch(n -> n.equals(name));
+    }
+
+    public List<Integer> toIntegerList() {
+        return IntStream.range(0, playerNames.size()).boxed().toList();
     }
 }

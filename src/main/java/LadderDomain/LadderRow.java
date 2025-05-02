@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class Line {
+public class LadderRow {
 
     private final List<Connection> connections;
 
-    public Line(int width, BooleanValueGenerator generator) {
+    public LadderRow(int width, BooleanValueGenerator generator) {
         this.connections = generateValidLine(width, generator);
     }
 

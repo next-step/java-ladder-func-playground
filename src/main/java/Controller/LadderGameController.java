@@ -1,52 +1,47 @@
 package Controller;
 
 import Domain.PlayerName;
-import Domain.PlayerNames;
-import Domain.PrizeNames;
-import LadderDomain.Ladder;
 import LadderDomain.LadderGame;
+import Domain.GameInformation;
 import View.InputHandler;
 import View.OutputHandler;
 
 public class LadderGameController {
 
-    private final PlayerNames playerNames;
+    private final GameInformation gameInformation;
     private final LadderGame game;
-    private final Ladder ladder;
-    private final PrizeNames prizeNames;
 
-    public LadderGameController(PlayerNames playerNames, LadderGame game, Ladder ladder, PrizeNames prizeNames) {
-        this.playerNames = playerNames;
+    public LadderGameController(LadderGame game, GameInformation gameInformation) {
         this.game = game;
-        this.ladder = ladder;
-        this.prizeNames = prizeNames;
+        this.gameInformation = gameInformation;
     }
 
     public void run() {
-        OutputHandler.printLadder(playerNames, ladder, prizeNames);
-        playerResultInput();
+        OutputHandler.printLadder(gameInformation.getPlayerNames(), game.getLadder(), gameInformation.getPrizeNames());
+        handlePlayerResult();
     }
 
-    private void playerResultInput() {
+    private void handlePlayerResult() {
         String input = InputHandler.inputPlayerResult();
         while (!"exit".equals(input)) {
-            printResult(input);
+            parsePlayerResult(input);
             input = InputHandler.inputPlayerResult();
         }
     }
 
-    private void printResult(String input) {
+    private void parsePlayerResult(String input) {
         if ("all".equals(input)) {
-            OutputHandler.printResults(playerNames, game.findAllResults());
+            OutputHandler.printResults(gameInformation.getPlayerNames(), game.findAllResults());
             return;
         }
 
-        PlayerName inputName = new PlayerName(input);
-        if (playerNames.contains(inputName)) {
-            OutputHandler.printSingleResult(game.findResultByName(inputName));
+        PlayerName name = new PlayerName(input);
+        if (gameInformation.getPlayerNames().contains(name)) {
+            OutputHandler.printSingleResult(game.findResultByName(name));
             return;
         }
 
         OutputHandler.printInvalidName();
     }
 }
+

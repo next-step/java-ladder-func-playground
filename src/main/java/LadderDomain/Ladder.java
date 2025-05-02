@@ -6,24 +6,24 @@ import java.util.List;
 
 public class Ladder {
 
-    private final List<Line> lines;
+    private final List<LadderRow> ladderRows;
 
     public Ladder(int height, int width) {
         BooleanValueGenerator generator = new LadderConnectionGenerator();
-        lines = new ArrayList<>();
+        ladderRows = new ArrayList<>();
         for (int i = 0; i < height; i++) {
-            lines.add(new Line(width, generator));
+            ladderRows.add(new LadderRow(width, generator));
         }
     }
 
     public int move(int index) {
-        for (Line line : lines) {
-            index = line.move(index);
+        for (LadderRow ladderRow : ladderRows) {
+            index = ladderRow.move(index);
         }
         return index;
     }
 
-    public List<Line> getLines() {
-        return Collections.unmodifiableList(lines);
+    public List<LadderRow> getLines() {
+        return Collections.unmodifiableList(ladderRows);
     }
 }

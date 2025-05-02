@@ -10,6 +10,10 @@ public class PrizeNames {
         this.prizeNames = List.copyOf(prizeNames);
     }
 
+    public int size() {
+        return prizeNames.size();
+    }
+
     public PrizeName get(int index) {
         return prizeNames.get(index);
     }

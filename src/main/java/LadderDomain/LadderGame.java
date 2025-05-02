@@ -3,22 +3,34 @@ package LadderDomain;
 import Domain.PlayerName;
 import Domain.PlayerResults;
 import Domain.PrizeName;
+import Domain.GameInformation;
+import Domain.ResultCalculator;
 import java.util.Map;
 
 
 public class LadderGame {
 
-    private final PlayerResults playerResults;
+    private final Ladder ladder;
+    private final PlayerResults results;
 
-    public LadderGame(PlayerResults playerResults) {
-        this.playerResults = playerResults;
+    public LadderGame(GameInformation gameInformation, Ladder ladder) {
+        this.ladder = ladder;
+        this.results = ResultCalculator.calculate(
+                gameInformation.getPlayerNames(),
+                ladder,
+                gameInformation.getPrizeNames()
+        );
     }
 
     public PrizeName findResultByName(PlayerName name) {
-        return playerResults.get(name);
+        return results.get(name);
     }
 
     public Map<PlayerName, PrizeName> findAllResults() {
-        return playerResults.getAll();
+        return results.getAll();
+    }
+
+    public Ladder getLadder() {
+        return ladder;
     }
 }

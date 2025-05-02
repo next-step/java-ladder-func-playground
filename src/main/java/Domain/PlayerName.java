@@ -6,6 +6,9 @@ public class PlayerName {
     private final String name;
 
     public PlayerName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("이름은 null일 수 없습니다.");
+        }
         String trimmed = name.trim();
 
         if (trimmed.isEmpty()) {

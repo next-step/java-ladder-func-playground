@@ -26,8 +26,12 @@ public class PlayerName {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         PlayerName other = (PlayerName) obj;
         return name.equals(other.name);
     }

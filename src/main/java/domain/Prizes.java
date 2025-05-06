@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Prizes {
 
+    private static final int MIN_PRIZES_SIZE = 2;
     private final List<Prize> prizes;
 
     private Prizes(List<String> prizes) {
@@ -33,8 +34,11 @@ public class Prizes {
     }
 
     private static void validate(List<String> prizes) {
-        if (prizes == null || prizes.isEmpty()) {
-            throw new IllegalArgumentException("상품은 하나 이상이어야 합니다.");
+        if (prizes == null) {
+            throw new IllegalArgumentException("값을 넘겨주세요");
+        }
+        if (prizes.size() < MIN_PRIZES_SIZE) {
+            throw new IllegalArgumentException("상품은 " + MIN_PRIZES_SIZE + "개 이상이어야 합니다.");
         }
     }
 }

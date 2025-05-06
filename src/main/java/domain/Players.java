@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class Players {
 
+    private final static int MIN_PLAYERS_SIZE = 2;
     private final List<Player> players;
 
     private Players(List<String> names) {
@@ -33,8 +34,11 @@ public class Players {
     }
 
     private static void validate(List<String> names) {
-        if (names.isEmpty() || names.size() < 2) {
-            throw new IllegalArgumentException("플레이어는 두 명 이상이어야 합니다.");
+        if (names == null) {
+            throw new IllegalArgumentException("값을 넘겨주세요");
+        }
+        if (names.size() < MIN_PLAYERS_SIZE) {
+            throw new IllegalArgumentException("플레이어는  " + MIN_PLAYERS_SIZE+ "명 이상이어야 합니다.");
         }
     }
 }

@@ -45,7 +45,7 @@ class LadderGameTest {
                 NOT_CONNECTED, CONNECTED, NOT_CONNECTED,    //   |     |-----|     |
                 NOT_CONNECTED, CONNECTED, NOT_CONNECTED     //   |     |-----|     |
         );
-        Ladder ladder = Ladder.create(fixedBooleanGenerator, LadderHeight.create(3), players);
+        Ladder ladder = Ladder.create(fixedBooleanGenerator, new LadderHeight(3), players);
         LadderGame game = LadderGame.create(ladder, players, prizes);
 
         // when

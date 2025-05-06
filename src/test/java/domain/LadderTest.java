@@ -51,7 +51,7 @@ class LadderTest {
                 CONNECTED, NOT_CONNECTED, NOT_CONNECTED             //       |-----|     |     |
         );
         Players players = Players.from(List.of("A", "B", "C", "D"));
-        Ladder ladder = Ladder.create(fixedBooleanGenerator, LadderHeight.create(4), players);
+        Ladder ladder = Ladder.create(fixedBooleanGenerator, new LadderHeight(4), players);
 
         //when
         Map<Integer, Integer> startAndEndMap = ladder.mapStartToEndPositions(players.size());

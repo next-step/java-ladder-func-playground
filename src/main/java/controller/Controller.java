@@ -22,7 +22,7 @@ public class Controller {
     public void run() {
         Players players = Players.from(inputPlayers());
         Prizes prizes = Prizes.from(inputPrizes());
-        LadderHeight ladderHeight = LadderHeight.create(inputLadderHeight());
+        LadderHeight ladderHeight = new LadderHeight(inputLadderHeight());
         Ladder ladder = Ladder.create(booleanGenerator, ladderHeight, players);
 
         ladderGame = LadderGame.create(ladder, players, prizes);

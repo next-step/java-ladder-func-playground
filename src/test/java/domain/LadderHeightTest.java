@@ -10,7 +10,7 @@ class LadderHeightTest {
     @DisplayName("사다리 높이가 정상적으로 생성된다")
     void 사다리_높이가_정상적으로_생성된다() {
         //given
-        LadderHeight ladderHeight = LadderHeight.create(1);
+        LadderHeight ladderHeight = new LadderHeight(1);
 
         //when
         int height = ladderHeight.height();
@@ -22,7 +22,7 @@ class LadderHeightTest {
     @Test
     @DisplayName("사다리 높이가 0이하면 예외를 던진다")
     void 사다리_높이가_0이하면_예외를_던진다() {
-        Assertions.assertThatThrownBy(() -> LadderHeight.create(0))
+        Assertions.assertThatThrownBy(() -> new LadderHeight(0))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

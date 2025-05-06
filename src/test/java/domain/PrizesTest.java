@@ -36,8 +36,8 @@ class PrizesTest {
     }
 
     @Test
-    @DisplayName("상품은 하나 이상이어야 한다")
-    void 상품은_하나_이상이어야_한다() {
+    @DisplayName("상품은 두개 이상이어야 한다")
+    void 상품은_두개_이상이어야_한다() {
         //given
         List<String> labelList = List.of();
 

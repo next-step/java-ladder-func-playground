@@ -19,32 +19,7 @@ public class OutputView {
     }
 
     public void outputLadder(Ladder ladder) {
-        List<Line> lines = ladder.getLines();
-        outputLines(lines);
-    }
-
-    private void outputLines(List<Line> lines) {
-        for (Line line : lines) {
-            printVerticalBar();
-            outputLine(line);
-            System.out.println();
-        }
-    }
-
-    private void outputLine(Line line) {
-        List<Boolean> points = line.getPoints();
-        for (Boolean point : points) {
-            printPoint(point);
-            printVerticalBar();
-        }
-    }
-
-    private void printPoint(Boolean point) {
-        if (point) {
-            printConnection();
-            return;
-        }
-        printEmptySpace();
+        LadderPrinter.outputLadder(ladder);
     }
 
     public void outputLadderHeader() {
@@ -63,25 +38,13 @@ public class OutputView {
         System.out.printf("%-6s", resultedName);
     }
 
-    private void printVerticalBar() {
-        System.out.print("|");
-    }
-
-    private void printConnection() {
-        System.out.print("-----");
-    }
-
-    private void printEmptySpace() {
-        System.out.print("     ");
+    public void outputResultByName(String s) {
+        printResultTitle();
+        System.out.println(s);
     }
 
     private void printResultTitle() {
         System.out.println("실행 결과");
-    }
-
-    public void outputResultByName(String s) {
-        printResultTitle();
-        System.out.println(s);
     }
 
     public void outputAllResult(Map<String, String> result) {

@@ -21,7 +21,7 @@ class DirectionTest {
     }
 
     @Test
-    @DisplayName("RIGHT는 오르쪽 연결이 있을 때만 이동 가능하다")
+    @DisplayName("RIGHT는 오른쪽 연결이 있을 때만 이동 가능하다")
     void RIGHT는_오른쪽_연결이_있을_때만_이동_가능하다() {
         List<Boolean> points = Arrays.asList(CONNECTED, NOT_CONNECTED, CONNECTED);
         assertThat(Direction.RIGHT.canMove(points, 0)).isTrue();

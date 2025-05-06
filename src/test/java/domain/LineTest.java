@@ -49,8 +49,8 @@ class LineTest {
     }
 
     @Test
-    @DisplayName("오르쪽과 연결되어 있으면 오른쪽으로 움직인다")
-    void 오르쪽과_연결되어_있으면_오른쪽으로_움직인다() {
+    @DisplayName("오른쪽과 연결되어 있으면 오른쪽으로 움직인다")
+    void 오른쪽과_연결되어_있으면_오른쪽으로_움직인다() {
         //given
         FixedBooleanGenerator fixedBooleanGenerator = new FixedBooleanGenerator(NOT_CONNECTED, CONNECTED);
         Line line = create(fixedBooleanGenerator, 3);

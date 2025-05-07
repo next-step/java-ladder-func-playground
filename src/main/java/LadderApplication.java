@@ -1,10 +1,10 @@
-import Controller.LadderGameController;
-import Domain.GameInformation;
-import Domain.PlayerNames;
-import Domain.PrizeNames;
-import LadderDomain.Ladder;
-import LadderDomain.LadderGame;
-import View.InputHandler;
+import controller.LadderGameController;
+import domain.GameInformation;
+import domain.PlayerNames;
+import domain.PrizeNames;
+import ladderdomain.Ladder;
+import ladderdomain.LadderGame;
+import view.InputHandler;
 
 public class LadderApplication {
     public static void main(String[] args) {

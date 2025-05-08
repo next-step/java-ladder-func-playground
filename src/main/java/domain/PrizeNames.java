@@ -21,4 +21,9 @@ public class PrizeNames {
     public List<PrizeName> getAll() {
         return prizeNames;
     }
+
+    public PrizeName getByIndex(int index) {
+        return prizeNames.get(index);
+    }
+
 }

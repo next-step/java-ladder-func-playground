@@ -17,8 +17,8 @@ public class ResultCalculator {
                 IntStream.range(0, playerNames.size())
                         .boxed()
                         .collect(Collectors.toMap(
-                                i -> playerNames.get(i),
-                                i -> prizeNames.get(endPositions.get(i)),
+                                playerNames::getByIndex,
+                                i -> prizeNames.getByIndex(endPositions.get(i)),
                                 (a, b) -> a,
                                 LinkedHashMap::new
                         ));

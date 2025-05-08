@@ -28,8 +28,8 @@ public class PlayerNames {
     public record IndexedPlayerName(int index, PlayerName name) {
     }
 
-    public List<PlayerName> getAll() {
-        return playerNames;
+    public PlayerName getByIndex(int index) {
+        return playerNames.get(index);
     }
 
     public boolean contains(PlayerName name) {

@@ -47,7 +47,7 @@ public class OutputHandler {
         return "     ";
     }
     public static void printSingleResult(PrizeName prize) {
-        System.out.println("실행 결과");
+        System.out.println("\n실행 결과");
         System.out.println(prize.getValue());
     }
 
@@ -60,6 +60,6 @@ public class OutputHandler {
     }
 
     public static void printInvalidName() {
-        System.out.println("존재하지 않는 이름입니다.");
+        System.out.println("존재하지 않는 이름입니다.\n");
     }
 }

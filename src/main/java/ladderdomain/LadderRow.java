@@ -22,7 +22,7 @@ public class LadderRow {
     }
 
     private List<Connection> generateLine(int width, BooleanValueGenerator generator) {
-        List<Connection> line = new ArrayList<>();
+        List<Connection> line = new java.util.ArrayList<>();
         int index = 0;
         List<Boolean> randomBoolean = generateRandomConnection(width - 1, generator);
 
@@ -37,15 +37,15 @@ public class LadderRow {
     }
 
     private List<Boolean> generateRandomConnection(int size, BooleanValueGenerator generator) {
-        List<Boolean> randomBoolean = new ArrayList<>();
+        List<Boolean> randomBoolean = new java.util.ArrayList<>();
         for (int i = 0; i < size; i++) {
             randomBoolean.add(generator.generate());
         }
         return randomBoolean;
     }
 
-    private List<Boolean> removeConnection(List<Boolean> original) {  //라인이 한 줄로 겹치지 않기 위해서
-        List<Boolean> result = new ArrayList<>();
+    private List<Boolean> removeConnection(List<Boolean> original) {
+        List<Boolean> result = new java.util.ArrayList<>();
         boolean wasTrue = false;
 
         for (Boolean current : original) {
@@ -57,10 +57,7 @@ public class LadderRow {
     }
 
     private boolean skipConnection(boolean current, boolean wasTrue) {
-        if (wasTrue) {
-            return false;
-        }
-        return current;
+        return !wasTrue && current;
     }
 
     private boolean containsAtLeastOneTrue(List<Connection> line) {
@@ -68,16 +65,10 @@ public class LadderRow {
     }
 
     public int move(int index) {
-        if (index < connections.size() && connections.get(index).hasRight()) {
-            return index + 1;
-        }
-        if (index > 0 && connections.get(index - 1).hasRight()) {
-            return index - 1;
-        }
-        return index;
+        return Direction.of(index, connections).move(index);
     }
 
     public List<Connection> getConnections() {
-        return Collections.unmodifiableList(connections);
+        return java.util.Collections.unmodifiableList(connections);
     }
 }

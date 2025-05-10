@@ -1,5 +1,8 @@
 package domain;
 
+import domain.prize.PrizeName;
+import domain.user.PlayerName;
+import domain.user.PlayerResults;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;

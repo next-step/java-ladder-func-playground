@@ -1,11 +1,10 @@
 package ladderdomain;
 
-import domain.PlayerName;
-import domain.PlayerResults;
-import domain.PrizeName;
-import domain.GameInformation;
+import domain.user.PlayerName;
+import domain.user.PlayerResults;
+import domain.prize.PrizeName;
+import domain.user.GameInformation;
 import java.util.Map;
-
 
 public class LadderGame {
 

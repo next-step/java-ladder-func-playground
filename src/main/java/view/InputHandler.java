@@ -1,9 +1,9 @@
 package view;
 
-import domain.PlayerName;
-import domain.PlayerNames;
-import domain.PrizeName;
-import domain.PrizeNames;
+import domain.user.PlayerName;
+import domain.user.PlayerNames;
+import domain.prize.PrizeName;
+import domain.prize.PrizeNames;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;

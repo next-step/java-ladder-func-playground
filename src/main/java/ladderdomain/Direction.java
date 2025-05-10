@@ -1,48 +1,41 @@
 package ladderdomain;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public enum Direction {
 
-    RIGHT(
-            index -> index < Integer.MAX_VALUE && hasRight(index),
-            index -> index + 1
+    RIGHT(1, (index, connections) ->
+            index < connections.size() && connections.get(index).hasRight()
     ),
-    LEFT(
-            index -> index > 0 && hasRight(index - 1),
-            index -> index - 1
+
+    LEFT(-1, (index, connections) ->
+            index > 0 && connections.get(index - 1).hasRight()
     ),
-    STAY(
-            index -> true,
-            index -> index
-    );
 
-    private static List<Connection> currentConnections;
-    private final Predicate<Integer> condition;
-    private final java.util.function.IntUnaryOperator movement;
+    STAY(0, (index, connections) -> true);
 
-    Direction(Predicate<Integer> condition, java.util.function.IntUnaryOperator movement) {
+    private final int offset;
+    private final MoveCondition condition;
+
+    Direction(int offset, MoveCondition condition) {
+        this.offset = offset;
         this.condition = condition;
-        this.movement = movement;
+    }
+
+    public boolean canMove(int index, List<Connection> connections) {
+        return condition.test(index, connections);
+    }
+
+    public int move(int index) {
+        return index + offset;
     }
 
     public static Direction of(int index, List<Connection> connections) {
-        currentConnections = connections;
         for (Direction direction : values()) {
-            if (direction != STAY && direction.condition.test(index)) {
+            if (direction != STAY && direction.canMove(index, connections)) {
                 return direction;
             }
         }
         return STAY;
     }
-
-    public int move(int index) {
-        return movement.applyAsInt(index);
-    }
-
-    private static boolean hasRight(int index) {
-        return index >= 0 && index < currentConnections.size() && currentConnections.get(index).hasRight();
-    }
 }
-

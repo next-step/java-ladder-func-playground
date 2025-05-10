@@ -1,5 +1,6 @@
 package domain;
 
+import domain.user.PlayerName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

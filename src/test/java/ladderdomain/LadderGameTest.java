@@ -1,6 +1,10 @@
 package ladderdomain;
 
-import domain.*;
+import domain.prize.PrizeName;
+import domain.prize.PrizeNames;
+import domain.user.GameInformation;
+import domain.user.PlayerName;
+import domain.user.PlayerNames;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 

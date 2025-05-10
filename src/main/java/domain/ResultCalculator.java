@@ -1,5 +1,10 @@
 package domain;
 
+import domain.prize.PrizeName;
+import domain.prize.PrizeNames;
+import domain.user.PlayerName;
+import domain.user.PlayerNames;
+import domain.user.PlayerResults;
 import ladderdomain.Ladder;
 import java.util.LinkedHashMap;
 import java.util.List;

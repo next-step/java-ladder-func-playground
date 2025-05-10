@@ -1,8 +1,8 @@
 package controller;
 
-import domain.PlayerName;
+import domain.user.PlayerName;
 import ladderdomain.LadderGame;
-import domain.GameInformation;
+import domain.user.GameInformation;
 import view.InputHandler;
 import view.OutputHandler;
 

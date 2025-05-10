@@ -1,7 +1,7 @@
 import controller.LadderGameController;
-import domain.GameInformation;
-import domain.PlayerNames;
-import domain.PrizeNames;
+import domain.user.GameInformation;
+import domain.user.PlayerNames;
+import domain.prize.PrizeNames;
 import ladderdomain.Ladder;
 import ladderdomain.LadderGame;
 import view.InputHandler;

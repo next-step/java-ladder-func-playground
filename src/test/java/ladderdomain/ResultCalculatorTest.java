@@ -1,10 +1,10 @@
 package ladderdomain;
 
-import domain.PlayerName;
-import domain.PlayerNames;
-import domain.PlayerResults;
-import domain.PrizeName;
-import domain.PrizeNames;
+import domain.user.PlayerName;
+import domain.user.PlayerNames;
+import domain.user.PlayerResults;
+import domain.prize.PrizeName;
+import domain.prize.PrizeNames;
 import domain.ResultCalculator;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,6 @@
-package domain;
+package domain.user;
 
+import domain.prize.PrizeName;
 import java.util.Map;
 
 public class PlayerResults {

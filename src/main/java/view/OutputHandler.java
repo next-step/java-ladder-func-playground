@@ -1,9 +1,9 @@
 package view;
 
-import domain.PlayerName;
-import domain.PlayerNames;
-import domain.PrizeName;
-import domain.PrizeNames;
+import domain.user.PlayerName;
+import domain.user.PlayerNames;
+import domain.prize.PrizeName;
+import domain.prize.PrizeNames;
 import ladderdomain.Connection;
 import ladderdomain.Ladder;
 import ladderdomain.LadderRow;

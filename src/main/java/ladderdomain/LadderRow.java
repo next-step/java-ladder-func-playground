@@ -1,9 +1,6 @@
 package ladderdomain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
 
 public class LadderRow {
 
@@ -23,14 +20,11 @@ public class LadderRow {
 
     private List<Connection> generateLine(int width, BooleanValueGenerator generator) {
         List<Connection> line = new java.util.ArrayList<>();
-        int index = 0;
         List<Boolean> randomBoolean = generateRandomConnection(width - 1, generator);
-
         List<Boolean> filteredBoolean = removeConnection(randomBoolean);
 
-        while (index < filteredBoolean.size()) {
-            line.add(new Connection(filteredBoolean.get(index)));
-            index++;
+        for (Boolean bool : filteredBoolean) {
+            line.add(new Connection(bool));
         }
 
         return line;
@@ -49,15 +43,12 @@ public class LadderRow {
         boolean wasTrue = false;
 
         for (Boolean current : original) {
-            result.add(skipConnection(current, wasTrue));
-            wasTrue = result.get(result.size() - 1);
+            boolean valid = !wasTrue && current;
+            result.add(valid);
+            wasTrue = valid;
         }
 
         return result;
-    }
-
-    private boolean skipConnection(boolean current, boolean wasTrue) {
-        return !wasTrue && current;
     }
 
     private boolean containsAtLeastOneTrue(List<Connection> line) {
@@ -65,7 +56,8 @@ public class LadderRow {
     }
 
     public int move(int index) {
-        return Direction.of(index, connections).move(index);
+        Direction direction = Direction.of(index, connections);
+        return direction.move(index);
     }
 
     public List<Connection> getConnections() {

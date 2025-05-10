@@ -1,5 +1,7 @@
 package domain;
 
+import domain.prize.PrizeName;
+import domain.prize.PrizeNames;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

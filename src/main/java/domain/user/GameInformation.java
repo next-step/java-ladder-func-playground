@@ -1,4 +1,7 @@
-package domain;
+package domain.user;
+
+import domain.prize.PrizeNames;
+import domain.ResultCalculator;
 
 public class GameInformation {
 

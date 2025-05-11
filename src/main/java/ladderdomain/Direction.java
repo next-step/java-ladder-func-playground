@@ -31,11 +31,14 @@ public enum Direction {
     }
 
     public static Direction of(int index, List<Connection> connections) {
-        for (Direction direction : values()) {
-            if (direction != STAY && direction.canMove(index, connections)) {
-                return direction;
-            }
-        }
-        return STAY;
+        return findCanMove(index, connections);
     }
+
+    private static Direction findCanMove(int index, List<Connection> connections) {
+        return List.of(RIGHT, LEFT).stream()
+                .filter(direction -> direction.canMove(index, connections))
+                .findFirst()
+                .orElse(STAY);
+    }
+
 }

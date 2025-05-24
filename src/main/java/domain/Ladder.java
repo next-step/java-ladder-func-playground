@@ -44,7 +44,6 @@ public class Ladder {
         return false;
     }
 
-
     public int move(int position) {
         int current = position;
         for (Line line : lines) {

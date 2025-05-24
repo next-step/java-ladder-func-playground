@@ -47,7 +47,6 @@ public class Participants {
         }
     }
 
-
     public int size() {
         return names.size();
     }

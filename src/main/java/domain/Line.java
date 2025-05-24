@@ -25,6 +25,16 @@ public class Line {
         return new Line(points);
     }
 
+    public int move(int position) {
+        if (position < points.size() && points.get(position).isConnected()) {
+            return position + 1;
+        }
+        if (position > 0 && points.get(position - 1).isConnected()) {
+            return position - 1;
+        }
+        return position;
+    }
+
     public List<Point> getPoints() {
         return points;
     }

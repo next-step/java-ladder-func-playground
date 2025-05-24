@@ -15,6 +15,7 @@ public class InputView {
             int width = Integer.parseInt(reader.readLine());
             System.out.println("\n사다리의 높이는 몇 개인가요?");
             int height = Integer.parseInt(reader.readLine());
+            System.out.println();
 
             validate(width, height);
 

@@ -2,24 +2,23 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Ladder {
     private final List<Line> lines;
 
-    public Ladder(int height, int width, Random random) {
-        this.lines = generateLadder(height, width, random);
+    private Ladder(List<Line> lines) {
+        this.lines = lines;
     }
 
-    private List<Line> generateLadder(int height, int width, Random random) {
-        List<Line> result = new ArrayList<>();
-        for (int i = 0; i < height; i++) {
-            result.add(new Line(width, random));
+    public static Ladder create(Size size) {
+        List<Line> lines = new ArrayList<>();
+        for (int i = 0; i < size.getHeight(); i++) {
+            lines.add(Line.create(size.getWidth()));
         }
-        return result;
+        return new Ladder(lines);
     }
 
-    public List<Line> lines() {
+    public List<Line> getLines() {
         return lines;
     }
 }

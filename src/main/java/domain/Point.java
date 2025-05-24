@@ -1,17 +1,17 @@
 package domain;
 
 public class Point {
-    private final boolean hasRightConnection;
+    private final boolean connected;
 
-    public Point(boolean hasRightConnection) {
-        this.hasRightConnection = hasRightConnection;
+    private Point(boolean connected) {
+        this.connected = connected;
     }
 
-    public boolean hasRightConnection() {
-        return hasRightConnection;
+    public static Point of(boolean connected) {
+        return new Point(connected);
     }
 
-    public String toString() {
-        return hasRightConnection ? "|-----" : "|     ";
+    public boolean isConnected() {
+        return connected;
     }
 }

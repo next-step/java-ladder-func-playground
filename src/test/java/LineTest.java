@@ -1,34 +1,26 @@
-import domain.Line;
-import domain.Point;
+package domain;
+
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-import java.util.Random;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
-class LineTest {
+public class LineTest {
 
-    @RepeatedTest(5)
-    void notOverlapping_row() {
+    @RepeatedTest(10)
+    void lineIsWidthPlusOne() {
         int width = 4;
-        Line line = new Line(width, new Random());
-
-        List<Point> points = line.points();
-        for (int i = 0; i < points.size() - 1; i++) {
-            if (points.get(i).hasRightConnection()) {
-                assertThat(points.get(i + 1).hasRightConnection()).isFalse();
-            }
-        }
+        Line line = Line.create(width);
+        assertThat(line.getPoints()).hasSize(width);
     }
 
-    @Test
-    void lastPointIsNotConnect() {
-        Line line = new Line(4, new Random());
-        List<Point> points = line.points();
-
-        Point last = points.get(points.size() - 1);
-        assertThat(last.hasRightConnection()).isFalse();
+    @RepeatedTest(10)
+    void notOverlapping() {
+        Line line = Line.create(5);
+        boolean previous = false;
+        for (Point point : line.getPoints()) {
+            if (previous && point.isConnected()) {
+                throw new AssertionError("인접한 연결이 발견됨");
+            }
+            previous = point.isConnected();
+        }
     }
 }

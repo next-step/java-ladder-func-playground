@@ -7,34 +7,25 @@ import java.util.Random;
 public class Line {
     private final List<Point> points;
 
-    public Line(int width, Random random) {
-        this.points = generateLine(width, random);
+    private Line(List<Point> points) {
+        this.points = points;
     }
 
-    private List<Point> generateLine(int width, Random random) {
-        List<Point> result = new ArrayList<>();
-        boolean previous = false;
+    public static Line create(int width) {
+        List<Point> points = new ArrayList<>();
+        Random random = new Random();
+        boolean previousConnected = false;
 
         for (int i = 0; i < width - 1; i++) {
-            boolean connect = !previous && random.nextBoolean();
-            result.add(new Point(connect));
-            previous = connect;
+            boolean connect = !previousConnected && random.nextBoolean();
+            points.add(Point.of(connect));
+            previousConnected = connect;
         }
-
-        result.add(new Point(false));
-        return result;
+        points.add(Point.of(false));
+        return new Line(points);
     }
 
-    public List<Point> points() {
+    public List<Point> getPoints() {
         return points;
-    }
-
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (Point point : points) {
-            builder.append(point);
-        }
-        builder.append("|");
-        return builder.toString();
     }
 }

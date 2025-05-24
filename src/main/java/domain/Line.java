@@ -25,6 +25,23 @@ public class Line {
         return new Line(points);
     }
 
+    public void forceConnect(int position) {
+        if (position < 0 || position >= points.size() - 1) {
+            return;
+        }
+        if (canConnect(position)) {
+            points.set(position, Point.of(true));
+        }
+    }
+
+    private boolean canConnect(int position) {
+        boolean current = points.get(position).isConnected();
+        boolean prev = position > 0 && points.get(position - 1).isConnected();
+        boolean next = position < points.size() - 1 && points.get(position + 1).isConnected();
+
+        return !current && !prev && !next;
+    }
+
     public int move(int position) {
         if (position < points.size() && points.get(position).isConnected()) {
             return position + 1;

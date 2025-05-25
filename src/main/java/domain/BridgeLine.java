@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class BridgeLine {
 
@@ -38,14 +40,9 @@ public class BridgeLine {
     }
 
     public String drawLineFormat(int columnCount) {
-        StringBuilder builder = new StringBuilder();
-
-        for (int i = 0; i < columnCount; i++) {
-            builder.append(VERTICAL_BAR);
-            builder.append(renderBridge(i));
-        }
-
-        return builder.toString();
+        return IntStream.range(0, columnCount)
+                .mapToObj(i -> VERTICAL_BAR + renderBridge(i))
+                .collect(Collectors.joining());
     }
 
     private String renderBridge(int index) {

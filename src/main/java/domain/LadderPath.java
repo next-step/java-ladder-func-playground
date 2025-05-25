@@ -3,6 +3,7 @@ package domain;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class LadderPath {
 
@@ -15,13 +16,13 @@ public class LadderPath {
     }
 
     public Map<Integer, Integer> mapStartToEndIndex() {
-        Map<Integer, Integer> startToEndMap = new LinkedHashMap<>();
-
-        for (int startColumnIndex = 0; startColumnIndex < numberOfColumns; startColumnIndex++) {
-            startToEndMap.put(startColumnIndex, tracePathFrom(startColumnIndex));
-        }
-
-        return startToEndMap;
+        return IntStream.range(0, numberOfColumns)
+                .boxed()
+                .collect(
+                        LinkedHashMap::new,
+                        (map, i) -> map.put(i, tracePathFrom(i)),
+                        Map::putAll
+                );
     }
 
     private int tracePathFrom(int startColumnIndex) {

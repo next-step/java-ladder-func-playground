@@ -5,7 +5,6 @@ import domain.LadderPath;
 import domain.PlayerResults;
 import dto.LadderBuildResponse;
 import dto.LadderResultResponse;
-import util.NumericParser;
 import view.InputView;
 import view.OutputView;
 
@@ -45,8 +44,7 @@ public class LadderController {
 
     private int promptAndParseLadderHeight() {
         outputView.printHeightPrompt();
-        String input = inputView.readResultRequest();
-        return NumericParser.parse(input);
+        return inputView.readLadderHeight();
     }
 
     private LadderBuildResponse buildLadder(int columnCount, int rowCount) {

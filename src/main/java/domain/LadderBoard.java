@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class LadderBoard {
 
@@ -85,13 +86,12 @@ public class LadderBoard {
     }
 
     private static List<Boolean> generateConnectionStates(int participantCount) {
-        List<Boolean> connectionStates = new ArrayList<>();
-        for (int index = 0; index < participantCount - 1; index++) {
-            boolean canConnect = index == 0 || !connectionStates.get(index - 1);
-            boolean shouldConnect = canConnect && RANDOM.nextBoolean();
-            connectionStates.add(shouldConnect);
-        }
-        return connectionStates;
+        return IntStream.range(0, participantCount - 1)
+                .boxed()
+                .collect(ArrayList::new, (list, i) -> {
+                    boolean canConnect = i == 0 || !list.get(i - 1);
+                    list.add(canConnect && RANDOM.nextBoolean());
+                }, List::addAll);
     }
 
     private static boolean isConnectedAtCenter(BridgeLine line, int centerIndex) {
@@ -99,9 +99,9 @@ public class LadderBoard {
     }
 
     private static void recordConnectedIndices(Set<Integer> connectedColumnIndices, List<Boolean> connectionStates) {
-        for (int i = 0; i < connectionStates.size(); i++) {
-            if (connectionStates.get(i)) connectedColumnIndices.add(i);
-        }
+        IntStream.range(0, connectionStates.size())
+                .filter(i -> connectionStates.get(i))
+                .forEach(connectedColumnIndices::add);
     }
 
     private static boolean areAllColumnsConnected(Set<Integer> connectedColumnIndices, int expectedCount) {

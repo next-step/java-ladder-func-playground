@@ -3,6 +3,7 @@ package domain;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 public class PlayerResults {
 
@@ -53,13 +54,13 @@ public class PlayerResults {
     }
 
     private static Map<String, String> mapResults(List<String> names, List<String> labels, Map<Integer, Integer> indexMap) {
-        Map<String, String> resultMap = new LinkedHashMap<>();
-        for (int i = 0; i < names.size(); i++) {
-            String name = names.get(i);
-            String label = labels.get(indexMap.get(i));
-            resultMap.put(name, label);
-        }
-        return resultMap;
+        return IntStream.range(0, names.size())
+                .boxed()
+                .collect(
+                        LinkedHashMap::new,
+                        (map, i) -> map.put(names.get(i), labels.get(indexMap.get(i))),
+                        Map::putAll
+                );
     }
 
     public String resultOf(String playerName) {

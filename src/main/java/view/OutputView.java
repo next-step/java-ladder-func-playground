@@ -62,9 +62,8 @@ public class OutputView {
     }
 
     public void printAllResults(Map<String, String> participantResults) {
-        for (Map.Entry<String, String> entry : participantResults.entrySet()) {
-            System.out.println(formatResult(entry.getKey(), entry.getValue()));
-        }
+        participantResults.forEach((name, result) ->
+                System.out.println(formatResult(name, result)));
     }
 
     public void printSingleResult(String resultValue) {

@@ -1,34 +1,29 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Results {
-    private final List<String> results;
+    private final List<Result> values;
 
-    private Results(List<String> results) {
-        this.results = new ArrayList<>(results);
+    private Results(List<Result> values) {
+        this.values = values;
     }
 
     public static Results from(String input) {
-        String[] split = input.split(",");
-        List<String> results = new ArrayList<>();
-        for (String r : split) {
-            results.add(r.trim());
-        }
+        List<Result> results = Arrays.stream(input.split(","))
+                .map(String::trim)
+                .map(Result::new)
+                .collect(Collectors.toList());
         return new Results(results);
     }
 
-    public String get(int index) {
-        return results.get(index);
+    public Result get(int index) {
+        return values.get(index);
     }
 
-    public int size() {
-        return results.size();
-    }
-
-    public List<String> getAll() {
-        return Collections.unmodifiableList(results);
+    public void print() {
+        values.forEach(result -> System.out.printf("%6s", result.getValue()));
+        System.out.println();
     }
 }

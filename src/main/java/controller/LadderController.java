@@ -2,50 +2,45 @@ package controller;
 
 import domain.*;
 import view.InputView;
-import view.LadderView;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+import view.OutputView;
 
 public class LadderController {
-    private Participants participants;
-    private Results results;
-    private Ladder ladder;
-    private Size size;
+    private final InputView inputView = new InputView();
+    private final OutputView outputView = new OutputView();
 
     public void run() {
-        participants = Participants.from(InputView.readParticipants());
-        results = Results.from(InputView.readResults());
+        Names names = inputView.readNames();
+        Results results = inputView.readResults();
+        Height height = inputView.readHeight();
 
-        size = new Size(participants.size(), InputView.readHeight());
-        ladder = Ladder.create(size);
+        Ladder ladder = LadderGenerator.generate(names.size(), height);
+        LadderGame ladderGame = new LadderGame(names, results, ladder);
 
-        LadderView.printLadderWithParticipants(ladder, participants);
-        Map<Integer, Integer> gameResults = play();
+        outputView.printLadder(names, ladder, results);
 
-        LadderView.printResultsWithPrizes(participants, results, gameResults);
+        processQuery(ladderGame);
+    }
 
+    private void processQuery(LadderGame ladderGame) {
         while (true) {
-            String query = InputView.readQueryName();
-            if (query.equalsIgnoreCase("all")) {
-                LadderView.printAllResults(participants, results, gameResults);
-                break;
+            String target = inputView.readNameForResult();
+            if (isAll(target)) {
+                printAllResults(ladderGame);
+                return;
             }
-            int idx = participants.indexOf(query);
-            if (idx == -1) {
-                System.out.println("존재하지 않는 이름입니다. 다시 입력하세요.");
-                continue;
-            }
-            LadderView.printSingleResult(query, results.get(gameResults.get(idx)));
+            printSingleResult(ladderGame, target);
         }
     }
 
-    private Map<Integer, Integer> play() {
-        Map<Integer, Integer> resultMap = new LinkedHashMap<>();
-        for (int i = 0; i < size.getWidth(); i++) {
-            int destination = ladder.move(i);
-            resultMap.put(i, destination);
-        }
-        return resultMap;
+    private boolean isAll(String input) {
+        return input.equals("all");
+    }
+
+    private void printAllResults(LadderGame ladderGame) {
+        outputView.printAllResults(ladderGame.playAll());
+    }
+
+    private void printSingleResult(LadderGame ladderGame, String target) {
+        outputView.printResult(ladderGame.play(new Name(target)));
     }
 }

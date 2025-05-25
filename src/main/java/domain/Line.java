@@ -5,54 +5,56 @@ import java.util.List;
 import java.util.Random;
 
 public class Line {
-    private final List<Point> points;
+    private final List<Boolean> steps;
 
-    private Line(List<Point> points) {
-        this.points = points;
+    public Line(List<Boolean> steps) {
+        this.steps = steps;
     }
 
-    public static Line create(int width) {
-        List<Point> points = new ArrayList<>();
+    public static Line generate(int width) {
+        List<Boolean> steps = new ArrayList<>();
         Random random = new Random();
-        boolean previousConnected = false;
 
-        for (int i = 0; i < width - 1; i++) {
-            boolean connect = !previousConnected && random.nextBoolean();
-            points.add(Point.of(connect));
-            previousConnected = connect;
+        for (int index = 0; index < width - 1; index++) {
+            steps.add(nextStep(index, steps, random));
         }
-        points.add(Point.of(false));
-        return new Line(points);
+        return new Line(steps);
     }
 
-    public void forceConnect(int position) {
-        if (position < 0 || position >= points.size() - 1) {
-            return;
+    private static boolean nextStep(int index, List<Boolean> steps, Random random) {
+        if (hasLeftStep(index, steps)) {
+            return false;
         }
-        if (canConnect(position)) {
-            points.set(position, Point.of(true));
-        }
+        return random.nextBoolean();
     }
 
-    private boolean canConnect(int position) {
-        boolean current = points.get(position).isConnected();
-        boolean prev = position > 0 && points.get(position - 1).isConnected();
-        boolean next = position < points.size() - 1 && points.get(position + 1).isConnected();
-
-        return !current && !prev && !next;
+    private static boolean hasLeftStep(int index, List<Boolean> steps) {
+        return index > 0 && steps.get(index - 1);
     }
 
     public int move(int position) {
-        if (position < points.size() && points.get(position).isConnected()) {
-            return position + 1;
-        }
-        if (position > 0 && points.get(position - 1).isConnected()) {
+        if (canMoveLeft(position)) {
             return position - 1;
+        }
+        if (canMoveRight(position)) {
+            return position + 1;
         }
         return position;
     }
 
-    public List<Point> getPoints() {
-        return points;
+    private boolean canMoveLeft(int position) {
+        return position > 0 && steps.get(position - 1);
+    }
+
+    private boolean canMoveRight(int position) {
+        return position < steps.size() && steps.get(position);
+    }
+
+    public void print() {
+        System.out.print("    ");
+        for (Boolean step : steps) {
+            System.out.print(step ? "|-----" : "|     ");
+        }
+        System.out.println("|");
     }
 }

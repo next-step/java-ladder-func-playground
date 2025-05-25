@@ -1,37 +1,72 @@
 package view;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import domain.Height;
+import domain.Names;
+import domain.Results;
+
+import java.util.Scanner;
 
 public class InputView {
-    private static final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private final Scanner scanner = new Scanner(System.in);
 
-    public static String readParticipants() {
-        System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
-        return readLine();
+    public Names readNames() {
+        printMessage("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
+        String input = readValidLine();
+        return Names.from(input);
     }
 
-    public static String readResults() {
-        System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
-        return readLine();
+    public Results readResults() {
+        printMessage("\n실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
+        String input = readValidLine();
+        return Results.from(input);
     }
 
-    public static int readHeight() {
-        System.out.println("최대 사다리 높이는 몇 개인가요?");
-        return Integer.parseInt(readLine());
+    public Height readHeight() {
+        printMessage("\n최대 사다리 높이는 몇 개인가요?");
+        int value = readValidPositiveInteger();
+        return new Height(value);
     }
 
-    public static String readQueryName() {
-        System.out.println("결과를 보고 싶은 사람은?");
-        return readLine();
+    public String readNameForResult() {
+        printMessage("\n결과를 보고 싶은 사람은?");
+        return scanner.nextLine().trim();
     }
 
-    private static String readLine() {
-        try {
-            return reader.readLine();
-        } catch (IOException e) {
-            throw new RuntimeException("입력 중 오류가 발생했습니다.");
+    private String readValidLine() {
+        String input = scanner.nextLine().trim();
+        if (input.isEmpty()) {
+            return retryReadLine();
         }
+        return input;
+    }
+
+    private String retryReadLine() {
+        printMessage("\n값을 입력해주세요. 빈 값은 허용되지 않습니다.");
+        return readValidLine();
+    }
+
+    private int readValidPositiveInteger() {
+        String input = scanner.nextLine().trim();
+        if (!isPositiveNumber(input)) {
+            return retryReadPositiveInteger();
+        }
+        return Integer.parseInt(input);
+    }
+
+    private int retryReadPositiveInteger() {
+        printMessage("\n1 이상의 숫자를 입력해주세요.");
+        return readValidPositiveInteger();
+    }
+
+    private boolean isPositiveNumber(String input) {
+        try {
+            return Integer.parseInt(input) > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private void printMessage(String message) {
+        System.out.println(message);
     }
 }

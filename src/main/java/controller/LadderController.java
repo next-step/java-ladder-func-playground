@@ -1,6 +1,12 @@
 package controller;
 
-import domain.*;
+import domain.Height;
+import domain.Ladder;
+import domain.LadderGame;
+import domain.LadderGenerator;
+import domain.Name;
+import domain.Names;
+import domain.Results;
 import view.InputView;
 import view.OutputView;
 

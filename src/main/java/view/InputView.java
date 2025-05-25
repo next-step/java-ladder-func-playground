@@ -3,7 +3,6 @@ package view;
 import domain.Height;
 import domain.Names;
 import domain.Results;
-
 import java.util.Scanner;
 
 public class InputView {

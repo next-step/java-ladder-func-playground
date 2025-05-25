@@ -1,8 +1,11 @@
 package view;
 
-import domain.*;
+import domain.Result;
+import domain.Results;
+import domain.Ladder;
+import domain.Name;
+import domain.Names;
 import java.util.Map;
-
 public class OutputView {
     public void printLadder(Names names, Ladder ladder, Results results) {
         System.out.println("사다리 결과\n");

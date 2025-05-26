@@ -18,7 +18,7 @@ public class Line {
         List<Boolean> points = new ArrayList<>();
         boolean previous = false;
 
-        for (int i = 0; i < width; i++) {
+        for (int i = 0; i < width - 1; i++) {
             boolean current = !previous && random.nextBoolean();
             points.add(current);
             previous = current;

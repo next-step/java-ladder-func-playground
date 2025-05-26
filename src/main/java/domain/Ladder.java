@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ladder {
+    public static final int SIZE_LIMIT = 0;
     public static final String ERROR_SIZE = "사다리의 크기는 1 이상이어야합니다.";
     private final List<Line> lines;
-    private final int width;
 
     public Ladder(List<Line> lines) {
         this.lines = lines;
-        this.width = lines.get(0).getWidth();
     }
 
     public static Ladder generate(int width, int height) {
@@ -23,7 +22,7 @@ public class Ladder {
     }
 
     private static void validate(int width, int height) {
-        if (width <= 0 || height <= 0) {
+        if (width <= SIZE_LIMIT || height <= SIZE_LIMIT) {
             throw new IllegalArgumentException(ERROR_SIZE);
         }
     }
@@ -38,9 +37,5 @@ public class Ladder {
 
     public List<Line> getLines() {
         return new ArrayList<>(lines);
-    }
-
-    public int getWidth() {
-        return width;
     }
 }

@@ -13,6 +13,10 @@ public class Results {
         return results.get(index);
     }
 
+    public int getCount() {
+        return results.size();
+    }
+
     public List<String> getResults() {
         return results;
     }

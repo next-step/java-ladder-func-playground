@@ -50,8 +50,4 @@ public class Line {
     public List<Boolean> getPoints() {
         return new ArrayList<>(points);
     }
-
-    public int getWidth() {
-        return points.size() + 1;
-    }
 }

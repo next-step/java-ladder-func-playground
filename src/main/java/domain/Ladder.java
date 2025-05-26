@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ladder {
-    private static final String ERROR_SIZE = "사다리의 크기는 1 이상이어야합니다.";
+    public static final String ERROR_SIZE = "사다리의 크기는 1 이상이어야합니다.";
     private final List<Line> lines;
 
     public Ladder(List<Line> lines) {

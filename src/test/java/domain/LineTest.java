@@ -1,5 +1,7 @@
 package domain;
 
+import static domain.Line.ERROR_DUPLICATE_LINES;
+
 import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +15,6 @@ class LineTest {
         List<Boolean> points = List.of(true, true, false);
         Assertions.assertThatThrownBy(() -> new Line(points))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("가로 라인은 겹치지 않아야합니다.");
+                .hasMessage(ERROR_DUPLICATE_LINES);
     }
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 public class Line {
+    public static final String ERROR_DUPLICATE_LINES = "가로 라인은 겹치지 않아야합니다.";
     private final List<Boolean> points;
 
     public Line(List<Boolean> points) {
@@ -30,7 +31,7 @@ public class Line {
         boolean previous = false;
         for (boolean current : points) {
             if (previous && current) {
-                throw new IllegalArgumentException("가로 라인은 겹치지 않아야합니다.");
+                throw new IllegalArgumentException(ERROR_DUPLICATE_LINES);
             }
             previous = current;
         }

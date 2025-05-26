@@ -7,7 +7,8 @@ import java.util.Random;
 public class Line {
     private final List<Boolean> points;
 
-    private Line(List<Boolean> points) {
+    public Line(List<Boolean> points) {
+        validateLine(points);
         this.points = points;
     }
 
@@ -23,6 +24,16 @@ public class Line {
         }
 
         return new Line(points);
+    }
+
+    private void validateLine(List<Boolean> points) {
+        boolean previous = false;
+        for (boolean current : points) {
+            if (previous && current) {
+                throw new IllegalArgumentException("가로 라인은 겹치지 않아야합니다.");
+            }
+            previous = current;
+        }
     }
 
     public List<Boolean> getPoints() {

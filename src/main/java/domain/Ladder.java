@@ -6,13 +6,15 @@ import java.util.List;
 public class Ladder {
     public static final String ERROR_SIZE = "사다리의 크기는 1 이상이어야합니다.";
     private final List<Line> lines;
+    private final int width;
 
     public Ladder(List<Line> lines) {
         this.lines = lines;
+        this.width = lines.get(0).getWidth();
     }
 
     public static Ladder generate(int width, int height) {
-        validateLadder(width, height);
+        validate(width, height);
         List<Line> lines = new ArrayList<>();
         for (int i = 0; i < height; i++) {
             lines.add(Line.generate(width));
@@ -20,13 +22,25 @@ public class Ladder {
         return new Ladder(lines);
     }
 
-    private static void validateLadder(int width, int height) {
+    private static void validate(int width, int height) {
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException(ERROR_SIZE);
         }
     }
 
+    public int move(int startIndex) {
+        int position = startIndex;
+        for (Line line : lines) {
+            position = line.move(position);
+        }
+        return position;
+    }
+
     public List<Line> getLines() {
         return new ArrayList<>(lines);
+    }
+
+    public int getWidth() {
+        return width;
     }
 }

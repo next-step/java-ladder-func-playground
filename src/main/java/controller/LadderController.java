@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Ladder;
+import domain.LadderResult;
 import view.InputView;
 import view.ResultView;
 
@@ -16,7 +17,11 @@ public class LadderController {
     public void run() {
         int width = inputView.readWidth();
         int height = inputView.readHeight();
+
         Ladder ladder = Ladder.generate(width, height);
         resultView.printLadder(ladder);
+
+        LadderResult ladderResult = new LadderResult(ladder);
+        resultView.printResult(ladderResult);
     }
 }

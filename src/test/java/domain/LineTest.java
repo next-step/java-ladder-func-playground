@@ -1,9 +1,9 @@
 package domain;
 
 import static domain.Line.ERROR_DUPLICATE_LINES;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ class LineTest {
     @Test
     void createInvalidLine() {
         List<Boolean> points = List.of(true, true, false);
-        Assertions.assertThatThrownBy(() -> new Line(points))
+        assertThatThrownBy(() -> new Line(points))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ERROR_DUPLICATE_LINES);
     }

@@ -1,6 +1,11 @@
 package domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LadderBoard {
@@ -25,7 +30,8 @@ public class LadderBoard {
     public static LadderBoard build(int columnCount, int rowCount) {
         validate(columnCount, rowCount);
         int centerColumnIndex = (columnCount - 1) / 2;
-        List<BridgeLine> bridgeLines = generateValidBridgeLines(columnCount, rowCount, centerColumnIndex);
+
+        List<BridgeLine> bridgeLines = tryGenerateBridgeLines(columnCount, rowCount, centerColumnIndex);
         return new LadderBoard(columnCount, bridgeLines);
     }
 
@@ -38,51 +44,47 @@ public class LadderBoard {
     }
 
     private static void validate(int columnCount, int rowCount) {
-        validateParticipantCount(columnCount);
-        validateLadderHeight(rowCount);
-    }
-
-    private static void validateParticipantCount(int columnCount) {
         if (columnCount < MIN_PARTICIPANTS) {
             throw new IllegalArgumentException(ERROR_TOO_FEW_PARTICIPANTS);
         }
-    }
-
-    private static void validateLadderHeight(int rowCount) {
         if (rowCount < MIN_HEIGHT) {
             throw new IllegalArgumentException(ERROR_INVALID_HEIGHT);
         }
     }
 
-    private static List<BridgeLine> generateValidBridgeLines(int participantCount, int ladderHeight, int centerColumnIndex) {
-        for (int attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-            List<BridgeLine> candidateBridgeLines = tryGenerateBridgeLines(participantCount, ladderHeight, centerColumnIndex);
-            if (candidateBridgeLines != null) return candidateBridgeLines;
-        }
-        throw new IllegalStateException(ERROR_GENERATION_FAILED);
+    private static List<BridgeLine> tryGenerateBridgeLines(int participantCount, int ladderHeight, int centerColumnIndex) {
+        return IntStream.range(0, MAX_ATTEMPTS)
+                .mapToObj(i -> generateAttempt(participantCount, ladderHeight))
+                .filter(lines -> isValidBridgeLines(lines, participantCount, centerColumnIndex))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException(ERROR_GENERATION_FAILED));
     }
 
-    private static List<BridgeLine> tryGenerateBridgeLines(int participantCount, int ladderHeight, int centerColumnIndex) {
-        List<BridgeLine> generatedBridgeLines = new ArrayList<>();
-        boolean isCenterBridgePresent = false;
-        Set<Integer> connectedColumnIndices = new HashSet<>();
+    private static List<BridgeLine> generateAttempt(int participantCount, int ladderHeight) {
+        return IntStream.range(0, ladderHeight)
+                .mapToObj(i -> new BridgeLine(generateConnectionStates(participantCount)))
+                .collect(Collectors.toList());
+    }
 
-        for (int row = 0; row < ladderHeight; row++) {
-            List<Boolean> connectionStates = generateConnectionStates(participantCount);
-            BridgeLine line = new BridgeLine(connectionStates);
-            generatedBridgeLines.add(line);
+    private static boolean isValidBridgeLines(List<BridgeLine> lines, int participantCount, int centerColumnIndex) {
+        return hasCenterBridge(lines, centerColumnIndex) &&
+                hasAllColumnConnections(lines, participantCount - 1);
+    }
 
-            if (isConnectedAtCenter(line, centerColumnIndex)) {
-                isCenterBridgePresent = true;
-            }
+    private static boolean hasCenterBridge(List<BridgeLine> lines, int centerIndex) {
+        return lines.stream().anyMatch(line -> isConnectedAtCenter(line, centerIndex));
+    }
 
-            recordConnectedIndices(connectedColumnIndices, connectionStates);
-        }
+    private static boolean hasAllColumnConnections(List<BridgeLine> lines, int expectedCount) {
+        Set<Integer> connectedIndices = new HashSet<>();
+        lines.forEach(line -> recordConnectedIndices(connectedIndices, getConnectionStates(line)));
+        return connectedIndices.size() == expectedCount;
+    }
 
-        if (!areAllColumnsConnected(connectedColumnIndices, participantCount - 1)) return null;
-        if (!isCenterBridgePresent) return null;
-
-        return generatedBridgeLines;
+    private static List<Boolean> getConnectionStates(BridgeLine line) {
+        return IntStream.range(0, line.width())
+                .mapToObj(line::isConnectedAt)
+                .collect(Collectors.toList());
     }
 
     private static List<Boolean> generateConnectionStates(int participantCount) {
@@ -102,9 +104,5 @@ public class LadderBoard {
         IntStream.range(0, connectionStates.size())
                 .filter(i -> connectionStates.get(i))
                 .forEach(connectedColumnIndices::add);
-    }
-
-    private static boolean areAllColumnsConnected(Set<Integer> connectedColumnIndices, int expectedCount) {
-        return connectedColumnIndices.size() == expectedCount;
     }
 }

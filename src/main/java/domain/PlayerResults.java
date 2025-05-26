@@ -7,10 +7,6 @@ import java.util.stream.IntStream;
 
 public class PlayerResults {
 
-    private static final int MAX_NAME_LENGTH = 5;
-
-    private static final String ERROR_NO_PARTICIPANTS = "[ERROR] 참여자는 한 명 이상이어야 합니다.";
-    private static final String ERROR_NAME_TOO_LONG = "[ERROR] 참여자 이름은 5자 이하만 가능합니다: ";
     private static final String ERROR_RESULT_COUNT_MISMATCH = "[ERROR] 실행 결과 수가 참여자 수와 일치해야 합니다.";
 
     private final Map<String, String> resultByPlayerName;
@@ -19,48 +15,10 @@ public class PlayerResults {
         this.resultByPlayerName = resultByPlayerName;
     }
 
-    public static PlayerResults from(List<String> playerNames, List<String> outcomeLabels, Map<Integer, Integer> startToEndIndexMap) {
-        validate(playerNames, outcomeLabels);
-        Map<String, String> mappedResults = mapResults(playerNames, outcomeLabels, startToEndIndexMap);
+    public static PlayerResults from(Participants participants, List<String> outcomeLabels, Map<Integer, Integer> startToEndIndexMap) {
+        validateSizeMatch(participants, outcomeLabels);
+        Map<String, String> mappedResults = mapResults(participants.getNames(), outcomeLabels, startToEndIndexMap);
         return new PlayerResults(mappedResults);
-    }
-
-    private static void validate(List<String> playerNames, List<String> outcomeLabels) {
-        validateNotEmpty(playerNames);
-        validateNameLength(playerNames);
-        validateSizeMatch(playerNames, outcomeLabels);
-    }
-
-    private static void validateNotEmpty(List<String> playerNames) {
-        if (playerNames.isEmpty()) throw new IllegalArgumentException(ERROR_NO_PARTICIPANTS);
-    }
-
-    private static void validateNameLength(List<String> playerNames) {
-        for (String name : playerNames) {
-            validateSingleNameLength(name);
-        }
-    }
-
-    private static void validateSingleNameLength(String name) {
-        if (name.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException(ERROR_NAME_TOO_LONG + name);
-        }
-    }
-
-    private static void validateSizeMatch(List<String> playerNames, List<String> outcomeLabels) {
-        if (playerNames.size() != outcomeLabels.size()) {
-            throw new IllegalArgumentException(ERROR_RESULT_COUNT_MISMATCH);
-        }
-    }
-
-    private static Map<String, String> mapResults(List<String> names, List<String> labels, Map<Integer, Integer> indexMap) {
-        return IntStream.range(0, names.size())
-                .boxed()
-                .collect(
-                        LinkedHashMap::new,
-                        (map, i) -> map.put(names.get(i), labels.get(indexMap.get(i))),
-                        Map::putAll
-                );
     }
 
     public String resultOf(String playerName) {
@@ -73,5 +31,18 @@ public class PlayerResults {
 
     public boolean hasPlayer(String playerName) {
         return resultByPlayerName.containsKey(playerName);
+    }
+
+    private static void validateSizeMatch(Participants participants, List<String> outcomeLabels) {
+        if (participants.getCount() != outcomeLabels.size()) {
+            throw new IllegalArgumentException(ERROR_RESULT_COUNT_MISMATCH);
+        }
+    }
+
+    private static Map<String, String> mapResults(List<String> names, List<String> labels, Map<Integer, Integer> indexMap) {
+        return IntStream.range(0, names.size())
+                .collect(LinkedHashMap::new,
+                        (map, i) -> map.put(names.get(i), labels.get(indexMap.get(i))),
+                        Map::putAll);
     }
 }

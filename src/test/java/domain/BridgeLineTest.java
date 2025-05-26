@@ -13,56 +13,45 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class BridgeLineTest {
 
-    @Test
-    @DisplayName("index 0은 연결되어 있지 않다")
-    void isConnectedAt_index0_false() {
+    @ParameterizedTest(name = "index {0}는 연결 상태가 {1}이다")
+    @MethodSource("connectionCases")
+    @DisplayName("isConnectedAt은 연결 여부를 반환한다")
+    void isConnectedAt_returnsExpected(int index, boolean expected) {
         BridgeLine line = new BridgeLine(List.of(false, true, false));
-        assertThat(line.isConnectedAt(0)).isFalse();
+        assertThat(line.isConnectedAt(index)).isEqualTo(expected);
     }
 
     @Test
-    @DisplayName("index 1은 연결되어 있다")
-    void isConnectedAt_index1_true() {
-        BridgeLine line = new BridgeLine(List.of(false, true, false));
-        assertThat(line.isConnectedAt(1)).isTrue();
-    }
-
-    @Test
-    @DisplayName("index 2는 연결되어 있지 않다")
-    void isConnectedAt_index2_false() {
-        BridgeLine line = new BridgeLine(List.of(false, true, false));
-        assertThat(line.isConnectedAt(2)).isFalse();
-    }
-
-    @ParameterizedTest(name = "연결 리스트 {0}의 크기는 {1}이다")
-    @MethodSource("widthTestCases")
-    @DisplayName("width는 연결 리스트의 크기를 반환한다")
-    void width_returnsCorrectSize(List<Boolean> connections, int expectedWidth) {
-        BridgeLine line = new BridgeLine(connections);
-        assertThat(line.width()).isEqualTo(expectedWidth);
-    }
-
-    @Test
-    @DisplayName("drawLineFormat은 사다리 가로줄을 시각화된 문자열로 반환한다")
-    void drawLineFormat_returnsVisualRepresentation() {
+    @DisplayName("width는 연결 수를 반환한다")
+    void width_returnsConnectionSize() {
         BridgeLine line = new BridgeLine(List.of(true, false, true));
-        String result = line.drawLineFormat(4);
-
-        assertThat(result).isEqualTo("|-----|     |-----|     ");
+        assertThat(line.width()).isEqualTo(3);
     }
 
-    private static Stream<Arguments> connectionTestCases() {
+    @ParameterizedTest(name = "위치 {0}에서 다음 위치는 {1}이다")
+    @MethodSource("nextPositionCases")
+    @DisplayName("nextPositionFrom은 연결에 따라 위치를 이동한다")
+    void nextPositionFrom_returnsExpected(int current, int expected) {
+        BridgeLine line = new BridgeLine(List.of(true, false, true));
+        assertThat(line.nextPositionFrom(current)).isEqualTo(expected);
+    }
+
+    private static Stream<Arguments> connectionCases() {
         return Stream.of(
                 Arguments.of(0, false),
                 Arguments.of(1, true),
-                Arguments.of(2, false)
+                Arguments.of(2, false),
+                Arguments.of(-1, false),
+                Arguments.of(3, false)
         );
     }
 
-    private static Stream<Arguments> widthTestCases() {
+    private static Stream<Arguments> nextPositionCases() {
         return Stream.of(
-                Arguments.of(List.of(true, false, true), 3),
-                Arguments.of(List.of(false, false, false, false), 4)
+                Arguments.of(0, 1),
+                Arguments.of(1, 0),
+                Arguments.of(2, 3),
+                Arguments.of(3, 2)
         );
     }
 }

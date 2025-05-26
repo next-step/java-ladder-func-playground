@@ -2,6 +2,7 @@ package controller;
 
 import domain.LadderBoard;
 import domain.LadderPath;
+import domain.Participants;
 import domain.PlayerResults;
 import dto.LadderBuildResponse;
 import dto.LadderResultResponse;
@@ -12,6 +13,8 @@ import java.util.List;
 
 public class LadderController {
 
+    private static final String ALL_COMMAND = "all";
+
     private final InputView inputView;
     private final OutputView outputView;
 
@@ -21,28 +24,29 @@ public class LadderController {
     }
 
     public void run() {
-        List<String> participantNames = promptParticipants();
-        List<String> resultLabels = promptResultLabels();
-        int ladderHeight = promptAndParseLadderHeight();
+        Participants participants = readParticipants();
+        List<String> resultLabels = readResultLabels();
+        int ladderHeight = readLadderHeight();
 
-        LadderBuildResponse ladder = buildLadder(participantNames.size(), ladderHeight);
-        displayLadderBoard(participantNames, resultLabels, ladder);
+        LadderBuildResponse ladder = buildLadder(participants.getCount(), ladderHeight);
+        printLadderBoard(participants.getNames(), resultLabels, ladder);
 
-        PlayerResults playerResults = mapResults(participantNames, resultLabels, ladder);
-        handleResultRequestLoop(playerResults);
+        PlayerResults playerResults = mapPlayerResults(participants, resultLabels, ladder);
+        handleResultRequest(playerResults);
     }
 
-    private List<String> promptParticipants() {
+    private Participants readParticipants() {
         outputView.printParticipantPrompt();
-        return inputView.readParticipantNames();
+        List<String> names = inputView.readParticipantNames();
+        return Participants.of(names);
     }
 
-    private List<String> promptResultLabels() {
+    private List<String> readResultLabels() {
         outputView.printResultPrompt();
         return inputView.readResultLabels();
     }
 
-    private int promptAndParseLadderHeight() {
+    private int readLadderHeight() {
         outputView.printHeightPrompt();
         return inputView.readLadderHeight();
     }
@@ -52,45 +56,34 @@ public class LadderController {
         return LadderBuildResponse.from(ladderBoard);
     }
 
-    private void displayLadderBoard(List<String> participants, List<String> results, LadderBuildResponse ladder) {
+    private void printLadderBoard(List<String> participants, List<String> results, LadderBuildResponse ladder) {
         outputView.printLadderTitle();
         outputView.printParticipantNames(participants);
         outputView.printBridgeLines(ladder);
         outputView.printResultLabels(results);
     }
 
-    private PlayerResults mapResults(List<String> participants, List<String> results, LadderBuildResponse ladder) {
+    private PlayerResults mapPlayerResults(Participants participants, List<String> results, LadderBuildResponse ladder) {
         LadderPath ladderPath = new LadderPath(ladder.lines(), ladder.columnCount());
         LadderResultResponse resultMapping = new LadderResultResponse(ladderPath.mapStartToEndIndex());
         return PlayerResults.from(participants, results, resultMapping.positionMap());
     }
 
-    private void handleResultRequestLoop(PlayerResults playerResults) {
-        while (true) {
-            outputView.printResultSelectionPrompt();
-            String name = inputView.readResultRequest();
+    private void handleResultRequest(PlayerResults playerResults) {
+        outputView.printResultSelectionPrompt();
+        String name = inputView.readResultRequest();
 
-            if (handleSingleResult(playerResults, name)) continue;
-            if (handleAllResults(playerResults, name)) return;
-
-            outputView.printNameNotFound();
+        if (ALL_COMMAND.equals(name)) {
+            outputView.printLadderTitle();
+            outputView.printAllResults(playerResults.allResults());
+            return;
         }
-    }
 
-    private boolean handleSingleResult(PlayerResults playerResults, String name) {
-        if (!playerResults.hasPlayer(name)) return false;
-        outputView.printSingleResultWithTitle(playerResults.resultOf(name));
-        return true;
-    }
+        if (playerResults.hasPlayer(name)) {
+            outputView.printSingleResultWithTitle(playerResults.resultOf(name));
+            return;
+        }
 
-    private boolean handleAllResults(PlayerResults playerResults, String name) {
-        if (!isAllCommandAndNotPlayer(name, playerResults)) return false;
-        outputView.printLadderTitle();
-        outputView.printAllResults(playerResults.allResults());
-        return true;
-    }
-
-    private boolean isAllCommandAndNotPlayer(String name, PlayerResults playerResults) {
-        return "all".equals(name) && !playerResults.hasPlayer(name);
+        outputView.printNameNotFound();
     }
 }

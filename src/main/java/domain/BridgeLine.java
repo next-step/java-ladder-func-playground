@@ -2,14 +2,9 @@ package domain;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public class BridgeLine {
 
-    private static final String VERTICAL_BAR = "|";
-    private static final String CONNECTED_LINE = "-----";
-    private static final String EMPTY_LINE = "     ";
     private static final String ERROR_INVALID_CONNECTIONS = "[ERROR] 가로줄 연결 상태는 null이거나 비어 있을 수 없습니다.";
 
     private final List<Boolean> horizontalConnections;
@@ -20,6 +15,9 @@ public class BridgeLine {
     }
 
     public boolean isConnectedAt(int index) {
+        if (index < 0 || index >= horizontalConnections.size()) {
+            return false;
+        }
         return horizontalConnections.get(index);
     }
 
@@ -37,24 +35,6 @@ public class BridgeLine {
         }
 
         return position;
-    }
-
-    public String drawLineFormat(int columnCount) {
-        return IntStream.range(0, columnCount)
-                .mapToObj(i -> VERTICAL_BAR + renderBridge(i))
-                .collect(Collectors.joining());
-    }
-
-    private String renderBridge(int index) {
-        if (index >= horizontalConnections.size()) {
-            return EMPTY_LINE;
-        }
-
-        if (horizontalConnections.get(index)) {
-            return CONNECTED_LINE;
-        }
-
-        return EMPTY_LINE;
     }
 
     private void validate(List<Boolean> connections) {

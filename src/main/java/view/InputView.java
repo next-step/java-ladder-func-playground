@@ -1,5 +1,7 @@
 package view;
 
+import util.NumericParser;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -17,7 +19,7 @@ public class InputView {
     }
 
     public int readLadderHeight() {
-        return Integer.parseInt(readLine());
+        return NumericParser.parse(readLine());
     }
 
     public String readResultRequest() {

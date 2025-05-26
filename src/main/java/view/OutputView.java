@@ -1,10 +1,12 @@
 package view;
 
+import domain.BridgeLine;
 import dto.LadderBuildResponse;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class OutputView {
 
@@ -18,6 +20,11 @@ public class OutputView {
     private static final int DISPLAY_CELL_WIDTH = 6;
     private static final String CELL_FORMAT = "%-" + DISPLAY_CELL_WIDTH + "s";
     private static final String RESULT_FORMAT = "%s : %s";
+
+    private static final String VERTICAL_BAR = "|";
+    private static final String CONNECTED_LINE = "-----";
+    private static final String EMPTY_LINE = "     ";
+    private static final String INDENT = " ";
 
     public void printParticipantPrompt() {
         System.out.println(PARTICIPANT_PROMPT);
@@ -39,26 +46,23 @@ public class OutputView {
         System.out.println(LADDER_RESULT_TITLE);
     }
 
+    public void printNameNotFound() {
+        System.out.println(NAME_NOT_FOUND_MESSAGE);
+    }
+
     public void printParticipantNames(List<String> participantNames) {
-        String alignedNames = participantNames.stream()
-                .map(this::formatCell)
-                .collect(Collectors.joining());
-        System.out.println(alignedNames);
+        System.out.println(joinAligned(participantNames));
     }
 
     public void printResultLabels(List<String> resultLabels) {
-        String alignedResults = resultLabels.stream()
-                .map(this::formatCell)
-                .collect(Collectors.joining());
-        System.out.println(alignedResults);
+        System.out.println(joinAligned(resultLabels));
     }
 
     public void printBridgeLines(LadderBuildResponse response) {
-        int totalColumns = response.columnCount();
+        int columnCount = response.columnCount();
+        List<BridgeLine> lines = response.lines();
 
-        response.lines().forEach(line -> {
-            System.out.println(" " + line.drawLineFormat(totalColumns));
-        });
+        lines.forEach(line -> System.out.println(INDENT + formatBridgeLine(line, columnCount)));
     }
 
     public void printAllResults(Map<String, String> participantResults) {
@@ -75,15 +79,28 @@ public class OutputView {
         printSingleResult(resultValue);
     }
 
-    public void printNameNotFound() {
-        System.out.println(NAME_NOT_FOUND_MESSAGE);
+    private String formatBridgeLine(BridgeLine line, int columnCount) {
+        return IntStream.range(0, columnCount)
+                .mapToObj(i -> VERTICAL_BAR + bridgeRepresentation(line, i))
+                .collect(Collectors.joining());
     }
 
-    private String formatResult(String name, String result) {
-        return String.format(RESULT_FORMAT, name, result);
+    private String bridgeRepresentation(BridgeLine line, int index) {
+        if (line.isConnectedAt(index)) return CONNECTED_LINE;
+        return EMPTY_LINE;
+    }
+
+    private String joinAligned(List<String> values) {
+        return values.stream()
+                .map(this::formatCell)
+                .collect(Collectors.joining());
     }
 
     private String formatCell(String value) {
         return String.format(CELL_FORMAT, value);
+    }
+
+    private String formatResult(String name, String result) {
+        return String.format(RESULT_FORMAT, name, result);
     }
 }

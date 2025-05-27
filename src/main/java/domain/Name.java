@@ -15,6 +15,9 @@ public class Name {
         if (value.length() > 5) {
             throw new IllegalArgumentException("이름은 5글자 이하여야 합니다.");
         }
+        if (value.equals("all")) {
+            throw new IllegalArgumentException("\"all\"은 참가자 이름으로 사용할 수 없습니다.");
+        }
     }
 
     public String getValue() {

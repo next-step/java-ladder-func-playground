@@ -14,13 +14,13 @@ public class LadderGame {
         this.ladder = ladder;
     }
 
-    public Result play(Name name) {
+    public Results.Result play(Name name) {
         int index = names.getValues().indexOf(name);
         int resultIndex = ladder.traverse(index);
         return results.get(resultIndex);
     }
 
-    public Map<Name, Result> playAll() {
+    public Map<Name, Results.Result> playAll() {
         return names.getValues().stream()
                 .collect(Collectors.toMap(n -> n, this::play));
     }

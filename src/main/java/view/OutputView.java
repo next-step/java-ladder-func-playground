@@ -1,6 +1,5 @@
 package view;
 
-import domain.Result;
 import domain.Results;
 import domain.Ladder;
 import domain.Name;
@@ -14,12 +13,12 @@ public class OutputView {
         results.print();
     }
 
-    public void printResult(Result result) {
+    public void printResult(Results.Result result) {
         System.out.println("실행 결과");
         System.out.println(result.getValue());
     }
 
-    public void printAllResults(Map<Name, Result> allResults) {
+    public void printAllResults(Map<Name, Results.Result> allResults) {
         System.out.println("실행 결과");
         allResults.forEach((name, result) ->
                 System.out.println(name.getValue() + " : " + result.getValue())

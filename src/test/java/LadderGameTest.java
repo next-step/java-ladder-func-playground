@@ -3,7 +3,6 @@ import domain.Names;
 import domain.Results;
 import domain.Ladder;
 import domain.LadderGame;
-import domain.Result;
 import domain.Name;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -27,13 +26,13 @@ class LadderGameTest {
 
             LadderGame game = new LadderGame(names, results, ladder);
 
-            Result resultA = game.play(new Name("A"));
-            Result resultB = game.play(new Name("B"));
+            Results.Result resultA = game.play(new Name("A"));
+            Results.Result resultB = game.play(new Name("B"));
 
             assertEquals("당첨", resultA.getValue());
             assertEquals("꽝", resultB.getValue());
 
-            Map<Name, Result> allResults = game.playAll();
+            Map<Name, Results.Result> allResults = game.playAll();
             assertEquals(2, allResults.size());
             assertEquals("당첨", allResults.get(new Name("A")).getValue());
             assertEquals("꽝", allResults.get(new Name("B")).getValue());
@@ -54,13 +53,13 @@ class LadderGameTest {
 
             LadderGame game = new LadderGame(names, results, ladder);
 
-            Result result1 = game.play(new Name("12345"));
+            Results.Result result1 = game.play(new Name("12345"));
             assertEquals("3등", result1.getValue());
 
-            Result result2 = game.play(new Name("ABCDE"));
+            Results.Result result2 = game.play(new Name("ABCDE"));
             assertEquals("1등", result2.getValue());
 
-            Result result3 = game.play(new Name("가나다라마"));
+            Results.Result result3 = game.play(new Name("가나다라마"));
             assertEquals("2등", result3.getValue());
         }
 

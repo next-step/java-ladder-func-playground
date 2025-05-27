@@ -27,4 +27,16 @@ public class Results {
         values.forEach(result -> System.out.printf("%6s", result.getValue()));
         System.out.println();
     }
+
+    public static class Result {
+        private final String value;
+
+        public Result(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    }
 }

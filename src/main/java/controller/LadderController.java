@@ -30,12 +30,16 @@ public class LadderController {
     private void processQuery(LadderGame ladderGame) {
         while (true) {
             String target = inputView.readNameForResult();
-            if (isAll(target)) {
-                printAllResults(ladderGame);
-                return;
-            }
-            printSingleResult(ladderGame, target);
+            handleQuery(target, ladderGame);
         }
+    }
+
+    private void handleQuery(String target, LadderGame ladderGame){
+        if (isAll(target)) {
+            printAllResults(ladderGame);
+            System.exit(0);
+        }
+        printSingleResult(ladderGame, target);
     }
 
     private boolean isAll(String input) {

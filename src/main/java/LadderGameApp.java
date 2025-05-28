@@ -6,6 +6,7 @@ import domain.Players;
 import domain.Reward;
 import domain.Rewards;
 import java.util.List;
+import java.util.Objects;
 import view.InputView;
 import view.OutputView;
 
@@ -13,18 +14,25 @@ public class LadderGameApp {
     public static void main(String[] args) {
         OutputView outputView = new OutputView();
         InputView inputView = new InputView();
-
-        GameConfig gameConfig = getGameConfig(inputView);
         Players players = getPlayers(inputView);
         Rewards rewards = getRewards(inputView);
+        GameConfig gameConfig = getGameConfig(inputView,players.size());
 
         LadderGame ladderGame = LadderGame.of(gameConfig);
         LadderResult ladderResult = ladderGame.play();
-
         outputView.printLadderState(ladderGame.getLadder(),players,rewards);
+        printTargetResult(inputView, outputView, ladderResult, players, rewards);
+    }
 
+    private static void printTargetResult(InputView inputView, OutputView outputView, LadderResult ladderResult,
+                                  Players players, Rewards rewards) {
+        String targetPlayerName = inputView.getTargetPlayerName();
+        if (Objects.equals(targetPlayerName, "all")) {
+            outputView.printLadderResult(ladderResult, players, rewards);
+            return;
+        }
 
-        outputView.printLadderResult(ladderResult,players,rewards);
+        outputView.printTargetReward(targetPlayerName, ladderResult, players, rewards);
     }
 
     private static Players getPlayers(InputView inputView) {
@@ -43,8 +51,7 @@ public class LadderGameApp {
         return new Rewards(rewardList);
     }
 
-    private static GameConfig getGameConfig(InputView inputView) {
-        final int width = inputView.getWidth();
+    private static GameConfig getGameConfig(InputView inputView, int width) {
         final int height = inputView.getHeight();
         return new GameConfig(width, height);
     }

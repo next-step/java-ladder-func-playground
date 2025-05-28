@@ -8,14 +8,14 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public int getWidth() {
-        System.out.println("사다리의 넓이는 몇 개인가요?");
+        System.out.println("\n사다리의 넓이는 몇 개인가요?");
         int width = scanner.nextInt();
         scanner.nextLine();
         return width;
     }
 
     public int getHeight() {
-        System.out.println("사다리의 높이는 몇 개인가요?");
+        System.out.println("\n사다리의 높이는 몇 개인가요?");
         int height = scanner.nextInt();
         scanner.nextLine();
         return height;
@@ -30,10 +30,15 @@ public class InputView {
     }
 
     public List<String> getRewards(){
-        System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
+        System.out.println("\n실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
         String input = scanner.nextLine();
         return Arrays.stream(input.split(","))
                 .map(String::trim)
                 .toList();
+    }
+
+    public String getTargetPlayerName() {
+        System.out.println("결과를 보고 싶은 사람은?");
+        return scanner.nextLine();
     }
 }

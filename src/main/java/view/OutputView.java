@@ -20,12 +20,13 @@ public class OutputView {
     private static final String INDENT = "    ";
 
     public void printLadderState(Ladder ladder, Players players, Rewards rewards) {
-        System.out.println("사다리 결과");
+        System.out.println("\n사다리 결과\n");
         printNames(players);
         for (Line line : ladder.getLines()) {
             System.out.println(printLine(line));
         }
         printRewards(rewards);
+        System.out.println();
     }
 
     private void printNames(Players players) {
@@ -61,10 +62,25 @@ public class OutputView {
     }
 
     public void printLadderResult(LadderResult ladderResult, Players players, Rewards rewards) {
+        System.out.println("\n실행 결과");
         for (Map.Entry<Integer, Integer> entry : ladderResult.getResultMap().entrySet()) {
             String playerName = players.get(entry.getKey()).getName();
             String rewardName = rewards.get(entry.getValue()).getName();
             System.out.printf(RESULT_FORMAT + "%n", playerName, rewardName);
         }
     }
+
+    public void printTargetReward(String targetPlayerName, LadderResult ladderResult, Players players, Rewards rewards) {
+        System.out.println("\n실행 결과");
+        for (Map.Entry<Integer, Integer> entry : ladderResult.getResultMap().entrySet()) {
+            String playerName = players.get(entry.getKey()).getName();
+            if (playerName.equals(targetPlayerName)) {
+                String rewardName = rewards.get(entry.getValue()).getName();
+                System.out.printf(RESULT_FORMAT + "%n", playerName, rewardName);
+                return;
+            }
+        }
+        throw new IllegalArgumentException("해당 이름의 참가자가 존재하지 않습니다: " + targetPlayerName);
+    }
+
 }

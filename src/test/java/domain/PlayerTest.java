@@ -20,7 +20,7 @@ class PlayerTest {
         Player player = new Player(name);
 
         // Then
-        assertEquals("brie", player.getName());
+        assertEquals("brie", player.name());
     }
 
     @Test

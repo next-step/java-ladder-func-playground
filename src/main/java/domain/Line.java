@@ -12,8 +12,8 @@ public class Line {
 
     private void validate(List<Connection> connections) {
         for (int i = 0; i < connections.size() - 1; i++) {
-            boolean curr = connections.get(i).isConnectedRight();
-            boolean next = connections.get(i + 1).isConnectedRight();
+            boolean curr = connections.get(i).connectedRight();
+            boolean next = connections.get(i + 1).connectedRight();
             if (curr && next) {
                 throw new IllegalArgumentException("사다리 가로선에 연속된 연결선이 존재합니다.");
             }
@@ -31,11 +31,11 @@ public class Line {
     }
 
     private boolean canMoveRight(int index) {
-        return index < connections.size() && connections.get(index).isConnectedRight();
+        return index < connections.size() && connections.get(index).connectedRight();
     }
 
     private boolean canMoveLeft(int index) {
-        return index > 0 && connections.get(index - 1).isConnectedRight();
+        return index > 0 && connections.get(index - 1).connectedRight();
     }
 
     public List<Connection> getConnections() {

@@ -31,14 +31,14 @@ public class OutputView {
 
     private void printNames(Players players) {
         for (Player player : players.getPlayers()) {
-            System.out.printf(NAME_FORMAT, player.getName());
+            System.out.printf(NAME_FORMAT, player.name());
         }
         System.out.println();
     }
 
     private void printRewards(Rewards rewards) {
         for (Reward reward : rewards.getRewards()) {
-            System.out.printf(REWARD_FORMAT, reward.getName());
+            System.out.printf(REWARD_FORMAT, reward.name());
         }
         System.out.println();
     }
@@ -55,7 +55,7 @@ public class OutputView {
     }
 
     private String printConnection(Connection conn) {
-        if (conn.isConnectedRight()) {
+        if (conn.connectedRight()) {
             return CONNECTION;
         }
         return NOT_CONNECTION;
@@ -64,8 +64,8 @@ public class OutputView {
     public void printLadderResult(LadderResult ladderResult, Players players, Rewards rewards) {
         System.out.println("\n실행 결과");
         for (Map.Entry<Integer, Integer> entry : ladderResult.getResultMap().entrySet()) {
-            String playerName = players.get(entry.getKey()).getName();
-            String rewardName = rewards.get(entry.getValue()).getName();
+            String playerName = players.get(entry.getKey()).name();
+            String rewardName = rewards.get(entry.getValue()).name();
             System.out.printf(RESULT_FORMAT + "%n", playerName, rewardName);
         }
     }
@@ -74,9 +74,9 @@ public class OutputView {
                                   Rewards rewards) {
         System.out.println("\n실행 결과");
         for (Map.Entry<Integer, Integer> entry : ladderResult.getResultMap().entrySet()) {
-            String playerName = players.get(entry.getKey()).getName();
+            String playerName = players.get(entry.getKey()).name();
             if (playerName.equals(targetPlayerName)) {
-                String rewardName = rewards.get(entry.getValue()).getName();
+                String rewardName = rewards.get(entry.getValue()).name();
                 System.out.printf(RESULT_FORMAT + "%n", playerName, rewardName);
                 return;
             }

@@ -20,6 +20,24 @@ public class Line {
         }
     }
 
+    public int move(int index) {
+        if (canMoveRight(index)) {
+            return index + 1;
+        }
+        if (canMoveLeft(index)) {
+            return index - 1;
+        }
+        return index;
+    }
+
+    private boolean canMoveRight(int index) {
+        return index < connections.size() && connections.get(index).isConnectedRight();
+    }
+
+    private boolean canMoveLeft(int index) {
+        return index > 0 && connections.get(index - 1).isConnectedRight();
+    }
+
     public List<Connection> getConnections() {
         return List.copyOf(connections);
     }

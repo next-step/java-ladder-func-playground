@@ -7,7 +7,6 @@ import java.util.Map;
 public class LadderGame {
     private final GameConfig config;
     private final Ladder ladder;
-    private LadderResult ladderResult;
 
     private LadderGame(GameConfig config, Ladder ladder) {
         this.config = config;
@@ -19,15 +18,16 @@ public class LadderGame {
         return new LadderGame(config, ladder);
     }
 
-    public void play() {
-
+    public LadderResult play() {
+        Map<Integer, Integer> resultMap = new LinkedHashMap<>();
+        for (int i = 0; i < config.getWidth(); i++) {
+            int destination = ladder.move(i);
+            resultMap.put(i, destination);
+        }
+        return new LadderResult(resultMap);
     }
 
     public Ladder getLadder() {
         return ladder;
-    }
-
-    public LadderResult getResult() {
-        return ladderResult;
     }
 }

@@ -1,5 +1,6 @@
 import config.GameConfig;
 import domain.LadderGame;
+import domain.LadderResult;
 import view.InputView;
 import view.OutputView;
 
@@ -8,9 +9,10 @@ public class LadderGameApp {
         GameConfig gameConfig = getGameConfig();
         OutputView outputView = new OutputView();
         LadderGame ladderGame = LadderGame.of(gameConfig);
-        ladderGame.play();
+        LadderResult ladderResult = ladderGame.play();
 
         outputView.printLadderState(ladderGame.getLadder());
+        outputView.printLadderResult(ladderResult);
     }
 
     private static GameConfig getGameConfig() {

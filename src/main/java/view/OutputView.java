@@ -2,12 +2,15 @@ package view;
 
 import domain.Connection;
 import domain.Ladder;
+import domain.LadderResult;
 import domain.Line;
+import java.util.Map;
 
 public class OutputView {
     private static final String CONNECTION = "-----";
     private static final String NOT_CONNECTION = "     ";
     private static final String LADDER = "|";
+    private static final String RESULT_FORMAT = "%d -> %d";
 
     public void printLadderState(Ladder ladder) {
         System.out.println("실행결과");
@@ -33,7 +36,9 @@ public class OutputView {
         return NOT_CONNECTION;
     }
 
-    public void printLadderResult(Ladder ladder) {
-
+    public void printLadderResult(LadderResult ladderResult) {
+        for (Map.Entry<Integer, Integer> entry : ladderResult.getResultMap().entrySet()) {
+            System.out.printf((RESULT_FORMAT) + "%n", entry.getKey(), entry.getValue());
+        }
     }
 }

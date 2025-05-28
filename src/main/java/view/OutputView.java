@@ -4,23 +4,47 @@ import domain.Connection;
 import domain.Ladder;
 import domain.LadderResult;
 import domain.Line;
+import domain.Player;
+import domain.Players;
+import domain.Reward;
+import domain.Rewards;
 import java.util.Map;
 
 public class OutputView {
     private static final String CONNECTION = "-----";
     private static final String NOT_CONNECTION = "     ";
     private static final String LADDER = "|";
-    private static final String RESULT_FORMAT = "%d -> %d";
+    private static final String RESULT_FORMAT = "%s : %s";
+    private static final String NAME_FORMAT = "%5s ";
+    private static final String REWARD_FORMAT = "%5s ";
+    private static final String INDENT = "    ";
 
-    public void printLadderState(Ladder ladder) {
-        System.out.println("실행결과");
+    public void printLadderState(Ladder ladder, Players players, Rewards rewards) {
+        System.out.println("사다리 결과");
+        printNames(players);
         for (Line line : ladder.getLines()) {
             System.out.println(printLine(line));
         }
+        printRewards(rewards);
+    }
+
+    private void printNames(Players players) {
+        for (Player player : players.getPlayers()) {
+            System.out.printf(NAME_FORMAT, player.getName());
+        }
+        System.out.println();
+    }
+
+    private void printRewards(Rewards rewards) {
+        for (Reward reward : rewards.getRewards()) {
+            System.out.printf(REWARD_FORMAT, reward.getName());
+        }
+        System.out.println();
     }
 
     private String printLine(Line line) {
         StringBuilder sb = new StringBuilder();
+        sb.append(INDENT);
         for (Connection conn : line.getConnections()) {
             sb.append(LADDER);
             sb.append(printConnection(conn));
@@ -36,9 +60,11 @@ public class OutputView {
         return NOT_CONNECTION;
     }
 
-    public void printLadderResult(LadderResult ladderResult) {
+    public void printLadderResult(LadderResult ladderResult, Players players, Rewards rewards) {
         for (Map.Entry<Integer, Integer> entry : ladderResult.getResultMap().entrySet()) {
-            System.out.printf((RESULT_FORMAT) + "%n", entry.getKey(), entry.getValue());
+            String playerName = players.get(entry.getKey()).getName();
+            String rewardName = rewards.get(entry.getValue()).getName();
+            System.out.printf(RESULT_FORMAT + "%n", playerName, rewardName);
         }
     }
 }

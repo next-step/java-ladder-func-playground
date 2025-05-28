@@ -70,7 +70,8 @@ public class OutputView {
         }
     }
 
-    public void printTargetReward(String targetPlayerName, LadderResult ladderResult, Players players, Rewards rewards) {
+    public void printTargetReward(String targetPlayerName, LadderResult ladderResult, Players players,
+                                  Rewards rewards) {
         System.out.println("\n실행 결과");
         for (Map.Entry<Integer, Integer> entry : ladderResult.getResultMap().entrySet()) {
             String playerName = players.get(entry.getKey()).getName();

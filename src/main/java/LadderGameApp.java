@@ -7,8 +7,8 @@ public class LadderGameApp {
     public static void main(String[] args) {
         GameConfig gameConfig = getGameConfig();
         OutputView outputView = new OutputView();
-        LadderGame ladderGame = new LadderGame(gameConfig);
-        ladderGame.run();
+        LadderGame ladderGame = LadderGame.of(gameConfig);
+        ladderGame.play();
 
         outputView.printLadderState(ladderGame.getLadder());
     }

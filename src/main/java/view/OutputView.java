@@ -25,7 +25,10 @@ public class OutputView {
     }
 
     private static void printLink(Link link) {
-        String symbol = link.isLinked() ? CONNECTED : DISCONNECTED;
+        String symbol = DISCONNECTED;
+        if (link.isLinked()) {
+            symbol = CONNECTED;
+        }
         System.out.print(symbol);
     }
 }

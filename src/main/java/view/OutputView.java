@@ -6,6 +6,7 @@ import domain.Line;
 
 public class OutputView {
     public void printLadderState(Ladder ladder) {
+        System.out.println("실행결과");
         for (Line line : ladder.getLines()) {
             StringBuilder sb = new StringBuilder();
             for (Connection conn : line.getConnections()) {

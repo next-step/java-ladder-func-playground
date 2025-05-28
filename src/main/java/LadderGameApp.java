@@ -1,16 +1,22 @@
 import config.GameConfig;
 import domain.LadderGame;
+import view.InputView;
 import view.OutputView;
 
 public class LadderGameApp {
     public static void main(String[] args) {
-        final int WIDTH = 4;
-        final int HEIGHT = 4;
-        GameConfig gameConfig = new GameConfig(WIDTH, HEIGHT);
+        GameConfig gameConfig = getGameConfig();
         OutputView outputView = new OutputView();
         LadderGame ladderGame = new LadderGame(gameConfig);
         ladderGame.run();
 
         outputView.printLadderState(ladderGame.getLadder());
+    }
+
+    private static GameConfig getGameConfig() {
+        InputView inputView = new InputView();
+        final int width = inputView.getWidth();
+        final int height = inputView.getHeight();
+        return new GameConfig(width, height);
     }
 }

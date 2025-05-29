@@ -1,10 +1,10 @@
 import view.OutputView;
 
 public class Application {
-    public static void main(String[] args) {
-        final int LADDER_ROW = 4;
-        final int LADDER_COLUMN = 4;
+    static private final int LADDER_ROW = 4;
+    static private final int LADDER_COLUMN = 4;
 
+    public static void main(String[] args) {
         LadderGame game = new LadderGame(LADDER_ROW, LADDER_COLUMN); //그냥 맨 사다리 만듬
 
         game.initialize(); //사다리 연결 시작

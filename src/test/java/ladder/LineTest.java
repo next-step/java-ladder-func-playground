@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LineTest {
     @Test
     @DisplayName("랜덤 링크 생성 시, 연속된 Link는 연결되지 않아야 한다")
-    void ShouldNotHaveConsecutiveLinksAfterRandomlyLink() {
+    void shouldNotHaveConsecutiveLinksAfterRandomlyLink() {
         // given
         int columnCount = 6;
         Line line = new Line(columnCount);

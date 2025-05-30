@@ -1,32 +1,25 @@
 package ladder;
 
+import strategy.LinkStrategy;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Ladder {
     private final List<Line> lines;
 
-    public Ladder(int row, int column) {
+    public Ladder(int rowCount, int columnCount, LinkStrategy strategy) {
         this.lines = new ArrayList<>();
+        List<Link> prevLine = null;
 
-        for (int i = 0; i < row; i++) {
-            lines.add(new Line(column));
+        for (int row = 0; row < rowCount; row++) {
+            Line line = new Line(columnCount, strategy, prevLine, row); //한 행 만들고
+            lines.add(line); //집어넣고
+            prevLine = line.getLinks(); //이전 행 저장
         }
     }
 
     public List<Line> getLines() {
         return List.copyOf(lines);
-    }
-
-    public int getRow() {
-        return lines.size();
-    }
-
-    //연결 로직
-    public void generateLadder() {
-        Random random = new Random();
-        lines.forEach(line -> line.randomlyLink(random));
     }
 
 }

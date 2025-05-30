@@ -24,10 +24,10 @@ class PointTest {
     }
 
     @Test
-    @DisplayName("포인트의 오른쪽이 ture라면, 다음 포인트는 오른쪽이 false를 가진다.")
+    @DisplayName("포인트는 가로로 연속되지 않는다.")
     void shouldReturnNextPointFalse_whenPointRightTrue() {
         // given
-        Point point = new Point(true);
+        Point point = Point.first(true);
 
         // when
         Point next = point.connectNext(true);
@@ -37,10 +37,10 @@ class PointTest {
     }
 
     @Test
-    @DisplayName("포인트의 오른쪽이 false이면 다음 포인트는 인자로 받은 값을 가진다.")
+    @DisplayName("현재 포인트가 연결되지 않은 경우, 다음 포인트는 입력에 따라 연결된다.")
     void shouldReturnNextPointTrueOrFalse_whenPointRightFalse() {
         // given
-        Point point = new Point(false);
+        Point point = Point.first(false);
 
         // when
         Point nextTrue = point.connectNext(true);

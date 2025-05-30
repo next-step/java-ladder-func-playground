@@ -21,7 +21,7 @@ public final class OutputView {
     }
 
     public static void paintLadder(final Ladder ladder) {
-        for (Line line : ladder.lines()) {
+        for (Line line : ladder.getLines()) {
             paintLine(line);
         }
     }

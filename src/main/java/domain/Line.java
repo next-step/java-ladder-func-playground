@@ -8,7 +8,7 @@ public class Line {
     private final List<Boolean> steps;
 
     public Line(List<Boolean> steps) {
-        this.steps = steps;
+        this.steps = List.copyOf(steps);
     }
 
     public static Line generate(int width) {
@@ -50,11 +50,7 @@ public class Line {
         return position < steps.size() && steps.get(position);
     }
 
-    public void print() {
-        System.out.print("    ");
-        for (Boolean step : steps) {
-            System.out.print(step ? "|-----" : "|     ");
-        }
-        System.out.println("|");
+    public List<Boolean> getSteps() {
+        return steps;
     }
 }

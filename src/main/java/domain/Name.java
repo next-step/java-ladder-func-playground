@@ -24,13 +24,11 @@ public class Name {
         return value;
     }
 
-    @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Name)) return false;
         return value.equals(((Name) obj).value);
     }
 
-    @Override
     public int hashCode() {
         return value.hashCode();
     }

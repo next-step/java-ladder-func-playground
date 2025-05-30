@@ -6,7 +6,11 @@ public class Ladder {
     private final List<Line> lines;
 
     public Ladder(List<Line> lines) {
-        this.lines = lines;
+        if (lines == null || lines.isEmpty()) {
+            throw new IllegalArgumentException("사다리는 최소 한 줄 이상이어야 합니다.");
+        }
+
+        this.lines = List.copyOf(lines);
     }
 
     public int traverse(int startPosition) {
@@ -17,7 +21,7 @@ public class Ladder {
         return position;
     }
 
-    public void print() {
-        lines.forEach(Line::print);
+    public List<Line> getLines() {
+        return lines;
     }
 }

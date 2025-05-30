@@ -2,6 +2,7 @@ package ladder;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import strategy.RandomLinkStrategy;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ class LadderTest {
         int columnCount = 3;
 
         // when
-        Ladder ladder = new Ladder(rowCount, columnCount);
+        Ladder ladder = new Ladder(rowCount, columnCount, new RandomLinkStrategy());
 
         // then
         List<Line> lines = ladder.getLines();
@@ -29,16 +30,14 @@ class LadderTest {
         // given
         int rowCount = 3;
         int columnCount = 4;
-        Ladder ladder = new Ladder(rowCount, columnCount);
+        Ladder ladder = new Ladder(rowCount, columnCount, new RandomLinkStrategy());
 
         // when
-        ladder.generateLadder();
-
-        // then
         boolean atLeastOneLinked = ladder.getLines().stream()
                 .flatMap(line -> line.getLinks().stream())
                 .anyMatch(link -> link.isLinked());
 
+        // then
         assertThat(atLeastOneLinked).isTrue();
     }
 }

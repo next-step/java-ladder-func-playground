@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class Line {
     private final List<Boolean> steps;
+    private static final Random RANDOM = new Random();
 
     public Line(List<Boolean> steps) {
         this.steps = List.copyOf(steps);
@@ -13,19 +14,17 @@ public class Line {
 
     public static Line generate(int width) {
         List<Boolean> steps = new ArrayList<>();
-        Random random = new Random();
-
         for (int index = 0; index < width - 1; index++) {
-            steps.add(nextStep(index, steps, random));
+            steps.add(nextStep(index, steps));
         }
         return new Line(steps);
     }
 
-    private static boolean nextStep(int index, List<Boolean> steps, Random random) {
+    private static boolean nextStep(int index, List<Boolean> steps) {
         if (hasLeftStep(index, steps)) {
             return false;
         }
-        return random.nextBoolean();
+        return RANDOM.nextBoolean();
     }
 
     private static boolean hasLeftStep(int index, List<Boolean> steps) {

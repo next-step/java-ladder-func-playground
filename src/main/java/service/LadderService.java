@@ -1,12 +1,6 @@
 package service;
 
-import domain.Height;
-import domain.Name;
-import domain.Names;
-import domain.Results;
-import domain.LadderGame;
-import domain.Ladder;
-import domain.LadderGenerator;
+import domain.*;
 
 public class LadderService {
     private static final String ALL_QUERY = "all";

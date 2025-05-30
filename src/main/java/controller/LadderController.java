@@ -3,13 +3,17 @@ package controller;
 import domain.Height;
 import domain.Result;
 import domain.LadderGame;
+import domain.Ladder;
+import domain.Line;
 import service.LadderService;
 import domain.Name;
 import domain.Names;
 import domain.Results;
 import view.InputView;
 import view.OutputView;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class LadderController {
     private final InputView inputView;
@@ -35,7 +39,12 @@ public class LadderController {
 
             this.ladderGame = ladderService.createLadderGame(names, results, height);
 
-            outputView.printLadder(names, ladderGame.getLadder(), results);
+            // domain 객체 -> OutputView
+            outputView.printLadder(
+                    convertNamesToStrings(names),
+                    convertLadderToLists(ladderGame.getLadder()),
+                    convertResultsToStrings(results)
+            );
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             start();
@@ -48,18 +57,46 @@ public class LadderController {
 
             if (ladderService.isAllQuery(target)) {
                 Map<Name, Result> allResults = ladderGame.playAll();
-                outputView.printAllResults(allResults);
+                Map<String, String> convertedResults = convertAllResultsToMap(allResults);
+                outputView.printAllResults(convertedResults);
                 return false;
             }
 
             Name targetName = ladderService.createName(target);
             Result result = ladderGame.play(targetName);
-            outputView.printResult(result);
+
+            outputView.printResult(result.getValue());
             return true;
 
         } catch (IllegalArgumentException e) {
             outputView.printError(e.getMessage());
             return true;
         }
+    }
+
+    private List<String> convertNamesToStrings(Names names) {
+        return names.getValues().stream()
+                .map(Name::getValue)
+                .collect(Collectors.toList());
+    }
+
+    private List<List<Boolean>> convertLadderToLists(Ladder ladder) {
+        return ladder.getLines().stream()
+                .map(Line::getSteps)
+                .collect(Collectors.toList());
+    }
+
+    private List<String> convertResultsToStrings(Results results) {
+        return results.getValues().stream()
+                .map(Result::getValue)
+                .collect(Collectors.toList());
+    }
+
+    private Map<String, String> convertAllResultsToMap(Map<Name, Result> gameResults) {
+        return gameResults.entrySet().stream()
+                .collect(Collectors.toMap(
+                        entry -> entry.getKey().getValue(),
+                        entry -> entry.getValue().getValue()
+                ));
     }
 }

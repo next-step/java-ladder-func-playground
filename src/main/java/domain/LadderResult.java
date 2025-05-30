@@ -8,18 +8,18 @@ public class LadderResult {
     public static final String ERROR_RESULTS_SIZE = "결과의 수는 참가자의 수와 같아야합니다.";
     private final Map<String, String> resultMap = new LinkedHashMap<>();
 
-    public LadderResult(Ladder ladder, Players players, Results results) {
-        validate(players, results);
+    public LadderResult(Ladder ladder, Players players, Rewards rewards) {
+        validate(players, rewards);
         for (int i = 0; i < players.getCount(); i++) {
             String playerName = players.getName(i);
             int finalPosition = ladder.move(i);
-            String result = results.getResult(finalPosition);
+            String result = rewards.getResult(finalPosition);
             resultMap.put(playerName, result);
         }
     }
 
-    private void validate(Players players, Results results) {
-        if (results.getCount()!= players.getCount()) {
+    private void validate(Players players, Rewards rewards) {
+        if (rewards.getCount()!= players.getCount()) {
             throw new IllegalArgumentException(ERROR_RESULTS_SIZE);
         }
     }

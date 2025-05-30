@@ -30,10 +30,14 @@ public class Line {
     private void validateLine(List<Boolean> points) {
         boolean previous = false;
         for (boolean current : points) {
-            if (previous && current) {
-                throw new IllegalArgumentException(ERROR_DUPLICATE_LINES);
-            }
+            validateNotDuplicate(current, previous);
             previous = current;
+        }
+    }
+
+    private static void validateNotDuplicate(boolean current, boolean previous) {
+        if (previous && current) {
+            throw new IllegalArgumentException(ERROR_DUPLICATE_LINES);
         }
     }
 

@@ -4,7 +4,7 @@ import domain.Ladder;
 import domain.LadderResult;
 import domain.Player;
 import domain.Players;
-import domain.Results;
+import domain.Rewards;
 import java.util.List;
 import view.InputView;
 import view.ResultView;
@@ -20,12 +20,12 @@ public class LadderController {
 
     public void run() {
         Players players = setUpPlayers();
-        Results results = setUpResults();
+        Rewards rewards = setUpResults();
 
         Ladder ladder = setUpLadder(players.getCount());
-        resultView.printLadder(ladder, players, results);
+        resultView.printLadder(ladder, players, rewards);
 
-        LadderResult ladderResult = new LadderResult(ladder, players, results);
+        LadderResult ladderResult = new LadderResult(ladder, players, rewards);
         String targetName = inputView.readTargetName();
         resultView.printResult(ladderResult, targetName);
     }
@@ -38,9 +38,9 @@ public class LadderController {
         return new Players(players);
     }
 
-    private Results setUpResults() {
+    private Rewards setUpResults() {
         List<String> results = inputView.readResults();
-        return new Results(results);
+        return new Rewards(results);
     }
 
     private Ladder setUpLadder(int width) {

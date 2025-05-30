@@ -2,10 +2,10 @@ package domain;
 
 import java.util.List;
 
-public class Results {
+public class Rewards {
     private final List<String> results;
 
-    public Results(List<String> results) {
+    public Rewards(List<String> results) {
         this.results = results;
     }
 

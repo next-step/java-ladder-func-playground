@@ -15,7 +15,7 @@ class LadderResultTest {
                 new Player("brie"),
                 new Player("tommy")
         ));
-        Results results = new Results(List.of("꽝", "5000", "꽝", "3000"));
+        Rewards rewards = new Rewards(List.of("꽝", "5000", "꽝", "3000"));
         List<Line> lines = List.of(
                 new Line(List.of(true, false, true)),
                 new Line(List.of(false, true, false)),
@@ -24,7 +24,7 @@ class LadderResultTest {
                 new Line(List.of(true, false, true))
         );
         Ladder ladder = new Ladder(lines);
-        LadderResult result = new LadderResult(ladder, players, results);
+        LadderResult result = new LadderResult(ladder, players, rewards);
 
         assertThat(result.getResult("neo")).isEqualTo("꽝");
     }

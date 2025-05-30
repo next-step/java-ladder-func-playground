@@ -5,9 +5,10 @@ import ladder.Line;
 import ladder.Link;
 
 public class OutputView {
-    private static final String LEFT_MARGIN = "    |";
-    private static final String CONNECTED = "-----|";
-    private static final String DISCONNECTED = "     |";
+    private static final String CONNECTED = "-----";
+    private static final String DISCONNECTED = "     ";
+    private static final String VERTICAL_BAR = "|";
+    private static final String LEFT_MARGIN = "    ";
 
     private OutputView() {
     }
@@ -19,17 +20,17 @@ public class OutputView {
     }
 
     private static void printLine(Line line) {
-        System.out.print(LEFT_MARGIN);
-        line.getLinks().forEach(OutputView::printLink);
-        System.out.println();
+        StringBuilder sb = new StringBuilder(LEFT_MARGIN);
+        for (Link link : line.getLinks()) {
+            sb.append(VERTICAL_BAR);
+            sb.append(renderLink(link.isLinked()));
+        }
+        sb.append(VERTICAL_BAR);
+        System.out.println(sb);
     }
 
-    private static void printLink(Link link) {
-        String symbol = DISCONNECTED;
-        if (link.isLinked()) {
-            symbol = CONNECTED;
-        }
-        System.out.print(symbol);
+    private static String renderLink(boolean isLinked) {
+        return isLinked ? CONNECTED : DISCONNECTED;
     }
 }
 

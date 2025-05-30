@@ -1,14 +1,11 @@
 import ladder.Ladder;
+import strategy.LinkStrategy;
 
 public class LadderGame {
     private final Ladder ladder;
 
-    public LadderGame(int row, int column) {
-        this.ladder = new Ladder(row, column);
-    }
-
-    public void initialize() {
-        ladder.generateLadder();
+    public LadderGame(int row, int column, LinkStrategy linkStrategy) {
+        this.ladder = new Ladder(row, column, linkStrategy);
     }
 
     public Ladder getLadder() {

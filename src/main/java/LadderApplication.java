@@ -1,12 +1,15 @@
+import ladder.Height;
+import ladder.Width;
 import strategy.RandomLinkStrategy;
+import view.InputView;
 import view.OutputView;
 
 public class LadderApplication {
-    static private final int LADDER_ROW = 4;
-    static private final int LADDER_COLUMN = 4;
-
     public static void main(String[] args) {
-        LadderGame game = new LadderGame(LADDER_ROW, LADDER_COLUMN, new RandomLinkStrategy());
+        Width  width = Width.from(InputView.readLadderWidth());
+        Height height = Height.from(InputView.readLadderHeight());
+
+        LadderGame game = new LadderGame(height, width, new RandomLinkStrategy());
 
         OutputView.printLadder(game.getLadder());
     }

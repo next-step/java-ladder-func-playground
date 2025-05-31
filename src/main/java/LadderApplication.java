@@ -1,7 +1,7 @@
 import strategy.RandomLinkStrategy;
 import view.OutputView;
 
-public class Application {
+public class LadderApplication {
     static private final int LADDER_ROW = 4;
     static private final int LADDER_COLUMN = 4;
 

@@ -16,6 +16,7 @@ public final class OutputView {
     }
 
     public static void printLadderResultTitle() {
+        System.out.println();
         System.out.println(LADDER_RESULT_TITLE);
         System.out.println();
     }

@@ -5,15 +5,29 @@ public record RequestLadder(
         int height
 ) {
 
-    public static final int MIN_LADDER_SIZE = 2;
+    static final int MIN_LADDER_SIZE = 2;
+    static final int MAX_LADDER_SIZE = 24;
 
     public RequestLadder {
         validateLadderSize(width, height);
     }
 
     private void validateLadderSize(final int width, final int height) {
-        if (width < MIN_LADDER_SIZE || height < MIN_LADDER_SIZE) {
-            throw new IllegalArgumentException("사다리의 넓이와 높이는 최소 %s어야 합니다.".formatted(MIN_LADDER_SIZE));
+        validateWidthSize(width);
+        validateHeightSize(height);
+    }
+
+    private void validateWidthSize(final int width) {
+        if (width < MIN_LADDER_SIZE || MAX_LADDER_SIZE < width) {
+            throw new IllegalArgumentException(
+                    "사다리의 넓이는 %s 이상 %s 이하여야 합니다.".formatted(MIN_LADDER_SIZE, MAX_LADDER_SIZE));
+        }
+    }
+
+    private void validateHeightSize(final int height) {
+        if (height < MIN_LADDER_SIZE || MAX_LADDER_SIZE < height) {
+            throw new IllegalArgumentException(
+                    "사다리의 높이는 %s 이상 %s 이하여야 합니다.".formatted(MIN_LADDER_SIZE, MAX_LADDER_SIZE));
         }
     }
 }

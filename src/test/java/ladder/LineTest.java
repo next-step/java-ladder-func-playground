@@ -15,7 +15,7 @@ class LineTest {
     void shouldNotHaveConsecutiveLinks() {
         // given
         int columnCount = 6;
-        Line line = new Line(columnCount, new RandomLinkStrategy(), null, 0);
+        Line line = new Line(columnCount, new RandomLinkStrategy());
 
         // when
         List<Link> links = line.getLinks();

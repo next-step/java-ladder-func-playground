@@ -16,6 +16,10 @@ public class Link {
         this.isLinked = true;
     }
 
+    public void unlink() {
+        this.isLinked = false;
+    }
+
 }
 
 

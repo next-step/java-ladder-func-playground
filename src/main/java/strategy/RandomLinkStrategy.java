@@ -9,4 +9,9 @@ public class RandomLinkStrategy implements LinkStrategy{
     public boolean canLink() {
         return random.nextBoolean();
     }
+
+    @Override
+    public int pickRandomRow(int bound) {
+        return random.nextInt(bound);
+    }
 }

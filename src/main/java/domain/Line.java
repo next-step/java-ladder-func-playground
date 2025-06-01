@@ -11,8 +11,12 @@ public class Line {
         this.points = Collections.unmodifiableList(points);
     }
 
-    public static Line of(final List<Point> points) {
+    public static Line from(final List<Point> points) {
         return new Line(points);
+    }
+
+    public boolean hasConnectionAt(final int index) {
+        return points.get(index).right();
     }
 
     public List<Point> getPoints() {

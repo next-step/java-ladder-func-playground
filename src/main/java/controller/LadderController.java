@@ -1,7 +1,8 @@
 package controller;
 
-import domain.Ladder;
 import domain.dto.RequestLadder;
+import domain.ladder.Ladder;
+import domain.ladder.LadderFactory;
 import strategy.LineGenerator;
 import strategy.PointGenerator;
 import strategy.RandomLineGenerator;
@@ -11,28 +12,29 @@ import view.OutputView;
 
 public class LadderController {
 
-    public void start() {
-        RequestLadder requestLadder = readLadderInput();
+    public void play() {
+        RequestLadder requestLadder = inputLadderSettings();
 
-        LineGenerator lineGenerator = buildLineGenerator();
-        Ladder ladder = Ladder.create(requestLadder.width(), requestLadder.height(), lineGenerator);
+        LineGenerator lineGenerator = createLineGenerator();
+        LadderFactory factory = new LadderFactory();
+        Ladder ladder = factory.draw(requestLadder.width(), requestLadder.height(), lineGenerator);
 
-        paintLadder(ladder);
+        drawLadder(ladder);
     }
 
-    private RequestLadder readLadderInput() {
+    private RequestLadder inputLadderSettings() {
         int width = InputView.inputLadderWidth();
         int height = InputView.inputLadderHeight();
         return new RequestLadder(width, height);
     }
 
-    private LineGenerator buildLineGenerator() {
+    private LineGenerator createLineGenerator() {
         PointGenerator pointGenerator = new RandomPointGenerator();
         return new RandomLineGenerator(pointGenerator);
     }
 
-    private void paintLadder(final Ladder ladder) {
+    private void drawLadder(final Ladder ladder) {
         OutputView.printLadderResultTitle();
-        OutputView.paintLadder(ladder);
+        OutputView.drawLadder(ladder);
     }
 }

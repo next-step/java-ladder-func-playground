@@ -15,17 +15,18 @@ public class FixedLineGenerator implements LineGenerator {
     }
 
     @Override
-    public Line generate(int width) {
+    public Line generate(final int width) {
         boolean[] values = fixedValuesList.get(index++);
-        Point first = Point.first(values[0]);
+
+        Point current = Point.from(values[0]);
         List<Point> points = new ArrayList<>();
-        points.add(first);
+        points.add(current);
 
         for (int i = 1; i < width; i++) {
-            first = first.connectNext(values[i]);
-            points.add(first);
+            current = current.connectNext(values[i]);
+            points.add(current);
         }
 
-        return Line.of(points);
+        return Line.from(points);
     }
 }

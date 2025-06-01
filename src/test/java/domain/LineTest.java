@@ -39,7 +39,7 @@ class LineTest {
         List<Point> points = line.getPoints();
 
         // when & then
-        assertThatThrownBy(() -> points.add(Point.first(true)))
+        assertThatThrownBy(() -> points.add(Point.from(true)))
                 .isInstanceOf(UnsupportedOperationException.class);
     }
 }

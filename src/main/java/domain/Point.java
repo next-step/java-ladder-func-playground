@@ -4,7 +4,7 @@ public record Point(
         boolean right
 ) {
 
-    public static Point first(final boolean right) {
+    public static Point from(final boolean right) {
         return new Point(right);
     }
 

@@ -14,6 +14,15 @@ public class Players {
         if (players == null || players.isEmpty()) {
             throw new IllegalArgumentException("플레이어 목록은 비어 있을 수 없습니다.");
         }
+
+        long distinctCount = players.stream()
+                .map(Player::name)
+                .distinct()
+                .count();
+
+        if (distinctCount != players.size()) {
+            throw new IllegalArgumentException("플레이어 이름은 중복될 수 없습니다.");
+        }
     }
 
     public List<Player> getPlayers() {

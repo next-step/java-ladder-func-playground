@@ -61,27 +61,17 @@ public class OutputView {
         return NOT_CONNECTION;
     }
 
-    public void printLadderResult(LadderResult ladderResult, Players players, Rewards rewards) {
+    public void printLadderResult(LadderResult ladderResult) {
         System.out.println("\n실행 결과");
-        for (Map.Entry<Integer, Integer> entry : ladderResult.getResultMap().entrySet()) {
-            String playerName = players.get(entry.getKey()).name();
-            String rewardName = rewards.get(entry.getValue()).name();
-            System.out.printf(RESULT_FORMAT + "%n", playerName, rewardName);
+        for (Map.Entry<Player, Reward> entry : ladderResult.getResultMap().entrySet()) {
+            System.out.printf(RESULT_FORMAT + "%n", entry.getKey().name(), entry.getValue().name());
         }
     }
 
-    public void printTargetReward(String targetPlayerName, LadderResult ladderResult, Players players,
-                                  Rewards rewards) {
+    public void printTargetReward(String targetPlayerName, LadderResult ladderResult) {
         System.out.println("\n실행 결과");
-        for (Map.Entry<Integer, Integer> entry : ladderResult.getResultMap().entrySet()) {
-            String playerName = players.get(entry.getKey()).name();
-            if (playerName.equals(targetPlayerName)) {
-                String rewardName = rewards.get(entry.getValue()).name();
-                System.out.printf(RESULT_FORMAT + "%n", playerName, rewardName);
-                return;
-            }
-        }
-        throw new IllegalArgumentException("해당 이름의 참가자가 존재하지 않습니다: " + targetPlayerName);
+        Reward reward = ladderResult.findRewardByPlayerName(targetPlayerName);
+        System.out.printf(RESULT_FORMAT + "%n", targetPlayerName, reward.name());
     }
 
 }

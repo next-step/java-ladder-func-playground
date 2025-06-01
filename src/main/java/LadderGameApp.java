@@ -19,20 +19,19 @@ public class LadderGameApp {
         GameConfig gameConfig = getGameConfig(inputView, players.size());
 
         LadderGame ladderGame = LadderGame.of(gameConfig);
-        LadderResult ladderResult = ladderGame.play();
+        LadderResult ladderResult = ladderGame.play(players,rewards);
         outputView.printLadderState(ladderGame.getLadder(), players, rewards);
-        printTargetResult(inputView, outputView, ladderResult, players, rewards);
+        printTargetResult(inputView, outputView, ladderResult);
     }
 
-    private static void printTargetResult(InputView inputView, OutputView outputView, LadderResult ladderResult,
-                                          Players players, Rewards rewards) {
+    private static void printTargetResult(InputView inputView, OutputView outputView, LadderResult ladderResult) {
         String targetPlayerName = inputView.getTargetPlayerName();
         if (Objects.equals(targetPlayerName, "all")) {
-            outputView.printLadderResult(ladderResult, players, rewards);
+            outputView.printLadderResult(ladderResult);
             return;
         }
 
-        outputView.printTargetReward(targetPlayerName, ladderResult, players, rewards);
+        outputView.printTargetReward(targetPlayerName, ladderResult);
     }
 
     private static Players getPlayers(InputView inputView) {

@@ -5,24 +5,24 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class LadderGame {
-    private final GameConfig config;
     private final Ladder ladder;
 
-    private LadderGame(GameConfig config, Ladder ladder) {
-        this.config = config;
+    private LadderGame(Ladder ladder) {
         this.ladder = ladder;
     }
 
     public static LadderGame of(GameConfig config) {
-        Ladder ladder = new LadderGenerator().generate(config);
-        return new LadderGame(config, ladder);
+        Ladder ladder = Ladder.from(config);
+        return new LadderGame(ladder);
     }
 
-    public LadderResult play() {
-        Map<Integer, Integer> resultMap = new LinkedHashMap<>();
-        for (int i = 0; i < config.getWidth(); i++) {
+    public LadderResult play(Players players, Rewards rewards) {
+        Map<Player, Reward> resultMap = new LinkedHashMap<>();
+        for (int i = 0; i < ladder.getWidth(); i++) {
             int destination = ladder.move(i);
-            resultMap.put(i, destination);
+            Player player = players.get(i);
+            Reward reward = rewards.get(destination);
+            resultMap.put(player, reward);
         }
         return new LadderResult(resultMap);
     }

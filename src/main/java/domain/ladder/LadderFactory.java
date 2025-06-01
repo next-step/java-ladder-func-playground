@@ -4,6 +4,7 @@ import domain.Line;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 import strategy.LineGenerator;
 
 public class LadderFactory {
@@ -16,13 +17,10 @@ public class LadderFactory {
     }
 
     private Optional<Ladder> findDrawableLadder(final int width, final int height, final LineGenerator generator) {
-        for (int attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
-            Ladder ladder = drawLadder(width, height, generator);
-            if (ladder.isFullyConnected(width)) {
-                return Optional.of(ladder);
-            }
-        }
-        return Optional.empty();
+        return IntStream.range(0, MAX_ATTEMPTS)
+                .mapToObj(attempt -> drawLadder(width, height, generator))
+                .filter(ladder -> ladder.isFullyConnected(width))
+                .findFirst();
     }
 
     private Ladder drawLadder(final int width, final int height, final LineGenerator lineGenerator) {

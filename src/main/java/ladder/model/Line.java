@@ -12,8 +12,4 @@ public class Line {
         List<Boolean> links = linkConnector.generate(width);
         this.links = Collections.unmodifiableList(links);
     }
-
-    public List<Boolean> getLinks() {
-        return List.copyOf(links);
-    }
 }

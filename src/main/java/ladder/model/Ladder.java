@@ -3,19 +3,40 @@ package ladder.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.IntStream;
 
 public class Ladder {
-    private List<Line> lines;
+    private List<List<Boolean>> lines;
 
     public Ladder(int width, int height, LinkConnector linkConnector) {
-        List<Line> lines = new ArrayList<>();
+        Random random = new Random();
+        List<List<Boolean>> generatedLines = new ArrayList<>();
         for (int i = 0; i < height; i++) {
-            lines.add(new Line(width, linkConnector));
+            generatedLines.add(linkConnector.generate(width));
         }
-        this.lines = Collections.unmodifiableList(lines);
+
+        int col = width -1;
+        boolean[] hasBridgeArray = new boolean[col];
+        for (List<Boolean> line : generatedLines) {
+        for (int j = 0; j < col; j++) {
+            hasBridgeArray[j] = hasBridgeArray[j] | line.get(j);
+            }
+        }
+
+        List<Integer> notHasBridgeArray = new ArrayList<>();
+        for (int j = 0; j < col; j++) {
+            boolean b = !hasBridgeArray[j] && notHasBridgeArray.add(j);
+        }
+
+        for (int j : notHasBridgeArray) {
+            int i = random.nextInt(height);
+            generatedLines.get(i).set(j,true);
+        }
+        lines = generatedLines;
     }
 
-    public List<Line> getLines() {
+    public List<List<Boolean>> getLines() {
         return List.copyOf(lines);
     }
 }

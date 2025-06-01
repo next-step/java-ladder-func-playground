@@ -2,7 +2,7 @@ package strategy;
 
 import java.util.Random;
 
-public class RandomGenerator implements PointGenerator {
+public class RandomPointGenerator implements PointGenerator {
 
     private final Random random = new Random();
 

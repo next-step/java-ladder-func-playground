@@ -1,10 +1,11 @@
 package ladder;
 
 public record Width(int width) {
+    private static final int MIN_WIDTH = 2;
 
     public Width {
-        if (width < 2) {
-            throw new IllegalArgumentException("사다리의 넓이는 2 이상이어야 합니다.");
+        if (width < MIN_WIDTH) {
+            throw new IllegalArgumentException("사다리의 넓이는 " + MIN_WIDTH + " 이상이어야 합니다.");
         }
     }
 

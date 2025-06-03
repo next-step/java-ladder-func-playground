@@ -3,21 +3,21 @@ package domain;
 import java.util.List;
 
 public class Rewards {
-    private final List<String> results;
+    private final List<String> rewards;
 
-    public Rewards(List<String> results) {
-        this.results = results;
+    public Rewards(List<String> rewards) {
+        this.rewards = rewards;
     }
 
-    public String getResult(int index) {
-        return results.get(index);
+    public String getReward(int index) {
+        return rewards.get(index);
     }
 
     public int getCount() {
-        return results.size();
+        return rewards.size();
     }
 
-    public List<String> getResults() {
-        return results;
+    public List<String> getRewards() {
+        return rewards;
     }
 }

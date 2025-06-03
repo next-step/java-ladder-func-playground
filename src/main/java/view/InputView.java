@@ -19,7 +19,7 @@ public class InputView {
                 .toList();
     }
 
-    public List<String> readResults() {
+    public List<String> readRewards() {
         System.out.println();
         System.out.println(INPUT_RESULTS);
         String[] results = scanner.nextLine().trim().split(",");

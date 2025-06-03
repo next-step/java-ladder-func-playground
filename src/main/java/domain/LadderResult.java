@@ -13,7 +13,7 @@ public class LadderResult {
         for (int i = 0; i < players.getCount(); i++) {
             String playerName = players.getName(i);
             int finalPosition = ladder.move(i);
-            String result = rewards.getResult(finalPosition);
+            String result = rewards.getReward(finalPosition);
             resultMap.put(playerName, result);
         }
     }

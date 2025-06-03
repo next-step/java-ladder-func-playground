@@ -2,6 +2,7 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Ladder {
     public static final int SIZE_LIMIT = 0;
@@ -35,7 +36,9 @@ public class Ladder {
         return position;
     }
 
-    public List<Line> getLines() {
-        return new ArrayList<>(lines);
+    public List<List<Boolean>> getLinePoints() {
+        return lines.stream()
+                .map(Line::getPoints)
+                .collect(Collectors.toList());
     }
 }

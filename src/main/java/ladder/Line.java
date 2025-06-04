@@ -29,6 +29,18 @@ public class Line {
         return link;
     }
 
+    public boolean isLinkedAt(int col) {
+        return points.get(col).isLinked();
+    }
+
+    public void linkAt(int col) {
+        points.get(col).link();
+    }
+
+    public void unlinkAt(int col) {
+        points.get(col).unlink();
+    }
+
     public List<Link> getLinks() {
         return List.copyOf(points);
     }

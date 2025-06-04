@@ -7,14 +7,14 @@ import java.util.List;
 public class Line {
     private final List<Link> points;
 
-    public Line(int columnCount, LinkStrategy strategy) {
+    public Line(Width width, LinkStrategy strategy) {
         this.points = new ArrayList<>();
-        generateLinks(columnCount, strategy);
+        generateLinks(width, strategy);
     }
 
-    private void generateLinks(int columnCount, LinkStrategy strategy) {
+    private void generateLinks(Width width, LinkStrategy strategy) {
         boolean prevLinked = false;
-        for (int col = 0; col < columnCount - 1; col++) {
+        for (int col = 0; col < width.width() - 1; col++) {
             Link link = createLink(strategy, prevLinked);
             prevLinked = link.isLinked();
             points.add(link);

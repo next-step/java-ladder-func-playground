@@ -14,7 +14,7 @@ public class Ladder {
         this.lines = new ArrayList<>();
         this.strategy = strategy;
         for (int row = 0; row < height.height(); row++) {
-            lines.add(new Line(width.width(), strategy));
+            lines.add(new Line(width, strategy));
         }
         //2. Random 기반이라 이상한 부분 보정
         applyCorrection(width.width());

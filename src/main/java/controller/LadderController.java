@@ -1,5 +1,7 @@
 package controller;
 
+import domain.Height;
+import domain.Width;
 import domain.dto.RequestLadder;
 import domain.ladder.Ladder;
 import domain.ladder.LadderFactory;
@@ -14,17 +16,19 @@ public class LadderController {
 
     public void play() {
         RequestLadder requestLadder = inputLadderSettings();
+        Width width = requestLadder.toWidth();
+        Height height = requestLadder.toHeight();
 
         LineGenerator lineGenerator = createLineGenerator();
         LadderFactory factory = new LadderFactory();
-        Ladder ladder = factory.draw(requestLadder.width(), requestLadder.height(), lineGenerator);
+        Ladder ladder = factory.draw(width, height, lineGenerator);
 
         drawLadder(ladder);
     }
 
     private RequestLadder inputLadderSettings() {
-        int width = InputView.inputLadderWidth();
-        int height = InputView.inputLadderHeight();
+        String width = InputView.inputLadderWidth();
+        String height = InputView.inputLadderHeight();
         return new RequestLadder(width, height);
     }
 

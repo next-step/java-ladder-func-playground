@@ -1,6 +1,7 @@
 package domain.ladder;
 
 import domain.Line;
+import domain.Width;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -17,8 +18,8 @@ public class Ladder {
         return new Ladder(lines);
     }
 
-    public boolean isFullyConnected(int width) {
-        return IntStream.range(0, width - 1)
+    public boolean isFullyConnected(final Width width) {
+        return IntStream.range(0, width.value() - 1)
                 .allMatch(this::isConnectedBetween);
     }
 

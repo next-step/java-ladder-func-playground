@@ -1,33 +1,37 @@
 package domain.dto;
 
+import domain.Height;
+import domain.Width;
+
 public record RequestLadder(
-        int width,
-        int height
+        String width,
+        String height
 ) {
 
-    static final int MIN_LADDER_SIZE = 2;
-    static final int MAX_LADDER_SIZE = 24;
-
     public RequestLadder {
-        validateLadderSize(width, height);
+        validateEmpty(width, height);
     }
 
-    private void validateLadderSize(final int width, final int height) {
-        validateWidthSize(width);
-        validateHeightSize(height);
-    }
-
-    private void validateWidthSize(final int width) {
-        if (width < MIN_LADDER_SIZE || MAX_LADDER_SIZE < width) {
-            throw new IllegalArgumentException(
-                    "사다리의 넓이는 %s 이상 %s 이하여야 합니다.".formatted(MIN_LADDER_SIZE, MAX_LADDER_SIZE));
+    private void validateEmpty(final String width, final String height) {
+        if (width == null || width.isBlank() || height == null || height.isBlank()) {
+            throw new IllegalArgumentException("사다리의 넓이와 높이를 입력해야 합니다.");
         }
     }
 
-    private void validateHeightSize(final int height) {
-        if (height < MIN_LADDER_SIZE || MAX_LADDER_SIZE < height) {
-            throw new IllegalArgumentException(
-                    "사다리의 높이는 %s 이상 %s 이하여야 합니다.".formatted(MIN_LADDER_SIZE, MAX_LADDER_SIZE));
+    public Width toWidth() {
+        try {
+            return new Width(Integer.parseInt(width.strip()));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("사다리의 넓이는 숫자여야 합니다.");
         }
     }
+
+    public Height toHeight() {
+        try {
+            return new Height(Integer.parseInt(height.strip()));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("사다리의 높이는 숫자여야 합니다.");
+        }
+    }
+
 }

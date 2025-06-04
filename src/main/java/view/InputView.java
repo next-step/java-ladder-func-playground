@@ -9,14 +9,14 @@ public final class InputView {
     private InputView() {
     }
 
-    public static int inputLadderWidth() {
+    public static String inputLadderWidth() {
         System.out.println("사다리의 넓이는 몇 인가요?");
-        return Integer.parseInt(sc.nextLine());
+        return sc.nextLine();
     }
 
-    public static int inputLadderHeight() {
+    public static String inputLadderHeight() {
         System.out.println();
         System.out.println("사다리의 높이는 몇 인가요?");
-        return Integer.parseInt(sc.nextLine());
+        return sc.nextLine();
     }
 }

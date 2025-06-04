@@ -5,7 +5,6 @@ import tuner.LadderTuner;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Ladder {
     private final List<Line> lines;
@@ -17,7 +16,21 @@ public class Ladder {
             lines.add(new Line(width, strategy));
         }
         //2. Random 기반이라 이상한 부분 보정
-        tuner.tune(lines, width);
+        tuner.tune(this, height, width);
+    }
+
+    public boolean hasLinkAt(int rowIndex, int colIndex) {
+        return lines.get(rowIndex).isLinkedAt(colIndex);
+    }
+
+    public void addLinkAt(int rowIndex, int colIndex) {
+
+        lines.get(rowIndex).linkAt(colIndex);
+    }
+
+    public void removeLinkAt(int rowIndex, int colIndex) {
+
+        lines.get(rowIndex).unlinkAt(colIndex);
     }
 
     public List<Line> getLines() {

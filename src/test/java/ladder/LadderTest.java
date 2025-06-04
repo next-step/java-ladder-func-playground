@@ -1,8 +1,11 @@
 package ladder;
 
+import generator.RandomGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import strategy.RandomLinkStrategy;
+import tuner.DefaultLadderTuner;
+import tuner.LadderTuner;
 import view.InputView;
 
 import java.util.List;
@@ -17,9 +20,11 @@ class LadderTest {
         Height height = Height.from(3);
         Width  width = Width.from(4);
 
+        RandomLinkStrategy strategy = new RandomLinkStrategy(new RandomGenerator());
+        LadderTuner tuner = new DefaultLadderTuner(strategy);
 
         // when
-        Ladder ladder = new Ladder(height, width, new RandomLinkStrategy());
+        Ladder ladder = new Ladder(height, width, strategy, tuner);
 
         // then
         List<Line> lines = ladder.getLines();
@@ -33,7 +38,10 @@ class LadderTest {
         Height height = Height.from(3);
         Width  width = Width.from(4);
 
-        Ladder ladder = new Ladder(height, width, new RandomLinkStrategy());
+        RandomLinkStrategy strategy = new RandomLinkStrategy(new RandomGenerator());
+        LadderTuner tuner = new DefaultLadderTuner(strategy);
+
+        Ladder ladder = new Ladder(height, width, strategy, tuner);
 
         // when
         boolean atLeastOneLinked = ladder.getLines().stream()

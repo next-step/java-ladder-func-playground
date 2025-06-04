@@ -1,5 +1,6 @@
 package ladder;
 
+import generator.RandomGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import strategy.RandomLinkStrategy;
@@ -15,7 +16,8 @@ class LineTest {
     void shouldNotHaveConsecutiveLinks() {
         // given
         int columnCount = 6;
-        Line line = new Line(columnCount, new RandomLinkStrategy());
+        RandomLinkStrategy strategy = new RandomLinkStrategy(new RandomGenerator());
+        Line line = new Line(Width.from(columnCount), strategy);
 
         // when
         List<Link> links = line.getLinks();

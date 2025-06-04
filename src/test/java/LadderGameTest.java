@@ -1,9 +1,13 @@
+import generator.RandomGenerator;
 import ladder.Height;
 import ladder.Ladder;
+import ladder.LadderGame;
 import ladder.Width;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import strategy.RandomLinkStrategy;
+import tuner.DefaultLadderTuner;
+import tuner.LadderTuner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +19,10 @@ class LadderGameTest {
         Height height = Height.from(4);
         Width width = Width.from(4);
 
-        LadderGame game = new LadderGame(height, width, new RandomLinkStrategy());
+        RandomLinkStrategy strategy = new RandomLinkStrategy(new RandomGenerator());
+        LadderTuner tuner = new DefaultLadderTuner(strategy);
+
+        LadderGame game = new LadderGame(height, width, strategy, tuner);
 
         // when
         Ladder ladder = game.getLadder();
@@ -35,7 +42,10 @@ class LadderGameTest {
         Height height = Height.from(3);
         Width width = Width.from(4);
 
-        LadderGame game = new LadderGame(height, width, new RandomLinkStrategy());
+        RandomLinkStrategy strategy = new RandomLinkStrategy(new RandomGenerator());
+        LadderTuner tuner = new DefaultLadderTuner(strategy);
+
+        LadderGame game = new LadderGame(height, width, strategy, tuner);
 
         // when
         Ladder ladder = game.getLadder();

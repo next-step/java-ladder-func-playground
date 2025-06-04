@@ -1,6 +1,5 @@
-import ladder.Height;
-import ladder.Ladder;
-import ladder.Width;
+package ladder;
+
 import strategy.LinkStrategy;
 
 public class LadderGame {

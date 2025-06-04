@@ -1,17 +1,23 @@
 package strategy;
 
+import generator.Generator;
+
 import java.util.Random;
 
 public class RandomLinkStrategy implements LinkStrategy{
-    private final Random random = new Random();
+    private final Generator generator;
 
-    @Override
-    public boolean canLink() {
-        return random.nextBoolean();
+    public RandomLinkStrategy(Generator generator) {
+        this.generator = generator;
     }
 
     @Override
-    public int pickRandomRow(int bound) {
-        return random.nextInt(bound);
+    public boolean canLink() {
+        return generator.getRandomBoolean();
+    }
+
+    @Override
+    public int pickRow(int bound) {
+        return generator.getRandomInt(bound);
     }
 }

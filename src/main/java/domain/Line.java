@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Collections;
 import java.util.List;
 
 public class Line {
@@ -8,7 +7,7 @@ public class Line {
     final List<Point> points;
 
     private Line(final List<Point> points) {
-        this.points = Collections.unmodifiableList(points);
+        this.points = List.copyOf(points);
     }
 
     public static Line from(final List<Point> points) {

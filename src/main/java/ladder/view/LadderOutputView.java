@@ -22,7 +22,7 @@ public class LadderOutputView {
         }
 
         System.out.println(stringBuilder);
-        }
+    }
 
     private String getJoiner(boolean isConnected) {
         if (isConnected) {

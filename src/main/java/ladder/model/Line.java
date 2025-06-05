@@ -1,9 +1,7 @@
 package ladder.model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Line {
     private final List<Boolean> links;

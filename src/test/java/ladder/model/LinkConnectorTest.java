@@ -1,6 +1,5 @@
 package ladder.model;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,25 +11,29 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LinkConnectorTest {
 
-    @BeforeEach
-    void seedRandom() throws Exception {
-        Field field = LinkConnector.class.getDeclaredField("random");
-        field.setAccessible(true);
-        Random random = (Random) field.get(null);
-        random.setSeed(728);
-    }
-
     @Test
-    @DisplayName("사다리에 연속된 다리가 생기지 말아야 한다")
-    void notConnectorBridge() {
-        LinkConnector connector = new LinkConnector();
-        int width = 10;
-        // 가독성을 위해 i 대신 attempt 사용
-        for (int attempt = 0; attempt < 20; attempt++) {
-            List<Boolean> links = connector.generate(width);
-            for (int j = 0; j < links.size() - 1; j++) {
-                assertFalse(links.get(j) && links.get(j + 1));
-                // 다리가 연속으로 생기지 않아 통과
+    @DisplayName("열 사이의 다리가 겹치면 안된다")
+    void notDuplicationLine() throws Exception {
+        Field randomField = LinkConnector.class.getDeclaredField("random");
+        randomField.setAccessible(true);
+        Random random = (Random) randomField.get(null);
+        random.setSeed(728);
+
+        int width = 4;
+        int height = 6;
+
+        LinkConnector linkConnector = new LinkConnector();
+        LadderBuilder ladderBuilder = new LadderBuilder(linkConnector);
+        Ladder ladder = ladderBuilder.build(width, height);
+        List<List<Boolean>> lines = ladder.getLines();
+
+        for (int i = 0; i < lines.size() - 1; i++) {
+            List<Boolean> current = lines.get(i);
+            List<Boolean> next = lines.get(i + 1);
+            for (int col = 0; col < current.size(); col++) {
+                assertFalse(
+                        current.get(col) && next.get(col)
+                );
             }
         }
     }

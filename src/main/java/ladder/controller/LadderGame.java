@@ -15,7 +15,10 @@ public class LadderGame {
     }
 
     public void play() {
-        Ladder ladder = Ladder.create();
+        int width = inputView.inputWidth();
+        int height = inputView.inputHeight();
+
+        Ladder ladder = Ladder.create(width, height);
         outputView.printLadder(ladder);
     }
 }

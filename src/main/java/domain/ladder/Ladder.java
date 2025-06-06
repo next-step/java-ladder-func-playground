@@ -2,6 +2,7 @@ package domain.ladder;
 
 import domain.Line;
 import domain.Width;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -10,7 +11,7 @@ public class Ladder {
     private final List<Line> lines;
 
     private Ladder(final List<Line> lines) {
-        this.lines = List.copyOf(lines);
+        this.lines = lines;
     }
 
     public static Ladder from(final List<Line> lines) {
@@ -28,6 +29,6 @@ public class Ladder {
     }
 
     public List<Line> getLines() {
-        return lines;
+        return Collections.unmodifiableList(lines);
     }
 }

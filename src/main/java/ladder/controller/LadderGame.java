@@ -20,5 +20,6 @@ public class LadderGame {
 
         Ladder ladder = Ladder.create(width, height);
         outputView.printLadder(ladder);
+        outputView.printResults(ladder.result());
     }
 }

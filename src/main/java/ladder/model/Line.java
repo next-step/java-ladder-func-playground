@@ -3,51 +3,56 @@ package ladder.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 public class Line {
 
-  private final List<Boolean> points;
+    private final List<Boolean> points;
 
-  private Line(List<Boolean> points) {
-    this.points = points;
-  }
-
-  public static Line create(int width) {
-    List<Boolean> points = new ArrayList<>();
-    Random random = new Random();
-
-    for (int i = 0; i < width - 1; i++) {
-      addConnection(points, i, random);
+    private Line(List<Boolean> points) {
+        this.points = points;
     }
 
-    return new Line(points);
-  }
-
-  private static void addConnection(List<Boolean> points, int index, Random random) {
-    if (isConnectedToPrevious(index, points)) {
-      points.add(false);
-      return;
+    public List<Boolean> getPoints() {
+        return points;
     }
 
-    points.add(random.nextBoolean());
-  }
+    public static Line create(int width) {
+        List<Boolean> points = new ArrayList<>();
+        Random random = new Random();
 
-  private static boolean isConnectedToPrevious(int index, List<Boolean> points) {
-    return index > 0 && points.get(index - 1);
-  }
+        for (int i = 0; i < width - 1; i++) {
+            addConnection(points, i, random);
+        }
 
-  public void draw() {
-    for (Boolean point : points) {
-      System.out.print("|");
-      printLine(point);
+        return new Line(points);
     }
-    System.out.println("|");
-  }
 
-  private void printLine(Boolean connected) {
-    if (connected) {
-      System.out.print("-----");
-      return;
+    private static void addConnection(List<Boolean> points, int index, Random random) {
+        if (isConnectedToPrevious(index, points)) {
+            points.add(false);
+            return;
+        }
+
+        points.add(random.nextBoolean());
     }
-    System.out.print("     ");
-  }
+
+    private static boolean isConnectedToPrevious(int index, List<Boolean> points) {
+        return index > 0 && points.get(index - 1);
+    }
+
+    public void draw() {
+        for (Boolean point : points) {
+            System.out.print("|");
+            printLine(point);
+        }
+        System.out.println("|");
+    }
+
+    private void printLine(Boolean connected) {
+        if (connected) {
+            System.out.print("-----");
+            return;
+        }
+        System.out.print("     ");
+    }
 }

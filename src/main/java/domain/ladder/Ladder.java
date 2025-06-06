@@ -1,5 +1,6 @@
 package domain.ladder;
 
+import domain.Direction;
 import domain.Line;
 import domain.Width;
 import java.util.Collections;
@@ -26,6 +27,15 @@ public class Ladder {
     private boolean isConnectedBetween(final int index) {
         return lines.stream()
                 .anyMatch(line -> line.hasConnectionAt(index));
+    }
+
+    public int move(final int startIndex) {
+        int position = startIndex;
+        for (Line line : lines) {
+            Direction direction = line.directionAt(position);
+            position = direction.moveFrom(position);
+        }
+        return position;
     }
 
     public List<Line> getLines() {

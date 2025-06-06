@@ -18,6 +18,24 @@ public class Line {
         return points.get(index).right();
     }
 
+    public Direction directionAt(final int index) {
+        if (canMoveRight(index)) {
+            return Direction.RIGHT;
+        }
+        if (canMoveLeft(index)) {
+            return Direction.LEFT;
+        }
+        return Direction.STAY;
+    }
+
+    private boolean canMoveRight(final int index) {
+        return index < points.size() - 1 && points.get(index).right();
+    }
+
+    private boolean canMoveLeft(final int index) {
+        return index > 0 && points.get(index - 1).right();
+    }
+
     public List<Point> getPoints() {
         return points;
     }

@@ -23,7 +23,7 @@ public class LadderController {
         LadderFactory factory = new LadderFactory();
         Ladder ladder = factory.draw(width, height, lineGenerator);
 
-        drawLadder(ladder);
+        drawLadder(ladder, width);
     }
 
     private RequestLadder inputLadderSettings() {
@@ -37,8 +37,9 @@ public class LadderController {
         return new RandomLineGenerator(pointGenerator);
     }
 
-    private void drawLadder(final Ladder ladder) {
+    private void drawLadder(final Ladder ladder, final Width width) {
         OutputView.printLadderResultTitle();
         OutputView.drawLadder(ladder);
+        OutputView.printLadderResult(ladder, width);
     }
 }

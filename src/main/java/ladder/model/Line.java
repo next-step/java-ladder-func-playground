@@ -3,6 +3,8 @@ package ladder.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Line {
 
@@ -13,31 +15,21 @@ public class Line {
     }
 
     public List<Boolean> getPoints() {
-        return points;
+        return new ArrayList<>(points);
     }
 
     public static Line create(int width) {
-        List<Boolean> points = new ArrayList<>();
         Random random = new Random();
-
-        for (int i = 0; i < width - 1; i++) {
-            addConnection(points, i, random);
-        }
-
-        return new Line(points);
+        List<Boolean> points = new ArrayList<>();
+        return new Line(IntStream.range(0, width - 1)
+            .mapToObj(i -> shouldConnect(points, i, random))
+            .collect(Collectors.toList()));
     }
 
-    private static void addConnection(List<Boolean> points, int index, Random random) {
-        if (isConnectedToPrevious(index, points)) {
-            points.add(false);
-            return;
-        }
-
-        points.add(random.nextBoolean());
-    }
-
-    private static boolean isConnectedToPrevious(int index, List<Boolean> points) {
-        return index > 0 && points.get(index - 1);
+    private static boolean shouldConnect(List<Boolean> points, int index, Random random) {
+        boolean connection = (index <= 0 || !points.get(index - 1)) && random.nextBoolean();
+        points.add(connection);
+        return connection;
     }
 
     public void draw() {

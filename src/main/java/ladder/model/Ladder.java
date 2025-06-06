@@ -1,7 +1,8 @@
 package ladder.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Ladder {
 
@@ -12,11 +13,11 @@ public class Ladder {
     }
 
     public static Ladder create(int width, int height) {
-        List<Line> lines = new ArrayList<>();
-        for (int i = 0; i < height; i++) {
-            lines.add(Line.create(width));
-        }
-        return new Ladder(lines);
+        return new Ladder(
+            IntStream.range(0, height)
+                .mapToObj(i -> Line.create(width))
+                .collect(Collectors.toList())
+        );
     }
 
     public void draw() {
@@ -27,13 +28,10 @@ public class Ladder {
 
     public List<Integer> result() {
         int width = lines.get(0).getPoints().size() + 1;
-        List<Integer> results = new ArrayList<>();
-
-        for (int start = 0; start < width; start++) {
-            results.add(getEndPoint(start));
-        }
-
-        return results;
+        return IntStream.range(0, width)
+            .map(this::getEndPoint)
+            .boxed()
+            .collect(Collectors.toList());
     }
 
     private int getEndPoint(int start) {

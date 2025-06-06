@@ -33,7 +33,7 @@ public class Line {
     }
 
     private boolean canMoveLeft(final int index) {
-        return index > 0 && points.get(index - 1).right();
+        return 0 < index && points.get(index - 1).right();
     }
 
     public List<Point> getPoints() {

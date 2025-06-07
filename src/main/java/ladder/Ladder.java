@@ -9,14 +9,14 @@ import java.util.List;
 public class Ladder {
     private final List<Line> lines;
 
-    public Ladder(Height height, Width width, LinkStrategy strategy, LadderTuner tuner) {
+    public Ladder(Row rows, Column columns, LinkStrategy strategy, LadderTuner tuner) {
         //1. 일단 Random 기반으로 사다리 완전체 만듦
         this.lines = new ArrayList<>();
-        for (int row = 0; row < height.height(); row++) {
-            lines.add(new Line(width, strategy));
+        for (int row = 0; row < rows.value(); row++) {
+            lines.add(new Line(columns, strategy));
         }
         //2. Random 기반이라 이상한 부분 보정
-        tuner.tune(this, height, width);
+        tuner.tune(this, rows, columns);
     }
 
     public boolean hasLinkAt(int rowIndex, int colIndex) {

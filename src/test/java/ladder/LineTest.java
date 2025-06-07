@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import strategy.RandomLinkStrategy;
 
 import java.util.List;
-import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,7 +16,7 @@ class LineTest {
         // given
         int columnCount = 6;
         RandomLinkStrategy strategy = new RandomLinkStrategy(new RandomGenerator());
-        Line line = new Line(Width.from(columnCount), strategy);
+        Line line = new Line(Column.from(columnCount), strategy);
 
         // when
         List<Link> links = line.getLinks();

@@ -1,8 +1,8 @@
 import generator.RandomGenerator;
-import ladder.Height;
+import ladder.Row;
 import ladder.Ladder;
 import ladder.LadderGame;
-import ladder.Width;
+import ladder.Column;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import strategy.RandomLinkStrategy;
@@ -16,8 +16,8 @@ class LadderGameTest {
     @DisplayName("LadderGame 생성 시 내부 Ladder에 최소 하나 이상 연결되어야 한다")
     void shouldGenerateLadderWithAtLeastOneLinked() {
         // given
-        Height height = Height.from(4);
-        Width width = Width.from(4);
+        Row height = Row.from(4);
+        Column width = Column.from(4);
 
         RandomLinkStrategy strategy = new RandomLinkStrategy(new RandomGenerator());
         LadderTuner tuner = new DefaultLadderTuner(strategy);
@@ -39,8 +39,8 @@ class LadderGameTest {
     @DisplayName("LadderGame에서 getLadder 호출 시 Ladder 객체를 반환해야 한다")
     void shouldReturnLadderWhenGetLadderIsCalled() {
         // given
-        Height height = Height.from(3);
-        Width width = Width.from(4);
+        Row height = Row.from(3);
+        Column width = Column.from(4);
 
         RandomLinkStrategy strategy = new RandomLinkStrategy(new RandomGenerator());
         LadderTuner tuner = new DefaultLadderTuner(strategy);

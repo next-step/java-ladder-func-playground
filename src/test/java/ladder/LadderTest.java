@@ -27,7 +27,7 @@ class LadderTest {
 
         // then
         List<Line> lines = ladder.getLines();
-        assertThat(lines).hasSize(height.height());
+        assertThat(lines).hasSize(height.value());
     }
 
     @Test

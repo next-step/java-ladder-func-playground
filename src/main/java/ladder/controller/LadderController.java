@@ -2,6 +2,7 @@ package ladder.controller;
 
 import ladder.model.Ladder;
 import ladder.model.LadderBuilder;
+import ladder.model.LadderResult;
 import ladder.model.LinkConnector;
 import ladder.view.LadderOutputView;
 
@@ -31,13 +32,14 @@ public class LadderController {
         LadderBuilder ladderBuilder = new LadderBuilder(linkConnector);
         Ladder ladder = ladderBuilder.build(width, height);
 
-
         LadderOutputView ladderOutputView = new LadderOutputView();
+        LadderResult ladderResult = new LadderResult();
         List<List<Boolean>> lines = ladder.getLines();
 
         for (List<Boolean> line : lines) {
             ladderOutputView.printLine(line);
         }
 
+        ladderResult.printResult(ladder);
     }
 }

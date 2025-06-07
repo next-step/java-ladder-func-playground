@@ -3,6 +3,7 @@ package view;
 import ladder.Ladder;
 import ladder.Line;
 import ladder.Link;
+import result.Result;
 
 public class OutputView {
     private static final String CONNECTED = "-----";
@@ -31,6 +32,17 @@ public class OutputView {
 
     private static String renderLink(boolean isLinked) {
         return isLinked ? CONNECTED : DISCONNECTED;
+    }
+
+    public static void printResult(Result result) {
+        StringBuilder builder = new StringBuilder();
+        result.result().forEach((start, end) ->
+                builder.append(start)
+                        .append(" -> ")
+                        .append(end)
+                        .append(System.lineSeparator())
+        );
+        System.out.print(builder);
     }
 }
 

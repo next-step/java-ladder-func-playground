@@ -25,7 +25,7 @@ public class Line {
         if (canMoveLeft(index)) {
             return Direction.LEFT;
         }
-        return Direction.STAY;
+        return Direction.DOWN;
     }
 
     private boolean canMoveRight(final int index) {

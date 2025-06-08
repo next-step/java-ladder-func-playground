@@ -21,7 +21,6 @@ public class Line {
         for (boolean point : points) {
             sb.append(isConnected(point));
         }
-
         return sb.toString();
     }
 
@@ -31,5 +30,9 @@ public class Line {
         } else {
             return "     |";
         }
+    }
+
+    public List<Boolean> getPoints() {
+        return points;
     }
 }

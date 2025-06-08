@@ -3,6 +3,8 @@ package controller;
 import domain.Height;
 import domain.Width;
 import domain.dto.RequestLadder;
+import domain.dto.ResponseLadder;
+import domain.dto.ResponseLadderResult;
 import domain.ladder.Ladder;
 import domain.ladder.LadderFactory;
 import strategy.LineGenerator;
@@ -39,7 +41,11 @@ public class LadderController {
 
     private void drawLadder(final Ladder ladder, final Width width) {
         OutputView.printLadderResultTitle();
-        OutputView.drawLadder(ladder);
-        OutputView.printLadderResult(ladder, width);
+
+        ResponseLadder responseLadder = ResponseLadder.from(ladder);
+        OutputView.drawLadder(responseLadder);
+
+        ResponseLadderResult responseResult = ResponseLadderResult.of(ladder, width);
+        OutputView.printLadderResult(responseResult);
     }
 }

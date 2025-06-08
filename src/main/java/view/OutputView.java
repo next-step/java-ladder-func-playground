@@ -1,15 +1,13 @@
 package view;
 
-import domain.Line;
-import domain.Point;
-import domain.Width;
-import domain.ladder.Ladder;
-import java.util.List;
+import domain.dto.ResponseLadder;
+import domain.dto.ResponseLadderResult;
+import domain.dto.ResponseLine;
 
 public final class OutputView {
 
     private static final String LADDER_RESULT_TITLE = "실행결과";
-    private static final String LADDER_RESULT_ARROW = " -> ";
+
     private static final String BLANK = "     ";
     private static final String VERTICAL = "|";
     private static final String HORIZONTAL = "-----";
@@ -23,37 +21,36 @@ public final class OutputView {
         System.out.println();
     }
 
-    public static void drawLadder(final Ladder ladder) {
-        for (Line line : ladder.getLines()) {
+    public static void drawLadder(final ResponseLadder ladder) {
+        for (ResponseLine line : ladder.lines()) {
             drawLine(line);
         }
     }
 
-    private static void drawLine(final Line line) {
+    private static void drawLine(final ResponseLine line) {
         StringBuilder builder = new StringBuilder();
         builder.append(BLANK);
 
-        List<Point> points = line.getPoints();
-        for (int i = 0; i < points.size() - 1; i++) {
+        for (boolean connected : line.connections()) {
             builder.append(VERTICAL);
-            builder.append(drawHorizontalIfConnected(points.get(i)));
+            builder.append(drawHorizontalIfConnected(connected));
         }
+
         builder.append(VERTICAL);
         System.out.println(builder);
     }
 
-    private static String drawHorizontalIfConnected(final Point point) {
-        if (point.right()) {
+    private static String drawHorizontalIfConnected(final boolean connected) {
+        if (connected) {
             return HORIZONTAL;
         }
         return BLANK;
     }
 
-    public static void printLadderResult(final Ladder ladder, final Width width) {
+    public static void printLadderResult(final ResponseLadderResult result) {
         System.out.println();
-        for (int start = 0; start < width.value(); start++) {
-            int end = ladder.move(start);
-            System.out.println(start + LADDER_RESULT_ARROW + end);
+        for (String line : result.results()) {
+            System.out.println(line);
         }
     }
 }

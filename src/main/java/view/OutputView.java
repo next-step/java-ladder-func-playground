@@ -1,6 +1,7 @@
 package view;
 
 import ladder.Ladder;
+import ladder.LadderGame;
 import ladder.Line;
 import ladder.Link;
 import people.People;
@@ -15,43 +16,48 @@ public class OutputView {
     private static final String VERTICAL_BAR = "|";
     private static final String LEFT_MARGIN = "    ";
     private static final int COLUMN_WIDTH = 6;
+    private static final String NEW_LINE = System.lineSeparator();
 
     private OutputView() {
     }
 
     public static void printLadder(Ladder ladder, People people, Prizes prizes) {
-        System.out.println("사다리 결과");
-        System.out.println();
+        StringBuilder sb = new StringBuilder();
+        sb.append(NEW_LINE).append("사다리 결과").append(NEW_LINE);
 
-        printNames(people);
-        ladder.getLines().forEach(OutputView::printLine);
-        printPrizes(prizes);
+        sb.append(namesLine(people));
+        ladder.getLines().forEach(line -> sb.append(ladderLine(line)));
+        sb.append(prizesLine(prizes)).append(NEW_LINE);
+
+        System.out.print(sb);
     }
 
-    private static void printNames(People people) {
+    private static String namesLine(People people) {
         StringBuilder sb = new StringBuilder(LEFT_MARGIN);
         for (Person person : people.values()) {
             sb.append(String.format("%-" + COLUMN_WIDTH + "s", person.name()));
         }
-        System.out.println(sb);
+        sb.append(NEW_LINE);
+        return sb.toString();
     }
 
-    private static void printPrizes(Prizes prizes) {
+    private static String prizesLine(Prizes prizes) {
         StringBuilder sb = new StringBuilder(LEFT_MARGIN);
         for (Prize prize : prizes.values()) {
             sb.append(String.format("%-" + COLUMN_WIDTH + "s", prize.value()));
         }
-        System.out.println(sb);
+        sb.append(NEW_LINE);
+        return sb.toString();
     }
 
-    private static void printLine(Line line) {
+    private static String ladderLine(Line line) {
         StringBuilder sb = new StringBuilder(LEFT_MARGIN);
         for (Link link : line.getLinks()) {
             sb.append(VERTICAL_BAR);
             sb.append(renderLink(link.isLinked()));
         }
-        sb.append(VERTICAL_BAR);
-        System.out.println(sb);
+        sb.append(VERTICAL_BAR).append(NEW_LINE);
+        return sb.toString();
     }
 
     private static String renderLink(boolean isLinked) {
@@ -61,17 +67,45 @@ public class OutputView {
         return DISCONNECTED;
     }
 
-    public static void printResult(LadderResult result) {
+//    public static void printResult(LadderResult result) {
+//        StringBuilder sb = new StringBuilder();
+//        sb.append(NEW_LINE);
+//        result.result().forEach((start, end) ->
+//                sb.append(start)
+//                        .append(" -> ")
+//                        .append(end)
+//                        .append(NEW_LINE)
+//        );
+//        System.out.print(sb);
+//    }
+
+    public static void printSingleResult(String name, People people, Prizes prizes, LadderGame game) {
+        int startIndex = people.indexOf(name);
+        int endIndex = game.play(startIndex);
+        Prize prize = prizes.prizeAt(endIndex);
+
         StringBuilder sb = new StringBuilder();
-        sb.append(System.lineSeparator());
-        result.result().forEach((start, end) ->
-                sb.append(start)
-                        .append(" -> ")
-                        .append(end)
-                        .append(System.lineSeparator())
-        );
+        sb.append(NEW_LINE)
+                .append("실행 결과").append(NEW_LINE)
+                .append(prize.value()).append(NEW_LINE);
         System.out.print(sb);
     }
+
+    public static void printAllResults(People people, Prizes prizes, LadderGame game) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(NEW_LINE).append("실행 결과").append(NEW_LINE);
+        for (Person person : people.values()) {
+            int startIndex = people.indexOf(person.name());
+            int endIndex = game.play(startIndex);
+            Prize prize = prizes.prizeAt(endIndex);
+            sb.append(person.name())
+                    .append(" : ")
+                    .append(prize.value())
+                    .append(NEW_LINE);
+        }
+        System.out.print(sb);
+    }
+
 }
 
 

@@ -1,8 +1,6 @@
 package domain.ladder;
 
-import domain.Direction;
-import domain.Line;
-import domain.Width;
+import domain.player.Players;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -19,8 +17,8 @@ public class Ladder {
         return new Ladder(lines);
     }
 
-    public boolean isFullyConnected(final Width width) {
-        return IntStream.range(0, width.value() - 1)
+    public boolean isFullyConnected(final Players players) {
+        return IntStream.range(0, players.values().size() - 1)
                 .allMatch(this::isConnectedBetween);
     }
 

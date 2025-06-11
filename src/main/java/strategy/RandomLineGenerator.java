@@ -1,7 +1,7 @@
 package strategy;
 
-import domain.Line;
-import domain.Point;
+import domain.ladder.Line;
+import domain.ladder.Point;
 import java.util.ArrayList;
 import java.util.List;
 

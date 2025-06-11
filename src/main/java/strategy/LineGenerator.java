@@ -1,6 +1,6 @@
 package strategy;
 
-import domain.Line;
+import domain.ladder.Line;
 
 public interface LineGenerator {
     Line generate(int width);

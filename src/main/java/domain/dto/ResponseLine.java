@@ -1,7 +1,7 @@
 package domain.dto;
 
-import domain.Line;
-import domain.Point;
+import domain.ladder.Line;
+import domain.ladder.Point;
 import java.util.List;
 
 public record ResponseLine(

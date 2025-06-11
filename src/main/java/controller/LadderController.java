@@ -1,12 +1,12 @@
 package controller;
 
-import domain.Height;
-import domain.Width;
-import domain.dto.RequestLadder;
+import domain.dto.RequestLadderGame;
 import domain.dto.ResponseLadder;
 import domain.dto.ResponseLadderResult;
+import domain.ladder.Height;
 import domain.ladder.Ladder;
 import domain.ladder.LadderFactory;
+import domain.player.Players;
 import strategy.LineGenerator;
 import strategy.PointGenerator;
 import strategy.RandomLineGenerator;
@@ -17,21 +17,22 @@ import view.OutputView;
 public class LadderController {
 
     public void play() {
-        RequestLadder requestLadder = inputLadderSettings();
-        Width width = requestLadder.toWidth();
-        Height height = requestLadder.toHeight();
+        RequestLadderGame requestLadderGame = inputLadderSettings();
+        Players players = requestLadderGame.toPlayers();
+        Height height = requestLadderGame.toHeight();
 
         LineGenerator lineGenerator = createLineGenerator();
         LadderFactory factory = new LadderFactory();
-        Ladder ladder = factory.draw(width, height, lineGenerator);
+        Ladder ladder = factory.draw(players, height, lineGenerator);
 
-        drawLadder(ladder, width);
+        drawLadder(ladder, players);
     }
 
-    private RequestLadder inputLadderSettings() {
-        String width = InputView.inputLadderWidth();
+    private RequestLadderGame inputLadderSettings() {
+        String playerNames = InputView.inputPlayerNames();
+        String runningResult = InputView.inputRunningResult();
         String height = InputView.inputLadderHeight();
-        return new RequestLadder(width, height);
+        return new RequestLadderGame(playerNames, runningResult, height);
     }
 
     private LineGenerator createLineGenerator() {
@@ -39,13 +40,13 @@ public class LadderController {
         return new RandomLineGenerator(pointGenerator);
     }
 
-    private void drawLadder(final Ladder ladder, final Width width) {
+    private void drawLadder(final Ladder ladder, final Players players) {
         OutputView.printLadderResultTitle();
 
         ResponseLadder responseLadder = ResponseLadder.from(ladder);
         OutputView.drawLadder(responseLadder);
 
-        ResponseLadderResult responseResult = ResponseLadderResult.of(ladder, width);
+        ResponseLadderResult responseResult = ResponseLadderResult.of(ladder, players);
         OutputView.printLadderResult(responseResult);
     }
 }

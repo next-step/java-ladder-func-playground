@@ -21,6 +21,10 @@ public class Prizes {
         return prizes.size();
     }
 
+    public Prize prizeAt(int index) {
+        return prizes.get(index);
+    }
+
     public List<Prize> values() {
         return Collections.unmodifiableList(prizes);
     }

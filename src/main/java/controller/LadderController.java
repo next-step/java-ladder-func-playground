@@ -6,7 +6,6 @@ import ladder.Row;
 import ladder.LadderGame;
 import ladder.Column;
 import people.People;
-import result.LadderResult;
 import result.Prizes;
 import strategy.LinkStrategy;
 import strategy.RandomLinkStrategy;
@@ -16,9 +15,7 @@ import view.InputParser;
 import view.InputView;
 import view.OutputView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LadderController {
     public void run() {
@@ -44,12 +41,33 @@ public class LadderController {
 
         OutputView.printLadder(game.getLadder(), people, prizes);
 
-        //사다리 게임 결과 출력
-        Map<Integer, Integer> resultMap = new HashMap<>();
-        for (int start = 0; start < columns.value(); start++) {
-            resultMap.put(start, game.play(start));
+        //5. 사다리 실행 결과
+//        Map<Integer, Integer> resultMap = new HashMap<>();
+//        for (int start = 0; start < columns.value(); start++) {
+//            resultMap.put(start, game.play(start));
+//        }
+//        LadderResult result = new LadderResult(resultMap);
+//        OutputView.printResult(result);
+
+        // 6. 결과 보기
+        while (getResult(people, prizes, game)) {
         }
-        LadderResult result = new LadderResult(resultMap);
-        OutputView.printResult(result);
+    }
+
+    private boolean getResult(People people, Prizes prizes, LadderGame game){
+        String resultName = InputView.readResultName().strip();
+
+        if ("all".equalsIgnoreCase(resultName)) {
+            OutputView.printAllResults(people, prizes, game);
+            return false;
+        }
+
+        if (people.contains(resultName)) {
+            OutputView.printSingleResult(resultName, people, prizes, game);
+            return true;
+        }
+
+        System.out.println("존재하지 않는 이름입니다. 다시 입력해주세요.");
+        return true;
     }
 }

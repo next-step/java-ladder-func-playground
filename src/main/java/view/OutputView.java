@@ -36,7 +36,7 @@ public class OutputView {
 
     public static void printResult(LadderResult result) {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n");
+        sb.append(System.lineSeparator());
         result.result().forEach((start, end) ->
                 sb.append(start)
                         .append(" -> ")

@@ -28,7 +28,7 @@ public class InputView {
     }
 
     public static String readResultName(){
-        System.out.print("결과를 보고 싶은 사람은?" + NEW_LINE);
+        System.out.print(NEW_LINE + "결과를 보고 싶은 사람은?" + NEW_LINE);
         return scanner.nextLine();
     }
 

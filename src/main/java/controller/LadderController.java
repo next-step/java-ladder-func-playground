@@ -42,7 +42,7 @@ public class LadderController {
         LadderTuner tuner = new DefaultLadderTuner(strategy);
         LadderGame game = new LadderGame(rows, columns, strategy, tuner);
 
-        OutputView.printLadder(game.getLadder());
+        OutputView.printLadder(game.getLadder(), people, prizes);
 
         //사다리 게임 결과 출력
         Map<Integer, Integer> resultMap = new HashMap<>();

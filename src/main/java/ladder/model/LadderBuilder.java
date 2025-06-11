@@ -3,7 +3,6 @@ package ladder.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.IntStream;
 
 public class LadderBuilder {
     private final LinkConnector linkConnector;
@@ -15,7 +14,6 @@ public class LadderBuilder {
 
     public Ladder build(int width, int height) {
         List<List<Boolean>> generatedLines = new ArrayList<>();
-
         generatedLines.add(linkConnector.generate(width));
 
         int col = width - 1;
@@ -27,19 +25,27 @@ public class LadderBuilder {
         }
 
         fillEmptySpace(generatedLines, width, height);
-
         return new Ladder(generatedLines);
     }
 
     private List<Boolean> duplicationLine(int width, List<Boolean> prevLine, int cols) {
-        List<Boolean> nextLine = linkConnector.generate(width);
-
-        boolean b = IntStream.range(0, cols)
-                .anyMatch(j -> prevLine.get(j) && nextLine.get(j));
-
-        if (b) {
-            return duplicationLine(width, prevLine, cols);
+        if (cols <= 1) {
+            return linkConnector.generate(width);
         }
+
+        List<Boolean> nextLine;
+        boolean collision;
+        do {
+            nextLine = linkConnector.generate(width);
+            collision = false;
+            for (int j = 0; j < cols; j++) {
+                if (prevLine.get(j) && nextLine.get(j)) {
+                    collision = true;
+                    break;
+                }
+            }
+        } while (collision);
+
         return nextLine;
     }
 
@@ -62,7 +68,7 @@ public class LadderBuilder {
 
         for (int cols : missingCols) {
             int randomRow = random.nextInt(height);
-            lines.get(randomRow).set(col, true);
+            lines.get(randomRow).set(cols, true);
         }
     }
 }

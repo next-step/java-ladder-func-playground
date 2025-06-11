@@ -6,6 +6,10 @@ import tuner.LadderTuner;
 public class LadderGame {
     private final Ladder ladder;
 
+    public LadderGame(Ladder ladder) {
+        this.ladder = ladder;
+    }
+
     public LadderGame(Row rows, Column columns, LinkStrategy linkStrategy, LadderTuner tuner) {
         this.ladder = new Ladder(rows, columns, linkStrategy, tuner);
     }

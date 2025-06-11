@@ -19,10 +19,6 @@ public class Results {
         );
     }
 
-    public Result get(final int index) {
-        return values.get(index);
-    }
-
     public List<Result> asList() {
         return Collections.unmodifiableList(values);
     }

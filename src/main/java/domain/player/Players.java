@@ -43,7 +43,7 @@ public class Players {
 
     private Set<String> uniqueNamesFrom(final List<Player> players) {
         return players.stream()
-                .map(player -> player.getName().value())
+                .map(player -> player.name().value())
                 .collect(toSet());
     }
 

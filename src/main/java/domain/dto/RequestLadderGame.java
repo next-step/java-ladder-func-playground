@@ -20,6 +20,12 @@ public record RequestLadderGame(
         validateEmptyHeight(height);
     }
 
+    private static void validatePlayerCountEqualsResultsCount(final int playerCount, final List<String> results) {
+        if (playerCount != results.size()) {
+            throw new IllegalArgumentException("실행 결과 수는 플레이어 수와 동일해야 합니다.");
+        }
+    }
+
     private void validateEmptyPlayerNames(final String playerNames) {
         if (playerNames == null || playerNames.isBlank()) {
             throw new IllegalArgumentException("플레이어들의 이름을 입력해야 합니다.");
@@ -60,11 +66,5 @@ public record RequestLadderGame(
 
         validatePlayerCountEqualsResultsCount(playerCount, results);
         return Results.from(results);
-    }
-
-    private static void validatePlayerCountEqualsResultsCount(final int playerCount, final List<String> results) {
-        if (playerCount != results.size()) {
-            throw new IllegalArgumentException("실행 결과 수는 플레이어 수와 동일해야 합니다.");
-        }
     }
 }

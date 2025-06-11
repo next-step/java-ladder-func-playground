@@ -23,11 +23,11 @@ public class OutputView {
 
     public static void printLadder(Ladder ladder, People people, Prizes prizes) {
         StringBuilder sb = new StringBuilder();
-        sb.append(NEW_LINE).append("사다리 결과").append(NEW_LINE);
 
+        sb.append(NEW_LINE).append("사다리 결과").append(NEW_LINE).append(NEW_LINE);
         sb.append(namesLine(people));
         ladder.getLines().forEach(line -> sb.append(ladderLine(line)));
-        sb.append(prizesLine(prizes)).append(NEW_LINE);
+        sb.append(prizesLine(prizes));
 
         System.out.print(sb);
     }

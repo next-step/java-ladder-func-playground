@@ -10,6 +10,8 @@ import result.LadderResult;
 import result.Prize;
 import result.Prizes;
 
+import java.util.Map;
+
 public class OutputView {
     private static final String CONNECTED = "-----";
     private static final String DISCONNECTED = "     ";
@@ -79,30 +81,20 @@ public class OutputView {
 //        System.out.print(sb);
 //    }
 
-    public static void printSingleResult(String name, People people, Prizes prizes, LadderGame game) {
-        int startIndex = people.indexOf(name);
-        int endIndex = game.play(startIndex);
-        Prize prize = prizes.prizeAt(endIndex);
-
+    public static void printSingleResult(String prizeValue) {
         StringBuilder sb = new StringBuilder();
-        sb.append(NEW_LINE)
-                .append("실행 결과").append(NEW_LINE)
-                .append(prize.value()).append(NEW_LINE);
+        sb.append(System.lineSeparator())
+                .append("실행 결과").append(System.lineSeparator())
+                .append(prizeValue).append(System.lineSeparator());
         System.out.print(sb);
     }
 
-    public static void printAllResults(People people, Prizes prizes, LadderGame game) {
+    public static void printAllResults(Map<String, String> resultMap) {
         StringBuilder sb = new StringBuilder();
-        sb.append(NEW_LINE).append("실행 결과").append(NEW_LINE);
-        for (Person person : people.values()) {
-            int startIndex = people.indexOf(person.name());
-            int endIndex = game.play(startIndex);
-            Prize prize = prizes.prizeAt(endIndex);
-            sb.append(person.name())
-                    .append(" : ")
-                    .append(prize.value())
-                    .append(NEW_LINE);
-        }
+        sb.append(System.lineSeparator()).append("실행 결과").append(System.lineSeparator());
+        resultMap.forEach((name, prize) ->
+                sb.append(name).append(" : ").append(prize).append(System.lineSeparator())
+        );
         System.out.print(sb);
     }
 

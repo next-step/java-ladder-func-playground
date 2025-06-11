@@ -15,7 +15,9 @@ import view.InputParser;
 import view.InputView;
 import view.OutputView;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LadderController {
     public void run() {
@@ -58,12 +60,22 @@ public class LadderController {
         String resultName = InputView.readResultName().strip();
 
         if ("all".equalsIgnoreCase(resultName)) {
-            OutputView.printAllResults(people, prizes, game);
+            Map<String, String> resultMap = new LinkedHashMap<>();
+            for (people.Person person : people.values()) {
+                int startIndex = people.indexOf(person.name());
+                int endIndex = game.play(startIndex);
+                String prizeValue = prizes.prizeAt(endIndex).value();
+                resultMap.put(person.name(), prizeValue);
+            }
+            OutputView.printAllResults(resultMap);
             return false;
         }
 
         if (people.contains(resultName)) {
-            OutputView.printSingleResult(resultName, people, prizes, game);
+            int startIndex = people.indexOf(resultName);
+            int endIndex = game.play(startIndex);
+            String prizeValue = prizes.prizeAt(endIndex).value();
+            OutputView.printSingleResult(prizeValue);
             return true;
         }
 

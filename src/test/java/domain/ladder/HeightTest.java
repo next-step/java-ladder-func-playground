@@ -1,7 +1,7 @@
-package domain;
+package domain.ladder;
 
-import static domain.Height.MAX_LADDER_HEIGHT_SIZE;
-import static domain.Height.MIN_LADDER_HEIGHT_SIZE;
+import static domain.ladder.Height.MAX_LADDER_HEIGHT_SIZE;
+import static domain.ladder.Height.MIN_LADDER_HEIGHT_SIZE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;

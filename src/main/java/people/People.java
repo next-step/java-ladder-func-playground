@@ -1,5 +1,6 @@
 package people;
 
+import java.util.Collections;
 import java.util.List;
 
 public class People {
@@ -18,5 +19,9 @@ public class People {
 
     public int size() {
         return people.size();
+    }
+
+    public List<Person> values() {
+        return Collections.unmodifiableList(people);
     }
 }

@@ -1,7 +1,6 @@
 package result;
 
-
-
+import java.util.Collections;
 import java.util.List;
 
 public class Prizes {
@@ -20,5 +19,9 @@ public class Prizes {
 
     public int size() {
         return prizes.size();
+    }
+
+    public List<Prize> values() {
+        return Collections.unmodifiableList(prizes);
     }
 }

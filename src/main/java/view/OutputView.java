@@ -3,21 +3,45 @@ package view;
 import ladder.Ladder;
 import ladder.Line;
 import ladder.Link;
+import people.People;
+import people.Person;
 import result.LadderResult;
+import result.Prize;
+import result.Prizes;
 
 public class OutputView {
     private static final String CONNECTED = "-----";
     private static final String DISCONNECTED = "     ";
     private static final String VERTICAL_BAR = "|";
     private static final String LEFT_MARGIN = "    ";
+    private static final int COLUMN_WIDTH = 6;
 
     private OutputView() {
     }
 
-    public static void printLadder(Ladder ladder) {
-        System.out.println("실행결과");
+    public static void printLadder(Ladder ladder, People people, Prizes prizes) {
+        System.out.println("사다리 결과");
         System.out.println();
+
+        printNames(people);
         ladder.getLines().forEach(OutputView::printLine);
+        printPrizes(prizes);
+    }
+
+    private static void printNames(People people) {
+        StringBuilder sb = new StringBuilder(LEFT_MARGIN);
+        for (Person person : people.values()) {
+            sb.append(String.format("%-" + COLUMN_WIDTH + "s", person.name()));
+        }
+        System.out.println(sb);
+    }
+
+    private static void printPrizes(Prizes prizes) {
+        StringBuilder sb = new StringBuilder(LEFT_MARGIN);
+        for (Prize prize : prizes.values()) {
+            sb.append(String.format("%-" + COLUMN_WIDTH + "s", prize.value()));
+        }
+        System.out.println(sb);
     }
 
     private static void printLine(Line line) {
@@ -31,7 +55,10 @@ public class OutputView {
     }
 
     private static String renderLink(boolean isLinked) {
-        return isLinked ? CONNECTED : DISCONNECTED;
+        if(isLinked){
+            return CONNECTED;
+        }
+        return DISCONNECTED;
     }
 
     public static void printResult(LadderResult result) {

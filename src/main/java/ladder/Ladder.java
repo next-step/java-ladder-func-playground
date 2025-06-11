@@ -24,13 +24,19 @@ public class Ladder {
     }
 
     public void addLinkAt(int rowIndex, int colIndex) {
-
         lines.get(rowIndex).linkAt(colIndex);
     }
 
     public void removeLinkAt(int rowIndex, int colIndex) {
-
         lines.get(rowIndex).unlinkAt(colIndex);
+    }
+
+    public int rowCount() {
+        return lines.size();
+    }
+
+    public Line lineAt(int row) {
+        return lines.get(row);
     }
 
     public List<Line> getLines() {

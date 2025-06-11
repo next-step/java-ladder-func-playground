@@ -16,20 +16,25 @@ public class LadderGame {
 
     public int play(int start) {
         int position = start;
-        for (int row = 0; row < ladder.getLines().size(); row++) {
-            position = movePosition(position, ladder.getLines().get(row));
+        for (int row = 0; row < ladder.rowCount(); row++) {
+            position = movePosition(position, ladder.lineAt(row));
         }
         return position;
     }
 
     private int movePosition(int position, Line line) {
+        Direction direction = getDirection(position, line);
+        return direction.move(position);
+    }
+
+    private Direction getDirection(int position, Line line) {
         if (canMoveLeft(position, line)) {
-            return position - 1;
+            return Direction.LEFT;
         }
         if (canMoveRight(position, line)) {
-            return position + 1;
+            return Direction.RIGHT;
         }
-        return position;
+        return Direction.DOWN;
     }
 
     private boolean canMoveLeft(int position, Line line) {

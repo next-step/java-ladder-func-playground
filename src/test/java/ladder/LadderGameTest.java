@@ -1,8 +1,6 @@
+package ladder;
+
 import generator.RandomGenerator;
-import ladder.Row;
-import ladder.Ladder;
-import ladder.LadderGame;
-import ladder.Column;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import strategy.RandomLinkStrategy;

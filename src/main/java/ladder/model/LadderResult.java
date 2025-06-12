@@ -3,29 +3,29 @@ package ladder.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Results {
+public class LadderResult {
 
     private final Participants participants;
-    private final List<String> results;
+    private final List<Result> results;
 
-    public Results(Participants participants, List<String> results) {
+    public LadderResult(Participants participants, List<Result> results) {
         this.participants = participants;
         this.results = results;
     }
 
-    public List<String> getAll() {
+    public List<Result> getAll() {
         return new ArrayList<>(results);
     }
 
     public List<Name> getParticipants() {
-        return participants.values();
+        return participants.getParticipantsNameList();
     }
 
-    public String getResult(String participant) {
-        return participants.values().stream()
+    public Result getResult(String participant) {
+        return participants.getParticipantsNameList().stream()
             .filter(name -> name.matches(participant))
             .findFirst()
-            .map(name -> results.get(participants.values().indexOf(name)))
+            .map(name -> results.get(participants.getParticipantsNameList().indexOf(name)))
             .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 참가자입니다."));
     }
 }

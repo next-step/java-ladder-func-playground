@@ -20,17 +20,14 @@ public class Ladder {
         );
     }
 
-    public void draw() {
-        for (Line line : lines) {
-            line.draw();
-        }
+    public List<Line> getLines() {
+        return lines;
     }
 
-    public List<Integer> result() {
+    public List<Point> result() {
         int width = lines.get(0).getPoints().size() + 1;
         return IntStream.range(0, width)
-            .map(this::getEndPoint)
-            .boxed()
+            .mapToObj(start -> new Point(start, getEndPoint(start))) // 출발점과 도착점을 Point로 묶음
             .collect(Collectors.toList());
     }
 

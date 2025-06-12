@@ -1,9 +1,7 @@
 package ladder.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Participants {
 
@@ -13,20 +11,15 @@ public class Participants {
         this.names = names;
     }
 
-    public static Participants from(String input) {
-        return new Participants(
-            Arrays.stream(input.split(","))
-                  .map(String::trim)
-                  .map(Name::new)
-                  .collect(Collectors.toList())
-        );
+    public static Participants of(List<Name> names) {
+        return new Participants(new ArrayList<>(names));
     }
 
     public int size() {
         return names.size();
     }
 
-    public List<Name> values() {
+    public List<Name> getParticipantsNameList() {
         return new ArrayList<>(names);
     }
 }

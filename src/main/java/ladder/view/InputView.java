@@ -3,22 +3,32 @@ package ladder.view;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import ladder.model.Name;
 import ladder.model.Participants;
+import ladder.model.Result;
 
 public class InputView {
 
-    private static final Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     public Participants inputParticipants() {
         System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
         String input = scanner.nextLine();
-        return Participants.from(input);
+        List<Name> names = Arrays.stream(input.split(","))
+            .map(String::trim)
+            .map(Name::new)
+            .collect(Collectors.toList());
+        return Participants.of(names);
     }
 
-    public List<String> inputResults() {
+    public List<Result> inputResults() {
         System.out.println("\n실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
         String input = scanner.nextLine();
-        return Arrays.asList(input.split(","));
+        return Arrays.stream(input.split(","))
+            .map(String::trim)
+            .map(Result::new)
+            .collect(Collectors.toList());
     }
 
     public int inputHeight() {

@@ -3,6 +3,7 @@ package domain.ladder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import domain.player.Players;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -45,9 +46,11 @@ class LadderTest {
         );
 
         Ladder ladder = Ladder.from(lines);
+        List<String> names = List.of("dd","dd2","dd3");
+
 
         // when & then
-//        assertThat(ladder.isFullyConnected(Players.from(3))).isTrue();
+        assertThat(ladder.isFullyConnected(Players.from(names))).isTrue();
     }
 
     @Test
@@ -60,9 +63,10 @@ class LadderTest {
         );
 
         Ladder ladder = Ladder.from(lines);
+        List<String> names = List.of("dd","dd2","dd3");
 
         // when & then
-//        assertThat(ladder.isFullyConnected(Players.from(3))).isFalse();
+        assertThat(ladder.isFullyConnected(Players.from(names))).isFalse();
     }
 
     @Test

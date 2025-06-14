@@ -15,7 +15,7 @@ public class Line {
     }
 
     public boolean hasConnectionAt(final int index) {
-        return points.get(index).right();
+        return points.get(index).isConnectRight();
     }
 
     public Direction directionAt(final int index) {
@@ -29,11 +29,11 @@ public class Line {
     }
 
     private boolean canMoveRight(final int index) {
-        return index < points.size() - 1 && points.get(index).right();
+        return index < points.size() - 1 && points.get(index).isConnectRight();
     }
 
     private boolean canMoveLeft(final int index) {
-        return 0 < index && points.get(index - 1).right();
+        return 0 < index && points.get(index - 1).isConnectRight();
     }
 
     public List<Point> getPoints() {

@@ -19,8 +19,8 @@ class PointTest {
         Point falsePoint = Point.from(isRightFalse);
 
         // then
-        assertThat(truePoint.right()).isTrue();
-        assertThat(falsePoint.right()).isFalse();
+        assertThat(truePoint.isConnectRight()).isTrue();
+        assertThat(falsePoint.isConnectRight()).isFalse();
     }
 
     @Test
@@ -33,7 +33,7 @@ class PointTest {
         Point next = point.connectNext(true);
 
         // then
-        assertThat(next.right()).isFalse();
+        assertThat(next.isConnectRight()).isFalse();
     }
 
     @Test
@@ -47,7 +47,7 @@ class PointTest {
         Point nextFalse = point.connectNext(false);
 
         // then
-        assertThat(nextTrue.right()).isTrue();
-        assertThat(nextFalse.right()).isFalse();
+        assertThat(nextTrue.isConnectRight()).isTrue();
+        assertThat(nextFalse.isConnectRight()).isFalse();
     }
 }

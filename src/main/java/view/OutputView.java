@@ -67,10 +67,10 @@ public final class OutputView {
         System.out.println();
     }
 
-    public static void printSingleLadderResult(final LadderResultBoard resultBoard, final String player) {
+    public static void printSingleLadderResult(final LadderResultBoard resultBoard, final String playerName) {
         System.out.println();
         System.out.println(RUNNING_RESULT_TITLE);
-        String result = resultBoard.findResultOf(player)
+        String result = resultBoard.findResultOf(playerName)
                 .orElse("존재하지 않는 플레이어입니다.");
         System.out.println(result);
     }
@@ -78,11 +78,11 @@ public final class OutputView {
     public static void printAllLadderResult(final LadderResultBoard resultBoard) {
         System.out.println();
         System.out.println(RUNNING_RESULT_TITLE);
-        resultBoard.getAllResults().forEach(result ->
-                System.out.println(result.player() + " : " + result.result()));
+        resultBoard.getAllResults().forEach(ladderResult ->
+                System.out.println(ladderResult.playerName() + " : " + ladderResult.result()));
     }
 
-    private static String padding(String text) {
+    private static String padding(final String text) {
         return String.format("%-" + CELL_WIDTH + "s", text);
     }
 }

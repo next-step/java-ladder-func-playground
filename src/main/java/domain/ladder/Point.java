@@ -1,7 +1,7 @@
 package domain.ladder;
 
 public record Point(
-        boolean right
+        boolean isConnectRight
 ) {
 
     public static Point from(final boolean right) {
@@ -9,7 +9,7 @@ public record Point(
     }
 
     public Point connectNext(final boolean canConnectRight) {
-        if (this.right) {
+        if (this.isConnectRight) {
             return new Point(false);
         }
         return new Point(canConnectRight);

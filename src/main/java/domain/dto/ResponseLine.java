@@ -11,7 +11,7 @@ public record ResponseLine(
     public static ResponseLine from(final Line line) {
         List<Boolean> connections = line.getPoints().stream()
                 .limit(line.getPoints().size() - 1)
-                .map(Point::right)
+                .map(Point::isConnectRight)
                 .toList();
         return new ResponseLine(connections);
     }

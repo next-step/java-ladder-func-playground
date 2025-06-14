@@ -24,7 +24,7 @@ class LineTest {
 
         // then
         assertThat(points)
-                .extracting(Point::right)
+                .extracting(Point::isConnectRight)
                 .containsExactly(true, false, true, false);
     }
 

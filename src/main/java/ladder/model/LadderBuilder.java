@@ -32,21 +32,28 @@ public class LadderBuilder {
         if (cols <= 1) {
             return linkConnector.generate(width);
         }
+        return createLine(width, prevLine, cols);
+    }
 
-        List<Boolean> nextLine;
-        boolean collision;
-        do {
+    private List<Boolean> createLine(int width, List<Boolean> prevLine, int cols) {
+        List<Boolean> nextLine = linkConnector.generate(width);
+        boolean confilct = hasConflict(prevLine, nextLine, cols);
+
+        while (confilct) {
             nextLine = linkConnector.generate(width);
-            collision = false;
-            for (int j = 0; j < cols; j++) {
-                if (prevLine.get(j) && nextLine.get(j)) {
-                    collision = true;
-                    break;
-                }
-            }
-        } while (collision);
-
+            confilct = hasConflict(prevLine, nextLine, cols);
+        }
         return nextLine;
+    }
+
+    private boolean hasConflict(List<Boolean> prevLine, List<Boolean> nextLine, int cols) {
+        int num = 0;
+        boolean confilct = false;
+        while (num < cols) {
+            confilct = confilct || (prevLine.get(num) && nextLine.get(num));
+            num++;
+        }
+        return confilct;
     }
 
     private void fillEmptySpace(List<List<Boolean>> lines, int width, int height) {

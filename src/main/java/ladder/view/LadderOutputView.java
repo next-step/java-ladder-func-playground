@@ -4,8 +4,8 @@ import java.util.List;
 
 public class LadderOutputView {
 
-    private static String LEG = "----";
-    private static String BLANK = "    ";
+    private final static String LEG = "----";
+    private final static String BLANK = "    ";
 
     public void printLine(List<Boolean> line) {
         if (line == null || line.isEmpty()) {

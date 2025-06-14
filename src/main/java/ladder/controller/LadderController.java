@@ -16,21 +16,41 @@ public class LadderController {
     private final LadderOutputView ladderOutputView = new LadderOutputView();
     private final LadderResult ladderResult = new LadderResult();
 
+
     public void run() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
-        String[] ArrayNames = scanner.nextLine().split(",");
-        List<String> names = new ArrayList<>();
-        for (String name : ArrayNames) {
-            name = name.trim();
-            names.add(name);
+        List<String> names;
+        while (true) {
+            System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요, 이름은 5글자까지 허용합니다.)");
+            String[] ArrayNames = scanner.nextLine().split(",");
+            names = Arrays.stream(ArrayNames)
+                    .map(String::trim)
+                    .toList();
+
+            boolean nameCount = names.stream().anyMatch(name -> name.length() > 5);
+
+            if (nameCount) {
+                System.out.println("이름은 5글자 이내로 입력하세요.");
+                continue;
+            }
+            break;
         }
 
         System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
         List<String> results = Arrays.stream(scanner.nextLine().split(","))
                 .map(String::trim)
                 .toList();
+        // 실행 결과에 기본값을 넣어준다
+        if (results.size() < names.size()) {
+            int different = names.size() - results.size();
+            results = new ArrayList<>(results);
+            for (int i = 0; i < different; i++) {
+                results.add("꽝");
+            }
+        } else if (results.size() > names.size()) {
+            results = results.subList(0, names.size());
+        }
 
         System.out.println("최대 사다리 높이는 몇 개인가요?");
         int height = scanner.nextInt();
@@ -44,8 +64,9 @@ public class LadderController {
         LadderBuilder builder = new LadderBuilder(connector);
         Ladder ladder = builder.build(width, height);
 
+        String LADDER_INTERVAL = "%-5s";
         for (String name : names) {
-            System.out.print(String.format("%-5s", name));
+            System.out.printf(LADDER_INTERVAL, name);
         }
         System.out.println();
 
@@ -54,13 +75,13 @@ public class LadderController {
         }
 
         for (String result : results) {
-            System.out.print(String.format("%-5s", result));
+            System.out.printf(LADDER_INTERVAL, result);
         }
         System.out.println();
 
         while (true) {
             System.out.println("결과를 보고 싶은 사람은?");
-            String result = scanner.next().trim();
+            String result = scanner.next().strip();
             boolean isAll = "all".equalsIgnoreCase(result);
             boolean isName = names.contains(result);
 
@@ -76,9 +97,9 @@ public class LadderController {
                 int[] resultLadder = ladderResult.resultIndex(ladder);
                 System.out.println("실행 결과");
                 System.out.println(results.get(resultLadder[idx]));
-                break;
+                continue;
             }
-            System.out.println("유효한 이름이나 all을 입력해주세요.");
+            System.out.println("작성한 이름이나 all을 입력해주세요.");
         }
     }
 }

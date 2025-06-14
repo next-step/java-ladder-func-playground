@@ -13,34 +13,30 @@ import java.util.stream.IntStream;
 
 public class LadderResultBoard {
 
-    private final List<LadderResult> ladderResults;
-    private final Map<String, LadderResult> ladderResultCache;
+    private final Map<String, LadderResult> playerResultMap;
 
-    public LadderResultBoard(final List<LadderResult> ladderResults) {
-        this.ladderResults = List.copyOf(ladderResults);
-        this.ladderResultCache = ladderResults.stream()
-                .collect(toMap(LadderResult::player, Function.identity()));
+    private LadderResultBoard(final Map<String, LadderResult> playerResultMap) {
+        this.playerResultMap = Map.copyOf(playerResultMap);
     }
 
     public static LadderResultBoard of(final Players players, final Ladder ladder, final Results results) {
-        List<LadderResult> ladderResults = IntStream.range(0, players.size())
+        Map<String, LadderResult> playerResultMap = IntStream.range(0, players.size())
                 .mapToObj(startIndex -> {
                     String playerName = players.name(startIndex);
                     int destinationIndex = ladder.move(startIndex);
                     String resultValue = results.value(destinationIndex);
                     return new LadderResult(playerName, resultValue);
                 })
-                .toList();
-
-        return new LadderResultBoard(ladderResults);
+                .collect(toMap(LadderResult::playerName, Function.identity()));
+        return new LadderResultBoard(playerResultMap);
     }
 
     public Optional<String> findResultOf(final String playerName) {
-        return Optional.ofNullable(ladderResultCache.get(playerName))
+        return Optional.ofNullable(playerResultMap.get(playerName))
                 .map(LadderResult::result);
     }
 
     public List<LadderResult> getAllResults() {
-        return ladderResults;
+        return List.copyOf(playerResultMap.values());
     }
 }

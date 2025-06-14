@@ -7,7 +7,8 @@ public class InputView {
     private static final String NEW_LINE = System.lineSeparator();
 
     public static String readName(){
-        System.out.print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)" + NEW_LINE);
+        System.out.print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)" + NEW_LINE +
+                "※ 중복된 이름은 '이름_1', '이름_2' 형식으로 입력해주세요." + NEW_LINE);
         return scanner.nextLine();
     }
 

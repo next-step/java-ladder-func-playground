@@ -12,6 +12,7 @@ import java.util.function.Function;
 import java.util.stream.IntStream;
 
 public class LadderResultBoard {
+
     private final List<LadderResult> ladderResults;
     private final Map<String, LadderResult> ladderResultCache;
 
@@ -22,11 +23,11 @@ public class LadderResultBoard {
     }
 
     public static LadderResultBoard of(final Players players, final Ladder ladder, final Results results) {
-        List<LadderResult> ladderResults = IntStream.range(0, players.values().size())
+        List<LadderResult> ladderResults = IntStream.range(0, players.size())
                 .mapToObj(startIndex -> {
-                    String playerName = players.values().get(startIndex).name().value();
+                    String playerName = players.name(startIndex);
                     int destinationIndex = ladder.move(startIndex);
-                    String resultValue = results.asList().get(destinationIndex).value();
+                    String resultValue = results.value(destinationIndex);
                     return new LadderResult(playerName, resultValue);
                 })
                 .toList();

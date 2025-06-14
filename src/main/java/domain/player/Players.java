@@ -53,6 +53,14 @@ public class Players {
         }
     }
 
+    public int size() {
+        return players.size();
+    }
+
+    public String name(final int index) {
+        return players.get(index).name().value();
+    }
+
     public List<Player> values() {
         return Collections.unmodifiableList(players);
     }

@@ -69,18 +69,6 @@ public class OutputView {
         return DISCONNECTED;
     }
 
-//    public static void printResult(LadderResult result) {
-//        StringBuilder sb = new StringBuilder();
-//        sb.append(NEW_LINE);
-//        result.result().forEach((start, end) ->
-//                sb.append(start)
-//                        .append(" -> ")
-//                        .append(end)
-//                        .append(NEW_LINE)
-//        );
-//        System.out.print(sb);
-//    }
-
     public static void printSingleResult(String prizeValue) {
         StringBuilder sb = new StringBuilder();
         sb.append(System.lineSeparator())

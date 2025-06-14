@@ -9,10 +9,6 @@ import java.util.List;
 public class Ladder {
     private final List<Line> lines;
 
-    public Ladder(List<Line> lines) {
-        this.lines = new ArrayList<>(lines);
-    }
-
     public Ladder(Row rows, Column columns, LinkStrategy strategy, LadderTuner tuner) {
         //1. 일단 Random 기반으로 사다리 완전체 만듦
         this.lines = new ArrayList<>();

@@ -31,6 +31,10 @@ public class LadderController {
         List<String> results = InputParser.parseCommaSeparated(InputView.readPrize());
         Prizes prizes = Prizes.from(results);
 
+        if (names.size() != results.size()) {
+            throw new IllegalArgumentException("참여자 수와 실행 결과 수가 일치하지 않습니다.");
+        }
+
         //3. 최대 사다리 높이 입력
         Row rows = Row.from(InputView.readLadderHeight());
 

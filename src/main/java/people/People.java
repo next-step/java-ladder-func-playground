@@ -33,6 +33,10 @@ public class People {
                 .anyMatch(person -> person.name().equals(name));
     }
 
+    public Person personAt(int index) {
+        return people.get(index);
+    }
+
     public int indexOf(String name) {
         return IntStream.range(0, people.size())
                 .filter(i -> people.get(i).isSameName(name))

@@ -6,6 +6,9 @@ import ladder.Row;
 import ladder.LadderGame;
 import ladder.Column;
 import people.People;
+import people.Person;
+import result.LadderResult;
+import result.Prize;
 import result.Prizes;
 import strategy.LinkStrategy;
 import strategy.RandomLinkStrategy;
@@ -15,6 +18,7 @@ import view.InputParser;
 import view.InputView;
 import view.OutputView;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,42 +48,28 @@ public class LadderController {
 
         LadderTuner tuner = new DefaultLadderTuner(strategy);
         LadderGame game = new LadderGame(rows, columns, strategy, tuner);
-
+        //4-1. 사다리 생성 결과
         OutputView.printLadder(game.getLadder(), people, prizes);
 
-        //5. 사다리 실행 결과
-//        Map<Integer, Integer> resultMap = new HashMap<>();
-//        for (int start = 0; start < columns.value(); start++) {
-//            resultMap.put(start, game.play(start));
-//        }
-//        LadderResult result = new LadderResult(resultMap);
-//        OutputView.printResult(result);
+        //5. 사다리 게임 실행
+        LadderResult result = LadderResult.from(people, prizes, game);
 
-        // 6. 결과 보기
-        while (getResult(people, prizes, game)) {
+        //5-1. 사다리 게임 결과 보기
+        while (getResult(result)) {
         }
     }
 
-    private boolean getResult(People people, Prizes prizes, LadderGame game){
+    private boolean getResult(LadderResult result) {
         String resultName = InputView.readResultName().strip();
 
         if ("all".equalsIgnoreCase(resultName)) {
-            Map<String, String> resultMap = new LinkedHashMap<>();
-            for (people.Person person : people.values()) {
-                int startIndex = people.indexOf(person.name());
-                int endIndex = game.play(startIndex);
-                String prizeValue = prizes.prizeAt(endIndex).value();
-                resultMap.put(person.name(), prizeValue);
-            }
-            OutputView.printAllResults(resultMap);
+            OutputView.printAllResults(result.toNamePrizeMap());
             return false;
         }
 
-        if (people.contains(resultName)) {
-            int startIndex = people.indexOf(resultName);
-            int endIndex = game.play(startIndex);
-            String prizeValue = prizes.prizeAt(endIndex).value();
-            OutputView.printSingleResult(prizeValue);
+        Prize prize = result.findByName(resultName);
+        if (prize != null) {
+            OutputView.printSingleResult(prize.value());
             return true;
         }
 

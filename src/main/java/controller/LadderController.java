@@ -1,5 +1,7 @@
 package controller;
 
+import static constants.ReservedWord.FINISH_KEYWORD;
+
 import domain.dto.RequestLadderGame;
 import domain.dto.ResponseLadder;
 import domain.ladder.Height;
@@ -19,7 +21,6 @@ import view.OutputView;
 
 public class LadderController {
 
-    private static final String FINISH_KEYWORD = "all";
     private static final String NOT_FOUND_PLAYER_RETRY_MESSAGE = "존재하지 않는 플레이어입니다. 다시 입력해주세요.";
 
     public void play() {
@@ -62,26 +63,26 @@ public class LadderController {
 
     private void showPlayerResult(final LadderResultBoard board) {
         repeatUntilDone(
-                InputView::inputTargetPlayer,
-                input -> {
-                    if (input.equals(FINISH_KEYWORD)) {
+                InputView::inputTargetPlayerName,
+                name -> {
+                    if (name.equals(FINISH_KEYWORD)) {
                         OutputView.printAllLadderResult(board);
                         return true;
                     }
 
-                    if (board.findResultOf(input).isEmpty()) {
+                    if (board.findResultOf(name).isEmpty()) {
                         System.out.println();
                         System.out.println(NOT_FOUND_PLAYER_RETRY_MESSAGE);
                         return false;
                     }
 
-                    OutputView.printSingleLadderResult(board, input);
+                    OutputView.printSingleLadderResult(board, name);
                     return false;
                 }
         );
     }
 
-    private void repeatUntilDone(Supplier<String> inputSupplier, Function<String, Boolean> handler) {
+    private void repeatUntilDone(final Supplier<String> inputSupplier, final Function<String, Boolean> handler) {
         boolean done = false;
         while (!done) {
             String input = inputSupplier.get();

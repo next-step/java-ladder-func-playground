@@ -36,6 +36,10 @@ public class Line {
         return 0 < index && points.get(index - 1).isConnectRight();
     }
 
+    public int size() {
+        return points.size();
+    }
+
     public List<Point> getPoints() {
         return points;
     }

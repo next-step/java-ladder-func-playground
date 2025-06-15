@@ -26,7 +26,7 @@ public final class InputView {
         return sc.nextLine();
     }
 
-    public static String inputTargetPlayer() {
+    public static String inputTargetPlayerName() {
         System.out.println();
         System.out.println("결과를 보고 싶은 사람은?");
         return sc.nextLine();

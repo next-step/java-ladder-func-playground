@@ -27,7 +27,7 @@ public class LadderFactory {
     private Ladder drawLadder(final Players players, final Height height, final LineGenerator lineGenerator) {
         List<Line> lines = new ArrayList<>();
         for (int i = 0; i < height.value(); i++) {
-            lines.add(lineGenerator.generate(players.values().size()));
+            lines.add(lineGenerator.generate(players.size()));
         }
         return Ladder.from(lines);
     }

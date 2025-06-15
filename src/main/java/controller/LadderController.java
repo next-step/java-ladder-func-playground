@@ -26,7 +26,7 @@ public class LadderController {
         RequestLadderGame request = inputLadderSettings();
         Players players = request.toPlayers();
         Height height = request.toHeight();
-        Results results = request.toResults(players.values().size());
+        Results results = request.toResults(players.size());
 
         Ladder ladder = drawLadder(players, height);
         LadderResultBoard resultBoard = LadderResultBoard.of(players, ladder, results);

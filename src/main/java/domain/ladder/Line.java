@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Line {
 
-    final List<Point> points;
+    private final List<Point> points;
 
     private Line(final List<Point> points) {
         this.points = List.copyOf(points);

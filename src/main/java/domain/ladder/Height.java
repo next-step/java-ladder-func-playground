@@ -4,8 +4,8 @@ public record Height(
         int value
 ) {
 
-    static final int MIN_LADDER_HEIGHT_SIZE = 2;
-    static final int MAX_LADDER_HEIGHT_SIZE = 24;
+    private static final int MIN_LADDER_HEIGHT_SIZE = 2;
+    private static final int MAX_LADDER_HEIGHT_SIZE = 24;
 
     public Height {
         validateHeightSize(value);

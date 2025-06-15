@@ -4,8 +4,8 @@ public record Point(
         boolean isConnectRight
 ) {
 
-    public static Point from(final boolean right) {
-        return new Point(right);
+    public static Point from(final boolean isConnectRight) {
+        return new Point(isConnectRight);
     }
 
     public Point connectNext(final boolean canConnectRight) {

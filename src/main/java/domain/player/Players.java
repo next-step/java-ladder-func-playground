@@ -8,8 +8,8 @@ import java.util.Set;
 
 public class Players {
 
-    static final int MIN_PLAYER_SIZE = 2;
-    static final int MAX_PLAYER_SIZE = 24;
+    private static final int MIN_PLAYER_SIZE = 2;
+    private static final int MAX_PLAYER_SIZE = 24;
 
     private final List<Player> players;
 
@@ -49,7 +49,7 @@ public class Players {
 
     private void validateNameCountEqualsDistinctCount(final int total, final int distinct) {
         if (total != distinct) {
-            throw new IllegalArgumentException("플레이어의 이름은 중복될 수 없습니다.");
+            throw new IllegalArgumentException("플레이어의 이름은 중복이 아니어야 합니다.");
         }
     }
 

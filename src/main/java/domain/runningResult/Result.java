@@ -10,7 +10,7 @@ public record Result(
 
     private void validateEmptyResult(final String value) {
         if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("실행 결과를 입력해야 합니다.");
+            throw new IllegalArgumentException("실행 결과는 공백이 아니어야 합니다.");
         }
     }
 }

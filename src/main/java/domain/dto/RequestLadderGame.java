@@ -12,7 +12,7 @@ public record RequestLadderGame(
         String height
 ) {
 
-    static final String INPUT_DELIMITER = ",";
+    private static final String INPUT_DELIMITER = ",";
 
     public RequestLadderGame {
         validateEmptyPlayerNames(playerNames);
@@ -28,19 +28,19 @@ public record RequestLadderGame(
 
     private void validateEmptyPlayerNames(final String playerNames) {
         if (playerNames == null || playerNames.isBlank()) {
-            throw new IllegalArgumentException("플레이어들의 이름을 입력해야 합니다.");
+            throw new IllegalArgumentException("플레이어들의 이름은 공백이 아니어야 합니다.");
         }
     }
 
     private void validateEmptyResults(final String results) {
         if (results == null || results.isBlank()) {
-            throw new IllegalArgumentException("실행 결과를 입력해야 합니다.");
+            throw new IllegalArgumentException("실행 결과는 공백이 아니어야 합니다.");
         }
     }
 
     private void validateEmptyHeight(final String height) {
         if (height == null || height.isBlank()) {
-            throw new IllegalArgumentException("사다리의 높이를 입력해야 합니다.");
+            throw new IllegalArgumentException("사다리의 높이는 공백이 아니어야 합니다.");
         }
     }
 

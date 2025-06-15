@@ -15,6 +15,6 @@ class ResultTest {
         // given & when & then
         assertThatThrownBy(() -> new Result(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("실행 결과를 입력해야 합니다.");
+                .hasMessage("실행 결과는 공백이 아니어야 합니다.");
     }
 }

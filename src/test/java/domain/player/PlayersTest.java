@@ -1,7 +1,5 @@
 package domain.player;
 
-import static domain.player.Players.MAX_PLAYER_SIZE;
-import static domain.player.Players.MIN_PLAYER_SIZE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.util.List;
@@ -25,7 +23,7 @@ class PlayersTest {
         // when & then
         assertThatThrownBy(() -> Players.from(names))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("플레이어 수는 %s 이상 %s 이하여야 합니다.".formatted(MIN_PLAYER_SIZE, MAX_PLAYER_SIZE));
+                .hasMessage("플레이어 수는 2 이상 24 이하여야 합니다.");
     }
 
     @Test
@@ -37,6 +35,6 @@ class PlayersTest {
         // when & then
         assertThatThrownBy(() -> Players.from(duplicateNames))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("플레이어의 이름은 중복될 수 없습니다.");
+                .hasMessage("플레이어의 이름은 중복이 아니어야 합니다.");
     }
 }

@@ -1,6 +1,5 @@
 package domain.player;
 
-import static domain.player.Name.MAX_NAME_LENGTH;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +16,7 @@ class NameTest {
         // given & when & then
         assertThatThrownBy(() -> new Name(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("플레이어의 이름을 입력해야 합니다.");
+                .hasMessage("플레이어의 이름은 공백이 아니어야 합니다.");
     }
 
     @ParameterizedTest
@@ -27,6 +26,6 @@ class NameTest {
         // given & when & then
         assertThatThrownBy(() -> new Name(value))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("플레이어의 이름이 %d를 초과합니다.".formatted(MAX_NAME_LENGTH));
+                .hasMessage("플레이어의 이름은 5자 이하여야 합니다.");
     }
 }

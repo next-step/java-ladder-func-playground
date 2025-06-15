@@ -1,7 +1,5 @@
 package domain.ladder;
 
-import static domain.ladder.Height.MAX_LADDER_HEIGHT_SIZE;
-import static domain.ladder.Height.MIN_LADDER_HEIGHT_SIZE;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +15,6 @@ class HeightTest {
         // given & when & then
         assertThatThrownBy(() -> Height.from(height))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("사다리의 높이는 %s 이상 %s 이하여야 합니다.".formatted(MIN_LADDER_HEIGHT_SIZE, MAX_LADDER_HEIGHT_SIZE));
+                .hasMessage("사다리의 높이는 2 이상 24 이하여야 합니다.");
     }
 }

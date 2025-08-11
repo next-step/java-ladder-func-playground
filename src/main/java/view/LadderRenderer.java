@@ -40,7 +40,7 @@ public final class LadderRenderer {
     public void print(Ladder ladder, Columns columns, RungLength rungLength) {
         List<String> lines = renderLines(ladder, columns, rungLength);
         for (String line : lines) {
-            System.out.println(line);
+            System.out.println("    " + line);
         }
     }
 }

@@ -5,6 +5,7 @@ import domain.Columns;
 import domain.Ladder;
 import domain.Rows;
 import domain.RungLength;
+import service.LadderNavigator;
 import service.RandomConnectionGenerator;
 import view.LadderRenderer;
 
@@ -31,6 +32,13 @@ public class App {
 
             LadderRenderer renderer = new LadderRenderer();
             renderer.print(ladder, columns, rungLength);
+
+            LadderNavigator navigator = new LadderNavigator();
+            System.out.println();
+            for (int i = 0; i < columns.count(); i++) {
+                int dest = navigator.traverse(ladder, columns, i);
+                System.out.println(i + " -> " + dest);
+            }
         }
     }
 }

@@ -75,12 +75,7 @@ public class App {
                 System.out.println();
                 System.out.println("실행 결과");
                 if (who.equalsIgnoreCase("all")) {
-                    for (int i = 0; i < columns.count(); i++) {
-                        int dest = navigator.traverse(ladder, columns, i);
-                        String name = names.get(i);
-                        String label = labels.get(dest);
-                        System.out.println(name + " : " + label);
-                    }
+                    printAllResults(navigator, ladder, columns, names, labels);
                     break;
                 }
                 int index = names.indexOf(who);
@@ -91,6 +86,21 @@ public class App {
                 int dest = navigator.traverse(ladder, columns, index);
                 System.out.println(labels.get(dest));
             }
+        }
+    }
+
+    private static void printAllResults(
+            LadderNavigator navigator,
+            Ladder ladder,
+            Columns columns,
+            List<String> names,
+            List<String> labels
+    ) {
+        for (int i = 0; i < columns.count(); i++) {
+            int dest = navigator.traverse(ladder, columns, i);
+            String name = names.get(i);
+            String label = labels.get(dest);
+            System.out.println(name + " : " + label);
         }
     }
 }

@@ -9,7 +9,11 @@ class PlayerTest {
 
     @Test
     void 이름이_5자를_초과하면_예외() {
-        assertThrows(IllegalArgumentException.class, () -> new Player("abcdef"));
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> new Player("abcdef")
+        );
+        assertEquals("이름은 최대 5글자까지 가능합니다.", exception.getMessage());
     }
 
     @Test

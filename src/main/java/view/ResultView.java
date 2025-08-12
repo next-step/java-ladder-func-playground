@@ -6,6 +6,7 @@ import model.Player;
 import java.util.*;
 
 public class ResultView {
+
     public static void printLadder(List<Player> players, List<Line> lines, List<String> results) {
         for (Player player : players) {
             System.out.printf("%6s", player.getName());

@@ -5,6 +5,7 @@ import model.*;
 import view.*;
 
 public class LadderController {
+
     private List<Player> players;
     private List<String> results;
     private Ladder ladder;

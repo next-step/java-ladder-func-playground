@@ -3,6 +3,7 @@ package view;
 import java.util.*;
 
 public class InputView {
+
     private static final Scanner scanner = new Scanner(System.in);
 
     public static List<String> getPlayerNames() {

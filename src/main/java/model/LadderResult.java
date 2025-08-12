@@ -3,6 +3,7 @@ package model;
 import java.util.*;
 
 public class LadderResult {
+
     private final Map<String, String> results;
 
     public LadderResult(Map<String, String> results) {

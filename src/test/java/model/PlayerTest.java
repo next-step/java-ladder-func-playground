@@ -1,5 +1,6 @@
 package model;
 
+import exception.ErrorMessage;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +14,7 @@ class PlayerTest {
                 IllegalArgumentException.class,
                 () -> new Player("abcdef")
         );
-        assertEquals("이름은 최대 5글자까지 가능합니다.", exception.getMessage());
+        assertEquals(ErrorMessage.LIMIT_NAME_LENGTH, exception.getMessage());
     }
 
     @Test

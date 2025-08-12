@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.*;
+
+import exception.ErrorMessage;
 import model.*;
 import view.*;
 
@@ -52,7 +54,7 @@ public class LadderController {
                 ResultView.printResult(query, ladderResult.getResult(query));
             }
             else {
-                System.out.println("존재하지 않는 이름입니다. 다시 입력해주세요.");
+                System.out.println(ErrorMessage.NOT_EXIST_NAME);
             }
         }
     }

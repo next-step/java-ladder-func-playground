@@ -1,5 +1,7 @@
 package model;
 
+import exception.ErrorMessage;
+
 public class Player {
 
     private final String name;
@@ -7,7 +9,7 @@ public class Player {
 
     public Player(String name) {
         if (name.length() > MAX_NAME_LENGTH) {
-            throw new IllegalArgumentException("이름은 최대 5글자까지 가능합니다.");
+            throw new IllegalArgumentException(ErrorMessage.LIMIT_NAME_LENGTH);
         }
         this.name = name;
     }

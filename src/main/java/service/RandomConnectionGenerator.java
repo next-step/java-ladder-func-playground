@@ -7,8 +7,8 @@ import java.util.Random;
 import domain.Columns;
 import domain.Connection;
 import domain.Ladder;
+import domain.LadderHeight;
 import domain.Row;
-import domain.Rows;
 
 public final class RandomConnectionGenerator {
     private final Random random;
@@ -39,13 +39,14 @@ public final class RandomConnectionGenerator {
         return Connection.EMPTY;
     }
 
-    public Ladder generateLadder(Rows rows, Columns columns) {
+    public Ladder generateLadder(LadderHeight height, Columns columns) {
         List<Row> rowList = new ArrayList<>();
-        for (int r = 0; r < rows.count(); r++) {
+        for (int r = 0; r < height.count(); r++) {
             rowList.add(generateRow(columns));
         }
         return Ladder.of(rowList);
     }
 }
+
 
 

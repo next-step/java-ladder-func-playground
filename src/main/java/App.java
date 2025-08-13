@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import domain.Columns;
 import domain.Ladder;
-import domain.Rows;
+import domain.LadderHeight;
 import domain.RungLength;
 import service.LadderNavigator;
 import service.RandomConnectionGenerator;
@@ -16,8 +16,8 @@ public class App {
         try (Scanner scanner = new Scanner(System.in)) {
             List<String> names = readNames(scanner);
             List<String> labels = readLabels(scanner, names.size());
-            int height = readHeight(scanner);
-            Ladder ladder = buildLadder(names.size(), height);
+            int heightCount = readHeight(scanner);
+            Ladder ladder = buildLadder(names.size(), heightCount);
             renderLadder(names, labels, ladder);
             queryAndPrintResults(scanner, names, labels, ladder);
         }
@@ -53,11 +53,11 @@ public class App {
         return Integer.parseInt(scanner.nextLine().trim());
     }
 
-    private static Ladder buildLadder(int numNames, int height) {
+    private static Ladder buildLadder(int numNames, int heightCount) {
         Columns columns = Columns.of(numNames);
-        Rows rows = Rows.of(height);
+        LadderHeight height = LadderHeight.of(heightCount);
         RandomConnectionGenerator generator = new RandomConnectionGenerator(new Random());
-        return generator.generateLadder(rows, columns);
+        return generator.generateLadder(height, columns);
     }
 
     private static void renderLadder(List<String> names, List<String> labels, Ladder ladder) {

@@ -18,9 +18,9 @@ public class LadderController {
         List<String> results = InputView.getResults();
         int height = InputView.getLadderHeight();
 
-        this.players = createPlayers(names);
+        players = createPlayers(names);
         this.results = results;
-        this.ladder = new Ladder(players.size(), height);
+        ladder = new Ladder(players.size(), height);
 
         play();
     }

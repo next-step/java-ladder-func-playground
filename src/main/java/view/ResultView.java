@@ -2,13 +2,14 @@ package view;
 
 import model.Line;
 import model.Player;
+import model.Players;
 
 import java.util.*;
 
 public class ResultView {
 
-    public static void printLadder(List<Player> players, List<Line> lines, List<String> results) {
-        for (Player player : players) {
+    public static void printLadder(Players players, List<Line> lines, List<String> results) {
+        for (Player player : players.getPlayersList()) {
             System.out.printf("%6s", player.getName());
         }
         System.out.println();

@@ -13,7 +13,7 @@ class LadderTest {
 
     @Test
     void 사다리_게임_결과_확인() {
-        List<Player> players = List.of(new Player("Neo"), new Player("Tommy"), new Player("Brie"));
+        Players players = new Players(List.of(new Player("Neo"), new Player("Tommy"), new Player("Brie")));
         List<String> results = List.of("1000", "꽝", "3000");
 
         Ladder ladder = new Ladder(players.size(), 5);

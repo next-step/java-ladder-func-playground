@@ -8,7 +8,7 @@ import view.*;
 
 public class LadderController {
 
-    private List<Player> players;
+    private Players players;
     private List<String> results;
     private Ladder ladder;
     private LadderResult ladderResult;
@@ -25,12 +25,12 @@ public class LadderController {
         play();
     }
 
-    private List<Player> createPlayers(List<String> names) {
+    private Players createPlayers(List<String> names) {
         List<Player> players = new ArrayList<>();
         for (String name : names) {
             players.add(new Player(name));
         }
-        return players;
+        return new Players(players);
     }
 
     public void play() {

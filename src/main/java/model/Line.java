@@ -3,6 +3,7 @@ package model;
 import java.util.*;
 
 public class Line {
+
     private final List<Boolean> points;
 
     public Line(int count) {
@@ -12,6 +13,7 @@ public class Line {
 
     private void generateRandomLadder() {
         Random random = new Random();
+
         for (int i = 0; i < points.size() - 1; i++) {
             if (!points.get(i) && (i == 0 || !points.get(i - 1))) {
                 points.set(i, random.nextBoolean());
@@ -33,4 +35,3 @@ public class Line {
         return points;
     }
 }
-

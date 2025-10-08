@@ -14,6 +14,10 @@ public class OutputView {
         }
     }
 
+    public static void printTraverseResult(int start, int end) {
+        System.out.println(start + " -> " + end);
+    }
+
     private static String buildRow(Line line, int width) {
         StringBuilder builder = new StringBuilder();
 

@@ -2,6 +2,7 @@ package io.suhan.ladder.controller;
 
 import io.suhan.ladder.model.Ladder;
 import io.suhan.ladder.model.LadderFactory;
+import io.suhan.ladder.model.LadderGame;
 import io.suhan.ladder.view.InputView;
 import io.suhan.ladder.view.OutputView;
 
@@ -12,6 +13,8 @@ public class LadderController {
 
         Ladder ladder = LadderFactory.createLadder(width, height);
 
-        OutputView.printResult(ladder);
+        LadderGame game = new LadderGame(ladder);
+
+        game.execute();
     }
 }

@@ -1,6 +1,5 @@
 package io.suhan.ladder.view;
 
-import io.suhan.ladder.model.Connection;
 import io.suhan.ladder.model.Ladder;
 import io.suhan.ladder.model.Line;
 
@@ -9,25 +8,30 @@ public class OutputView {
         System.out.println("\n실행 결과\n");
 
         for (Line line : ladder.getLines()) {
-            for (int i = 0; i < ladder.getWidth(); i++) {
-                System.out.print("|");
-                boolean connected = false;
+            String row = buildRow(line, ladder.getWidth());
 
-                for (Connection connection : line.getConnections()) {
-                    if (connection.getLeft() == i) {
-                        connected = true;
-                        break;
-                    }
-                }
-
-                if (connected) {
-                    System.out.print("----");
-                } else {
-                    System.out.print("    ");
-                }
-            }
-
-            System.out.println();
+            System.out.println(row);
         }
+    }
+
+    private static String buildRow(Line line, int width) {
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < width; i++) {
+            builder.append("|");
+
+            if (isConnected(line, i)) {
+                builder.append("-----");
+            } else {
+                builder.append("     ");
+            }
+        }
+
+        return builder.toString();
+    }
+
+    private static boolean isConnected(Line line, int index) {
+        return line.getConnections().stream()
+                .anyMatch((connection) -> connection.getLeft() == index);
     }
 }

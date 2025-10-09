@@ -44,18 +44,26 @@ public class Game {
         int col = start;
 
         for (Line line : ladder.getLines()) {
-            for (Connection connection : line.getConnections()) {
-                if (connection.getLeft() == col) {
-                    col = connection.getRight();
-                    break;
-                } else if (connection.getRight() == col) {
-                    col = connection.getLeft();
-                    break;
-                }
-            }
+            col = findNextColumn(line, col);
         }
 
         return col;
+    }
+
+    private int findNextColumn(Line line, int col) {
+        return line.getConnections().stream()
+                .filter((connection) -> connection.getLeft() == col || connection.getRight() == col)
+                .findFirst()
+                .map((connection) -> getConnectedColumn(connection, col))
+                .orElse(col);
+    }
+
+    private int getConnectedColumn(Connection connection, int col) {
+        if (connection.getLeft() == col) {
+            return connection.getRight();
+        }
+
+        return connection.getLeft();
     }
 
     public Ladder getLadder() {

@@ -2,8 +2,8 @@ package io.suhan.ladder.view;
 
 import io.suhan.ladder.model.Game;
 import io.suhan.ladder.model.GameResult;
-import io.suhan.ladder.model.ladder.Line;
 import io.suhan.ladder.model.Participant;
+import io.suhan.ladder.model.ladder.Line;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -57,14 +57,19 @@ public class OutputView {
         for (int i = 0; i < width; i++) {
             builder.append("|");
 
-            if (isConnected(line, i)) {
-                builder.append("-----");
-            } else {
-                builder.append("     ");
-            }
+            String connectionSegment = getConnectionSegment(line, i);
+            builder.append(connectionSegment);
         }
 
         return builder.toString();
+    }
+
+    private static String getConnectionSegment(Line line, int index) {
+        if (isConnected(line, index)) {
+            return "-----";
+        }
+
+        return "     ";
     }
 
     private static boolean isConnected(Line line, int index) {

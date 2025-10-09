@@ -2,11 +2,13 @@ package io.suhan.ladder.controller;
 
 import io.suhan.ladder.model.Game;
 import io.suhan.ladder.model.GameConfiguration;
+import io.suhan.ladder.model.GameConfigurationBuilder;
 import io.suhan.ladder.model.GameResult;
 import io.suhan.ladder.model.Participant;
 import io.suhan.ladder.view.InputView;
 import io.suhan.ladder.view.OutputView;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class LadderController {
     public void run() {
@@ -23,29 +25,32 @@ public class LadderController {
     }
 
     private GameConfiguration readConfiguration() {
-        List<Participant> participants = InputView.getParticipants().stream().map(Participant::new).toList();
-        List<String> outcomes = InputView.getOutcomes();
-        int height = InputView.getLadderHeight();
+        GameConfigurationBuilder builder = new GameConfigurationBuilder();
 
-        return GameConfiguration.of(participants, outcomes, height);
+        List<Participant> participants = InputView.getParticipants().stream().map(Participant::new).toList();
+        builder.participants(participants);
+
+        List<String> outcomes = InputView.getOutcomes();
+        builder.outcomes(outcomes);
+
+        int height = InputView.getLadderHeight();
+        builder.height(height);
+
+        return builder.build();
     }
 
     private void handleOutcomeQuery(GameResult result) {
-        while (true) {
-            String input = InputView.getParticipantForResult();
+        Stream.generate(InputView::getParticipantForResult)
+                .takeWhile((input) -> !input.equals("all"))
+                .forEach((input) -> result.getResults().keySet().stream()
+                        .filter((participant) -> participant.getName().equals(input))
+                        .findFirst()
+                        .ifPresentOrElse(
+                                (target) -> OutputView.printGameResultOf(target, result),
+                                () -> System.out.println("존재하지 않는 참가자입니다.")
+                        )
+                );
 
-            if (input.equals("all")) {
-                OutputView.printGameResult(result);
-                break;
-            }
-
-            result.getResults().keySet().stream()
-                    .filter((participant) -> participant.getName().equals(input))
-                    .findFirst()
-                    .ifPresentOrElse(
-                            (target) -> OutputView.printGameResultOf(target, result),
-                            () -> System.out.println("존재하지 않는 참가자입니다.")
-                    );
-        }
+        OutputView.printGameResult(result);
     }
 }

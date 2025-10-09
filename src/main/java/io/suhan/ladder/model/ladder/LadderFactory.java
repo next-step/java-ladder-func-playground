@@ -32,6 +32,7 @@ public class LadderFactory {
     private static List<Connection> createConnections(int width) {
         List<Connection> connections = new ArrayList<>();
 
+        // TODO: depth 줄이기
         for (int i = 0; i < width - 1; i++) {
             if (shouldConnect()) {
                 connections.add(new Connection(i, i + 1));

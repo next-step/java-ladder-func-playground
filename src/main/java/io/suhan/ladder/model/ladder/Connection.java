@@ -1,4 +1,4 @@
-package io.suhan.ladder.model;
+package io.suhan.ladder.model.ladder;
 
 public class Connection {
     private final int left;

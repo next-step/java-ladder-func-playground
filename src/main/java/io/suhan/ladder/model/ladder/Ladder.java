@@ -1,4 +1,4 @@
-package io.suhan.ladder.model;
+package io.suhan.ladder.model.ladder;
 
 import java.util.Collections;
 import java.util.List;

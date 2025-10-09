@@ -11,37 +11,41 @@ import java.util.List;
 public class LadderController {
     public void run() {
         try {
-            List<Participant> participants = InputView.getParticipants().stream().map(Participant::new).toList();
-            List<String> outcomes = InputView.getOutcomes();
-            int height = InputView.getLadderHeight();
-
-            GameConfiguration configuration = GameConfiguration.of(participants, outcomes, height);
-
+            GameConfiguration configuration = readConfiguration();
             Game game = Game.of(configuration);
 
             GameResult result = game.execute();
 
-            while (true) {
-                String input = InputView.getParticipantForResult();
-
-                if (input.equals("all")) {
-                    OutputView.printGameResult(result);
-                    break;
-                }
-
-                Participant target = participants.stream()
-                        .filter((participant -> participant.getName().equals(input)))
-                        .findFirst()
-                        .orElse(null);
-
-                if (target != null) {
-                    OutputView.printGameResultOf(target, result);
-                } else {
-                    System.out.println("존재하지 않는 참가자입니다.");
-                }
-            }
+            handleOutcomeQuery(result);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    private GameConfiguration readConfiguration() {
+        List<Participant> participants = InputView.getParticipants().stream().map(Participant::new).toList();
+        List<String> outcomes = InputView.getOutcomes();
+        int height = InputView.getLadderHeight();
+
+        return GameConfiguration.of(participants, outcomes, height);
+    }
+
+    private void handleOutcomeQuery(GameResult result) {
+        while (true) {
+            String input = InputView.getParticipantForResult();
+
+            if (input.equals("all")) {
+                OutputView.printGameResult(result);
+                break;
+            }
+
+            result.getResults().keySet().stream()
+                    .filter((participant) -> participant.getName().equals(input))
+                    .findFirst()
+                    .ifPresentOrElse(
+                            (target) -> OutputView.printGameResultOf(target, result),
+                            () -> System.out.println("존재하지 않는 참가자입니다.")
+                    );
         }
     }
 }

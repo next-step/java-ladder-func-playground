@@ -2,7 +2,7 @@ package io.suhan.ladder.view;
 
 import io.suhan.ladder.model.Game;
 import io.suhan.ladder.model.GameResult;
-import io.suhan.ladder.model.Line;
+import io.suhan.ladder.model.ladder.Line;
 import io.suhan.ladder.model.Participant;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,10 +48,6 @@ public class OutputView {
                 .collect(Collectors.joining(" "));
 
         System.out.println(line);
-    }
-
-    public static void printTraverseResult(int start, int end) {
-        System.out.println(start + " -> " + end);
     }
 
     private static String buildRow(Line line, int width) {

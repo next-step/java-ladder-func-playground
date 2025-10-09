@@ -4,10 +4,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameConfiguration {
-    private List<Participant> participants;
-    private List<String> outcomes;
-    private int width;
-    private int height;
+    private final List<Participant> participants;
+    private final List<String> outcomes;
+    private final int width;
+    private final int height;
 
     private GameConfiguration(List<Participant> participants, List<String> outcomes, int width, int height) {
         this.participants = participants;

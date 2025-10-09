@@ -1,20 +1,47 @@
 package io.suhan.ladder.controller;
 
-import io.suhan.ladder.model.Ladder;
-import io.suhan.ladder.model.LadderFactory;
-import io.suhan.ladder.model.LadderGame;
+import io.suhan.ladder.model.Game;
+import io.suhan.ladder.model.GameConfiguration;
+import io.suhan.ladder.model.GameResult;
+import io.suhan.ladder.model.Participant;
 import io.suhan.ladder.view.InputView;
 import io.suhan.ladder.view.OutputView;
+import java.util.List;
 
 public class LadderController {
     public void run() {
-        int width = InputView.getLadderWidth();
-        int height = InputView.getLadderHeight();
+        try {
+            List<Participant> participants = InputView.getParticipants().stream().map(Participant::new).toList();
+            List<String> outcomes = InputView.getOutcomes();
+            int height = InputView.getLadderHeight();
 
-        Ladder ladder = LadderFactory.createLadder(width, height);
+            GameConfiguration configuration = GameConfiguration.of(participants, outcomes, height);
 
-        LadderGame game = new LadderGame(ladder);
+            Game game = Game.of(configuration);
 
-        game.execute();
+            GameResult result = game.execute();
+
+            while (true) {
+                String input = InputView.getParticipantForResult();
+
+                if (input.equals("all")) {
+                    OutputView.printGameResult(result);
+                    break;
+                }
+
+                Participant target = participants.stream()
+                        .filter((participant -> participant.getName().equals(input)))
+                        .findFirst()
+                        .orElse(null);
+
+                if (target != null) {
+                    OutputView.printGameResultOf(target, result);
+                } else {
+                    System.out.println("존재하지 않는 참가자입니다.");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

@@ -10,7 +10,7 @@ public class LadderFactory {
     public static Ladder createLadder(int width, int height) {
         List<Line> lines = createLines(width, height);
 
-        return new Ladder(width, height, lines);
+        return new Ladder(lines);
     }
 
     private static List<Line> createLines(int width, int height) {

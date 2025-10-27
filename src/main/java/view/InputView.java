@@ -16,5 +16,4 @@ public class InputView {
         int height = scanner.nextInt();
         return height;
     }
-
 }

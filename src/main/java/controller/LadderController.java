@@ -10,9 +10,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LadderController {
     private final LadderFactory factory = new LadderFactory();
@@ -25,6 +23,10 @@ public class LadderController {
         int width = participants.size();
 
         List<String> results = inputView.inputResults();
+        if (participants.size() != results.size()) {
+            throw new IllegalArgumentException("참여자 수와 결과 수가 일치하지 않습니다.");
+        }
+
         int height = inputView.heightSize();
 
         LadderSize size = new LadderSize(width, height);
@@ -37,34 +39,26 @@ public class LadderController {
 
         outputView.printLadder(participants, lines, results);
 
-        ladderGame(ladder, participants, results);
+        LadderGame game = new LadderGame(ladder, participants.size());
+        playGame(game, participants, results);
     }
 
-    public void ladderGame(Ladder ladder, List<String> participants, List<String> results) {
-        LadderGame game = new LadderGame(ladder, participants.size());
-
+    private void playGame(LadderGame game, List<String> participants, List<String> results) {
         while (true) {
             String queryName = inputView.inputQueryName();
 
             if ("all".equals(queryName)) {
-                Map<String, String> allResults = new LinkedHashMap<>();
-                for (int i = 0; i < participants.size(); i++) {
-                    int finalPosition = game.play(i);
-                    allResults.put(participants.get(i), results.get(finalPosition));
-                }
-                outputView.printAllResults(allResults);
+                outputView.printAllResults(game.playAll(participants, results));
                 break;
-            } else {
-                int startIndex = participants.indexOf(queryName);
-                if (startIndex == -1) {
-                    System.out.println("존재하지 않는 이름입니다.");
-                    continue;
-                }
-
-                int finalPosition = game.play(startIndex);
-                String result = results.get(finalPosition);
-                outputView.printSingleResult(queryName, result);
             }
+
+            if (!participants.contains(queryName)) {
+                outputView.printError("존재하지 않는 이름입니다.");
+                continue;
+            }
+
+            String result = game.getResult(queryName, participants, results);
+            outputView.printSingleResult(queryName, result);
         }
     }
 }

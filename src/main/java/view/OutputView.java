@@ -9,18 +9,16 @@ public class OutputView {
         System.out.println("실행결과");
 
         for (String name : participants) {
-            System.out.print(String.format("%-8s", name));
+            System.out.print(String.format("%-5s", name));
         }
         System.out.println();
 
-        // 사다리 출력
         for (String line : lines) {
             System.out.println(line);
         }
 
-        // 결과 출력
         for (String result : results) {
-            System.out.print(String.format("%-8s", result));
+            System.out.print(String.format("%-5s", result));
         }
         System.out.println();
     }
@@ -38,4 +36,7 @@ public class OutputView {
         }
     }
 
+    public void printError(String message) {
+        System.out.println(message);
+    }
 }

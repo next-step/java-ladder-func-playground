@@ -12,7 +12,7 @@ public class InputView {
     }
 
     public int heightSize() {
-        System.out.println("사다리의 높이는 몇 개인가요?");
+        System.out.println("최대 사다리 높이는 몇 개인가요?");
         int height = scanner.nextInt();
         return height;
     }

@@ -1,5 +1,7 @@
 package model;
 
+import controller.LadderController;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,9 +10,9 @@ public class LadderGame {
     private final Ladder ladder;
     private final int positions;
 
-    public LadderGame(Ladder ladder, int positions) {
+    public LadderGame(Ladder ladder) {
         this.ladder = ladder;
-        this.positions = positions;
+        this.positions = LadderController.WIDTH;
     }
 
     public Map<Integer, Integer> playAll() {

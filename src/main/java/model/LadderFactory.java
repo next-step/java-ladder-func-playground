@@ -1,5 +1,7 @@
 package model;
 
+import controller.LadderController;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -9,14 +11,14 @@ public class LadderFactory {
 
     public Ladder create(LadderSize size) {
         List<Line> lines = new ArrayList<>();
-        for (int i = 0; i < size.width(); i++) {
-            lines.add(createLine(size.height()));
+        for (int i = 0; i < size.height(); i++) {
+            lines.add(createLine());
         }
         return new Ladder(lines);
     }
 
-    private Line createLine(int width) {
-        int pointsCount = width - 1;
+    private Line createLine() {
+        int pointsCount = LadderController.WIDTH - 1;
         List<Point> points = new ArrayList<>();
         boolean prevConnected = false;
         for (int i = 0; i < pointsCount; i++) {

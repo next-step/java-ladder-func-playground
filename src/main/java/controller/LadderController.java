@@ -17,12 +17,12 @@ public class LadderController {
     private final LadderFactory factory = new LadderFactory();
     private final OutputView outputView = new OutputView();
     private final InputView inputView = new InputView();
+    public static final int WIDTH = 4;
 
     public void run() {
-        int width = inputView.widthSize();
         int height = inputView.heightSize();
 
-        LadderSize size = new LadderSize(width, height);
+        LadderSize size = new LadderSize(WIDTH,height);
         Ladder ladder = factory.create(size);
 
         List<String> lines = new ArrayList<>();
@@ -31,12 +31,11 @@ public class LadderController {
         }
 
         outputView.print(lines);
-        ladderGame(ladder, width);
+        ladderGame(ladder);
     }
 
-    public void ladderGame(Ladder ladder, int width) {
-        //4단계 위해서 메서드 분리
-        LadderGame game = new LadderGame(ladder, width);
+    public void ladderGame(Ladder ladder) {
+        LadderGame game = new LadderGame(ladder);
         Map<Integer, Integer> results = game.playAll();
 
         outputView.printResults(results);

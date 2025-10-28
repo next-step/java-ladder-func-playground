@@ -1,3 +1,4 @@
+import controller.LadderController;
 import model.Ladder;
 import model.LadderFactory;
 import model.LadderSize;
@@ -44,7 +45,7 @@ public class LadderTest {
 
             assertThrows(
                     IllegalArgumentException.class, () -> {
-                        LadderSize invalidSize = new LadderSize(0, 1);
+                        LadderSize invalidSize = new LadderSize(LadderController.WIDTH, 0);
                         factory.create(invalidSize);
                     });
         }

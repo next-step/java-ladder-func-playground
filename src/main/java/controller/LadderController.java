@@ -22,12 +22,22 @@ public class LadderController {
         List<String> participants = inputView.inputParticipants();
         int width = participants.size();
 
-        List<String> results = inputView.inputResults();
-        if (participants.size() != results.size()) {
-            throw new IllegalArgumentException("참여자 수와 결과 수가 일치하지 않습니다.");
+        List<String> results ;
+        while(true) {
+            results = inputView.inputResults();
+            if (participants.size() == results.size()) {
+                break;
+            }
+            outputView.printError("참여자 수와 결과 수가 일치하지 않습니다.");
         }
-
-        int height = inputView.heightSize();
+        int height;
+        while(true){
+            height = inputView.heightSize();
+            if(height >=1){
+                break;
+            }
+            outputView.printError("높이는 1이상이어야 합니다.");
+        }
 
         LadderSize size = new LadderSize(width, height);
         Ladder ladder = factory.create(size, width);

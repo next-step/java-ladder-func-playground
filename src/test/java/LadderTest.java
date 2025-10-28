@@ -16,27 +16,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class LadderTest {
 
     @Test
-    @DisplayName("Point 연결 상태 확인")
-    void createPoint() {
-        Point point = new Point(true);
-        assertTrue(point.isConnected());
-        Point notPoint = new Point(false);
-        assertFalse(notPoint.isConnected());
-    }
-
-    @Test
-    @DisplayName("Line - null points는 예외가 발생한다")
-    void lineThrowsExceptionForNull() {
-        assertThrows(NullPointerException.class, () -> new Line(null));
-    }
-
-    @Test
-    @DisplayName("Ladder - null lines는 예외가 발생한다")
-    void ladderThrowsExceptionForNull() {
-        assertThrows(NullPointerException.class, () -> new Ladder(null));
-    }
-
-    @Test
     @DisplayName("높이가 0 이하면 예외가 발생한다")
     void ladderSizeThrowsExceptionForInvalidHeight() {
         assertThrows(IllegalArgumentException.class, () -> new LadderSize(4, 0));

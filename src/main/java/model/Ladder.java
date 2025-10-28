@@ -10,7 +10,6 @@ public class Ladder {
         this.lines = Objects.requireNonNull(lines);
     }
 
-    // 값이 변함 안변하는 자료구조나 방어적 복사 찾아보기
     public List<Line> lines() {
         return lines;
     }

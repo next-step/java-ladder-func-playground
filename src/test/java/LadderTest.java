@@ -45,8 +45,8 @@ public class LadderTest {
 
             assertThrows(
                     IllegalArgumentException.class, () -> {
-                        LadderSize invalidSize = new LadderSize(LadderController.WIDTH, 0);
-                        factory.create(invalidSize);
+                        LadderSize invalidSize = new LadderSize(1, 0);
+                        factory.create(invalidSize, 0);
                     });
         }
 

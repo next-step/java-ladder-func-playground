@@ -10,4 +10,12 @@ public class OutputView {
             System.out.println(singleRow);
         }
     }
+
+    public void printColInput(){
+        System.out.println("사다리의 넓이는 몇 개인가요?");
+    }
+
+    public void printRowInput(){
+        System.out.println("사다리의 높이는 몇 개인가요?");
+    }
 }

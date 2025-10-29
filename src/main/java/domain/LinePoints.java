@@ -8,7 +8,7 @@ public class LinePoints {
         this.points = points;
     }
 
-    public List<Boolean> getPoints() {
+    public List<Boolean> getLinePoints() {
         return points;
     }
 }

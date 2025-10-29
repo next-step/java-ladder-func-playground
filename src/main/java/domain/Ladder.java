@@ -3,13 +3,13 @@ package domain;
 import java.util.List;
 
 public class Ladder {
-    private final List<Line> lines;
+    private final List<LinePoints> lines;
 
-    public Ladder(List<Line> lines) {
+    public Ladder(List<LinePoints> lines) {
         this.lines = lines;
     }
 
-    public List<Line> getLines() {
+    public List<LinePoints> getLines() {
         return lines;
     }
 }

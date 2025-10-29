@@ -1,10 +1,10 @@
 package domain;
 import java.util.List;
 
-public class Line {
+public class LinePoints {
     private final List<Boolean> points;
 
-    public Line(List<Boolean> points) {
+    public LinePoints(List<Boolean> points) {
         this.points = points;
     }
 

@@ -8,11 +8,7 @@ public class LadderGame {
     private final Ladder ladder;
     private final int positions;
 
-    public LadderGame(Ladder ladder,int width) {
-        if (ladder == null) {
-            throw new IllegalArgumentException("ladder가 null일 수 없습니다.");
-        }
-
+    public LadderGame(Ladder ladder, int width) {
         this.ladder = ladder;
         this.positions = width;
     }

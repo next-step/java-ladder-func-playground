@@ -2,7 +2,9 @@ package view;
 
 import domain.Ladder;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     public void printLadder(List<String> ladderString) {
@@ -19,7 +21,13 @@ public class OutputView {
         System.out.println("사다리의 높이는 몇 개인가요?");
     }
 
-    public void printLadderStartEnd(int start, int end){
+    public void printSingleIndexStartEnd(int start, int end){
         System.out.printf(start + " -> " + end);
+    }
+
+    public void printResultStartEnd(HashMap<Integer, Integer> resultMap) {
+        for (Map.Entry<Integer, Integer> startEnd : resultMap.entrySet()) {
+            printSingleIndexStartEnd(startEnd.getKey(), startEnd.getValue());
+        }
     }
 }

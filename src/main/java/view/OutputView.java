@@ -18,4 +18,8 @@ public class OutputView {
     public void printRowInput(){
         System.out.println("사다리의 높이는 몇 개인가요?");
     }
+
+    public void printLadderStartEnd(int start, int end){
+        System.out.printf(start + " -> " + end);
+    }
 }

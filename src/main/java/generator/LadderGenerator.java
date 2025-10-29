@@ -1,6 +1,7 @@
-package domain;
+package generator;
 
-import controller.LadderController;
+import domain.Ladder;
+import domain.LinePoints;
 
 import java.util.ArrayList;
 import java.util.List;

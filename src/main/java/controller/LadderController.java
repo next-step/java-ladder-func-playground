@@ -2,7 +2,7 @@ package controller;
 
 import domain.Ladder;
 import domain.LadderBuilder;
-import domain.LadderGenerator;
+import generator.LadderGenerator;
 import view.InputView;
 import view.OutputView;
 

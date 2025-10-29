@@ -1,9 +1,8 @@
-package java.view;
+package view;
 
 public class OutputView {
-    public void printLadderSingleRow(String ladderSingleRow){
+    public void printLadderSingleRow(String ladderSingleRow) {
         System.out.println(ladderSingleRow);
+
     }
-
-
 }

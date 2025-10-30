@@ -21,7 +21,7 @@ public class LadderBuilder {
 
     public List<String> buildLadder(Ladder ladder) {
         List<String> ladderStrings = new ArrayList<>();
-        for(LinePoints linePoints: ladder.getLines()) {
+        for (LinePoints linePoints : ladder.getLines()) {
             ladderStrings.add(buildSingleLadderCol(linePoints));
         }
         return ladderStrings;

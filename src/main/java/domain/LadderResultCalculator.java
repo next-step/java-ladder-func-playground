@@ -1,8 +1,5 @@
 package domain;
 
-import domain.values.Ladder;
-import domain.values.LinePoints;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;

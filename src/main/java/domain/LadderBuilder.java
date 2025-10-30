@@ -1,8 +1,5 @@
 package domain;
 
-import domain.values.Ladder;
-import domain.values.LinePoints;
-
 import java.util.ArrayList;
 import java.util.List;
 

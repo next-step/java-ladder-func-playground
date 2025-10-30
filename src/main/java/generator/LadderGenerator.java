@@ -1,7 +1,7 @@
 package generator;
 
-import domain.values.Ladder;
-import domain.values.LinePoints;
+import domain.Ladder;
+import domain.LinePoints;
 
 import java.util.ArrayList;
 import java.util.List;

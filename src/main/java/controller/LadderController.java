@@ -1,8 +1,8 @@
 package controller;
 
-import domain.values.Ladder;
+import domain.Ladder;
 import domain.LadderBuilder;
-import domain.values.LadderResult;
+import domain.LadderResult;
 import domain.LadderResultCalculator;
 import generator.LadderGenerator;
 import view.InputView;

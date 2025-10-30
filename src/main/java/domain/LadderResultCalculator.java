@@ -7,15 +7,16 @@ import java.util.Map;
 public class LadderResultCalculator {
 
     public int changeRowLocation(int colIndex, LinePoints linePoints) {
-        List<Boolean> points = linePoints.getLinePoints();
-        if (colIndex > 0 && points.get(colIndex - 1)) {
-            return colIndex - 1;
-        }
-        if (colIndex < points.size() && points.get(colIndex)) {
-            return colIndex + 1;
-        }
+        List<Boolean> p = linePoints.getLinePoints();
+        int size = p.size();
+
+        if (colIndex > 0 && p.get(colIndex - 1)) return colIndex - 1;
+
+        if (colIndex < size && p.get(colIndex)) return colIndex + 1;
+
         return colIndex;
     }
+
 
     public int getFinalColumnIndex(int startColIndex, Ladder ladder) {
         int currentColIndex = startColIndex;
@@ -25,16 +26,15 @@ public class LadderResultCalculator {
         return currentColIndex;
     }
 
-    public Map<Integer, Integer> calculateResults(Ladder ladder) {
-        Map<Integer, Integer> resultMap = new LinkedHashMap<>();
+    public Map<String, String> calculateResults(Ladder ladder, List<String> players, List<String> prizes) {
+        Map<String, String> resultMap = new LinkedHashMap<>();
 
         for (int start = 0; start < ladder.getCols(); start++) {
             int end = getFinalColumnIndex(start, ladder);
-            resultMap.put(start, end);
+            resultMap.put(players.get(start), prizes.get(end));
         }
 
         return resultMap;
     }
-
 
 }

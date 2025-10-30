@@ -9,9 +9,8 @@ import Model.Rewards;
 import java.util.Arrays;
 import java.util.List;
 
-public class OutputView{
-    public void print(Bridge bridge)
-    {
+public class OutputView {
+    public void print(Bridge bridge) {
         for (List<BridgeStep> row : bridge.getRows()) {
             printRow(row);
             System.out.print("|");
@@ -27,8 +26,7 @@ public class OutputView{
         });
     }
 
-    public void printPlayersAndRewards(List<String> strings)
-    {
+    public void printPlayersAndRewards(List<String> strings) {
         strings.forEach(string -> System.out.printf("%-6s", string));
         System.out.println();
     }
@@ -40,14 +38,9 @@ public class OutputView{
             System.out.print("     ");
         }
     }
-    public void askResults()
-    {
-        System.out.println("결과를 보고 싶은 사람은?");
-    }
 
-    public void printResult()
-    {
-        System.out.println("실행 결과");
+    public void askResults() {
+        System.out.println("결과를 보고 싶은 사람은?");
     }
 
     public boolean printRewards(Rewards rewards, Player players, String inputNames) {
@@ -71,18 +64,15 @@ public class OutputView{
         return false;
     }
 
-    public void askPlayers()
-    {
+    public void askPlayers() {
         System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
     }
 
-    public void askRewards()
-    {
+    public void askRewards() {
         System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
     }
 
-    public void askLadderHeight()
-    {
+    public void askLadderHeight() {
         System.out.println("사다리의 높이는 몇 개인가요?");
     }
 }

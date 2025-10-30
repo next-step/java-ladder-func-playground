@@ -14,7 +14,6 @@ public class LadderDescentService {
         for (List<BridgeStep> row : bridge.getRows()) {
             pos += checkRightBridge(row,pos) + checkLeftBridge(row,pos);
         }
-
         return pos;
     }
 

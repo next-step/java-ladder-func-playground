@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class InputView {
     Scanner scanner = new Scanner(System.in);
-    public int getWidthAndHeight()
-    {
+
+    public int getWidthAndHeight() {
         return scanner.nextInt();
     }
 

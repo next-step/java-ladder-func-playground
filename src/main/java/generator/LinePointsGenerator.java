@@ -1,6 +1,6 @@
 package generator;
 
-import domain.LinePoints;
+import domain.values.LinePoints;
 
 import java.util.ArrayList;
 import java.util.List;

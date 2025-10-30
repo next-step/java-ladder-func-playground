@@ -6,6 +6,7 @@ import Model.BridgeStep;
 import Model.Player;
 import Model.Rewards;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class OutputView{
@@ -20,26 +21,24 @@ public class OutputView{
     }
 
     private void printRow(List<BridgeStep> row) {
-        System.out.print("  ");
-        for (BridgeStep bridgeStep : row) {
+        row.forEach(bridgeStep -> {
             System.out.print("|");
             printBridgeStep(bridgeStep);
-        }
+        });
     }
+
     public void printPlayersAndRewards(List<String> strings)
     {
-        for (String string: strings) {
-            System.out.printf("%-6s",string);
-        }
+        strings.forEach(string -> System.out.printf("%-6s", string));
         System.out.println();
     }
+
     private void printBridgeStep(BridgeStep bridgeStep) {
-        if(bridgeStep ==BridgeStep.EXIST)
-        {
+        if (bridgeStep == BridgeStep.EXIST) {
             System.out.print("-----");
-            return;
+        } else {
+            System.out.print("     ");
         }
-        System.out.print("     ");
     }
     public void askResults()
     {
@@ -55,21 +54,20 @@ public class OutputView{
         System.out.println("실행 결과");
         String trimmedInput = inputNames.trim();
         if (trimmedInput.equals("all")) {
-            for (String player : players.getPlayers()) {
-                System.out.println(player + " : " + rewards.getRewardskey(players.getDestinatioinPos(player)));
-            }
+            players.getPlayers().stream()
+                    .forEach(player -> System.out.println(player + " : " + rewards.getRewardskey(players.getDestinatioinPos(player))));
             return true;
         }
 
-        String[] nameArray = trimmedInput.split(",");
-        for (String name : nameArray) {
-            String trimmedName = name.trim();
-            try {
-                System.out.println(trimmedName + " : " + rewards.getRewardskey(players.getDestinatioinPos(trimmedName)));
-            } catch (Exception e) {
-                throw new IllegalArgumentException("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
-            }
-        }
+        Arrays.stream(trimmedInput.split(","))
+                .map(String::trim)
+                .forEach(trimmedName -> {
+                    try {
+                        System.out.println(trimmedName + " : " + rewards.getRewardskey(players.getDestinatioinPos(trimmedName)));
+                    } catch (Exception e) {
+                        throw new IllegalArgumentException("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
+                    }
+                });
         return false;
     }
 

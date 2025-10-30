@@ -25,6 +25,7 @@ public class LadderController {
     }
 
     private GameConfiguration readConfiguration() {
+        // method chaining으로 구성하려고 하였으나 Input 검증으로 인해 각각 따로 받음
         GameConfigurationBuilder builder = new GameConfigurationBuilder();
 
         List<Participant> participants = InputView.getParticipants().stream().map(Participant::new).toList();

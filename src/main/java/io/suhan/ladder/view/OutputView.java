@@ -3,21 +3,18 @@ package io.suhan.ladder.view;
 import io.suhan.ladder.model.Game;
 import io.suhan.ladder.model.GameResult;
 import io.suhan.ladder.model.Participant;
+import io.suhan.ladder.model.ladder.Ladder;
 import io.suhan.ladder.model.ladder.Line;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public static void printLadder(Game game) {
+    public static void printLadderResult(Game game) {
         System.out.println("\n사다리 결과\n");
 
         printParticipants(game.getConfiguration().getParticipants());
 
-        for (Line line : game.getLadder().getLines()) {
-            String row = buildRow(line, game.getConfiguration().getWidth());
-
-            System.out.println(row);
-        }
+        printLadder(game.getLadder(), game.getConfiguration().getWidth());
 
         printOutcomes(game.getConfiguration().getOutcomes());
     }
@@ -32,6 +29,14 @@ public class OutputView {
     public static void printGameResultOf(Participant target, GameResult result) {
         System.out.println("\n실행 결과");
         System.out.println(result.getOutcome(target));
+    }
+
+    public static void printLadder(Ladder ladder, int width) {
+        for (Line line : ladder.getLines()) {
+            String row = buildRow(line, width);
+
+            System.out.println(row);
+        }
     }
 
     private static void printParticipants(List<Participant> participants) {

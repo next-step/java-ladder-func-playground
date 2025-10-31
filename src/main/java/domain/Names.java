@@ -21,9 +21,7 @@ public class Names {
 
     private void addIfValid(List<Name> temp, String token) {
         String trimmed = token.trim();
-        if (!trimmed.isEmpty()) {
-            temp.add(new Name(trimmed));
-        }
+        temp.add(new Name(trimmed));
     }
 
     public int size() {

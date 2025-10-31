@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Players {
+    private static final int PLAYERS_NAME_MAX_LENGTH = 5;
     private final Names players;
 
     public Players(String input) {
@@ -12,7 +13,7 @@ public class Players {
     }
 
     private Names removeDuplicate(String input) {
-        String[] tokens = input.split(",");
+        List<String> tokens = List.of(input.split(","));
         List<Name> newInput = new ArrayList<>();
 
         for (String token : tokens) {
@@ -34,7 +35,7 @@ public class Players {
     }
 
     private void validateNameLength(Name name) {
-        if (name.value().length() > 5) {
+        if (name.value().length() > PLAYERS_NAME_MAX_LENGTH) {
             throw new IllegalArgumentException("이름은 5글자를 넘기면 안됩니다.");
         }
     }

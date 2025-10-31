@@ -7,7 +7,7 @@ public class Names {
     private final List<Name> values;
 
     public Names(String input) {
-        String[] tokens = input.split(",");
+        List<String> tokens = List.of(input.split(","));
         List<Name> temp = new ArrayList<>();
         for (String token : tokens) {
             addIfValid(temp, token);

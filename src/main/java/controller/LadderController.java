@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Height;
 import domain.Ladder;
 import domain.LadderGame;
 import domain.Players;
@@ -7,6 +8,7 @@ import domain.Results;
 import view.InputView;
 import view.OutputView;
 
+import java.util.InputMismatchException;
 import java.util.Random;
 
 public class LadderController {
@@ -20,20 +22,43 @@ public class LadderController {
 
     public Players inputPlayers() {
         outputView.printAskPlayers();
-        return new Players(inputView.readString());
+        while (true) {
+            try {
+                return new Players(inputView.readString());
+            } catch (IllegalArgumentException e) {
+                outputView.printException(e);
+                outputView.printRetryInputMessage();
+            }
+        }
     }
 
-    public Results inputResults() {
+    public Results inputResults(Players players) {
         outputView.printAskResults();
-        return new Results(inputView.readString());
+        while (true) {
+            try {
+                Results results = new Results(inputView.readString());
+                LadderGame.validatePlayerAndResultCount(players, results);
+                return results;
+            } catch (IllegalArgumentException e) {
+                outputView.printException(e);
+                outputView.printRetryInputMessage();
+            }
+        }
     }
 
-    public int inputHeight() {
+    public Height inputHeight() {
         outputView.printAskHeight();
-        return inputView.readInt();
+        while (true) {
+            try {
+                return new Height(inputView.readInt());
+            } catch (InputMismatchException | IllegalArgumentException e) {
+                outputView.printException(e);
+                outputView.printRetryInputMessage();
+            }
+        }
     }
 
-    public LadderGame startLadderGame(int height, Players players, Results results) {
+    public LadderGame startLadderGame(Height height, Players players, Results results) {
         Ladder ladder = new Ladder(height, players.size(), new Random());
         LadderGame game = new LadderGame(ladder, players, results);
         outputView.printLadderResultTitle();
@@ -58,7 +83,7 @@ public class LadderController {
             return false;
         }
         String result = game.findResultByPlayer(name);
-        outputView.printSingleResult(name, result);
+        outputView.printSingleResult(result);
         return true;
     }
 }

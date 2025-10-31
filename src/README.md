@@ -12,21 +12,21 @@
 
 ## 클래스 소개
 
-| 클래스                        | 역할                                   |
-|----------------------------|--------------------------------------|
-| `Name`                     | 이름 단위를 표현                            |
-| `Names`                    | 이름들의 일급 컬렉션                          |
-| `Players`                  | 참가자 이름 목록 관리 및 중복 제거                 |
-| `Results`                  | 실행 결과 목록 관리                          |
-| `Height`                   | 사다리 높이 검증 및 저장                       |
+| 클래스                        | 역할|
+|----------------------------|---|
+| `Name`                     | 이름 단위를 표현 |
+| `Names`                    | 이름들의 일급 컬렉션 |
+| `Players`                  | 참가자 이름 목록 관리 및 중복 제거 |
+| `Results`                  | 실행 결과 목록 관리 |
+| `Height`                   | 사다리 높이 검증 및 저장 |
 | `Connect`                  | `CONNECTED` / `DISCONNECTED` 상태 Enum |
-| `Point`                    | 연결 여부(`Connect`) 표현                  |
-| `Line`                     | 한 줄의 연결 상태(`Point`) 관리               |
-| `Ladder`                   | 사다리 전체를 구성 (여러 Line의 집합)             |
-| `LadderGame`               | 이동 로직 및 결과 매핑 수행                     |
-| `LadderController`         | 전체 게임 실행 흐름 제어                       |
-| `InputView` / `OutputView` | 입출력 담당                               |
-| `Main`                     | 프로그램 실행의 진입점 담당                      |
+| `Point`                    | 연결 여부(`Connect`) 표현 |
+| `Line`                     | 한 줄의 연결 상태(`Point`) 관리 |
+| `Ladder`                   | 사다리 전체를 구성 (여러 Line의 집합) |
+| `LadderGame`               | 이동 로직 및 결과 매핑 수행 |
+| `LadderController`         | 전체 게임 실행 흐름 제어 |
+| `InputView` / `OutputView` | 입출력 담당 |
+| `Main`                     | 프로그램 실행의 진입점 담당 |
 
 ---
 

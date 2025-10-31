@@ -18,14 +18,16 @@ public class Players {
 
         for (String token : tokens) {
             String trimmed = token.trim();
-            if (!trimmed.isEmpty()) {
-                Name name = new Name(trimmed);
-                if (!newInput.contains(name)) {
-                    newInput.add(name);
-                }
-            }
+            Name name = new Name(trimmed);
+            addIfAbsent(newInput, name);
         }
         return new Names(newInput);
+    }
+
+    private void addIfAbsent(List<Name> newInput, Name name) {
+        if (!newInput.contains(name)) {
+            newInput.add(name);
+        }
     }
 
     private void validatePlayerNames() {

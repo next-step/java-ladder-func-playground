@@ -24,7 +24,13 @@ public class GameTest {
                 new Participant("p4")
         );
 
-        List<String> outcomes = List.of("o1", "o2", "o3", "o4");
+        List<Outcome> outcomes = List.of(
+                new Outcome("o1"),
+                new Outcome("o2"),
+                new Outcome("o3"),
+                new Outcome("o4")
+        );
+
         int height = 4;
 
         GameConfiguration config = new GameConfigurationBuilder()
@@ -42,10 +48,10 @@ public class GameTest {
 
         // then
         SoftAssertions.assertSoftly((softly) -> {
-            softly.assertThat(result.getOutcome(participants.get(0))).isEqualTo("o1");
-            softly.assertThat(result.getOutcome(participants.get(1))).isEqualTo("o2");
-            softly.assertThat(result.getOutcome(participants.get(2))).isEqualTo("o3");
-            softly.assertThat(result.getOutcome(participants.get(3))).isEqualTo("o4");
+            softly.assertThat(result.getOutcome(participants.get(0)).value()).isEqualTo("o1");
+            softly.assertThat(result.getOutcome(participants.get(1)).value()).isEqualTo("o2");
+            softly.assertThat(result.getOutcome(participants.get(2)).value()).isEqualTo("o3");
+            softly.assertThat(result.getOutcome(participants.get(3)).value()).isEqualTo("o4");
         });
     }
 }

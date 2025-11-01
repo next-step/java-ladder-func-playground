@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 public class GameResultTest {
     @Test
     void 게임_결과는_수정할_수_없다() {
-        Map<Participant, String> entry = Map.of(new Participant("p1"), "o1");
+        Map<Participant, Outcome> entry = Map.of(new Participant("p1"), new Outcome("o1"));
         GameResult result = new GameResult(entry);
 
-        assertThrows(UnsupportedOperationException.class, () -> result.results().put(new Participant("p2"), "o2"));
+        assertThrows(UnsupportedOperationException.class, () -> result.results().put(new Participant("p2"), new Outcome("o2")));
     }
 }

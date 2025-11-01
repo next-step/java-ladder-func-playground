@@ -13,7 +13,7 @@ public class GameConfigurationBuilderTest {
     void GameConfiguration을_올바르게_생성할_수_있다() {
         // given
         List<Participant> participants = List.of(new Participant("p1"));
-        List<String> outcomes = List.of("o1");
+        List<Outcome> outcomes = List.of(new Outcome("o1"));
         int height = 1;
 
         // when

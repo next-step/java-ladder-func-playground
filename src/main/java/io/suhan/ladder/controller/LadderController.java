@@ -4,6 +4,7 @@ import io.suhan.ladder.model.Game;
 import io.suhan.ladder.model.GameConfiguration;
 import io.suhan.ladder.model.GameConfigurationBuilder;
 import io.suhan.ladder.model.GameResult;
+import io.suhan.ladder.model.Outcome;
 import io.suhan.ladder.model.Participant;
 import io.suhan.ladder.view.InputView;
 import io.suhan.ladder.view.OutputView;
@@ -31,7 +32,7 @@ public class LadderController {
         List<Participant> participants = InputView.getParticipants().stream().map(Participant::new).toList();
         builder.participants(participants);
 
-        List<String> outcomes = InputView.getOutcomes();
+        List<Outcome> outcomes = InputView.getOutcomes().stream().map(Outcome::new).toList();
         builder.outcomes(outcomes);
 
         int height = InputView.getLadderHeight();

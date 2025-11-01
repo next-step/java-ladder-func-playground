@@ -4,7 +4,7 @@ import java.util.List;
 
 public class GameConfigurationBuilder {
     private List<Participant> participants;
-    private List<String> outcomes;
+    private List<Outcome> outcomes;
     private int height;
 
     public GameConfigurationBuilder participants(List<Participant> participants) {
@@ -17,7 +17,7 @@ public class GameConfigurationBuilder {
         return this;
     }
 
-    public GameConfigurationBuilder outcomes(List<String> outcomes) {
+    public GameConfigurationBuilder outcomes(List<Outcome> outcomes) {
         if (outcomes == null || outcomes.size() != participants.size()) {
             throw new IllegalArgumentException("참가자의 수와 실행 결과의 수는 같아야 합니다.");
         }

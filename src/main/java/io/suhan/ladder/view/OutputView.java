@@ -2,6 +2,7 @@ package io.suhan.ladder.view;
 
 import io.suhan.ladder.model.Game;
 import io.suhan.ladder.model.GameResult;
+import io.suhan.ladder.model.Outcome;
 import io.suhan.ladder.model.Participant;
 import io.suhan.ladder.model.ladder.Ladder;
 import io.suhan.ladder.model.ladder.Line;
@@ -47,9 +48,9 @@ public class OutputView {
         System.out.println(line);
     }
 
-    private static void printOutcomes(List<String> outcomes) {
+    private static void printOutcomes(List<Outcome> outcomes) {
         String line = outcomes.stream()
-                .map(OutputView::centerAlign)
+                .map((outcome -> OutputView.centerAlign(outcome.value())))
                 .collect(Collectors.joining(" "));
 
         System.out.println(line);

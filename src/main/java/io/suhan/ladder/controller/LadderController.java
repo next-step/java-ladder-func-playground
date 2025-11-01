@@ -43,15 +43,26 @@ public class LadderController {
     private void handleOutcomeQuery(GameResult result) {
         Stream.generate(InputView::getParticipantForResult)
                 .takeWhile((input) -> !input.equals("all"))
-                .forEach((input) -> result.results().keySet().stream()
-                        .filter((participant) -> participant.name().equals(input))
-                        .findFirst()
-                        .ifPresentOrElse(
-                                (target) -> OutputView.printGameResultOf(target, result),
-                                () -> System.out.println("존재하지 않는 참가자입니다.")
-                        )
-                );
+                .forEach((input) -> handleSingleQuery(result, input));
 
         OutputView.printGameResult(result);
+    }
+
+    private void handleSingleQuery(GameResult result, String input) {
+        Participant participant = findParticipantByName(result, input);
+
+        if (participant == null) {
+            System.out.println("존재하지 않는 참가자입니다.");
+            return;
+        }
+
+        OutputView.printGameResultOf(participant, result);
+    }
+
+    private Participant findParticipantByName(GameResult result, String name) {
+        return result.results().keySet().stream()
+                .filter((participant -> participant.name().equals(name)))
+                .findFirst()
+                .orElse(null);
     }
 }

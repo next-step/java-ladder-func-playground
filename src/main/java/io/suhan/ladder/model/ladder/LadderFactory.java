@@ -36,12 +36,11 @@ public class LadderFactory {
     private static List<Connection> createConnections(int width, Random random) {
         List<Connection> connections = new ArrayList<>();
 
-        // TODO: depth 줄이기
         for (int i = 0; i < width - 1; i++) {
-            if (shouldConnect(random)) {
-                connections.add(new Connection(i, i + 1));
-                i += 1; // skip the right next line
-            }
+            if (!shouldConnect(random)) continue;
+
+            connections.add(new Connection(i, i + 1));
+            i += 1; // skip the right next line
         }
 
         return connections;

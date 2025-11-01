@@ -40,8 +40,6 @@ public class LadderFactoryTest {
 
                 int diff = next.left() - current.left();
 
-                System.out.println(diff);
-
                 // diff = 1 if overlaps
                 assertTrue(diff > 1);
             }

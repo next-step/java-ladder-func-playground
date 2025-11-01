@@ -11,13 +11,13 @@ public class InputView {
     public static List<String> getParticipants() {
         System.out.println("\n참여할 사람 이름을 입력하세요. (이름은 " + INPUT_DELIMITER + "로 구분하세요)");
 
-        return Arrays.stream(scanner.next().split(INPUT_DELIMITER)).toList();
+        return Arrays.stream(scanner.nextLine().split(INPUT_DELIMITER)).toList();
     }
 
     public static List<String> getOutcomes() {
         System.out.println("\n실행 결과를 입력하세요. (결과는 " + INPUT_DELIMITER + "로 구분하세요)");
 
-        return Arrays.stream(scanner.next().split(INPUT_DELIMITER)).toList();
+        return Arrays.stream(scanner.nextLine().split(INPUT_DELIMITER)).toList();
     }
 
     public static int getLadderHeight() {

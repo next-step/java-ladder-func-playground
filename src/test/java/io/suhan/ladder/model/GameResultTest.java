@@ -15,6 +15,6 @@ public class GameResultTest {
         Map<Participant, String> entry = Map.of(new Participant("p1"), "o1");
         GameResult result = new GameResult(entry);
 
-        assertThrows(UnsupportedOperationException.class, () -> result.getResults().put(new Participant("p2"), "o2"));
+        assertThrows(UnsupportedOperationException.class, () -> result.results().put(new Participant("p2"), "o2"));
     }
 }

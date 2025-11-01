@@ -17,14 +17,14 @@ public class LineTest {
         List<Connection> connections = List.of(new Connection(0, 1));
         Line line = new Line(connections);
 
-        assertEquals(connections.size(), line.getConnections().size());
-        assertIterableEquals(connections, line.getConnections());
+        assertEquals(connections.size(), line.connections().size());
+        assertIterableEquals(connections, line.connections());
     }
 
     @Test
     void 연결_목록은_수정할_수_없다() {
         Line line = new Line(List.of(new Connection(0, 1)));
 
-        assertThrows(UnsupportedOperationException.class, () -> line.getConnections().add(new Connection(1, 2)));
+        assertThrows(UnsupportedOperationException.class, () -> line.connections().add(new Connection(1, 2)));
     }
 }

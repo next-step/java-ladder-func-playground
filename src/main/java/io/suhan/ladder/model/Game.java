@@ -19,7 +19,7 @@ public class Game {
     }
 
     public static Game of(GameConfiguration configuration) {
-        return new Game(configuration, LadderFactory.createLadder(configuration.getWidth(), configuration.getHeight()));
+        return new Game(configuration, LadderFactory.createLadder(configuration.width(), configuration.height()));
     }
 
     public static Game of(GameConfiguration configuration, Ladder ladder) {
@@ -27,13 +27,13 @@ public class Game {
     }
 
     public GameResult execute() {
-        List<Participant> participants = configuration.getParticipants();
-        List<String> outcomes = configuration.getOutcomes();
+        List<Participant> participants = configuration.participants();
+        List<String> outcomes = configuration.outcomes();
         Map<Participant, String> result = new LinkedHashMap<>();
 
         OutputView.printLadderResult(this);
 
-        for (int start = 0; start < configuration.getWidth(); start++) {
+        for (int start = 0; start < configuration.width(); start++) {
             int end = traverse(start);
             Participant participant = participants.get(start);
             String outcome = outcomes.get(end);
@@ -47,7 +47,7 @@ public class Game {
     private int traverse(int start) {
         int col = start;
 
-        for (Line line : ladder.getLines()) {
+        for (Line line : ladder.lines()) {
             col = findNextColumn(line, col);
         }
 
@@ -56,19 +56,19 @@ public class Game {
 
     private int findNextColumn(Line line, int col) {
 
-        return line.getConnections().stream()
-                .filter((connection) -> connection.getLeft() == col || connection.getRight() == col)
+        return line.connections().stream()
+                .filter((connection) -> connection.left() == col || connection.right() == col)
                 .findFirst()
                 .map((connection) -> getConnectedColumn(connection, col))
                 .orElse(col);
     }
 
     private int getConnectedColumn(Connection connection, int col) {
-        if (connection.getLeft() == col) {
-            return connection.getRight();
+        if (connection.left() == col) {
+            return connection.right();
         }
 
-        return connection.getLeft();
+        return connection.left();
     }
 
     public Ladder getLadder() {

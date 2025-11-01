@@ -3,14 +3,9 @@ package io.suhan.ladder.model.ladder;
 import java.util.Collections;
 import java.util.List;
 
-public class Ladder {
-    private final List<Line> lines;
-
-    public Ladder(List<Line> lines) {
-        this.lines = lines;
-    }
-
-    public List<Line> getLines() {
+public record Ladder(List<Line> lines) {
+    @Override
+    public List<Line> lines() {
         return Collections.unmodifiableList(lines);
     }
 }

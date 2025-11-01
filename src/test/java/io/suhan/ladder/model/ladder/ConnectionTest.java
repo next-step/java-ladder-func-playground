@@ -13,7 +13,7 @@ public class ConnectionTest {
     void Left와_Right_정보를_반환할_수_있다() {
         Connection connection = new Connection(0, 1);
 
-        assertEquals(0, connection.getLeft());
-        assertEquals(1, connection.getRight());
+        assertEquals(0, connection.left());
+        assertEquals(1, connection.right());
     }
 }

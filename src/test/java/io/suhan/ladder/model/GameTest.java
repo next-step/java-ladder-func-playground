@@ -3,7 +3,6 @@ package io.suhan.ladder.model;
 import io.suhan.ladder.model.ladder.Ladder;
 import io.suhan.ladder.model.ladder.LadderFactory;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayNameGeneration;
@@ -34,7 +33,7 @@ public class GameTest {
                 .height(height)
                 .build();
 
-        Ladder ladder = LadderFactory.createLadder(config.getWidth(), config.getHeight(), fixedRandom);
+        Ladder ladder = LadderFactory.createLadder(config.width(), config.height(), fixedRandom);
 
         Game game = Game.of(config, ladder);
 

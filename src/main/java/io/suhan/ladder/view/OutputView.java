@@ -12,18 +12,18 @@ public class OutputView {
     public static void printLadderResult(Game game) {
         System.out.println("\n사다리 결과\n");
 
-        printParticipants(game.getConfiguration().getParticipants());
+        printParticipants(game.getConfiguration().participants());
 
-        printLadder(game.getLadder(), game.getConfiguration().getWidth());
+        printLadder(game.getLadder(), game.getConfiguration().width());
 
-        printOutcomes(game.getConfiguration().getOutcomes());
+        printOutcomes(game.getConfiguration().outcomes());
     }
 
     public static void printGameResult(GameResult result) {
         System.out.println("\n실행 결과");
 
-        result.getResults()
-                .forEach(((participant, outcome) -> System.out.println(participant.getName() + " : " + outcome)));
+        result.results()
+                .forEach(((participant, outcome) -> System.out.println(participant.name() + " : " + outcome)));
     }
 
     public static void printGameResultOf(Participant target, GameResult result) {
@@ -32,7 +32,7 @@ public class OutputView {
     }
 
     public static void printLadder(Ladder ladder, int width) {
-        for (Line line : ladder.getLines()) {
+        for (Line line : ladder.lines()) {
             String row = buildRow(line, width);
 
             System.out.println(row);
@@ -41,7 +41,7 @@ public class OutputView {
 
     private static void printParticipants(List<Participant> participants) {
         String line = participants.stream()
-                .map((participant -> OutputView.centerAlign(participant.getName())))
+                .map((participant -> OutputView.centerAlign(participant.name())))
                 .collect(Collectors.joining(" "));
 
         System.out.println(line);
@@ -78,8 +78,8 @@ public class OutputView {
     }
 
     private static boolean isConnected(Line line, int index) {
-        return line.getConnections().stream()
-                .anyMatch((connection) -> connection.getLeft() == index);
+        return line.connections().stream()
+                .anyMatch((connection) -> connection.left() == index);
     }
 
     private static String centerAlign(String input) {

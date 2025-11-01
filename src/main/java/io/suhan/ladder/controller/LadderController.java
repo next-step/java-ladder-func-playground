@@ -43,8 +43,8 @@ public class LadderController {
     private void handleOutcomeQuery(GameResult result) {
         Stream.generate(InputView::getParticipantForResult)
                 .takeWhile((input) -> !input.equals("all"))
-                .forEach((input) -> result.getResults().keySet().stream()
-                        .filter((participant) -> participant.getName().equals(input))
+                .forEach((input) -> result.results().keySet().stream()
+                        .filter((participant) -> participant.name().equals(input))
                         .findFirst()
                         .ifPresentOrElse(
                                 (target) -> OutputView.printGameResultOf(target, result),

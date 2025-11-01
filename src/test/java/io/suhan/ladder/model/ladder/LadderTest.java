@@ -21,14 +21,14 @@ public class LadderTest {
 
         Ladder ladder = new Ladder(lines);
 
-        assertEquals(lines.size(), ladder.getLines().size());
-        assertIterableEquals(lines, ladder.getLines());
+        assertEquals(lines.size(), ladder.lines().size());
+        assertIterableEquals(lines, ladder.lines());
     }
 
     @Test
     void 라인_목록은_수정할_수_없다() {
         Ladder ladder = new Ladder(List.of(new Line(List.of(new Connection(0, 1)))));
 
-        assertThrows(UnsupportedOperationException.class, () -> ladder.getLines().add(new Line(List.of(new Connection(1, 2)))));
+        assertThrows(UnsupportedOperationException.class, () -> ladder.lines().add(new Line(List.of(new Connection(1, 2)))));
     }
 }

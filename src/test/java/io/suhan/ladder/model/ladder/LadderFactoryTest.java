@@ -16,7 +16,7 @@ public class LadderFactoryTest {
     void 사다리는_올바른_높이를_가진다() {
         Ladder ladder = LadderFactory.createLadder(5, 4);
 
-        assertEquals(4, ladder.getLines().size());
+        assertEquals(4, ladder.lines().size());
     }
 
     @Test
@@ -30,15 +30,15 @@ public class LadderFactoryTest {
         Ladder ladder = LadderFactory.createLadder(width, height, fixedRandom);
 
         // then
-        for (int row = 0; row < ladder.getLines().size(); row++) {
-            Line line = ladder.getLines().get(row);
-            List<Connection> connections = line.getConnections();
+        for (int row = 0; row < ladder.lines().size(); row++) {
+            Line line = ladder.lines().get(row);
+            List<Connection> connections = line.connections();
 
             for (int i = 0; i < connections.size() - 1; i++) {
                 Connection current = connections.get(i);
                 Connection next = connections.get(i + 1);
 
-                int diff = next.getLeft() - current.getLeft();
+                int diff = next.left() - current.left();
 
                 System.out.println(diff);
 

@@ -25,9 +25,9 @@ public class GameConfigurationBuilderTest {
 
         // then
         SoftAssertions.assertSoftly((softly) -> {
-            softly.assertThat(config.getParticipants()).isEqualTo(participants);
-            softly.assertThat(config.getOutcomes()).isEqualTo(outcomes);
-            softly.assertThat(config.getHeight()).isEqualTo(height);
+            softly.assertThat(config.participants()).isEqualTo(participants);
+            softly.assertThat(config.outcomes()).isEqualTo(outcomes);
+            softly.assertThat(config.height()).isEqualTo(height);
         });
     }
 }

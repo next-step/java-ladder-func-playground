@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Player extends SplitMethod {
+public class Player {
     List<String> players;
     List<Integer> destinatioinPos = new ArrayList<>();
 
-    public Player(String players) {
-        this.players = split(players);
+    public Player(List<String> players) {
+        this.players = players;
     }
 
     public List<String> getPlayers() {

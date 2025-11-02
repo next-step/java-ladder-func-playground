@@ -3,11 +3,11 @@ package Model;
 import java.util.Collections;
 import java.util.List;
 
-public class Rewards extends SplitMethod {
+public class Rewards{
     List<String> rewards;
 
-    public Rewards(String rewards) {
-        this.rewards = split(rewards);
+    public Rewards(List<String> rewards) {
+        this.rewards = rewards;
     }
 
     public String getRewardskey(int index) {

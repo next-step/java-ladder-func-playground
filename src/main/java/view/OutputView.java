@@ -43,26 +43,49 @@ public class OutputView {
         System.out.println("결과를 보고 싶은 사람은?");
     }
 
-    public boolean printRewards(Rewards rewards, Player players, String inputNames) {
-        System.out.println("실행 결과");
-        String trimmedInput = inputNames.trim();
-        if (trimmedInput.equals("all")) {
-            players.getPlayers().stream()
-                    .forEach(player -> System.out.println(player + " : " + rewards.getRewardskey(players.getDestinatioinPos(player))));
-            return true;
-        }
+    public void printAllRewards(Rewards rewards, Player players) {
+        players.getPlayers().stream()
+                .forEach(player -> {
+                    String reward = rewards.getRewardskey(players.getDestinatioinPos(player));
+                    System.out.println(player + " : " + reward);
+                });
+    }
 
-        Arrays.stream(trimmedInput.split(","))
+
+    public void printSpecificRewards(Rewards rewards, Player players, String specificNames) {
+        Arrays.stream(specificNames.split(","))
                 .map(String::trim)
                 .forEach(trimmedName -> {
                     try {
-                        System.out.println(trimmedName + " : " + rewards.getRewardskey(players.getDestinatioinPos(trimmedName)));
+                        String reward = rewards.getRewardskey(players.getDestinatioinPos(trimmedName));
+                        System.out.println(trimmedName + " : " + reward);
                     } catch (Exception e) {
                         throw new IllegalArgumentException("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
                     }
                 });
-        return false;
     }
+
+
+//    public boolean printRewards(Rewards rewards, Player players, String inputNames) {
+//        System.out.println("실행 결과");
+//        String trimmedInput = inputNames.trim();
+//        if (trimmedInput.equals("all")) {
+//            players.getPlayers().stream()
+//                    .forEach(player -> System.out.println(player + " : " + rewards.getRewardskey(players.getDestinatioinPos(player))));
+//            return true;
+//        }
+//
+//        Arrays.stream(trimmedInput.split(","))
+//                .map(String::trim)
+//                .forEach(trimmedName -> {
+//                    try {
+//                        System.out.println(trimmedName + " : " + rewards.getRewardskey(players.getDestinatioinPos(trimmedName)));
+//                    } catch (Exception e) {
+//                        throw new IllegalArgumentException("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
+//                    }
+//                });
+//        return false;
+//    }
 
     public void askPlayers() {
         System.out.println("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");

@@ -37,11 +37,11 @@ public class Controller {
         boolean isAll = false;
 
         while (true) {
-            if(isAll)break;
             outputView.askResults();
             String string = inputView.getScanner().nextLine();
 
-            isAll = outputView.printRewards(rewards, players, string);
+            if(string.trim().equals("all")){outputView.printAllRewards(rewards,players);break;}
+            outputView.printSpecificRewards(rewards,players,string);
         }
     }
 

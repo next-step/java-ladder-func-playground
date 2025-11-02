@@ -12,10 +12,8 @@ public class Controller {
 
     public void startLadder() {
         int height;
-        boolean isAll = false;
 
         Player players = getPlayer();
-        String inputs;
 
         Rewards rewards = getRewards();
 
@@ -31,7 +29,10 @@ public class Controller {
         players.playerOnDestination(bridge);
         inputView.getScanner().nextLine();
 
-        while (!isAll) {
+        boolean isAll = false;
+
+        while (true) {
+            if(isAll)break;
             outputView.askResults();
             String string = inputView.getScanner().nextLine();
 

@@ -13,13 +13,11 @@ public class Controller {
     public void startLadder() {
         int height;
         boolean isAll = false;
-        outputView.askPlayers();
-        String inputs = inputView.getScanner().nextLine();
-        Player players = new Player(inputs);
 
-        outputView.askRewards();
-        inputs = inputView.getScanner().nextLine();
-        Rewards rewards = new Rewards(inputs);
+        Player players = getPlayer();
+        String inputs;
+
+        Rewards rewards = getRewards();
 
         outputView.askLadderHeight();
         height = inputView.getWidthAndHeight();
@@ -39,5 +37,17 @@ public class Controller {
 
             isAll = outputView.printRewards(rewards, players, string);
         }
+    }
+
+    private Rewards getRewards() {
+        outputView.askRewards();
+        String inputs = inputView.getScanner().nextLine();
+        return new Rewards(inputs);
+    }
+
+    private Player getPlayer() {
+        outputView.askPlayers();
+        String inputs = inputView.getScanner().nextLine();
+        return new Player(inputs);
     }
 }

@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import Model.LadderDescentService;
+import Model.LadderResult;
+
 public class Controller {
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
@@ -19,7 +22,7 @@ public class Controller {
         int height;
 
         Player players = getPlayer();
-        List<String> rewardNames = getRewardNames();
+        Rewards rewards = getRewards();
 
         outputView.askLadderHeight();
         height = inputView.getWidthAndHeight();
@@ -28,29 +31,29 @@ public class Controller {
         Bridge bridge = new Bridge(height, players.getPlayersNumber() - 1);
         outputView.printBridge(bridge);
 
-        outputView.printPlayersAndRewards(rewardNames);
+        outputView.printPlayersAndRewards(rewards.getRewards());
 
-        players.playerOnDestination(bridge);
+        LadderDescentService descentService = new LadderDescentService(bridge);
+        LadderResult ladderResult = descentService.calculateAllResults(players.getPlayersNumber());
+
         inputView.getScanner().nextLine();
-
-        Rewards rewards = new Rewards(players, rewardNames);
 
         while (true) {
             outputView.askResults();
             String string = inputView.getScanner().nextLine();
 
             if (string.trim().equals("all")) {
-                outputView.printAllRewards(rewards);
+                outputView.printAllResults(players, rewards, ladderResult);
                 break;
             }
-            outputView.printSpecificRewards(rewards, string);
+            outputView.printSpecificResults(players, rewards, ladderResult, string);
         }
     }
 
-    private List<String> getRewardNames() {
+    private Rewards getRewards() {
         outputView.askRewards();
         String rewardsInputs = inputView.getScanner().nextLine();
-        return split(rewardsInputs);
+        return new Rewards(split(rewardsInputs));
     }
 
     private Player getPlayer() {

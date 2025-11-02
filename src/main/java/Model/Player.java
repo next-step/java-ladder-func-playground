@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Player {
     List<String> players;
-    public List<Integer> destinatioinPos = new ArrayList<>();
 
     public Player(List<String> players) {
         this.players = players;
@@ -16,19 +15,15 @@ public class Player {
         return Collections.unmodifiableList(players);
     }
 
-    public int getDestinatioinPos(String string) {
-        return destinatioinPos.get(players.indexOf(string));
-    }
-
     public int getPlayersNumber() {
         return players.size();
     }
 
-    public void playerOnDestination(Bridge bridge) {
-        LadderDescentService descentService = new LadderDescentService(bridge);
+    public String getPlayerName(int index) {
+        return players.get(index);
+    }
 
-        for (String player : players) {
-            destinatioinPos.add(descentService.descent(players.indexOf(player)));
-        }
+    public int getPlayerIndex(String name) {
+        return players.indexOf(name);
     }
 }

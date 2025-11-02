@@ -2,14 +2,26 @@ package Model;
 
 import java.util.List;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 public class LadderDescentService {
-    private Bridge bridge;
+    private final Bridge bridge;
 
     public LadderDescentService(Bridge bridge) {
         this.bridge = bridge;
     }
 
-    public int descent(int curPos){
+    public LadderResult calculateAllResults(int numberOfPlayers) {
+        Map<Integer, Integer> resultMap = IntStream.range(0, numberOfPlayers)
+                .boxed()
+                .collect(Collectors.toMap(i -> i, this::descent));
+        return new LadderResult(resultMap);
+    }
+
+    private int descent(int curPos){
         int pos = curPos;
         for (BridgeRow row : bridge.getRows()) {
             List<BridgeStep> steps = row.getSteps();

@@ -39,19 +39,25 @@ public class OutputView {
         System.out.println("결과를 보고 싶은 사람은?");
     }
 
-    public void printAllRewards(Rewards rewards) {
-        rewards.getAllRewards().forEach((player, reward) -> 
-            System.out.println(player + " : " + reward));
+    public void printAllResults(Player players, Rewards rewards, LadderResult ladderResult) {
+        for (int i = 0; i < players.getPlayersNumber(); i++) {
+            String playerName = players.getPlayerName(i);
+            int destinationIndex = ladderResult.getDestinationIndex(i);
+            String reward = rewards.getReward(destinationIndex);
+            System.out.println(playerName + " : " + reward);
+        }
     }
 
-    public void printSpecificRewards(Rewards rewards, String specificNames) {
+    public void printSpecificResults(Player players, Rewards rewards, LadderResult ladderResult, String specificNames) {
         Arrays.stream(specificNames.split(","))
                 .map(String::trim)
                 .forEach(trimmedName -> {
-                    String reward = rewards.getRewardForPlayer(trimmedName);
-                    if (reward != null) {
+                    try {
+                        int playerIndex = players.getPlayerIndex(trimmedName);
+                        int destinationIndex = ladderResult.getDestinationIndex(playerIndex);
+                        String reward = rewards.getReward(destinationIndex);
                         System.out.println(trimmedName + " : " + reward);
-                    } else {
+                    } catch (Exception e) {
                         System.out.println("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
                     }
                 });

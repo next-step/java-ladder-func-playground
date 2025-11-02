@@ -19,8 +19,7 @@ public class Controller {
         int height;
 
         Player players = getPlayer();
-
-        Rewards rewards = getRewards();
+        List<String> rewardNames = getRewardNames();
 
         outputView.askLadderHeight();
         height = inputView.getWidthAndHeight();
@@ -29,26 +28,29 @@ public class Controller {
         Bridge bridge = new Bridge(height, players.getPlayersNumber() - 1);
         outputView.printBridge(bridge);
 
-        outputView.printPlayersAndRewards(rewards.getRewards());
+        outputView.printPlayersAndRewards(rewardNames);
 
         players.playerOnDestination(bridge);
         inputView.getScanner().nextLine();
 
-        boolean isAll = false;
+        Rewards rewards = new Rewards(players, rewardNames);
 
         while (true) {
             outputView.askResults();
             String string = inputView.getScanner().nextLine();
 
-            if(string.trim().equals("all")){outputView.printAllRewards(rewards,players);break;}
-            outputView.printSpecificRewards(rewards,players,string);
+            if (string.trim().equals("all")) {
+                outputView.printAllRewards(rewards);
+                break;
+            }
+            outputView.printSpecificRewards(rewards, string);
         }
     }
 
-    private Rewards getRewards() {
+    private List<String> getRewardNames() {
         outputView.askRewards();
         String rewardsInputs = inputView.getScanner().nextLine();
-        return new Rewards(split(rewardsInputs));
+        return split(rewardsInputs);
     }
 
     private Player getPlayer() {

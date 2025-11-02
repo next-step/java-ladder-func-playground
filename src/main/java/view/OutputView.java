@@ -39,23 +39,20 @@ public class OutputView {
         System.out.println("결과를 보고 싶은 사람은?");
     }
 
-    public void printAllRewards(Rewards rewards, Player players) {
-        players.getPlayers().stream()
-                .forEach(player -> {
-                    String reward = rewards.getRewardskey(players.getDestinatioinPos(player));
-                    System.out.println(player + " : " + reward);
-                });
+    public void printAllRewards(Rewards rewards) {
+        rewards.getAllRewards().forEach((player, reward) -> 
+            System.out.println(player + " : " + reward));
     }
 
-    public void printSpecificRewards(Rewards rewards, Player players, String specificNames) {
+    public void printSpecificRewards(Rewards rewards, String specificNames) {
         Arrays.stream(specificNames.split(","))
                 .map(String::trim)
                 .forEach(trimmedName -> {
-                    try {
-                        String reward = rewards.getRewardskey(players.getDestinatioinPos(trimmedName));
+                    String reward = rewards.getRewardForPlayer(trimmedName);
+                    if (reward != null) {
                         System.out.println(trimmedName + " : " + reward);
-                    } catch (Exception e) {
-                        throw new IllegalArgumentException("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
+                    } else {
+                        System.out.println("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
                     }
                 });
     }

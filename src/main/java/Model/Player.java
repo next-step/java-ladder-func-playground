@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Player {
     List<String> players;
-    List<Integer> destinatioinPos = new ArrayList<>();
+    public List<Integer> destinatioinPos = new ArrayList<>();
 
     public Player(List<String> players) {
         this.players = players;

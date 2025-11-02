@@ -10,16 +10,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
-    public void print(Bridge bridge) {
+    public void printBridge(Bridge bridge) {
         for (List<BridgeStep> row : bridge.getRows()) {
-            printRow(row);
+            printBrigdeRow(row);
             System.out.print("|");
             System.out.println();
         }
 
     }
 
-    private void printRow(List<BridgeStep> row) {
+    private void printBrigdeRow(List<BridgeStep> row) {
         row.forEach(bridgeStep -> {
             System.out.print("|");
             printBridgeStep(bridgeStep);

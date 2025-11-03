@@ -37,8 +37,8 @@ public class OutputView {
     }
 
     private void drawLine(Line line) {
-        int numberOfPoint = line.getNumberOfPoints();
-        for (int i = 0; i < numberOfPoint; i++) {
+        int pointCount = line.getPointCount();
+        for (int i = 0; i < pointCount; i++) {
             drawFoothold(line.isConnectedAt(i));
         }
         System.out.println("");

@@ -1,14 +1,17 @@
 package controller;
 
-import domain.Height;
 import domain.Ladder;
 import domain.LadderGame;
+import domain.PlayerName;
 import domain.Players;
+import domain.ResultName;
 import domain.Results;
 import view.InputView;
 import view.OutputView;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Random;
 
 public class LadderController {
@@ -24,7 +27,12 @@ public class LadderController {
         outputView.printAskPlayers();
         while (true) {
             try {
-                return new Players(inputView.readString());
+                String input = inputView.readString();
+                List<PlayerName> players = Arrays.stream(input.split(","))
+                        .map(String::trim)
+                        .map(PlayerName::new)
+                        .toList();
+                return new Players(players);
             } catch (IllegalArgumentException e) {
                 outputView.printException(e);
                 outputView.printRetryInputMessage();
@@ -36,7 +44,12 @@ public class LadderController {
         outputView.printAskResults();
         while (true) {
             try {
-                Results results = new Results(inputView.readString());
+                String input = inputView.readString();
+                List<ResultName> result = Arrays.stream(input.split(","))
+                        .map(String::trim)
+                        .map(ResultName::new)
+                        .toList();
+                Results results = new Results(result);
                 LadderGame.validatePlayerAndResultCount(players, results);
                 return results;
             } catch (IllegalArgumentException e) {
@@ -46,11 +59,15 @@ public class LadderController {
         }
     }
 
-    public Height inputHeight() {
+    public int inputHeight() {
         outputView.printAskHeight();
         while (true) {
             try {
-                return new Height(inputView.readInt());
+                int height = inputView.readInt();
+                if (height < 0) {
+                    throw new IllegalArgumentException("높이는 양수여야 합니다.");
+                }
+                return height;
             } catch (InputMismatchException | IllegalArgumentException e) {
                 outputView.printException(e);
                 outputView.printRetryInputMessage();
@@ -58,13 +75,11 @@ public class LadderController {
         }
     }
 
-    public LadderGame startLadderGame(Height height, Players players, Results results) {
+    public LadderGame startLadderGame(int height, Players players, Results results) {
         Ladder ladder = new Ladder(height, players.size(), new Random());
         LadderGame game = new LadderGame(ladder, players, results);
         outputView.printLadderResultTitle();
-        outputView.printLadder(ladder
-                , players.getPlayers().getValues()
-                , results.getResults().getValues());
+        outputView.printLadder(ladder, players.getPlayers(), results.getResults());
         return game;
     }
 

@@ -21,9 +21,9 @@ public class LadderGameController {
 
     public void startGame(){
         try {
-            Players players = setupPlayers();
-            Prizes prizes = setupPrizes(players);
-            Ladder ladder = setupLadder(players.size());
+            Players players = createPlayers();
+            Prizes prizes = createPrizes(players);
+            Ladder ladder = createLadder(players.size());
             LadderGame ladderGame = new LadderGame(ladder);
 
             GameResult gameResult = calculateAllResults(ladderGame, players, prizes);
@@ -39,7 +39,7 @@ public class LadderGameController {
         }
     }
 
-    private Players setupPlayers(){
+    private Players createPlayers(){
         String namesLine = inputView.inputPeople();
         List<String> playerNames = Arrays.asList(namesLine.split(","));
 
@@ -50,7 +50,7 @@ public class LadderGameController {
         return new Players(playerList);
     }
 
-    private Prizes setupPrizes(Players players){
+    private Prizes createPrizes(Players players){
         String prizeLine = inputView.inputResults();
         List<String> prizesType = Arrays.asList(prizeLine.split(","));
 
@@ -68,11 +68,11 @@ public class LadderGameController {
         }
     }
 
-    private Ladder setupLadder(int numberOfPeople){
+    private Ladder createLadder(int peopleCount){
         while (true) {
             try {
                 int height = inputView.inputLadderHeight();
-                return new Ladder(numberOfPeople, height);
+                return new Ladder(peopleCount, height);
             } catch (NumberFormatException e) {
                 outputView.printError("숫자만 입력할 수 있습니다");
             }
@@ -81,9 +81,9 @@ public class LadderGameController {
 
     private GameResult calculateAllResults(LadderGame ladderGame, Players players, Prizes prizes) {
         GameResult gameResult = new GameResult();
-        int numberOfPeople = players.size();
+        int peopleCount = players.size();
 
-        for (int startColumn = 0; startColumn < numberOfPeople; startColumn++) {
+        for (int startColumn = 0; startColumn < peopleCount; startColumn++) {
             Player currentPlayer = players.getPlayerAt(startColumn);
             int resultColumn = ladderGame.trace(startColumn);
             Prize currentPrize = prizes.getPrizeAt(resultColumn);

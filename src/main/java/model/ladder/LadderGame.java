@@ -20,7 +20,7 @@ public class LadderGame {
         if (currentColumn > 0 && currentLine.isConnectedAt(currentColumn - 1)) {
             return currentColumn - 1;
         }
-        if (currentColumn < currentLine.getNumberOfPoints() && currentLine.isConnectedAt(currentColumn)) {
+        if (currentColumn < currentLine.getPointCount() && currentLine.isConnectedAt(currentColumn)) {
             return currentColumn + 1;
         }
         return currentColumn;

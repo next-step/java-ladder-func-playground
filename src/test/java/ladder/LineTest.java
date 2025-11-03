@@ -19,7 +19,7 @@ public class LineTest {
         for (int row = 0; row < ladder.getHeight(); row++) {
             Line line = ladder.getLine(row);
 
-            for (int i = 0; i < line.getNumberOfPoints() - 1; i++) {
+            for (int i = 0; i < line.getPointCount() - 1; i++) {
                 if (line.isConnectedAt(i)) {
                     assertFalse(line.isConnectedAt(i + 1));
                 }

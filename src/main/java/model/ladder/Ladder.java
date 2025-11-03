@@ -41,11 +41,11 @@ public class Ladder {
 
     private List<Line> createLines(int width, int height) {
         List<Line> lines = new ArrayList<>();
-        int numberOfPoints = width - 1;
+        int pointCount = width - 1;
         Random random = new Random();
 
         for (int i = 0; i < height; i++) {
-            lines.add(Line.generateRandomLine(numberOfPoints, random));
+            lines.add(Line.generateRandomLine(pointCount, random));
         }
 
         return lines;

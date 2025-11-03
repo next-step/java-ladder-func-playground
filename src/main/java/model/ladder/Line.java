@@ -34,7 +34,7 @@ public class Line {
         return points.get(column).isConnected();
     }
 
-    public int getNumberOfPoints() {
+    public int getPointCount() {
         return points.size();
     }
 }

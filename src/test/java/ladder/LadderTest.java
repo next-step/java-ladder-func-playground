@@ -35,6 +35,6 @@ public class LadderTest {
 
         assertThat(ladder).isNotNull();
         assertThat(ladder.getHeight()).isEqualTo(height);
-        assertThat(ladder.getLine(0).getNumberOfPoints()).isEqualTo(width - 1);
+        assertThat(ladder.getLine(0).getPointCount()).isEqualTo(width - 1);
     }
 }

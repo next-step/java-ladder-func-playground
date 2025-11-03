@@ -1,17 +1,19 @@
 package domain;
 
-public class Results {
-    private final Names results;
+import java.util.List;
 
-    public Results(String input) {
-        this.results = new Names(input);
+public class Results {
+    private final List<ResultName> results;
+
+    public Results(List<ResultName> results) {
+        this.results = List.copyOf(results);
     }
 
     public int size() {
         return results.size();
     }
 
-    public Names getResults() {
+    public List<ResultName> getResults() {
         return results;
     }
 }

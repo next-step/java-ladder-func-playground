@@ -10,7 +10,7 @@ class LadderTest {
     @Test
     void 높이가_0인_사다리_생성() {
         //given
-        Height height = new Height(0);
+        int height = 0;
         int playerCount = 3;
 
         //when
@@ -23,7 +23,7 @@ class LadderTest {
     @Test
     void 높이가_3인_사다리_생성() {
         //given
-        Height height = new Height(3);
+        int height = 3;
         int playerCount = 3;
 
         //when
@@ -32,4 +32,5 @@ class LadderTest {
         //then
         assertThat(ladder.getLines()).hasSize(3);
     }
+
 }

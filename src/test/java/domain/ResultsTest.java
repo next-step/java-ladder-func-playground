@@ -2,21 +2,20 @@ package domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ResultsTest {
     @Test
-    void 쉼표로_구분된_문자열_생성() {
-        //given
-        String input = "꽝,5000,꽝";
+    void 결과_리스트를_생성할_수_있다() {
+        // given
+        List<ResultName> list = List.of(new ResultName("태우1"), new ResultName("태우2"));
 
-        //when
-        Results results = new Results(input);
+        // when
+        Results results = new Results(list);
 
-        //then
-        assertThat(results.size()).isEqualTo(3);
-        assertThat(results.getResults().getValues())
-                .extracting(Name::value)
-                .containsExactly("꽝", "5000", "꽝");
+        // then
+        assertThat(results.size()).isEqualTo(2);
     }
 }

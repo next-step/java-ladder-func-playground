@@ -23,30 +23,28 @@ public class LadderGame {
 
     private int move(int position) {
         for (Line line : ladder.getLines()) {
-            position += calculateNextPosition(line, position);
+            position = line.moveOf(position);
         }
         return position;
     }
 
-    private int calculateNextPosition(Line line, int position) {
-        if (line.validateMoveRight(position).isConnected()) return 1;
-        if (line.validateMoveLeft(position).isConnected()) return -1;
-        return 0;
-    }
 
     public String findResultByPlayer(String name) {
-        List<Name> player = players.getPlayers().getValues();
-        List<Name> result = results.getResults().getValues();
+        List<PlayerName> player = players.getPlayers();
+        List<ResultName> result = results.getResults();
 
-        int index = player.indexOf(new Name(name));
+        int index = player.indexOf(new PlayerName(name));
+        if (index < 0) {
+            throw new IllegalArgumentException("존재하지 않는 플레이어입니다.");
+        }
         index = move(index);
         return result.get(index).value();
     }
 
     public Map<String, String> findAll() {
         Map<String, String> map = new HashMap<>();
-        List<Name> player = players.getPlayers().getValues();
-        for (Name name : player) {
+        List<PlayerName> player = players.getPlayers();
+        for (PlayerName name : player) {
             map.put(name.value(), findResultByPlayer(name.value()));
         }
         return map;

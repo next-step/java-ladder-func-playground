@@ -1,13 +1,45 @@
 package view;
 
+import domain.Ladder;
+import domain.LinePoints;
+import domain.PointConnection;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
+    private static final String LadderVertical = "|";
+    private static final String LadderHorizontal = "-----";
+    private static final String EmptyHorizontal = "     ";
+
     public void printLadder(List<String> ladderString) {
         for (String singleRow : ladderString) {
             System.out.println(singleRow);
         }
+    }
+
+    public void printLadder(Ladder ladder) {
+        List<String> ladderString = buildLadder(ladder);
+        printLadder(ladderString);
+    }
+
+    private String buildSingleLadderCol(LinePoints linePoints) {
+        StringBuilder ladderString = new StringBuilder();
+        ladderString.append(LadderVertical);
+        for (PointConnection linePoint : linePoints.getLinePoints()) {
+            ladderString.append(linePoint.isConnected() ? LadderHorizontal : EmptyHorizontal);
+            ladderString.append(LadderVertical);
+        }
+        return ladderString.toString();
+    }
+
+    private List<String> buildLadder(Ladder ladder) {
+        List<String> ladderStrings = new ArrayList<>();
+        for (LinePoints linePoints : ladder.getLines()) {
+            ladderStrings.add(buildSingleLadderCol(linePoints));
+        }
+        return ladderStrings;
     }
 
     public void printPlayersInputMessage() {

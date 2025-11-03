@@ -6,11 +6,9 @@ import java.util.Map;
 
 public class LadderGame {
     private final Ladder ladder;
-    private final int positions;
 
     public LadderGame(Ladder ladder, int width) {
         this.ladder = ladder;
-        this.positions = width;
     }
 
     public Map<String, String> playAll(List<String> participants, List<String> results) {

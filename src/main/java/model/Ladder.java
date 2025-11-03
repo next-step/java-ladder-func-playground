@@ -14,4 +14,3 @@ public class Ladder {
         return lines;
     }
 }
-

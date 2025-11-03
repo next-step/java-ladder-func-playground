@@ -28,7 +28,7 @@ public class InputView {
 
     public String inputQueryName() {
         System.out.println();
-        System.out.println("결과를 보고 싶은 사람은?");
+        System.out.println("결과를 보고 싶은 사람은?--all을 입력하면 전체 결과를 확인하고 종료됩니다.");
         return scanner.nextLine().trim();
     }
 }

@@ -4,6 +4,8 @@ import domain.Ladder;
 import domain.LadderBuilder;
 import domain.LadderResult;
 import domain.LadderResultCalculator;
+import domain.Players;
+import domain.Prizes;
 import generator.LadderGenerator;
 import view.InputView;
 import view.OutputView;
@@ -34,8 +36,8 @@ public class LadderController {
     }
 
     public void run() {
-        List<String> players = getPlayers();
-        List<String> prizes = getPrizes();
+        Players players = getPlayers();
+        Prizes prizes = getPrizes();
         int colCount = players.size();
         int rowCount = getRow();
         Ladder ladder = ladderGenerator.generateLadder(colCount, rowCount);
@@ -43,22 +45,22 @@ public class LadderController {
         outputView.printLadder(ladderString);
         LadderResult calculatedResult = new LadderResult(ladderResultCalculator.calculateResults(
                 ladder,
-                players,
-                prizes
+                players.asList(),
+                prizes.asList()
         ));
         checkPrizesForPlayers(calculatedResult.getMappedResult());
     }
 
-    public List<String> getPlayers() {
+    public Players getPlayers() {
         outputView.printPlayersInputMessage();
         String playersInput = inputView.getInputPlayers();
-        return Arrays.asList(playersInput.split(","));
+        return new Players(Arrays.asList(playersInput.split(",")));
     }
 
-    public List<String> getPrizes() {
+    public Prizes getPrizes() {
         outputView.printPrizesInputMessage();
         String prizesInput = inputView.getInputPrizes();
-        return Arrays.asList(prizesInput.split(","));
+        return new Prizes(Arrays.asList(prizesInput.split(",")));
     }
 
     public void checkPrizesForPlayers(Map<String, String> calculatedResult) {
@@ -70,13 +72,17 @@ public class LadderController {
     }
 
     public void findPrizeForSelectedPlayer(String selectedPlayer, Map<String, String> calculatedResult) {
-        if (selectedPlayer == "all") outputView.printAllResultMessage(calculatedResult);
-        else if (calculatedResult.containsKey(selectedPlayer)) {
-            outputView.printSingleResultMessage(calculatedResult.get(selectedPlayer));
-        } else {
-            outputView.printInvalidSelectedPlayerMessage();
+        if ("all".equals(selectedPlayer)) {
+            outputView.printAllResultMessage(calculatedResult);
+            return;
         }
 
+        if (calculatedResult.containsKey(selectedPlayer)) {
+            outputView.printSingleResultMessage(calculatedResult.get(selectedPlayer));
+            return;
+        }
+
+        outputView.printInvalidSelectedPlayerMessage();
     }
 
     public int getRow() {

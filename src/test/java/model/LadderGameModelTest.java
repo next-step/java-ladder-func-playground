@@ -1,8 +1,10 @@
 package model;
 
 import Model.Bridge;
+import Model.BridgeRow;
 import Model.BridgeStep;
 import Model.LadderDescentService;
+import Model.LadderResult;
 import Model.Player;
 import Model.Rewards;
 import org.junit.jupiter.api.DisplayName;
@@ -11,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -23,9 +27,10 @@ public class LadderGameModelTest {
     void playerNamesAreSplit() {
         // given
         String inputNames = "pobi,crong,honux";
+        List<String> names = Arrays.asList(inputNames.split(","));
 
         // when
-        Player players = new Player(inputNames);
+        Player players = new Player(names);
         List<String> playerList = players.getPlayers();
 
         // then
@@ -37,92 +42,70 @@ public class LadderGameModelTest {
     void rewardsAreSplit() {
         // given
         String inputRewards = "꽝,5000,꽝";
+        List<String> rewardNames = Arrays.asList(inputRewards.split(","));
 
         // when
-        Rewards rewards = new Rewards(inputRewards);
+        Rewards rewards = new Rewards(rewardNames);
 
         // then
-        assertEquals("꽝", rewards.getRewardskey(0));
-        assertEquals("5000", rewards.getRewardskey(1));
+        assertEquals("꽝", rewards.getReward(0));
+        assertEquals("5000", rewards.getReward(1));
+    }
+
+    private Bridge createTestBridge(List<BridgeStep> steps) {
+        return new Bridge(Collections.singletonList(new BridgeRow(steps.size(), new Random()) {
+            @Override
+            public List<BridgeStep> getSteps() {
+                return steps;
+            }
+        }));
     }
 
     @Test
-    @DisplayName("사다리 이동 - 연결선이 없으면 그대로 내려간다")
-    void moveStaysWhenNoConnection() {
+    @DisplayName("사다리 결과 계산 - 연결선이 없으면 그대로 내려간다")
+    void calculateResultStaysWhenNoConnection() {
         // given
-        List<BridgeStep> row = Arrays.asList(BridgeStep.NONE, BridgeStep.NONE, BridgeStep.NONE);
-        Bridge bridge = new Bridge(Collections.singletonList(row));
+        Bridge bridge = createTestBridge(Arrays.asList(BridgeStep.NONE, BridgeStep.NONE, BridgeStep.NONE));
         LadderDescentService descentService = new LadderDescentService(bridge);
-        int initialPosition = 1;
 
         // when
-        int newPosition = descentService.descent(initialPosition);
+        LadderResult result = descentService.calculateAllResults(3);
 
         // then
-        assertEquals(initialPosition, newPosition);
+        assertEquals(0, result.getDestinationIndex(0));
+        assertEquals(1, result.getDestinationIndex(1));
+        assertEquals(2, result.getDestinationIndex(2));
     }
 
     @Test
-    @DisplayName("사다리 이동 - 오른쪽에 연결선이 있으면 오른쪽으로 이동한다")
-    void movesRightWhenConnectionExists() {
+    @DisplayName("사다리 결과 계산 - 오른쪽으로 이동")
+    void calculateResultMovesRight() {
         // given
-        List<BridgeStep> row = Arrays.asList(BridgeStep.NONE, BridgeStep.EXIST, BridgeStep.NONE);
-        Bridge bridge = new Bridge(Collections.singletonList(row));
+        Bridge bridge = createTestBridge(Arrays.asList(BridgeStep.EXIST, BridgeStep.NONE, BridgeStep.NONE));
         LadderDescentService descentService = new LadderDescentService(bridge);
-        int initialPosition = 1;
 
         // when
-        int newPosition = descentService.descent(initialPosition);
+        LadderResult result = descentService.calculateAllResults(3);
 
         // then
-        assertEquals(2, newPosition);
+        assertEquals(1, result.getDestinationIndex(0));
+        assertEquals(0, result.getDestinationIndex(1));
+        assertEquals(2, result.getDestinationIndex(2));
     }
 
     @Test
-    @DisplayName("사다리 이동 - 왼쪽에 연결선이 있으면 왼쪽으로 이동한다")
-    void movesLeftWhenConnectionExists() {
+    @DisplayName("사다리 결과 계산 - 왼쪽으로 이동")
+    void calculateResultMovesLeft() {
         // given
-        List<BridgeStep> row = Arrays.asList(BridgeStep.EXIST, BridgeStep.NONE, BridgeStep.NONE);
-        Bridge bridge = new Bridge(Collections.singletonList(row));
+        Bridge bridge = createTestBridge(Arrays.asList(BridgeStep.NONE, BridgeStep.EXIST, BridgeStep.NONE));
         LadderDescentService descentService = new LadderDescentService(bridge);
-        int initialPosition = 1;
 
         // when
-        int newPosition = descentService.descent(initialPosition);
+        LadderResult result = descentService.calculateAllResults(3);
 
         // then
-        assertEquals(0, newPosition);
-    }
-
-    @Test
-    @DisplayName("사다리 이동 - 가장 왼쪽에서는 오른쪽으로만 이동할 수 있다")
-    void movesRightFromLeftmostPosition() {
-        // given
-        List<BridgeStep> row = Arrays.asList(BridgeStep.EXIST, BridgeStep.NONE, BridgeStep.NONE);
-        Bridge bridge = new Bridge(Collections.singletonList(row));
-        LadderDescentService descentService = new LadderDescentService(bridge);
-        int initialPosition = 0;
-
-        // when
-        int newPosition = descentService.descent(initialPosition);
-
-        // then
-        assertEquals(1, newPosition);
-    }
-
-    @Test
-    @DisplayName("사다리 이동 - 가장 오른쪽에서는 왼쪽으로만 이동할 수 있다")
-    void movesLeftFromRightmostPosition() {
-        // given
-        List<BridgeStep> row = Arrays.asList(BridgeStep.NONE, BridgeStep.EXIST, BridgeStep.NONE);
-        Bridge bridge = new Bridge(Collections.singletonList(row));
-        LadderDescentService descentService = new LadderDescentService(bridge);
-        int initialPosition = 2;
-
-        // when
-        int newPosition = descentService.descent(initialPosition);
-
-        // then
-        assertEquals(1, newPosition);
+        assertEquals(0, result.getDestinationIndex(0));
+        assertEquals(2, result.getDestinationIndex(1));
+        assertEquals(1, result.getDestinationIndex(2));
     }
 }

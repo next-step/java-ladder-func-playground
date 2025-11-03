@@ -1,5 +1,4 @@
 import controller.LadderController;
-import domain.Height;
 import domain.LadderGame;
 import domain.Players;
 import domain.Results;
@@ -14,7 +13,7 @@ public class Main {
 
         Players players = controller.inputPlayers();
         Results results = controller.inputResults(players);
-        Height height = controller.inputHeight();
+        int height = controller.inputHeight();
 
         LadderGame game = controller.startLadderGame(height, players, results);
         controller.showResult(game, players);

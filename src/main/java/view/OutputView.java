@@ -3,9 +3,9 @@ package view;
 import domain.Connect;
 import domain.Ladder;
 import domain.Line;
-import domain.Name;
+import domain.PlayerName;
 import domain.Players;
-import domain.Point;
+import domain.ResultName;
 
 import java.util.List;
 import java.util.Map;
@@ -43,15 +43,15 @@ public class OutputView {
         System.out.println(e.getMessage());
     }
 
-    private void printPlayers(List<Name> players) {
-        for (Name name : players) {
+    private void printPlayers(List<PlayerName> players) {
+        for (PlayerName name : players) {
             System.out.printf("%6s", name);
         }
         System.out.println();
     }
 
-    private void printResults(List<Name> results) {
-        for (Name result : results) {
+    private void printResults(List<ResultName> results) {
+        for (ResultName result : results) {
             System.out.printf("%6s", result);
         }
         System.out.println();
@@ -66,8 +66,8 @@ public class OutputView {
     }
 
     private void printLine(Line line) {
-        for (Point point : line.getPoints()) {
-            printPoint(point.point());
+        for (Connect point : line.getPoints()) {
+            printPoint(point);
         }
     }
 
@@ -79,7 +79,7 @@ public class OutputView {
         System.out.print("     |");
     }
 
-    public void printLadder(Ladder ladder, List<Name> players, List<Name> results) {
+    public void printLadder(Ladder ladder, List<PlayerName> players, List<ResultName> results) {
         printPlayers(players);
         printLines(ladder.getLines());
         printResults(results);
@@ -93,7 +93,7 @@ public class OutputView {
 
     public void printAllResults(Map<String, String> results, Players players) {
         System.out.println("\n실행 결과");
-        for (Name name : players.getPlayers().getValues()) {
+        for (PlayerName name : players.getPlayers()) {
             System.out.println(name.value() + " : " + results.get(name.value()));
         }
     }

@@ -7,12 +7,16 @@ import java.util.Map;
 public class LadderResultCalculator {
 
     public int changeRowLocation(int colIndex, LinePoints linePoints) {
-        List<Boolean> p = linePoints.getLinePoints();
+        List<PointConnection> p = linePoints.getLinePoints();
         int size = p.size();
 
-        if (colIndex > 0 && p.get(colIndex - 1)) return colIndex - 1;
+        if (colIndex > 0 && p.get(colIndex - 1).isConnected()) {
+            return colIndex - 1;
+        }
 
-        if (colIndex < size && p.get(colIndex)) return colIndex + 1;
+        if (colIndex < size && p.get(colIndex).isConnected()) {
+            return colIndex + 1;
+        }
 
         return colIndex;
     }

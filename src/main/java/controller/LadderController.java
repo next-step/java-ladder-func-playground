@@ -1,7 +1,6 @@
 package controller;
 
 import domain.Ladder;
-import domain.LadderBuilder;
 import domain.LadderResult;
 import domain.LadderResultCalculator;
 import domain.Players;
@@ -16,20 +15,17 @@ import java.util.Map;
 
 public class LadderController {
     private final LadderGenerator ladderGenerator;
-    private final LadderBuilder ladderBuilder;
     private final OutputView outputView;
     private final InputView inputView;
     private final LadderResultCalculator ladderResultCalculator;
 
     public LadderController(
             LadderGenerator ladderGenerator,
-            LadderBuilder ladderBuilder,
             OutputView outputView,
             InputView inputView,
             LadderResultCalculator ladderResultCalculator
     ) {
         this.ladderGenerator = new LadderGenerator();
-        this.ladderBuilder = new LadderBuilder();
         this.outputView = new OutputView();
         this.inputView = inputView;
         this.ladderResultCalculator = new LadderResultCalculator();
@@ -41,8 +37,7 @@ public class LadderController {
         int colCount = players.size();
         int rowCount = getRow();
         Ladder ladder = ladderGenerator.generateLadder(colCount, rowCount);
-        List<String> ladderString = ladderBuilder.buildLadder(ladder);
-        outputView.printLadder(ladderString);
+        outputView.printLadder(ladder);
         LadderResult calculatedResult = new LadderResult(ladderResultCalculator.calculateResults(
                 ladder,
                 players.asList(),

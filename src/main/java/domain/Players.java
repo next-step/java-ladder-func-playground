@@ -1,44 +1,21 @@
 package domain;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Players {
-    private static final int PLAYERS_NAME_MAX_LENGTH = 5;
-    private final Names players;
+    private final List<PlayerName> players;
 
-    public Players(String input) {
-        this.players = removeDuplicate(input);
-        validatePlayerNames();
+    public Players(List<PlayerName> players) {
+        validateDuplicate(players);
+        this.players = List.copyOf(players);
     }
 
-    private Names removeDuplicate(String input) {
-        List<String> tokens = List.of(input.split(","));
-        List<Name> newInput = new ArrayList<>();
-
-        for (String token : tokens) {
-            String trimmed = token.trim();
-            Name name = new Name(trimmed);
-            addIfAbsent(newInput, name);
-        }
-        return new Names(newInput);
-    }
-
-    private void addIfAbsent(List<Name> newInput, Name name) {
-        if (!newInput.contains(name)) {
-            newInput.add(name);
-        }
-    }
-
-    private void validatePlayerNames() {
-        for (Name name : players.getValues()) {
-            validateNameLength(name);
-        }
-    }
-
-    private void validateNameLength(Name name) {
-        if (name.value().length() > PLAYERS_NAME_MAX_LENGTH) {
-            throw new IllegalArgumentException("이름은 5글자를 넘기면 안됩니다.");
+    private void validateDuplicate(List<PlayerName> players) {
+        Set<PlayerName> set = new HashSet<>(players);
+        if (set.size() != players.size()) {
+            throw new IllegalArgumentException("플레이어 이름은 중복될 수 없습니다.");
         }
     }
 
@@ -46,7 +23,7 @@ public class Players {
         return players.size();
     }
 
-    public Names getPlayers() {
+    public List<PlayerName> getPlayers() {
         return players;
     }
 }

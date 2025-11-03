@@ -8,7 +8,6 @@ public class LadderBuilder {
     private static final String LadderHorizontal = "-----";
     private static final String EmptyHorizontal = "     ";
 
-
     public String buildSingleLadderCol(LinePoints linePoints) {
         StringBuilder ladderString = new StringBuilder();
         ladderString.append(LadderVertical);

@@ -6,6 +6,7 @@ public class LinePoints {
     private final List<Boolean> points;
 
     public LinePoints(List<Boolean> points) {
+        checkNoduplicationTrue(points);
         this.points = points;
     }
 

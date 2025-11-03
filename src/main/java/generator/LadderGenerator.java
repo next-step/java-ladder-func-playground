@@ -12,12 +12,12 @@ public class LadderGenerator {
     public Ladder generateLadder(int colCount, int rowCount) {
         List<LinePoints> linePointsList = new ArrayList<>();
 
-        for(int i=0; i<rowCount; i++){
+        for (int i = 0; i < rowCount; i++) {
             LinePoints linePoints = linePointsGenerator.generateLinePoints(colCount);
             linePointsList.add(linePoints);
         }
 
-        return new Ladder(linePointsList,rowCount,colCount);
+        return new Ladder(linePointsList, rowCount, colCount);
 
     }
 

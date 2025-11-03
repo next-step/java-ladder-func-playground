@@ -17,7 +17,6 @@ public class LadderResultCalculator {
         return colIndex;
     }
 
-
     public int getFinalColumnIndex(int startColIndex, Ladder ladder) {
         int currentColIndex = startColIndex;
         for (LinePoints linePoints : ladder.getLines()) {

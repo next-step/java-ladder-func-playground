@@ -19,7 +19,13 @@ public class LadderController {
     private final InputView inputView;
     private final LadderResultCalculator ladderResultCalculator;
 
-    public LadderController(LadderGenerator ladderGenerator, LadderBuilder ladderBuilder, OutputView outputView, InputView inputView, LadderResultCalculator ladderResultCalculator) {
+    public LadderController(
+            LadderGenerator ladderGenerator,
+            LadderBuilder ladderBuilder,
+            OutputView outputView,
+            InputView inputView,
+            LadderResultCalculator ladderResultCalculator
+    ) {
         this.ladderGenerator = new LadderGenerator();
         this.ladderBuilder = new LadderBuilder();
         this.outputView = new OutputView();
@@ -35,7 +41,11 @@ public class LadderController {
         Ladder ladder = ladderGenerator.generateLadder(colCount, rowCount);
         List<String> ladderString = ladderBuilder.buildLadder(ladder);
         outputView.printLadder(ladderString);
-        LadderResult calculatedResult = new LadderResult(ladderResultCalculator.calculateResults(ladder,players,prizes));
+        LadderResult calculatedResult = new LadderResult(ladderResultCalculator.calculateResults(
+                ladder,
+                players,
+                prizes
+        ));
         checkPrizesForPlayers(calculatedResult.getMappedResult());
     }
 
@@ -45,33 +55,29 @@ public class LadderController {
         return Arrays.asList(playersInput.split(","));
     }
 
-    public List<String> getPrizes(){
+    public List<String> getPrizes() {
         outputView.printPrizesInputMessage();
         String prizesInput = inputView.getInputPrizes();
         return Arrays.asList(prizesInput.split(","));
     }
 
-    public void checkPrizesForPlayers(Map<String,String> calculatedResult){
-        while(true){
+    public void checkPrizesForPlayers(Map<String, String> calculatedResult) {
+        while (true) {
             outputView.printAskPlayerMessage();
             String selectedPlayer = inputView.getInputSelectedPlayer();
-            findPrizeForSelectedPlayer(selectedPlayer,calculatedResult);
+            findPrizeForSelectedPlayer(selectedPlayer, calculatedResult);
         }
     }
 
-    public void findPrizeForSelectedPlayer(String selectedPlayer, Map<String,String> calculatedResult){
-        if(selectedPlayer=="all") outputView.printAllResultMessage(calculatedResult);
-        else if(calculatedResult.containsKey(selectedPlayer)){
+    public void findPrizeForSelectedPlayer(String selectedPlayer, Map<String, String> calculatedResult) {
+        if (selectedPlayer == "all") outputView.printAllResultMessage(calculatedResult);
+        else if (calculatedResult.containsKey(selectedPlayer)) {
             outputView.printSingleResultMessage(calculatedResult.get(selectedPlayer));
-        }
-        else{
+        } else {
             outputView.printInvalidSelectedPlayerMessage();
         }
 
-
     }
-
-
 
     public int getRow() {
         outputView.printRowInput();

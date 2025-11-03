@@ -1,6 +1,5 @@
 package domain;
 
-
 import java.util.Map;
 
 public class LadderResult {
@@ -27,8 +26,5 @@ public class LadderResult {
             }
         }
     }
-
-
-
 
 }

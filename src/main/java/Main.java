@@ -13,7 +13,13 @@ public class Main {
         InputView inputView = new InputView();
         LadderResultCalculator ladderResultCalculator = new LadderResultCalculator();
 
-        LadderController ladderController = new LadderController(ladderGenerator, ladderBuilder, outputView, inputView, ladderResultCalculator);
+        LadderController ladderController = new LadderController(
+                ladderGenerator,
+                ladderBuilder,
+                outputView,
+                inputView,
+                ladderResultCalculator
+        );
         ladderController.run();
     }
 }

@@ -20,6 +20,10 @@ public class LadderResultCalculator {
 
     public Map<String, String> calculateResults(Ladder ladder, List<String> players, List<String> prizes) {
         Map<String, String> resultMap = new LinkedHashMap<>();
+        int cols = ladder.getCols();
+        if (players.size() != cols || prizes.size() != cols) {
+            throw new IllegalArgumentException("플레이어 수와 결과 수는 사다리 너비(cols)와 같아야 합니다.");
+        }
 
         for (int start = 0; start < ladder.getCols(); start++) {
             int end = getFinalColumnIndex(start, ladder);

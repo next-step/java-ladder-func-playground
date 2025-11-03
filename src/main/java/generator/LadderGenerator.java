@@ -17,7 +17,7 @@ public class LadderGenerator {
             linePointsList.add(linePoints);
         }
 
-        return new Ladder(linePointsList, rowCount, colCount);
+        return new Ladder(linePointsList, colCount, rowCount);
 
     }
 

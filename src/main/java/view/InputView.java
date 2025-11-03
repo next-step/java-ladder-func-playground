@@ -10,7 +10,8 @@ public class InputView {
     }
 
     public int getInputRow() {
-        return scanner.nextInt();
+        String line = scanner.nextLine();
+        return Integer.parseInt(line.trim());
     }
 
     public String getInputPlayers() {

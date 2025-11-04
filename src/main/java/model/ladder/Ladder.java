@@ -1,5 +1,7 @@
 package model.ladder;
 
+import model.ladder.generator.ConnectionGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -11,17 +13,10 @@ public class Ladder {
     private final List<Line> lines;
     private final int height;
 
-    public Ladder(int width, int height) {
+    public Ladder(int width, int height, ConnectionGenerator connectionGenerator) {
         validateLadderSize(width, height);
         this.height = height;
         this.lines = createLines(width, height);
-    }
-
-    //테스트용 생성자
-    public Ladder(List<Line> lines) {
-        validateLadderLines(lines);
-        this.lines = lines;
-        this.height = lines.size();
     }
 
     private void validateLadderSize(int width, int height) {

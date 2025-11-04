@@ -2,6 +2,7 @@ package ladder;
 
 import model.ladder.Ladder;
 import model.ladder.Line;
+import model.ladder.generator.RandomConnectionGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,7 @@ public class LineTest {
         int width = 5;
         int height = 10;
 
-        Ladder ladder = new Ladder(width, height);
+        Ladder ladder = new Ladder(width, height, new RandomConnectionGenerator());
 
         for (int row = 0; row < ladder.getHeight(); row++) {
             Line line = ladder.getLine(row);

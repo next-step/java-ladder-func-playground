@@ -1,5 +1,6 @@
 package controller;
 
+import model.ladder.generator.RandomConnectionGenerator;
 import model.result.Prize;
 import model.result.Prizes;
 import model.participant.Player;
@@ -72,7 +73,7 @@ public class LadderGameController {
         while (true) {
             try {
                 int height = inputView.inputLadderHeight();
-                return new Ladder(peopleCount, height);
+                return new Ladder(peopleCount, height, new RandomConnectionGenerator());
             } catch (NumberFormatException e) {
                 outputView.printError("숫자만 입력할 수 있습니다");
             }

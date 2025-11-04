@@ -1,10 +1,8 @@
 package ladder;
 
-import model.ladder.ConnectionStatus;
+import ladder.generator.FakeConnectionGenerator;
 import model.ladder.Ladder;
 import model.ladder.LadderGame;
-import model.ladder.Line;
-import model.ladder.Point;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,25 +23,15 @@ public class LadderGameTest {
         // 1 |     |-----|
         // 2 |-----|     |
 
-        // 0번 라인 (true, false)
-        Line line1 = new Line(List.of(
-                new Point(ConnectionStatus.CONNECTED),
-                new Point(ConnectionStatus.DISCONNECTED)
-        ));
+        List<Boolean> fixedConnection = List.of(
+                true, false,
+                false, true,
+                true, false
+        );
 
-        // 1번 라인 (false, true)
-        Line line2 = new Line(List.of(
-                new Point(ConnectionStatus.DISCONNECTED),
-                new Point(ConnectionStatus.CONNECTED)
-        ));
+        FakeConnectionGenerator fakeGenerator = new FakeConnectionGenerator(fixedConnection);
 
-        // 2번 라인 (true, false)
-        Line line3 = new Line(List.of(
-                new Point(ConnectionStatus.CONNECTED),
-                new Point(ConnectionStatus.DISCONNECTED)
-        ));
-
-        Ladder ladder = new Ladder(List.of(line1, line2, line3));
+        Ladder ladder = new Ladder(3, 3, fakeGenerator);
         this.predictableLadderGame = new LadderGame(ladder);
     }
 

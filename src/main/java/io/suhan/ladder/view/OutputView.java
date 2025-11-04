@@ -50,7 +50,7 @@ public class OutputView {
 
     private static void printParticipants(List<Participant> participants) {
         String line = participants.stream()
-                .map((participant -> OutputView.centerAlign(participant.name())))
+                .map((participant -> centerAlign(participant.name(), Participant.PARTICIPANT_NAME_MAX_LENGTH)))
                 .collect(Collectors.joining(" "));
 
         System.out.println(line);
@@ -58,7 +58,7 @@ public class OutputView {
 
     private static void printOutcomes(List<Outcome> outcomes) {
         String line = outcomes.stream()
-                .map((outcome -> OutputView.centerAlign(outcome.value())))
+                .map((outcome -> centerAlign(outcome.value(), Participant.PARTICIPANT_NAME_MAX_LENGTH)))
                 .collect(Collectors.joining(" "));
 
         System.out.println(line);
@@ -91,9 +91,7 @@ public class OutputView {
                 .anyMatch((connection) -> connection.left() == index);
     }
 
-    private static String centerAlign(String input) {
-        int width = Participant.PARTICIPANT_NAME_MAX_LENGTH;
-
+    private static String centerAlign(String input, int width) {
         int totalPadding = width - input.length();
         int leftPadding = totalPadding / 2;
         int rightPadding = totalPadding - leftPadding;

@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class OutputView {
+    private static final String CONNECTION_SEGMENT_CHAR = "-";
+    private static final String CONNECTION_SEGMENT_EMPTY_CHAR = " ";
+    private static final int CONNECTION_SEGMENT_LENGTH = 5;
+
     public static void printLadderResult(Game game) {
         System.out.println();
         System.out.println("사다리 결과");
@@ -76,10 +80,10 @@ public class OutputView {
 
     private static String getConnectionSegment(Line line, int index) {
         if (isConnected(line, index)) {
-            return "-----";
+            return CONNECTION_SEGMENT_CHAR.repeat(CONNECTION_SEGMENT_LENGTH);
         }
 
-        return "     ";
+        return CONNECTION_SEGMENT_EMPTY_CHAR.repeat(CONNECTION_SEGMENT_LENGTH);
     }
 
     private static boolean isConnected(Line line, int index) {

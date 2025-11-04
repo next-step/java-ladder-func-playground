@@ -19,6 +19,8 @@ public class LadderController {
 
             GameResult result = game.execute();
 
+            OutputView.printLadderResult(game);
+
             handleOutcomeQuery(result);
         } catch (Exception e) {
             System.out.println(e.getMessage());

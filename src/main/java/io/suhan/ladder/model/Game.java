@@ -32,8 +32,6 @@ public class Game {
         List<Outcome> outcomes = configuration.outcomes();
         Map<Participant, Outcome> result = new LinkedHashMap<>();
 
-        OutputView.printLadderResult(this);
-
         for (int start = 0; start < configuration.width(); start++) {
             int end = traverse(start);
             Participant participant = participants.get(start);

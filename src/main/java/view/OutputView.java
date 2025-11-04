@@ -15,7 +15,7 @@ public class OutputView {
     private static final int LINE_WIDTH = 5;
 
     public void printLadder(Ladder ladder, Players players, Prizes prizes) {
-        System.out.println("사다리 결과");
+        System.out.println(System.lineSeparator() + "사다리 결과");
         printPlayers(players);
         drawLadder(ladder);
         printPrizes(prizes);
@@ -57,18 +57,18 @@ public class OutputView {
         for (Prize prize : prizes.getPrizes()) {
             System.out.printf("%-5s", prize.getValue());
         }
-        System.out.println("\n");
+        System.out.println(System.lineSeparator());
     }
 
     public void printSingleResult(GameResult result, String playerName) {
-        System.out.println("\n실행 결과");
+        System.out.println(System.lineSeparator() + "실행 결과");
 
         Prize prize = result.getDestination(playerName);
         System.out.println(prize.getValue());
     }
 
     public void printAllResults(GameResult result, Players players) {
-        System.out.println("\n실행 결과");
+        System.out.println(System.lineSeparator() + "실행 결과");
         for (Player player : players.getPlayers()) {
             String name = player.getName();
             Prize prize = result.getDestination(name);

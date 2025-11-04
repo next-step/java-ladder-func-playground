@@ -31,13 +31,13 @@ public class OutputView {
         System.out.println("실행 결과");
 
         result.results()
-                .forEach(((participant, outcome) -> System.out.println(participant.name() + " : " + outcome)));
+                .forEach(((participant, outcome) -> System.out.println(participant.name() + " : " + outcome.value())));
     }
 
     public static void printGameResultOf(Participant target, GameResult result) {
         System.out.println();
         System.out.println("실행 결과");
-        System.out.println(result.getOutcome(target));
+        System.out.println(result.getOutcome(target).value());
     }
 
     public static void printLadder(Ladder ladder, int width) {

@@ -11,7 +11,9 @@ import java.util.stream.Collectors;
 
 public class OutputView {
     public static void printLadderResult(Game game) {
-        System.out.println("\n사다리 결과\n");
+        System.out.println();
+        System.out.println("사다리 결과");
+        System.out.println();
 
         printParticipants(game.getConfiguration().participants());
 
@@ -21,14 +23,16 @@ public class OutputView {
     }
 
     public static void printGameResult(GameResult result) {
-        System.out.println("\n실행 결과");
+        System.out.println();
+        System.out.println("실행 결과");
 
         result.results()
                 .forEach(((participant, outcome) -> System.out.println(participant.name() + " : " + outcome)));
     }
 
     public static void printGameResultOf(Participant target, GameResult result) {
-        System.out.println("\n실행 결과");
+        System.out.println();
+        System.out.println("실행 결과");
         System.out.println(result.getOutcome(target));
     }
 

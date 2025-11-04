@@ -10,10 +10,11 @@ import model.result.GameResult;
 import view.InputView;
 import view.OutputView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LadderGameController {
     private final InputView inputView = new InputView();
@@ -41,23 +42,22 @@ public class LadderGameController {
 
     private Players createPlayers(){
         String namesLine = inputView.inputPeople();
-        List<String> playerNames = Arrays.asList(namesLine.split(","));
+        List<Player> playerList = Arrays.stream(namesLine.split(","))
+                .map(String::trim)
+                .map(Player::new)
+                .collect(Collectors.toList());
 
-        List<Player> playerList = new ArrayList<>();
-        for(String playerName : playerNames){
-            playerList.add(new Player(playerName.trim()));
-        }
         return new Players(playerList);
     }
 
     private Prizes createPrizes(Players players){
         String prizeLine = inputView.inputResults();
-        List<String> prizesType = Arrays.asList(prizeLine.split(","));
 
-        List<Prize> prizeList = new ArrayList<>();
-        for(String prize : prizesType){
-            prizeList.add(new Prize(prize.trim()));
-        }
+        List<Prize> prizeList = Arrays.stream(prizeLine.split(","))
+                .map(String::trim)
+                .map(Prize::new)
+                .collect(Collectors.toList());
+
         Prizes prizes = new Prizes(prizeList);
         validateInput(players, prizes);
         return prizes;
@@ -83,13 +83,15 @@ public class LadderGameController {
         GameResult gameResult = new GameResult();
         int peopleCount = players.size();
 
-        for (int startColumn = 0; startColumn < peopleCount; startColumn++) {
-            Player currentPlayer = players.getPlayerAt(startColumn);
-            int resultColumn = ladderGame.trace(startColumn);
-            Prize currentPrize = prizes.getPrizeAt(resultColumn);
+        IntStream.range(0, peopleCount)
+                .forEach(startColumn -> {
+                    Player currentPlayer = players.getPlayerAt(startColumn);
+                    int resultColumn = ladderGame.trace(startColumn);
+                    Prize currentPrize = prizes.getPrizeAt(resultColumn);
 
-            gameResult.addResult(currentPlayer, currentPrize);
-        }
+                    gameResult.addResult(currentPlayer, currentPrize);
+                });
+
         return gameResult;
     }
 

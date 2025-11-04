@@ -91,7 +91,6 @@ public class OutputView {
         }
     }
 
-
     public void printError(String errorMessage) {
         printer.printError(errorMessage);
     }

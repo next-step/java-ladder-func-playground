@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-
 public class FakeConnectionGenerator implements ConnectionGenerator {
 
     private final Queue<Boolean> predefinedValues;

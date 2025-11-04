@@ -18,8 +18,15 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LadderGameController {
-    private final InputView inputView = new InputView();
-    private final OutputView outputView = new OutputView();
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final RandomConnectionGenerator randomConnectionGenerator;
+
+    public LadderGameController(InputView inputView, OutputView outputView, RandomConnectionGenerator randomConnectionGenerator) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.randomConnectionGenerator = randomConnectionGenerator;
+    }
 
     public void startGame(){
         try {
@@ -73,7 +80,7 @@ public class LadderGameController {
         while (true) {
             try {
                 int height = inputView.inputLadderHeight();
-                return new Ladder(peopleCount, height, new RandomConnectionGenerator());
+                return new Ladder(peopleCount, height, randomConnectionGenerator);
             } catch (NumberFormatException e) {
                 outputView.printError("숫자만 입력할 수 있습니다");
             }

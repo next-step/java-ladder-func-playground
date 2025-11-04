@@ -17,7 +17,7 @@ public class LadderController {
     private final OutputView outputView = new OutputView();
     private final InputView inputView = new InputView();
 
-    public void run() {
+    public void gameStart() {
 
         List<String> participants = inputView.inputParticipants();
         int width = participants.size();
@@ -51,10 +51,10 @@ public class LadderController {
         outputView.printLadder(participants, lines, results);
 
         LadderGame game = new LadderGame(ladder, participants.size());
-        playGame(game, participants, results);
+        gameResult(game, participants, results);
     }
 
-    private void playGame(LadderGame game, List<String> participants, List<String> results) {
+    private void gameResult(LadderGame game, List<String> participants, List<String> results) {
         while (true) {
             String queryName = inputView.inputQueryName();
 

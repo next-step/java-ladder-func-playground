@@ -8,6 +8,7 @@ import io.suhan.ladder.view.OutputView;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class Game {
     private final Ladder ladder;
@@ -55,10 +56,11 @@ public class Game {
     }
 
     private int findNextColumn(Line line, int col) {
-
-        return line.connections().stream()
+        Optional<Connection> connected = line.connections().stream()
                 .filter((connection) -> connection.left() == col || connection.right() == col)
-                .findFirst()
+                .findFirst();
+
+        return connected
                 .map((connection) -> getConnectedColumn(connection, col))
                 .orElse(col);
     }

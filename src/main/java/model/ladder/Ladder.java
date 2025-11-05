@@ -4,7 +4,6 @@ import model.ladder.generator.ConnectionGenerator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Ladder {
     private static final int MIN_LADDER_WIDTH = 2;
@@ -16,7 +15,7 @@ public class Ladder {
     public Ladder(int width, int height, ConnectionGenerator connectionGenerator) {
         validateLadderSize(width, height);
         this.height = height;
-        this.lines = createLines(width, height);
+        this.lines = createLines(width, height, connectionGenerator);
     }
 
     private void validateLadderSize(int width, int height) {
@@ -28,19 +27,12 @@ public class Ladder {
         }
     }
 
-    private void validateLadderLines(List<Line> lines) {
-        if (lines == null || lines.isEmpty()) {
-            throw new IllegalArgumentException("사다리 라인은 비어있을 수 없습니다.");
-        }
-    }
-
-    private List<Line> createLines(int width, int height) {
+    private List<Line> createLines(int width, int height, ConnectionGenerator connectionGenerator) {
         List<Line> lines = new ArrayList<>();
         int pointCount = width - 1;
-        Random random = new Random();
 
         for (int i = 0; i < height; i++) {
-            lines.add(Line.generateRandomLine(pointCount, random));
+            lines.add(Line.generateRandomLine(pointCount, connectionGenerator));
         }
 
         return lines;

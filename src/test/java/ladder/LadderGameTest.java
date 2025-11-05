@@ -23,11 +23,7 @@ public class LadderGameTest {
         // 1 |     |-----|
         // 2 |-----|     |
 
-        List<Boolean> fixedConnection = List.of(
-                true, false,
-                false, true,
-                true, false
-        );
+        List<Boolean> fixedConnection = List.of(true, false, true, true);
 
         FakeConnectionGenerator fakeGenerator = new FakeConnectionGenerator(fixedConnection);
 

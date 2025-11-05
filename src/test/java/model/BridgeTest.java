@@ -1,6 +1,7 @@
 package model;
 
 import Model.*;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BridgeTest {
     private Bridge createTestBridge(List<BridgeStep> steps) {
@@ -32,9 +32,11 @@ public class BridgeTest {
         LadderResult result = descentService.calculateAllResults(3);
 
         // then
-        assertEquals(0, result.getDestinationIndex(0));
-        assertEquals(1, result.getDestinationIndex(1));
-        assertEquals(2, result.getDestinationIndex(2));
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(result.getDestinationIndex(0)).isEqualTo(0);
+            softly.assertThat(result.getDestinationIndex(1)).isEqualTo(1);
+            softly.assertThat(result.getDestinationIndex(2)).isEqualTo(2);
+        });
     }
 
     @Test
@@ -48,9 +50,11 @@ public class BridgeTest {
         LadderResult result = descentService.calculateAllResults(3);
 
         // then
-        assertEquals(1, result.getDestinationIndex(0));
-        assertEquals(0, result.getDestinationIndex(1));
-        assertEquals(2, result.getDestinationIndex(2));
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(result.getDestinationIndex(0)).isEqualTo(1);
+            softly.assertThat(result.getDestinationIndex(1)).isEqualTo(0);
+            softly.assertThat(result.getDestinationIndex(2)).isEqualTo(2);
+        });
     }
 
     @Test
@@ -64,8 +68,10 @@ public class BridgeTest {
         LadderResult result = descentService.calculateAllResults(3);
 
         // then
-        assertEquals(0, result.getDestinationIndex(0));
-        assertEquals(2, result.getDestinationIndex(1));
-        assertEquals(1, result.getDestinationIndex(2));
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(result.getDestinationIndex(0)).isEqualTo(0);
+            softly.assertThat(result.getDestinationIndex(1)).isEqualTo(2);
+            softly.assertThat(result.getDestinationIndex(2)).isEqualTo(1);
+        });
     }
 }

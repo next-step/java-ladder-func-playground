@@ -1,13 +1,13 @@
 package model;
 
 import Model.Rewards;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RewardsTest {
     @Test
@@ -24,7 +24,9 @@ public class RewardsTest {
         Rewards rewards = new Rewards(rewardNames);
 
         // then
-        assertEquals(expected1, rewards.getReward(0));
-        assertEquals(expected2, rewards.getReward(1));
+        SoftAssertions.assertSoftly(softly -> {
+            softly.assertThat(rewards.getReward(0)).isEqualTo(expected1);
+            softly.assertThat(rewards.getReward(1)).isEqualTo(expected2);
+        });
     }
 }

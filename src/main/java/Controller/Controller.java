@@ -19,13 +19,11 @@ public class Controller {
     OutputView outputView = new OutputView();
 
     public void startLadder() {
-        int height;
-
         Player players = getPlayer();
         Rewards rewards = getRewards();
 
         outputView.askLadderHeight();
-        height = inputView.getWidthAndHeight();
+        int height = inputView.getWidthAndHeight();
 
         outputView.printPlayersAndRewards(players.getPlayers());
         Bridge bridge = new Bridge(height, players.getPlayersNumber() - 1);

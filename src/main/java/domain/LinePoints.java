@@ -1,18 +1,13 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LinePoints {
     private final List<PointConnection> points;
 
-    public LinePoints(List<Boolean> raw) {
-        List<PointConnection> converted = new ArrayList<>(raw.size());
-        for (Boolean b : raw) {
-            converted.add(new PointConnection(Boolean.TRUE.equals(b)));
-        }
-        checkNoduplicationTrue(converted);
-        this.points = converted;
+    public LinePoints(List<PointConnection> points) {
+        checkNoduplicationTrue(points);
+        this.points = points;
     }
 
     public List<PointConnection> getLinePoints() {

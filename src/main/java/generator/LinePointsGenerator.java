@@ -1,6 +1,7 @@
 package generator;
 
 import domain.LinePoints;
+import domain.PointConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +11,21 @@ public class LinePointsGenerator {
     private final Random random = new Random();
 
     public LinePoints generateLinePoints(int colCount) {
-        List<Boolean> points = new ArrayList<>(colCount - 1);
+        List<Boolean> booleanPoints = new ArrayList<>(colCount - 1);
         for (int i = 0; i < colCount - 1; i++) {
-            if (i > 0 && points.get(i - 1)) {
-                points.add(false);
+            if (i > 0 && booleanPoints.get(i - 1)) {
+                booleanPoints.add(false);
             } else {
-                points.add(random.nextBoolean());
+                booleanPoints.add(random.nextBoolean());
             }
         }
-        return new LinePoints(points);
+
+        List<PointConnection> pointConnections = new ArrayList<>(booleanPoints.size());
+        for (Boolean b : booleanPoints) {
+            pointConnections.add(new PointConnection(Boolean.TRUE.equals(b)));
+        }
+
+        return new LinePoints(pointConnections);
     }
 }
+

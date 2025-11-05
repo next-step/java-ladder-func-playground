@@ -8,7 +8,11 @@ public class GameConfigurationBuilder {
     private int height;
 
     public GameConfigurationBuilder participants(List<Participant> participants) {
-        if (participants == null || participants.isEmpty()) {
+        if (participants == null) {
+            throw new IllegalStateException("참가자 목록이 설정되지 않았습니다.");
+        }
+
+        if (participants.isEmpty()) {
             throw new IllegalArgumentException("참가자 목록은 비어 있을 수 없습니다.");
         }
 
@@ -18,7 +22,11 @@ public class GameConfigurationBuilder {
     }
 
     public GameConfigurationBuilder outcomes(List<Outcome> outcomes) {
-        if (outcomes == null || outcomes.size() != participants.size()) {
+        if (outcomes == null) {
+            throw new IllegalStateException("결과 목록이 설정되지 않았습니다.");
+        }
+
+        if (outcomes.size() != participants.size()) {
             throw new IllegalArgumentException("참가자의 수와 실행 결과의 수는 같아야 합니다.");
         }
 

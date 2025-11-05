@@ -10,11 +10,17 @@ class LadderTest {
 
     // cols = 3  → 각 LinePoints의 길이는 cols - 1 = 2
     private LinePoints linePoints1() {
-        return new LinePoints(List.of(true, false));
+        return new LinePoints(List.of(
+                new PointConnection(ConnectionStatus.CONNECTED),
+                new PointConnection(ConnectionStatus.DISCONNECTED)
+        ));
     }
 
     private LinePoints linePoints2() {
-        return new LinePoints(List.of(false, true));
+        return new LinePoints(List.of(
+                new PointConnection(ConnectionStatus.DISCONNECTED),
+                new PointConnection(ConnectionStatus.CONNECTED)
+        ));
     }
 
     @Test

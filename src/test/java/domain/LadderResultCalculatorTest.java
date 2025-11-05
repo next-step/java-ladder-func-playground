@@ -19,7 +19,10 @@ class LadderResultCalculatorTest {
         @Test
         void 왼쪽으로_이동한다() {
             // cols = 3 → linePoints 길이 = 2
-            LinePoints linePoints = new LinePoints(List.of(false, true));
+            LinePoints linePoints = new LinePoints(List.of(
+                    new PointConnection(ConnectionStatus.DISCONNECTED),
+                    new PointConnection(ConnectionStatus.CONNECTED)
+            ));
 
             int result = calculator.changeRowLocation(2, linePoints);
             assertEquals(1, result);
@@ -27,7 +30,10 @@ class LadderResultCalculatorTest {
 
         @Test
         void 오른쪽으로_이동한다() {
-            LinePoints linePoints = new LinePoints(List.of(true, false));
+            LinePoints linePoints = new LinePoints(List.of(
+                    new PointConnection(ConnectionStatus.CONNECTED),
+                    new PointConnection(ConnectionStatus.DISCONNECTED)
+            ));
 
             int result = calculator.changeRowLocation(0, linePoints);
             assertEquals(1, result);
@@ -35,7 +41,10 @@ class LadderResultCalculatorTest {
 
         @Test
         void 이동하지_않는다() {
-            LinePoints linePoints = new LinePoints(List.of(false, false));
+            LinePoints linePoints = new LinePoints(List.of(
+                    new PointConnection(ConnectionStatus.DISCONNECTED),
+                    new PointConnection(ConnectionStatus.DISCONNECTED)
+            ));
 
             int result = calculator.changeRowLocation(1, linePoints);
             assertEquals(1, result);
@@ -48,8 +57,14 @@ class LadderResultCalculatorTest {
         @Test
         void 모든_라인을_통과한_후_최종_열_인덱스를_계산한다() {
             // cols = 3 → 각 LinePoints 길이 = 2, rows = 2 → lines.size()와 일치
-            LinePoints firstLine  = new LinePoints(List.of(true,  false));
-            LinePoints secondLine = new LinePoints(List.of(false, true));
+            LinePoints firstLine  = new LinePoints(List.of(
+                    new PointConnection(ConnectionStatus.CONNECTED),
+                    new PointConnection(ConnectionStatus.DISCONNECTED)
+            ));
+            LinePoints secondLine = new LinePoints(List.of(
+                    new PointConnection(ConnectionStatus.DISCONNECTED),
+                    new PointConnection(ConnectionStatus.CONNECTED)
+            ));
             Ladder ladder = new Ladder(List.of(firstLine, secondLine), /*cols=*/3, /*rows=*/2);
 
             assertEquals(2, calculator.getFinalColumnIndex(0, ladder));
@@ -64,8 +79,14 @@ class LadderResultCalculatorTest {
         @Test
         void 플레이어와_상금을_올바르게_매핑한다() {
             // cols = 3, rows = 2
-            LinePoints firstLine  = new LinePoints(List.of(true,  false));
-            LinePoints secondLine = new LinePoints(List.of(false, true));
+            LinePoints firstLine  = new LinePoints(List.of(
+                    new PointConnection(ConnectionStatus.CONNECTED),
+                    new PointConnection(ConnectionStatus.DISCONNECTED)
+            ));
+            LinePoints secondLine = new LinePoints(List.of(
+                    new PointConnection(ConnectionStatus.DISCONNECTED),
+                    new PointConnection(ConnectionStatus.CONNECTED)
+            ));
             Ladder ladder = new Ladder(List.of(firstLine, secondLine), 3, 2);
 
             List<String> players = List.of("A", "B", "C"); // size = cols

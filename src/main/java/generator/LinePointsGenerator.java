@@ -1,5 +1,6 @@
 package generator;
 
+import domain.ConnectionStatus;
 import domain.LinePoints;
 import domain.PointConnection;
 
@@ -13,17 +14,17 @@ public class LinePointsGenerator {
     public LinePoints generateLinePoints(int colCount) {
         List<PointConnection> pointConnections = new ArrayList<>(colCount - 1);
         for (int i = 0; i < colCount - 1; i++) {
-            boolean isConnected = booleanConnect(i, pointConnections);
-            pointConnections.add(new PointConnection(isConnected));
+            ConnectionStatus status = determineConnectionStatus(i, pointConnections);
+            pointConnections.add(new PointConnection(status));
         }
 
         return new LinePoints(pointConnections);
     }
 
-    private boolean booleanConnect(int index, List<PointConnection> pointConnections) {
+    private ConnectionStatus determineConnectionStatus(int index, List<PointConnection> pointConnections) {
         if (index > 0 && pointConnections.get(index - 1).isConnected()) {
-            return false;
+            return ConnectionStatus.DISCONNECTED;
         }
-        return random.nextBoolean();
+        return random.nextBoolean() ? ConnectionStatus.CONNECTED : ConnectionStatus.DISCONNECTED;
     }
 }

@@ -1,13 +1,13 @@
 package domain;
 
 public class PointConnection {
-    private final boolean connected;
+    private final ConnectionStatus status;
 
-    public PointConnection(boolean connected) {
-        this.connected = connected;
+    public PointConnection(ConnectionStatus status) {
+        this.status = status;
     }
 
     public boolean isConnected() {
-        return connected;
+        return status == ConnectionStatus.CONNECTED;
     }
 }

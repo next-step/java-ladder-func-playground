@@ -13,14 +13,14 @@ public class LinePointsGenerator {
     public LinePoints generateLinePoints(int colCount) {
         List<PointConnection> pointConnections = new ArrayList<>(colCount - 1);
         for (int i = 0; i < colCount - 1; i++) {
-            boolean isConnected = shouldConnect(i, pointConnections);
+            boolean isConnected = booleanConnect(i, pointConnections);
             pointConnections.add(new PointConnection(isConnected));
         }
 
         return new LinePoints(pointConnections);
     }
 
-    private boolean shouldConnect(int index, List<PointConnection> pointConnections) {
+    private boolean booleanConnect(int index, List<PointConnection> pointConnections) {
         if (index > 0 && pointConnections.get(index - 1).isConnected()) {
             return false;
         }

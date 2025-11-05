@@ -11,21 +11,20 @@ public class LinePointsGenerator {
     private final Random random = new Random();
 
     public LinePoints generateLinePoints(int colCount) {
-        List<Boolean> booleanPoints = new ArrayList<>(colCount - 1);
+        List<PointConnection> pointConnections = new ArrayList<>(colCount - 1);
         for (int i = 0; i < colCount - 1; i++) {
-            if (i > 0 && booleanPoints.get(i - 1)) {
-                booleanPoints.add(false);
-            } else {
-                booleanPoints.add(random.nextBoolean());
-            }
-        }
-
-        List<PointConnection> pointConnections = new ArrayList<>(booleanPoints.size());
-        for (Boolean b : booleanPoints) {
-            pointConnections.add(new PointConnection(Boolean.TRUE.equals(b)));
+            boolean isConnected = shouldConnect(i, pointConnections);
+            pointConnections.add(new PointConnection(isConnected));
         }
 
         return new LinePoints(pointConnections);
+    }
+
+    private boolean shouldConnect(int index, List<PointConnection> pointConnections) {
+        if (index > 0 && pointConnections.get(index - 1).isConnected()) {
+            return false;
+        }
+        return random.nextBoolean();
     }
 }
 

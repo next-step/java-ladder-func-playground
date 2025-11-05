@@ -20,8 +20,12 @@ public class Bridge {
         return new Bridge(height,width);
     }
 
-    public Bridge(List<BridgeRow> rows) {
-        this.rows = rows;
+    private Bridge(List<BridgeRow> rows) {
+        this.rows = new ArrayList<>(rows);
+    }
+
+    public static Bridge fromRows(List<BridgeRow> rows) {
+        return new Bridge(rows);
     }
 
 

@@ -10,9 +10,14 @@ public class Bridge {
     private final List<BridgeRow> rows;
     private final Random random = new Random();
 
-    public Bridge(int height, int width) {
+    private Bridge(int height, int width) {
         this.rows = new ArrayList<>();
         initializeBridgeRows(height, width);
+    }
+
+    public static Bridge of(int height, int width)
+    {
+        return new Bridge(height,width);
     }
 
     public Bridge(List<BridgeRow> rows) {

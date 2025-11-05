@@ -26,7 +26,7 @@ public class Controller {
         int height = inputView.getWidthAndHeight();
 
         outputView.printPlayersAndRewards(players.getPlayers());
-        Bridge bridge = new Bridge(height, players.getPlayersNumber() - 1);
+        Bridge bridge = Bridge.of(height, players.getPlayersNumber() - 1);
         outputView.printBridge(bridge);
 
         outputView.printPlayersAndRewards(rewards.getRewards());

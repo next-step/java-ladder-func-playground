@@ -6,10 +6,10 @@ public class InputView {
     Scanner scanner = new Scanner(System.in);
 
     public int getWidthAndHeight() {
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
-    public Scanner getScanner() {
+        public Scanner getScanner() {
         return scanner;
     }
 }

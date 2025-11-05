@@ -34,8 +34,6 @@ public class Controller {
         LadderDescentService descentService = new LadderDescentService(bridge);
         LadderResult ladderResult = descentService.calculateAllResults(players.getPlayersNumber());
 
-        inputView.getScanner().nextLine();
-
         while (true) {
             outputView.askResults();
             String string = inputView.getScanner().nextLine();
@@ -50,11 +48,13 @@ public class Controller {
 
     private Rewards getRewards() {
         outputView.askRewards();
+        outputView.askRewards();
         String rewardsInputs = inputView.getScanner().nextLine();
         return new Rewards(split(rewardsInputs));
     }
 
     private Player getPlayer() {
+        outputView.askPlayers();
         outputView.askPlayers();
         String playerInputs = inputView.getScanner().nextLine();
         return new Player(split(playerInputs));

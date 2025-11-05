@@ -21,4 +21,3 @@ public class LinePointsGenerator {
         return new LinePoints(points);
     }
 }
-

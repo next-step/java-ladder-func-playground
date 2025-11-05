@@ -11,5 +11,3 @@ public class PointConnection {
         return connected;
     }
 }
-
-

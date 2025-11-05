@@ -41,5 +41,4 @@ public class Ladder {
             throw new IllegalArgumentException("라인 개수와 rows가 일치하지 않습니다.");
         }
     }
-
 }

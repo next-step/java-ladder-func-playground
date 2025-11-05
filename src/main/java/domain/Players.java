@@ -9,9 +9,7 @@ public class Players {
     private final List<String> players;
 
     public Players(List<String> rawPlayers) {
-        if (rawPlayers == null) {
-            throw new IllegalArgumentException("플레이어 목록이 null 입니다.");
-        }
+        validateRawPlayers(rawPlayers);
 
         List<String> players = new ArrayList<>(rawPlayers.size());
         for (String raw : rawPlayers) {
@@ -20,6 +18,12 @@ public class Players {
             players.add(name);
         }
         this.players = players;
+    }
+
+    private void validateRawPlayers(List<String> rawPlayers) {
+        if (rawPlayers == null) {
+            throw new IllegalArgumentException("플레이어 목록이 null 입니다.");
+        }
     }
 
     private void validateName(String name) {
@@ -40,5 +44,4 @@ public class Players {
         return players;
     }
 }
-
 

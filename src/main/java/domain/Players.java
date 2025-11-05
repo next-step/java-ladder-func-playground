@@ -41,7 +41,7 @@ public class Players {
     }
 
     public List<String> asList() {
-        return players;
+        return Collections.unmodifiableList(players);
     }
 }
 

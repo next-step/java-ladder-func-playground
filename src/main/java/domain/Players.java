@@ -3,7 +3,6 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class Players {
     private final List<String> players;
@@ -44,4 +43,3 @@ public class Players {
         return Collections.unmodifiableList(players);
     }
 }
-

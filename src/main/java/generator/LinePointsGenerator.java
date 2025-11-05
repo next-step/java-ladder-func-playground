@@ -27,4 +27,3 @@ public class LinePointsGenerator {
         return random.nextBoolean();
     }
 }
-

@@ -1,66 +1,50 @@
+// OutputView.java (REFACTORED)
 package view;
 
-import Model.*;
+// Model import가 모두 삭제되었습니다!
+// import Model.*; 
 
-import java.util.Arrays;
 import java.util.List;
+// 'Arrays'도 삭제되었습니다. (split, stream 로직이 사라졌으므로)
 
 public class OutputView {
 
-    public void printBridge(Bridge bridge) {
-        for (BridgeRow row : bridge.getRows()) {
-            printBridgeRow(row);
-            System.out.print("|");
-            System.out.println();
+    // 'Bridge' 대신 '완성된 문자열 리스트'를 받습니다.
+    public void printBridge(List<String> bridgeLines) {
+        // for문이 훨씬 단순해졌습니다.
+        for (String line : bridgeLines) {
+            System.out.println(line);
         }
     }
 
-    private void printBridgeRow(BridgeRow row) {
-        row.getSteps().forEach(bridgeStep -> {
-            System.out.print("|");
-            printBridgeStep(bridgeStep);
-        });
+    // List<String> 대신 '완성된 한 줄의 문자열'을 받습니다.
+    public void printNamesLine(String namesLine) {
+        System.out.println(namesLine);
     }
 
-    public void printPlayersAndRewards(List<String> strings) {
-        strings.forEach(string -> System.out.printf("%-6s", string));
-        System.out.println();
-    }
+    // printPlayersAndRewards는 printNamesLine으로 대체되거나
+    // 역할이 명확해졌습니다.
 
-    private void printBridgeStep(BridgeStep bridgeStep) {
-        if (bridgeStep == BridgeStep.EXIST) {
-            System.out.print("-----");
-        } else {
-            System.out.print("     ");
+    // 'Player', 'Reward' 대신 '완성된 결과 문자열 리스트'를 받습니다.
+    public void printResults(List<String> resultLines) {
+        System.out.println("\n실행 결과");
+        for (String line : resultLines) {
+            System.out.println(line);
         }
     }
+
+    // printAllResults, printSpecificResults는 
+    // printResults(List<String> results) 하나로 통합될 수 있습니다.
+
+    // (참고) '특정 결과'의 에러 메세지 출력 책임은 남겨둘 수 있습니다.
+    public void printPlayerNotFoundError(String trimmedName) {
+        System.out.println("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
+    }
+
+    // --- 질문(Ask) 메서드들은 원래 좋았습니다! ---
 
     public void askResults() {
-        System.out.println("결과를 보고 싶은 사람은?");
-    }
-
-    public void printAllResults(Player players, Rewards rewards, LadderResult ladderResult) {
-        for (int i = 0; i < players.getPlayersNumber(); i++) {
-            String playerName = players.getPlayerName(i);
-            int destinationIndex = ladderResult.getDestinationIndex(i);
-            String reward = rewards.getReward(destinationIndex);
-            System.out.println(playerName + " : " + reward);
-        }
-    }
-
-    public void printSpecificResults(Player players, Rewards rewards, LadderResult ladderResult, String specificNames) {
-        Arrays.stream(specificNames.split(","))
-                .map(String::trim)
-                .forEach(trimmedName -> {
-                    try {
-                        int playerIndex = players.getPlayerIndex(trimmedName);
-                        int destinationIndex = ladderResult.getDestinationIndex(playerIndex);
-                        String reward = rewards.getReward(destinationIndex);
-                        System.out.println(trimmedName + " : " + reward);
-                    } catch (Exception e) {
-                        System.out.println("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
-                    }
-                });
+        System.out.println("\n결과를 보고 싶은 사람은?");
     }
 
     public void askPlayers() {
@@ -68,10 +52,10 @@ public class OutputView {
     }
 
     public void askRewards() {
-        System.out.println("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
+        System.out.println("\n실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
     }
 
     public void askLadderHeight() {
-        System.out.println("사다리의 높이는 몇 개인가요?");
+        System.out.println("\n사다리의 높이는 몇 개인가요?");
     }
 }

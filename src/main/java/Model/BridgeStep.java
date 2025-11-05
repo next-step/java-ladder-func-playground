@@ -13,13 +13,6 @@ public enum BridgeStep {
         this.value = value;
     }
 
-    public static BridgeStep createRandomStep(Random random) {
-        if (random.nextBoolean()) {
-            return EXIST;
-        }
-        return NONE;
-    }
-
     public boolean isExist() {
         return this == EXIST;
     }

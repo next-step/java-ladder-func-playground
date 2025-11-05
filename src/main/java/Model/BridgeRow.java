@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Collections;
 
-public class BridgeRow {
+public class BridgeRow{
 
     private final List<BridgeStep> steps;
+    RandomStepGenerator randomStepGenerator = new RandomStepGenerator();
 
     public BridgeRow(int width, Random random) {
         this.steps = createOneRow(width, random);
@@ -22,7 +23,7 @@ public class BridgeRow {
     private List<BridgeStep> generateRandomRow(int width, Random random) {
         List<BridgeStep> row = new ArrayList<>();
         for (int i = 0; i < width; i++) {
-            row.add(BridgeStep.createRandomStep(random));
+            row.add(randomStepGenerator.generateStep());
         }
         return row;
     }

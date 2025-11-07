@@ -1,19 +1,14 @@
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 
-public class Ladder {
-    private final List<LinePoints> lines;
-    private final int cols;
-    private final int rows;
-
-    public Ladder(List<LinePoints> lines, int cols, int rows) {
+public record Ladder(List<LinePoints> lines, int cols, int rows) {
+    public Ladder {
         validateCols(cols);
         validateRows(rows);
         validateLines(lines, rows);
-        this.lines = lines;
-        this.cols = cols;
-        this.rows = rows;
+        lines = Collections.unmodifiableList(lines);
     }
 
     public List<LinePoints> getLines() {
@@ -41,5 +36,4 @@ public class Ladder {
             throw new IllegalArgumentException("라인 개수와 rows가 일치하지 않습니다.");
         }
     }
-
 }

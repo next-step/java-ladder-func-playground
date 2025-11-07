@@ -2,12 +2,9 @@ package domain;
 
 import java.util.Map;
 
-public class LadderResult {
-    private final Map<String, String> mappedResult;
-
-    public LadderResult(Map<String, String> mappedResult) {
+public record LadderResult(Map<String, String> mappedResult) {
+    public LadderResult {
         validateLadderResult(mappedResult);
-        this.mappedResult = mappedResult;
     }
 
     public Map<String, String> getMappedResult() {
@@ -26,5 +23,4 @@ public class LadderResult {
             }
         }
     }
-
 }

@@ -1,0 +1,114 @@
+package controller;
+
+import model.ladder.generator.ConnectionGenerator;
+import model.result.Prize;
+import model.result.Prizes;
+import model.participant.Player;
+import model.participant.Players;
+import model.ladder.Ladder;
+import model.ladder.LadderGame;
+import model.result.GameResult;
+import view.InputView;
+import view.OutputView;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+public class LadderGameController {
+    private final InputView inputView;
+    private final OutputView outputView;
+    private final ConnectionGenerator connectionGenerator;
+
+    public LadderGameController(InputView inputView, OutputView outputView, ConnectionGenerator connectionGenerator) {
+        this.inputView = inputView;
+        this.outputView = outputView;
+        this.connectionGenerator = connectionGenerator;
+    }
+
+    public void startGame(){
+        try {
+            Players players = createPlayers();
+            Prizes prizes = createPrizes(players);
+            Ladder ladder = createLadder(players.size());
+            LadderGame ladderGame = new LadderGame(ladder);
+
+            GameResult gameResult = calculateAllResults(ladderGame, players, prizes);
+
+            outputView.printLadder(ladder, players, prizes);
+            startResultQueryLoop(gameResult, players);
+
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            outputView.printError(e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            outputView.printError("알 수 없는 오류가 발생했습니다: " + e.getMessage());
+        }
+    }
+
+    private Players createPlayers(){
+        String namesLine = inputView.inputPeople();
+        List<Player> playerList = Arrays.stream(namesLine.split(","))
+                .map(String::trim)
+                .map(Player::new)
+                .collect(Collectors.toList());
+
+        return new Players(playerList);
+    }
+
+    private Prizes createPrizes(Players players){
+        String prizeLine = inputView.inputResults();
+
+        List<Prize> prizeList = Arrays.stream(prizeLine.split(","))
+                .map(String::trim)
+                .map(Prize::new)
+                .collect(Collectors.toList());
+
+        Prizes prizes = new Prizes(prizeList);
+        validateInput(players, prizes);
+        return prizes;
+    }
+    private void validateInput(Players players, Prizes prizes){
+        if(players.size() != prizes.size()){
+            throw new IllegalArgumentException("이름 수와 결과 수는 같아야 합니다.");
+        }
+    }
+
+    private Ladder createLadder(int peopleCount){
+        while (true) {
+            try {
+                int height = inputView.inputLadderHeight();
+                return new Ladder(peopleCount, height, connectionGenerator);
+            } catch (NumberFormatException e) {
+                outputView.printError("숫자만 입력할 수 있습니다");
+            }
+        }
+    }
+
+    private GameResult calculateAllResults(LadderGame ladderGame, Players players, Prizes prizes) {
+        GameResult gameResult = new GameResult();
+        int peopleCount = players.size();
+
+        IntStream.range(0, peopleCount)
+                .forEach(startColumn -> {
+                    Player currentPlayer = players.getPlayerAt(startColumn);
+                    int resultColumn = ladderGame.trace(startColumn);
+                    Prize currentPrize = prizes.getPrizeAt(resultColumn);
+
+                    gameResult.addResult(currentPlayer, currentPrize);
+                });
+
+        return gameResult;
+    }
+
+    private void startResultQueryLoop(GameResult result, Players players) {
+        String playerResult = inputView.inputPlayerName();
+        while (!Objects.equals(playerResult, "all")) {
+            outputView.printSingleResult(result, playerResult);
+            playerResult = inputView.inputPlayerName();
+        }
+        outputView.printAllResults(result, players);
+    }
+}

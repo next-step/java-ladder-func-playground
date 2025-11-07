@@ -11,7 +11,7 @@ public class LadderGame {
         this.ladder = ladder;
     }
 
-    public Map<String, String> playAll(List<String> participants, List<String> results) {
+    public Map<String, String> playAll(Participants participants, Results results) {
         Map<String, String> allResults = new LinkedHashMap<>();
         for (int i = 0; i < participants.size(); i++) {
             int finalPosition = play(i);
@@ -20,7 +20,7 @@ public class LadderGame {
         return allResults;
     }
 
-    public String getResult(String name, List<String> participants, List<String> results) {
+    public String getResult(String name, Participants participants, Results results) {
         int startIndex = participants.indexOf(name);
         int finalPosition = play(startIndex);
         return results.get(finalPosition);

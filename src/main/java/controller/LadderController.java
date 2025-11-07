@@ -1,10 +1,12 @@
 package controller;
 
 import model.Ladder;
-import model.LadderSize;
-import model.Line;
 import model.LadderFactory;
 import model.LadderGame;
+import model.LadderSize;
+import model.Line;
+import model.Participants;
+import model.Results;
 import model.BuildLine;
 import view.InputView;
 import view.OutputView;
@@ -18,13 +20,12 @@ public class LadderController {
     private final InputView inputView = new InputView();
 
     public void gameStart() {
-
-        List<String> participants = inputView.inputParticipants();
+        Participants participants = new Participants(inputView.inputParticipants());
         int width = participants.size();
 
-        List<String> results;
+        Results results;
         while (true) {
-            results = inputView.inputResults();
+            results = new Results(inputView.inputResults());
             if (participants.size() == results.size()) {
                 break;
             }
@@ -48,13 +49,13 @@ public class LadderController {
             lines.add(BuildLine.build(line));
         }
 
-        outputView.printLadder(participants, lines, results);
+        outputView.printLadder(participants.getNames(), lines, results.getValues());
 
         LadderGame game = new LadderGame(ladder, participants.size());
         gameResult(game, participants, results);
     }
 
-    private void gameResult(LadderGame game, List<String> participants, List<String> results) {
+    private void gameResult(LadderGame game, Participants participants, Results results) {
         while (true) {
             String queryName = inputView.inputQueryName();
 

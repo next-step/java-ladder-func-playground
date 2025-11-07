@@ -1,7 +1,9 @@
 import model.Ladder;
 import model.LadderGame;
 import model.Line;
+import model.Participants;
 import model.Point;
+import model.Results;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -17,7 +19,8 @@ public class ResultTest {
     @DisplayName("참여자 이름을 쉼표로 구분하여 List로 변환한다")
     void parseParticipantNames() {
         String input = "neo,brown,brie,tommy";
-        List<String> participants = Arrays.asList(input.split(","));
+        List<String> names = Arrays.asList(input.split(","));
+        Participants participants = new Participants(names);
 
         assertEquals(4, participants.size());
         assertEquals("neo", participants.get(0));
@@ -30,7 +33,8 @@ public class ResultTest {
     @DisplayName("실행 결과를 쉼표로 구분하여 List로 변환한다")
     void parseResults() {
         String input = "꽝,5000,꽝,3000";
-        List<String> results = Arrays.asList(input.split(","));
+        List<String> values = Arrays.asList(input.split(","));
+        Results results = new Results(values);
 
         assertEquals(4, results.size());
         assertEquals("꽝", results.get(0));
@@ -42,7 +46,7 @@ public class ResultTest {
     @Test
     @DisplayName("존재하지 않는 참여자 이름은 -1 인덱스를 반환한다")
     void nonExistentParticipantReturnsNegativeIndex() {
-        List<String> participants = Arrays.asList("neo", "brown", "brie");
+        Participants participants = new Participants(Arrays.asList("neo", "brown", "brie"));
 
         int index = participants.indexOf("unknown");
 
@@ -55,8 +59,8 @@ public class ResultTest {
         List<Point> line = Arrays.asList(new Point(false), new Point(false));
         Ladder ladder = new Ladder(Arrays.asList(new Line(line)));
 
-        List<String> participants = Arrays.asList("a", "b", "c");
-        List<String> results = Arrays.asList("1", "2");
+        Participants participants = new Participants(Arrays.asList("a", "b", "c"));
+        Results results = new Results(Arrays.asList("1", "2"));
 
         LadderGame game = new LadderGame(ladder, 3);
 
@@ -65,5 +69,5 @@ public class ResultTest {
                     game.playAll(participants, results);
                 });
     }
-    
 }
+

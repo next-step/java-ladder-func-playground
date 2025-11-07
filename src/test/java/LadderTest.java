@@ -1,9 +1,11 @@
 import model.Ladder;
 import model.LadderFactory;
+import model.LadderGame;
 import model.LadderSize;
 import model.Line;
+import model.Participants;
 import model.Point;
-import model.LadderGame;
+import model.Results;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -48,13 +50,12 @@ public class LadderTest {
         List<Point> line = Arrays.asList(new Point(false), new Point(false), new Point(false));
         Ladder ladder = new Ladder(Arrays.asList(new Line(line)));
 
-        List<String> participants = Arrays.asList("neo", "brown", "brie", "tommy");
-        List<String> results = Arrays.asList("꽝", "5000", "꽝2", "3000");
+        Participants participants = new Participants(Arrays.asList("neo", "brown", "brie", "tommy"));
+        Results results = new Results(Arrays.asList("꽝", "5000", "꽝2", "3000"));
 
         LadderGame game = new LadderGame(ladder, 4);
 
         assertEquals("꽝", game.getResult("neo", participants, results));
         assertEquals("5000", game.getResult("brown", participants, results));
     }
-
 }

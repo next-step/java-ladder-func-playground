@@ -1,9 +1,11 @@
 package domain;
 
-public record PointConnection(boolean connected) {
+public record PointConnection(ConnectionStatus status) {
     public boolean isConnected() {
-        return connected;
+        return status == ConnectionStatus.CONNECTED;
+    }
+
+    public ConnectionStatus getStatus() {
+        return status;
     }
 }
-
-

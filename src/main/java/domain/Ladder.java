@@ -36,4 +36,6 @@ public record Ladder(List<LinePoints> lines, int cols, int rows) {
             throw new IllegalArgumentException("라인 개수와 rows가 일치하지 않습니다.");
         }
     }
+
 }
+

@@ -1,6 +1,8 @@
 package generator;
 
+import domain.ConnectionStatus;
 import domain.LinePoints;
+import domain.PointConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,15 +12,19 @@ public class LinePointsGenerator {
     private final Random random = new Random();
 
     public LinePoints generateLinePoints(int colCount) {
-        List<Boolean> points = new ArrayList<>(colCount - 1);
+        List<PointConnection> pointConnections = new ArrayList<>(colCount - 1);
         for (int i = 0; i < colCount - 1; i++) {
-            if (i > 0 && points.get(i - 1)) {
-                points.add(false);
-            } else {
-                points.add(random.nextBoolean());
-            }
+            ConnectionStatus status = determineConnectionStatus(i, pointConnections);
+            pointConnections.add(new PointConnection(status));
         }
-        return new LinePoints(points);
+
+        return new LinePoints(pointConnections);
+    }
+
+    private ConnectionStatus determineConnectionStatus(int index, List<PointConnection> pointConnections) {
+        if (index > 0 && pointConnections.get(index - 1).isConnected()) {
+            return ConnectionStatus.DISCONNECTED;
+        }
+        return random.nextBoolean() ? ConnectionStatus.CONNECTED : ConnectionStatus.DISCONNECTED;
     }
 }
-

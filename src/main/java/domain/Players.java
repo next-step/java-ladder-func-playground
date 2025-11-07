@@ -3,15 +3,12 @@ package domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 
 public class Players {
     private final List<String> players;
 
     public Players(List<String> rawPlayers) {
-        if (rawPlayers == null) {
-            throw new IllegalArgumentException("플레이어 목록이 null 입니다.");
-        }
+        validateRawPlayers(rawPlayers);
 
         List<String> players = new ArrayList<>(rawPlayers.size());
         for (String raw : rawPlayers) {
@@ -20,6 +17,12 @@ public class Players {
             players.add(name);
         }
         this.players = players;
+    }
+
+    private void validateRawPlayers(List<String> rawPlayers) {
+        if (rawPlayers == null) {
+            throw new IllegalArgumentException("플레이어 목록이 null 입니다.");
+        }
     }
 
     private void validateName(String name) {
@@ -37,8 +40,6 @@ public class Players {
     }
 
     public List<String> asList() {
-        return players;
+        return Collections.unmodifiableList(players);
     }
 }
-
-

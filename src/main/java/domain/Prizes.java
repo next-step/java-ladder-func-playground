@@ -1,15 +1,14 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Prizes {
     private final List<String> prizes;
 
     public Prizes(List<String> rawPrizes) {
-        if (rawPrizes == null) {
-            throw new IllegalArgumentException("결과 목록이 null 입니다.");
-        }
+        validateRawPrizes(rawPrizes);
 
         List<String> prizes = new ArrayList<>(rawPrizes.size());
         for (String raw : rawPrizes) {
@@ -18,6 +17,12 @@ public class Prizes {
             prizes.add(value);
         }
         this.prizes = prizes;
+    }
+
+    private void validateRawPrizes(List<String> rawPrizes) {
+        if (rawPrizes == null) {
+            throw new IllegalArgumentException("결과 목록이 null 입니다.");
+        }
     }
 
     private void validateValue(String value) {
@@ -35,8 +40,6 @@ public class Prizes {
     }
 
     public List<String> asList() {
-        return prizes;
+        return Collections.unmodifiableList(prizes);
     }
 }
-
-

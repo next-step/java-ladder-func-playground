@@ -18,7 +18,5 @@ public class LadderGenerator {
         }
 
         return new Ladder(linePointsList, colCount, rowCount);
-
     }
-
 }

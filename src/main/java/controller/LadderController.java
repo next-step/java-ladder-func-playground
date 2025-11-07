@@ -25,10 +25,10 @@ public class LadderController {
             InputView inputView,
             LadderResultCalculator ladderResultCalculator
     ) {
-        this.ladderGenerator = new LadderGenerator();
-        this.outputView = new OutputView();
+        this.ladderGenerator = ladderGenerator;
+        this.outputView = outputView;
         this.inputView = inputView;
-        this.ladderResultCalculator = new LadderResultCalculator();
+        this.ladderResultCalculator = ladderResultCalculator;
     }
 
     public void run() {

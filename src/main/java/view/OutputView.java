@@ -1,47 +1,32 @@
-// OutputView.java (REFACTORED)
 package view;
 
-// Model import가 모두 삭제되었습니다!
-// import Model.*; 
+
+import Model.LadderResult;
+import Model.Player;
+import Model.Rewards;
 
 import java.util.List;
-// 'Arrays'도 삭제되었습니다. (split, stream 로직이 사라졌으므로)
 
 public class OutputView {
 
-    // 'Bridge' 대신 '완성된 문자열 리스트'를 받습니다.
     public void printBridge(List<String> bridgeLines) {
-        // for문이 훨씬 단순해졌습니다.
         for (String line : bridgeLines) {
             System.out.println(line);
         }
     }
 
-    // List<String> 대신 '완성된 한 줄의 문자열'을 받습니다.
     public void printNamesLine(String namesLine) {
         System.out.println(namesLine);
     }
 
-    // printPlayersAndRewards는 printNamesLine으로 대체되거나
-    // 역할이 명확해졌습니다.
-
-    // 'Player', 'Reward' 대신 '완성된 결과 문자열 리스트'를 받습니다.
-    public void printResults(List<String> resultLines) {
-        System.out.println("\n실행 결과");
-        for (String line : resultLines) {
-            System.out.println(line);
-        }
+    public void printRewards(String rewardLines) {
+        System.out.println(rewardLines);
     }
 
-    // printAllResults, printSpecificResults는 
-    // printResults(List<String> results) 하나로 통합될 수 있습니다.
-
-    // (참고) '특정 결과'의 에러 메세지 출력 책임은 남겨둘 수 있습니다.
     public void printPlayerNotFoundError(String trimmedName) {
         System.out.println("[ERROR] 존재하지 않는 플레이어 이름입니다: " + trimmedName);
     }
 
-    // --- 질문(Ask) 메서드들은 원래 좋았습니다! ---
 
     public void askResults() {
         System.out.println("\n결과를 보고 싶은 사람은?");
@@ -57,5 +42,24 @@ public class OutputView {
 
     public void askLadderHeight() {
         System.out.println("\n사다리의 높이는 몇 개인가요?");
+    }
+
+    public void printAllResults(Player players, Rewards rewards, LadderResult ladderResult) {
+        System.out.println("\n실행 결과");
+        for (int i = 0; i < players.getPlayersNumber(); i++) {
+            int destinationIndex = ladderResult.getDestinationIndex(i);
+            System.out.println(players.getPlayerName(i) + " : " + rewards.getReward(destinationIndex));
+        }
+    }
+
+    public void printSpecificResults(Player players, Rewards rewards, LadderResult ladderResult, String query) {
+        int playerIndex = players.getPlayerIndex(query);
+        if (playerIndex == -1) {
+            printPlayerNotFoundError(query);
+            return;
+        }
+        int destinationIndex = ladderResult.getDestinationIndex(playerIndex);
+        System.out.println("\n실행 결과");
+        System.out.println(rewards.getReward(destinationIndex));
     }
 }

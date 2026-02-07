@@ -35,11 +35,4 @@ public class Line {
         points.add(Point.from(currentBridge));
         return currentBridge;
     }
-
-    private static boolean canDraw(boolean lastBridge) {
-        if (lastBridge) {
-            return false;
-        }
-        return new Random().nextBoolean();
-    }
 }

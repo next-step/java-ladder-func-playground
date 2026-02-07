@@ -2,6 +2,7 @@ package ladder.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.BooleanSupplier;
 
 public class Ladder {
 
@@ -15,16 +16,16 @@ public class Ladder {
         this.height = height;
     }
 
-    public static Ladder of(LadderWidth width, LadderHeight height) {
-        List<Line> lines = generateLines(width, height);
+    public static Ladder of(LadderWidth width, LadderHeight height, BooleanSupplier strategy) {
+        List<Line> lines = generateLines(width, height, strategy);
 
         return new Ladder(lines, width, height);
     }
 
-    private static List<Line> generateLines(LadderWidth width, LadderHeight height) {
+    private static List<Line> generateLines(LadderWidth width, LadderHeight height, BooleanSupplier strategy) {
         List<Line> lines = new ArrayList<>();
         for (int i = 0; i < height.getValue(); i++) {
-            lines.add(Line.from(width.getPointCount()));
+            lines.add(Line.from(width.getPointCount(), strategy));
         }
         return lines;
     }

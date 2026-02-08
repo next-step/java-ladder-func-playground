@@ -1,7 +1,9 @@
 package ladder.domain;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BooleanSupplier;
 
 public class Ladder {
@@ -20,6 +22,22 @@ public class Ladder {
         List<Line> lines = generateLines(width, height, strategy);
 
         return new Ladder(lines, width, height);
+    }
+
+    public int climb(int startIndex) {
+        int currentIndex = startIndex;
+        for (Line line : lines) {
+            currentIndex = line.move(currentIndex);
+        }
+        return currentIndex;
+    }
+
+    public Map<Integer, Integer> generateResults() {
+        Map<Integer, Integer> results = new LinkedHashMap<>();
+        for (int i = 0; i < width.getValue(); i++) {
+            results.put(i, climb(i));
+        }
+        return results;
     }
 
     private static List<Line> generateLines(LadderWidth width, LadderHeight height, BooleanSupplier strategy) {

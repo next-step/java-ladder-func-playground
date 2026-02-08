@@ -2,7 +2,6 @@ package ladder.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.function.BooleanSupplier;
 
 public class Line {
@@ -19,6 +18,16 @@ public class Line {
 
     public List<Point> getPoints() {
         return points;
+    }
+
+    public int move(int index) {
+        if (index < points.size() && points.get(index).hasBridge()) {
+            return index + 1;
+        }
+        if (index > 0 && points.get(index - 1).hasBridge()) {
+            return index - 1;
+        }
+        return index;
     }
 
     private static List<Point> generatePoints(int size, BooleanSupplier strategy) {

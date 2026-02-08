@@ -9,19 +9,18 @@ import java.util.function.BooleanSupplier;
 public class Ladder {
 
     private final List<Line> lines;
-    private final LadderWidth width;
-    private final LadderHeight height;
+    private final int width;
 
-    private Ladder(List<Line> lines, LadderWidth width, LadderHeight height) {
+    private Ladder(List<Line> lines, int width) {
         this.lines = lines;
         this.width = width;
-        this.height = height;
     }
 
-    public static Ladder of(LadderWidth width, LadderHeight height, BooleanSupplier strategy) {
-        List<Line> lines = generateLines(width, height, strategy);
+    public static Ladder of(Participants participants, LadderHeight height, BooleanSupplier strategy) {
+        int participantCount = participants.size();
+        List<Line> lines = generateLines(participantCount, height, strategy);
 
-        return new Ladder(lines, width, height);
+        return new Ladder(lines, participantCount);
     }
 
     public int climb(int startIndex) {
@@ -34,16 +33,17 @@ public class Ladder {
 
     public Map<Integer, Integer> generateResults() {
         Map<Integer, Integer> results = new LinkedHashMap<>();
-        for (int i = 0; i < width.getValue(); i++) {
+        for (int i = 0; i < width; i++) {
             results.put(i, climb(i));
         }
         return results;
     }
 
-    private static List<Line> generateLines(LadderWidth width, LadderHeight height, BooleanSupplier strategy) {
+    private static List<Line> generateLines(int participantCount, LadderHeight height, BooleanSupplier strategy) {
         List<Line> lines = new ArrayList<>();
+        int pointCount = participantCount - 1;
         for (int i = 0; i < height.getValue(); i++) {
-            lines.add(Line.from(width.getPointCount(), strategy));
+            lines.add(Line.from(pointCount, strategy));
         }
         return lines;
     }

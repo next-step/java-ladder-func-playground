@@ -19,4 +19,8 @@ public class LadderResults {
             .toList();
         return new LadderResults(results);
     }
+
+    public List<LadderResult> getValues() {
+        return results;
+    }
 }

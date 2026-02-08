@@ -14,6 +14,10 @@ public class Name {
         return new Name(trimmedName);
     }
 
+    public String getName() {
+        return name;
+    }
+
     private static void validate(String name) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("이름은 빈 값일 수 없습니다.");

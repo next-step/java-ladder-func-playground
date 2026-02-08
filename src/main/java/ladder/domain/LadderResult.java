@@ -12,6 +12,10 @@ public class LadderResult {
         return new LadderResult(value.trim());
     }
 
+    public String getValue() {
+        return value;
+    }
+
     private void validate(String value) {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException("실행 결과는 빈 값일 수 없습니다.");

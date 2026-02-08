@@ -1,5 +1,6 @@
 package ladder.view;
 
+import java.util.Map;
 import ladder.domain.Ladder;
 import ladder.domain.Line;
 import ladder.domain.Point;
@@ -29,4 +30,10 @@ public class OutputView {
         System.out.print(EMPTY + VERTICAL_BAR);
     }
 
+    public static void printResults(Map<Integer, Integer> results) {
+        System.out.println();
+        results.forEach((start, end) ->
+            System.out.println(start + " -> " + end)
+        );
+    }
 }

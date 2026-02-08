@@ -1,9 +1,12 @@
 package ladder.view;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.function.Supplier;
 import ladder.domain.LadderHeight;
-import ladder.domain.LadderWidth;
+import ladder.domain.LadderResults;
+import ladder.domain.Participants;
 
 public class InputView {
 
@@ -22,10 +25,29 @@ public class InputView {
         }
     }
 
-    public static LadderWidth inputWidth() {
-        return input("사다리의 넓이는 몇 개인가요?", () -> {
+    public static Participants inputNames() {
+        return input("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)", () -> {
             String input = sc.nextLine();
-            return LadderWidth.from(parseToInt(input));
+            if (input == null || input.isBlank()) {
+                throw new IllegalArgumentException("참가자 이름을 입력해야 합니다.");
+            }
+            List<String> names = Arrays.asList(input.split(","));
+            return Participants.from(names);
+        });
+    }
+
+    public static LadderResults inputLadderResults(int participantCount) {
+        return input("\n실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)", () -> {
+            String input = sc.nextLine();
+            if (input == null || input.isBlank()) {
+                throw new IllegalArgumentException("실행 결과는 빈 값일 수 없습니다.");
+            }
+
+            List<String> rawResults = Arrays.stream(input.split(","))
+                .map(String::trim)
+                .toList();
+
+            return LadderResults.of(rawResults, participantCount);
         });
     }
 

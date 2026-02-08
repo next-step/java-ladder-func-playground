@@ -57,4 +57,34 @@ public class LadderTest {
         );
     }
 
+    @DisplayName("사다리를 타고 내려가 최종 도착 지점의 인덱스를 반환한다.")
+    @Test
+    void climb() {
+        // given
+        Ladder ladder = Ladder.of(LadderWidth.from(2), LadderHeight.from(1), () -> true);
+
+        // then
+        assertAll(
+            () -> assertThat(ladder.climb(0)).isEqualTo(1),
+            () -> assertThat(ladder.climb(1)).isEqualTo(0)
+        );
+    }
+
+    @DisplayName("사다리 전체 실행 결과를 Map 형태로 반환한다.")
+    @Test
+    void generateResults() {
+        // given: 3명(포인트 2개), 높이 1, 전략은 항상 true
+        Ladder ladder = Ladder.of(LadderWidth.from(3), LadderHeight.from(1), () -> true);
+
+        // when
+        java.util.Map<Integer, Integer> results = ladder.generateResults();
+
+        // then: 0->1, 1->0, 2->2 결과 확인
+        assertAll(
+            () -> assertThat(results).hasSize(3),
+            () -> assertThat(results.get(0)).isEqualTo(1),
+            () -> assertThat(results.get(1)).isEqualTo(0),
+            () -> assertThat(results.get(2)).isEqualTo(2)
+        );
+    }
 }

@@ -66,4 +66,9 @@ public class InputView {
         }
     }
 
+    public static String inputNameQuery() {
+        System.out.println("\n결과를 보고 싶은 사람은?");
+        return sc.nextLine();
+    }
+
 }

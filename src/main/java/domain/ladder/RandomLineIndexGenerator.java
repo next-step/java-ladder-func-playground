@@ -1,6 +1,6 @@
-package domain;
+package domain.ladder;
 
-import exception.LineException;
+import exception.DomainRuleViolationException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -34,7 +34,7 @@ public class RandomLineIndexGenerator implements LineIndexGenerator {
 
     private void validateLineSize(int lineSize) {
         if (lineSize < 2) {
-            throw new LineException("사다리의 넓이는 2 이상이어야 합니다.");
+            throw new DomainRuleViolationException("사다리의 넓이는 2 이상이어야 합니다.");
         }
     }
 

@@ -3,24 +3,24 @@ package domain.player;
 import exception.DomainRuleViolationException;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public record Players(List<String> names) {
 
-    private static final List<String> FORBIDDEN_PLAYER_NAMES = List.of("all", "q");
-
-    public Players {
-        validate(names);
-        names = List.copyOf(names);
+    public static Players of(List<String> names, Set<String> forbiddenPlayerNames) {
+        validate(names, forbiddenPlayerNames);
+        return new Players(List.copyOf(names));
     }
 
     public int size() {
         return names.size();
     }
 
-    private static void validate(List<String> names) {
+    private static void validate(List<String> names, Set<String> forbiddenPlayerNames) {
         validateNameFormat(names);
         validateDuplicatedName(names);
         validateNameSize(names);
+        validateForbiddenPlayerName(names, forbiddenPlayerNames);
     }
 
     private static void validateNameFormat(List<String> names) {
@@ -43,9 +43,10 @@ public record Players(List<String> names) {
         }
     }
 
-    private static void validateForbiddenPlayerName(List<String> names) {
+    private static void validateForbiddenPlayerName(List<String> names,
+            Set<String> forbiddenPlayerNames) {
         if (names.stream()
-                .anyMatch(FORBIDDEN_PLAYER_NAMES::contains)) {
+                .anyMatch(forbiddenPlayerNames::contains)) {
             throw new DomainRuleViolationException("q, all은 참가자 이름으로 사용할 수 없습니다.");
         }
     }

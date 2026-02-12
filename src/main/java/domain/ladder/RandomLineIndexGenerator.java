@@ -7,11 +7,12 @@ import java.util.Random;
 
 public class RandomLineIndexGenerator implements LineIndexGenerator {
 
-    private static final double DEFAULT_BRIDGE_PROBABILITY = 0.35;
     private final Random random;
+    private final double bridgeProbability;
 
-    public RandomLineIndexGenerator(Random random) {
+    public RandomLineIndexGenerator(Random random, double bridgeProbability) {
         this.random = random;
+        this.bridgeProbability = bridgeProbability;
     }
 
     @Override
@@ -39,7 +40,7 @@ public class RandomLineIndexGenerator implements LineIndexGenerator {
     }
 
     private int getNextGapIndex(int gapIndex, List<Integer> bridgeIndexes) {
-        if (random.nextDouble() >= DEFAULT_BRIDGE_PROBABILITY) {
+        if (random.nextDouble() >= bridgeProbability) {
             return gapIndex + 1;
         }
         bridgeIndexes.add(gapIndex);

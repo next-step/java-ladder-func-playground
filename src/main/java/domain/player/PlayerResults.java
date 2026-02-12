@@ -37,7 +37,7 @@ public final class PlayerResults {
                 .toList();
     }
 
-    public static PlayerResults from(Ladder ladder, Players players, Rewards rewards) {
+    public static PlayerResults of(Ladder ladder, Players players, Rewards rewards) {
         List<PlayerResult> playerResults = new ArrayList<>();
         List<String> names = players.names();
         List<String> values = rewards.values();

@@ -62,8 +62,23 @@ public class OutputView {
     }
 
     private String renderValues(List<String> values) {
-        return String.join(NEW_SPACE, values);
+        StringBuilder sb = new StringBuilder();
+        
+        for (String value : values) {
+            sb.append(value);
+            padRightToLength(value, sb, 4);
+            sb.append(NEW_SPACE);
+        }
+        
+        return sb.toString();
     }
+
+    private void padRightToLength(String value, StringBuilder sb, int length) {
+        int valueLength = value.length();
+        while (valueLength < length) {
+            sb.append(NEW_SPACE);
+            valueLength += 1;
+        }}
 
     private String renderLine(Line line) {
         StringBuilder sb = new StringBuilder();

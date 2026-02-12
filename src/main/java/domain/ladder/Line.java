@@ -6,7 +6,7 @@ import java.util.List;
 
 public record Line(List<Boolean> points) {
 
-    public static Line fromRandomIndex(List<Integer> indexes, int size) {
+    public static Line of(List<Integer> indexes, int size) {
         List<Boolean> points = new ArrayList<>(Collections.nCopies(size, Boolean.FALSE));
         for (int index : indexes) {
             points.set(index, Boolean.TRUE);

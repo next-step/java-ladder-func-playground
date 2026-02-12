@@ -17,8 +17,8 @@ public final class LadderFactory {
         List<Line> lines = new ArrayList<>();
 
         for (int i = 0; i < height; i++) {
-            List<Integer> randomIndexes = lineIndexGenerator.generate(playerCount);
-            Line line = Line.fromRandomIndex(randomIndexes, playerCount - 1);
+            List<Integer> lineIndexes = lineIndexGenerator.generate(playerCount);
+            Line line = Line.of(lineIndexes, playerCount - 1);
             lines.add(line);
         }
 

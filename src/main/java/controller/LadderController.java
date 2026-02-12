@@ -1,5 +1,6 @@
 package controller;
 
+import controller.command.QueryCommand;
 import domain.ladder.Ladder;
 import domain.ladder.LadderFactory;
 import domain.ladder.LadderGameRules;
@@ -29,19 +30,15 @@ public class LadderController {
         LadderGameRules.validateMatch(players, rewards);
 
         int height = readLadderHeight();
-
         Ladder ladder = ladderFactory.create(height, players.size());
-        PlayerResults playerResults = PlayerResults.from(ladder, players, rewards);
-
-        outputView.printLadderGameResult(ladder.lines(), playerResults.getNames(),
-                playerResults.getResults());
-
+        PlayerResults playerResults = PlayerResults.of(ladder, players, rewards);
+        outputView.printLadderGameResult(ladder.lines(), players.names(), rewards.values());
         runResultQueryLoop(playerResults);
     }
 
     private Players readPlayers() {
         outputView.printLadderGamePlayerNamesPrompt();
-        return new Players(inputView.readPlayerNames());
+        return Players.of(inputView.readPlayerNames(), QueryCommand.FORBIDDEN_PLAYER_NAMES);
     }
 
     private Rewards readRewards() {
@@ -65,10 +62,10 @@ public class LadderController {
     private boolean handleResultCommand(PlayerResults playerResults) {
         String nameForResult = readPlayNameForResult();
 
-        if (nameForResult.equals("q")) {
+        if (nameForResult.equals(QueryCommand.QUIT)) {
             return false;
         }
-        if (nameForResult.equals("all")) {
+        if (nameForResult.equals(QueryCommand.ALL)) {
             outputView.printAllResult(playerResults.findAllResults());
             return false;
         }

@@ -1,5 +1,6 @@
 package ladder.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class LadderResults {
@@ -21,6 +22,6 @@ public class LadderResults {
     }
 
     public List<LadderResult> getValues() {
-        return results;
+        return Collections.unmodifiableList(results);
     }
 }

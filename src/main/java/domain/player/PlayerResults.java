@@ -25,18 +25,6 @@ public final class PlayerResults {
         return playerResults;
     }
 
-    public List<String> getNames() {
-        return playerResults.stream()
-                .map(PlayerResult::name)
-                .toList();
-    }
-
-    public List<String> getResults() {
-        return playerResults.stream()
-                .map(PlayerResult::result)
-                .toList();
-    }
-
     public static PlayerResults of(Ladder ladder, Players players, Rewards rewards) {
         List<PlayerResult> playerResults = new ArrayList<>();
         List<String> names = players.names();

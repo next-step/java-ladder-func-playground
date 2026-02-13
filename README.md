@@ -1,14 +1,18 @@
 ## 🚀 1단계 - 사다리 출력
+
 ## 🚀 2단계 - 사다리 생성
+
 ### 요구사항
+
 - 모든 엔티티를 작게 유지한다.
 - 3개 이상의 인스턴스 변수를 가진 클래스를 쓰지 않는다.
 
 ### 필요한 객체
+
 - 한 row에서 연결 여부를 가진 Line 객체
 - Line들을 가진 Ladder 객체
 - 연결 여부를 결정할 때 한 Line의 연결 인덱스를 랜덤으로 설정해주는 객체
-  - 연속되는 인덱스가 없는지도 판별해야함
+    - 연속되는 인덱스가 없는지도 판별해야함
 - 연결되어있으면 "-----", 안되어있으면 "공백 5개" 출력
 
 - 출력은 output 객체가 담당
@@ -16,7 +20,7 @@
 ### 랜덤 인덱스 뽑는 방식
 
 - 확률을 정해놓고, 해당 확률에 따라 다리를 놓을지 결정
-  - 해당 확률을 RandomLineIndexGenerator가 알고 있어도 괜찮을까?
+    - 해당 확률을 RandomLineIndexGenerator가 알고 있어도 괜찮을까?
 
 ## 🚀 3단계 - 사다리 타기
 
@@ -27,8 +31,8 @@
 ### 고민
 
 - Ladder 객체가 시작 지점과 도착 지점을 탐색할 수 있어야 하는가?
-  - 도메인 행위에 포함되는지
-  - Ladder 자체가 사다리이므로, 자신이 가지고 있는 좌표값들 안에서 탐색할 수 있어도 괜찮을 것 같다고 생각했습니다.
+    - 도메인 행위에 포함되는지
+    - Ladder 자체가 사다리이므로, 자신이 가지고 있는 좌표값들 안에서 탐색할 수 있어도 괜찮을 것 같다고 생각했습니다.
 
 ## 🚀 4단계 - 게임 실행
 
@@ -37,7 +41,7 @@
 - 사다리 게임에 참여하는 사람에 이름을 최대 5글자까지 부여할 수 있다. 사다리를 출력할 때 사람 이름도 같이 출력한다.
 - 사람 이름은 쉼표(,)를 기준으로 구분한다.
 - 개인별 이름을 입력하면 개인별 결과를 출력하고, "all"을 입력하면 전체 참여자의 실행 결과를 출력한다.
-  - "all"이라는 이름은 등록할 수 없다.
+    - "all"이라는 이름은 등록할 수 없다.
 
 ### 가정사항
 
@@ -55,11 +59,35 @@
 - 컨트롤러에서 조립하던 Ladder를 LadderFactory의 책임으로 분리 + 생성 시 사다리 높이 검증
 - 게임 참여자와 결과 개수를 검증하는 헬퍼 메소드 -> LadderGameRules에서 검증
 
+### 리뷰 답변
 
+- Ladder와 Line을 record로 한 이유가 무엇인가? 일반 클래스와 record는 어떤 차이가 있나?
 
+### 태스트코드
 
+- Players
+  - 참여자 수가 1명보다 작으면 DomainRuleViolationException 예외를 반환한다.
+  - 이름 컨벤션이 맞지 않으면 DomainRuleViolationException 예외를 반환한다.
+  - 참여자 이름으로 q, all이 입력되면 DomainRuleViolationException 예외를 반환한다.
 
+- Rewards
+  - 실행 결과가 입력되지 않으면 DomainRuleViolationException 예외를 반환한다.
+  - 실행 결과 입력값 각각의 결과가 공백이면 DomainRuleViolationException 예외를 반환한다.
 
+- Ladder
+    - getDestination: 시작 위치를 입력하면 도착 지점을 반환한다. (여러 Line의 move를 순서대로 적용해 최종 위치를 계산한다.)
+- Line
+    - move: 위치를 입력하면 다리 위치에 따라 자신의 다음 위치를 반환한다.
 
+- LadderGameRules
+    - player와 reward의 개수가 다르면 DomainRuleViolationException 예외를 반환한다.
 
+- LadderFactory
+    - create: 참가자 수만큼의 가로 길이, 입력받은 사다리 높이만큼의 높이를 가진 사다리를 반환한다.
+    - 잘못된 사다리 높이가 입력되었을 경우 DomainRuleViolationException 예외를 반환한다.
 
+- PlayerResults
+  - of: Ladder, Players, Rewards를 입력하면 각 참가자의 시작위치와 도착지점의 실행 결과를 가진 결과를 반환한다.
+  - findResultByName
+    - 사용자 이름을 입력하면 해당 결과를 반환한다.
+    - 사용자 이름을 잘못 입력했을 경우 DomainNotFoundException 예외를 반환한다.

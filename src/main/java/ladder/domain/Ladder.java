@@ -24,7 +24,7 @@ public class Ladder {
         return new Ladder(lines, participantCount);
     }
 
-    public int climb(int startIndex) {
+    int climb(int startIndex) {
         return lines.move(startIndex);
     }
 

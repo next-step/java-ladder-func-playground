@@ -32,7 +32,5 @@ public class Application {
 
         OutputView.printLadder(participants, ladder, results);
         LadderGameController.runInquiry(gameResult);
-
     }
-
 }

@@ -13,19 +13,18 @@ public class LinesTest {
     void createLines() {
         int participantCount = 4;
         int height = 5;
-        Lines lines = Lines.of(participantCount, LadderHeight.from(height), () -> false);
+        Lines lines = Lines.generate(participantCount, LadderHeight.from(height), () -> false);
 
         assertAll(
             () -> assertThat(lines.size()).isEqualTo(height),
-            () -> assertThat(lines.get(0).getPoints()).hasSize(participantCount - 1)
-        );
+            () -> assertThat(lines.get(0).getPoints().size()).isEqualTo(participantCount - 1)        );
     }
 
     @DisplayName("다리가 하나도 없을 때, 시작 인덱스와 도착 인덱스는 동일하다.")
     @Test
     void move_noBridge() {
         // given
-        Lines lines = Lines.of(3, LadderHeight.from(3), () -> false);
+        Lines lines = Lines.generate(3, LadderHeight.from(3), () -> false);
 
         assertAll(
             () -> assertThat(lines.move(0)).isEqualTo(0),
@@ -38,7 +37,7 @@ public class LinesTest {
     @Test
     void move_withBridges() {
         // given: 2명이 참여하고 1층 높이인데 다리가 있는 경우
-        Lines lines = Lines.of(2, LadderHeight.from(1), () -> true);
+        Lines lines = Lines.generate(2, LadderHeight.from(1), () -> true);
 
         assertThat(lines.move(0)).isEqualTo(1);
         assertThat(lines.move(1)).isEqualTo(0);
@@ -48,7 +47,7 @@ public class LinesTest {
     @Test
     void move_multipleFloors() {
         // given: 2명이 참여하고 2층 높이인데 모든 층에 다리가 있는 경우 (0 -> 1 -> 0)
-        Lines lines = Lines.of(2, LadderHeight.from(2), () -> true);
+        Lines lines = Lines.generate(2, LadderHeight.from(2), () -> true);
 
         // then
         assertThat(lines.move(0)).isEqualTo(0);

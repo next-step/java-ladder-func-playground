@@ -1,10 +1,7 @@
 package ladder.domain;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.BooleanSupplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -18,10 +15,8 @@ public class Ladder {
         this.width = width;
     }
 
-    public static Ladder of(Participants participants, LadderHeight height, BooleanSupplier strategy) {
-        int participantCount = participants.size();
-        Lines lines = Lines.of(participantCount, height, strategy);
-        return new Ladder(lines, participantCount);
+    public static Ladder of(Participants participants, Lines lines) {
+        return new Ladder(lines, participants.size());
     }
 
     int climb(int startIndex) {

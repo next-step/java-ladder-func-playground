@@ -13,7 +13,7 @@ public class Lines implements Iterable<Line> {
         this.lines = lines;
     }
 
-    public static Lines of(int participantCount, LadderHeight height, BooleanSupplier strategy) {
+    public static Lines generate(int participantCount, LadderHeight height, BooleanSupplier strategy) {
         List<Line> lines = new ArrayList<>();
         int pointCount = participantCount - 1;
         for (int i = 0; i < height.getValue(); i++) {
@@ -28,10 +28,6 @@ public class Lines implements Iterable<Line> {
             currentIndex = line.move(currentIndex);
         }
         return currentIndex;
-    }
-
-    public List<Line> getValues() {
-        return Collections.unmodifiableList(lines);
     }
 
     public Line get(int index) {

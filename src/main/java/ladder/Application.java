@@ -7,6 +7,7 @@ import ladder.domain.Ladder;
 import ladder.domain.LadderGameResult;
 import ladder.domain.LadderHeight;
 import ladder.domain.LadderResults;
+import ladder.domain.Lines;
 import ladder.domain.Participants;
 import ladder.view.InputView;
 import ladder.view.OutputView;
@@ -21,7 +22,9 @@ public class Application {
 
         LadderHeight height = InputView.inputHeight();
 
-        Ladder ladder = Ladder.of(participants, height, RANDOM::nextBoolean);
+        Lines lines = Lines.generate(participants.size(), height, RANDOM::nextBoolean);
+
+        Ladder ladder = Ladder.of(participants, lines);
 
         Map<Integer, Integer> path = ladder.generateResults();
 

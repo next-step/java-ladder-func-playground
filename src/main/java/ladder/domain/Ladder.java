@@ -5,38 +5,38 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BooleanSupplier;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Ladder {
 
-    private final List<Line> lines;
+    private final Lines lines;
     private final int width;
 
-    private Ladder(List<Line> lines, int width) {
+    private Ladder(Lines lines, int width) {
         this.lines = lines;
         this.width = width;
     }
 
     public static Ladder of(Participants participants, LadderHeight height, BooleanSupplier strategy) {
         int participantCount = participants.size();
-        List<Line> lines = generateLines(participantCount, height, strategy);
-
+        Lines lines = Lines.of(participantCount, height, strategy);
         return new Ladder(lines, participantCount);
     }
 
     public int climb(int startIndex) {
-        int currentIndex = startIndex;
-        for (Line line : lines) {
-            currentIndex = line.move(currentIndex);
-        }
-        return currentIndex;
+        return lines.move(startIndex);
     }
 
     public Map<Integer, Integer> generateResults() {
-        Map<Integer, Integer> results = new LinkedHashMap<>();
-        for (int i = 0; i < width; i++) {
-            results.put(i, climb(i));
-        }
-        return results;
+        return IntStream.range(0, width)
+            .boxed()
+            .collect(Collectors.toMap(
+                index -> index,
+                this::climb,
+                (oldValue, newValue) -> newValue,
+                LinkedHashMap::new
+            ));
     }
 
     private static List<Line> generateLines(int participantCount, LadderHeight height, BooleanSupplier strategy) {
@@ -48,7 +48,7 @@ public class Ladder {
         return lines;
     }
 
-    public List<Line> getLines() {
+    public Lines getLines() {
         return lines;
     }
 }

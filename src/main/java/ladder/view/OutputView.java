@@ -20,7 +20,7 @@ public class OutputView {
 
         printParticipants(participants);
 
-        ladder.getLines().forEach(OutputView::printLine);
+        ladder.getLines().getValues().forEach(OutputView::printLine);
 
         printLadderResults(results);
     }

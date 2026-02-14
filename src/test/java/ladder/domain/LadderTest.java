@@ -20,7 +20,7 @@ public class LadderTest {
         Ladder ladder = createLadder(NAMES_3, heightValue);
 
         // then
-        assertThat(ladder.getLines()).hasSize(heightValue);
+        assertThat(ladder.getLines().size()).isEqualTo(heightValue);
     }
 
     @DisplayName("각 가로 줄(Line)은 사람 수보다 1개 적은 포인트(Point)를 가진다.")

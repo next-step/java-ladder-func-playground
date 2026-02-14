@@ -15,7 +15,7 @@ public class Participants {
     public static Participants from(List<String> names) {
         List<Name> nameList = names.stream()
             .map(Name::from)
-            .collect(Collectors.toList());
+            .toList();
         return new Participants(nameList);
     }
 

@@ -17,7 +17,7 @@ public class Lines implements Iterable<Line> {
         List<Line> lines = new ArrayList<>();
         int pointCount = participantCount - 1;
         for (int i = 0; i < height.getValue(); i++) {
-            lines.add(Line.from(pointCount, strategy));
+            lines.add(Line.generate(pointCount, strategy));
         }
         return new Lines(lines);
     }

@@ -38,10 +38,11 @@ public class LadderTest {
     void createLadder_StrategyCheck() {
         Ladder ladder = createLadder(NAMES_3, 1);
         Line firstLine = ladder.getLines().get(0);
+        Points points = firstLine.getPoints();
 
         assertAll(
-            () -> assertThat(firstLine.getPoints().get(0).hasBridge()).isTrue(),
-            () -> assertThat(firstLine.getPoints().get(1).hasBridge()).isFalse()
+            () -> assertThat(points.get(0).hasBridge()).isTrue(),
+            () -> assertThat(points.get(1).hasBridge()).isFalse()
         );
     }
 

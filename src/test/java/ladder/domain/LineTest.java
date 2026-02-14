@@ -15,8 +15,8 @@ public class LineTest {
         // given
         int size = 3;
         // when
-        Line line = Line.from(size, () -> true);
-        List<Point> points = line.getPoints();
+        Line line = Line.generate(size, () -> true);
+        Points points = line.getPoints();
 
         // then
         assertAll(
@@ -32,7 +32,7 @@ public class LineTest {
         // given
         int size = 5;
         // when
-        Line line = Line.from(size, () -> false);
+        Line line = Line.generate(size, () -> false);
 
         // then
         assertThat(line.getPoints())
@@ -44,14 +44,14 @@ public class LineTest {
     @Test
     void createLine_SizeCheck() {
         int size = 10;
-        Line line = Line.from(size, () -> true);
+        Line line = Line.generate(size, () -> true);
         assertThat(line.getPoints()).hasSize(size);
     }
 
     @DisplayName("다리 유무에 따라 인덱스가 좌, 우로 이동하거나 그대로 유지된다.")
     @Test
     void move() {
-        Line line = Line.from(3, () -> true);
+        Line line = Line.generate(3, () -> true);
 
         assertAll(
             // 0번 기둥: 0번 포인트가 T이므로 오른쪽(1)으로 이동

@@ -39,15 +39,6 @@ public class Ladder {
             ));
     }
 
-    private static List<Line> generateLines(int participantCount, LadderHeight height, BooleanSupplier strategy) {
-        List<Line> lines = new ArrayList<>();
-        int pointCount = participantCount - 1;
-        for (int i = 0; i < height.getValue(); i++) {
-            lines.add(Line.from(pointCount, strategy));
-        }
-        return lines;
-    }
-
     public Lines getLines() {
         return lines;
     }

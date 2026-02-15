@@ -4,6 +4,7 @@ import domain.ladder.Ladder;
 import exception.DomainNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public final class PlayerResults {
 
@@ -26,14 +27,15 @@ public final class PlayerResults {
     }
 
     public static PlayerResults of(Ladder ladder, Players players, Rewards rewards) {
-        List<PlayerResult> playerResults = new ArrayList<>();
         List<String> names = players.names();
         List<String> values = rewards.values();
 
-        for (int start = 0; start < players.size(); start++) {
-            int destination = ladder.getDestination(start);
-            playerResults.add(new PlayerResult(names.get((start)), values.get(destination)));
-        }
+        List<PlayerResult> playerResults = IntStream.range(0, players.size())
+                .mapToObj(start -> {
+                    int destination = ladder.getDestination(start);
+                    return new PlayerResult(names.get((start)), values.get(destination));
+                })
+                .toList();
 
         return new PlayerResults(playerResults);
     }

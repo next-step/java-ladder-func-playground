@@ -62,10 +62,10 @@ public class LadderController {
     private boolean handleResultCommand(PlayerResults playerResults) {
         String nameForResult = readPlayNameForResult();
 
-        if (nameForResult.equals(QueryCommand.QUIT)) {
+        if (nameForResult.equals(QueryCommand.QUIT.value())) {
             return false;
         }
-        if (nameForResult.equals(QueryCommand.ALL)) {
+        if (nameForResult.equals(QueryCommand.ALL.value())) {
             outputView.printAllResult(playerResults.findAllResults());
             return false;
         }

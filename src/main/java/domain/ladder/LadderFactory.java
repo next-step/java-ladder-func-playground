@@ -1,8 +1,8 @@
 package domain.ladder;
 
 import exception.DomainRuleViolationException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public final class LadderFactory {
 
@@ -14,13 +14,13 @@ public final class LadderFactory {
 
     public Ladder create(int height, int playerCount) {
         validateHeight(height);
-        List<Line> lines = new ArrayList<>();
 
-        for (int i = 0; i < height; i++) {
-            List<Integer> lineIndexes = lineIndexGenerator.generate(playerCount);
-            Line line = Line.of(lineIndexes, playerCount - 1);
-            lines.add(line);
-        }
+        List<Line> lines = IntStream.range(0, height)
+                .mapToObj(i -> {
+                    List<Integer> lineIndexes = lineIndexGenerator.generate(playerCount);
+                    return Line.of(lineIndexes, playerCount - 1);
+                })
+                .toList();
 
         return new Ladder(lines);
     }

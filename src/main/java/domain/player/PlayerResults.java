@@ -2,7 +2,6 @@ package domain.player;
 
 import domain.ladder.Ladder;
 import exception.DomainNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -33,7 +32,7 @@ public final class PlayerResults {
         List<PlayerResult> playerResults = IntStream.range(0, players.size())
                 .mapToObj(start -> {
                     int destination = ladder.getDestination(start);
-                    return new PlayerResult(names.get((start)), values.get(destination));
+                    return new PlayerResult(names.get(start), values.get(destination));
                 })
                 .toList();
 

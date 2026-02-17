@@ -1,6 +1,8 @@
 package controller.command;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public enum QueryCommand {
 
@@ -18,5 +20,7 @@ public enum QueryCommand {
     }
 
     public static final Set<String> FORBIDDEN_PLAYER_NAMES =
-            Set.of(QUIT.value, ALL.value);
+            Arrays.stream(QueryCommand.values())
+                    .map(QueryCommand::value)
+                    .collect(Collectors.toUnmodifiableSet());
 }

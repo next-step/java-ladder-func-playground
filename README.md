@@ -94,6 +94,11 @@
 
 ## 🚀 5단계 - 리팩터링
 
+### 리뷰 반영
+
+- QueryCommand, BridgeProbabilityPolicy 등 상수를 관리하는 클래스를 enum으로 변경
+
+
 ### 선언형으로 작성한 부분
 
 - LadderFactory: create

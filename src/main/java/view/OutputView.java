@@ -8,24 +8,23 @@ public class OutputView {
 
     private static final String LADDER_GAME_RESULT_COMMAND = "사다리 결과";
     private static final String GAME_RESULT_COMMAND = "실행 결과";
+
     private static final String VERTICAL_BAR = "|";
     private static final String BRIDGE_SEGMENT = "-----";
     private static final String EMPTY_SEGMENT = "     ";
     private static final String RESULT_SEPARATOR = " : ";
-    private static final String NEW_LINE = System.lineSeparator();
-    private static final String NEW_SPACE = " ";
 
     public void printLadderGamePlayerNamesPrompt() {
         print("참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
     }
 
     public void printLadderGameResultPrompt() {
-        print(NEW_LINE);
+        print("\n");
         print("실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
     }
 
     public void printLadderHeightPrompt() {
-        print(NEW_LINE);
+        print("\n");
         print("최대 사다리 높이는 몇 개인가요?");
     }
 
@@ -34,7 +33,7 @@ public class OutputView {
     }
 
     public void printLadderGameResult(List<Line> lines, List<String> names, List<String> results) {
-        print(NEW_LINE);
+        print("\n");
         print(LADDER_GAME_RESULT_COMMAND);
         print(renderValues(names));
 
@@ -43,17 +42,17 @@ public class OutputView {
         }
 
         print(renderValues(results));
-        print(NEW_LINE);
+        print("\n");
     }
 
     public void printAllResult(List<PlayerResult> playerResults) {
-        print(NEW_LINE);
+        print("\n");
         print(GAME_RESULT_COMMAND);
         print(getMatchingResult(playerResults));
     }
 
     public void printOneResult(String resultByName) {
-        print(NEW_LINE);
+        print("\n");
         print(resultByName);
     }
 
@@ -63,22 +62,23 @@ public class OutputView {
 
     private String renderValues(List<String> values) {
         StringBuilder sb = new StringBuilder();
-        
+
         for (String value : values) {
             sb.append(value);
             padRightToLength(value, sb, 4);
-            sb.append(NEW_SPACE);
+            sb.append(" ");
         }
-        
+
         return sb.toString();
     }
 
     private void padRightToLength(String value, StringBuilder sb, int length) {
         int valueLength = value.length();
         while (valueLength < length) {
-            sb.append(NEW_SPACE);
+            sb.append(" ");
             valueLength += 1;
-        }}
+        }
+    }
 
     private String renderLine(Line line) {
         StringBuilder sb = new StringBuilder();
@@ -106,7 +106,7 @@ public class OutputView {
             sb.append(playerResult.name());
             sb.append(RESULT_SEPARATOR);
             sb.append(playerResult.result());
-            sb.append(NEW_LINE);
+            sb.append("\n");
         }
 
         return sb.toString();

@@ -8,9 +8,8 @@ public record Line(List<Boolean> points) {
 
     public static Line of(List<Integer> indexes, int size) {
         List<Boolean> points = new ArrayList<>(Collections.nCopies(size, Boolean.FALSE));
-        for (int index : indexes) {
-            points.set(index, Boolean.TRUE);
-        }
+        indexes.forEach(index -> points.set(index, Boolean.TRUE));
+
         return new Line(points);
     }
 

@@ -5,7 +5,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public record Players(List<String> names) {
+public final class Players {
+
+    private final List<String> names;
+
+    private Players(List<String> names) {
+        this.names = names;
+    }
 
     public static Players of(List<String> names, Set<String> forbiddenPlayerNames) {
         validate(names, forbiddenPlayerNames);
@@ -14,6 +20,10 @@ public record Players(List<String> names) {
 
     public int size() {
         return names.size();
+    }
+
+    public List<String> getNames() {
+        return names;
     }
 
     private static void validate(List<String> names, Set<String> forbiddenPlayerNames) {

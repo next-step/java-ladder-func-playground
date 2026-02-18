@@ -26,8 +26,8 @@ public final class PlayerResults {
     }
 
     public static PlayerResults of(Ladder ladder, Players players, Rewards rewards) {
-        List<String> names = players.names();
-        List<String> values = rewards.values();
+        List<String> names = players.getNames();
+        List<String> values = rewards.getValues();
 
         List<PlayerResult> playerResults = IntStream.range(0, players.size())
                 .mapToObj(start -> {

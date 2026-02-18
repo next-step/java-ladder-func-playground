@@ -3,15 +3,21 @@ package domain.player;
 import exception.DomainRuleViolationException;
 import java.util.List;
 
-public record Rewards(List<String> values) {
+public final class Rewards {
 
-    public Rewards {
+    private final List<String> values;
+
+    public Rewards(List<String> values) {
         validate(values);
-        values = List.copyOf(values);
+        this.values = List.copyOf(values);
     }
 
     public int size() {
         return values.size();
+    }
+
+    public List<String> getValues() {
+        return values;
     }
 
     private void validate(List<String> values) {

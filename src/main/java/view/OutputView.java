@@ -4,13 +4,14 @@ import java.util.List;
 
 public class OutputView {
     public void printLadder(List<List<Boolean>> ladder) {
+        System.out.println("실행결과");
         ladder.forEach(this::printRow);
     }
 
     private void printRow(List<Boolean> row) {
-        for (int i = 0; i < row.size(); i++) {
+        for (Boolean aBoolean : row) {
             System.out.print("|");
-            printConnection(row.get(i));
+            printConnection(aBoolean);
         }
         System.out.println("|");
     }

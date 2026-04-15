@@ -5,17 +5,15 @@ import generator.ConnectionGenerator;
 import java.util.List;
 
 public class Ladder {
-    private static final int COLUMN_LENGTH = 4;
-    private static final int ROW_LENGTH = 4;
     private final List<Row> ladder;
 
     public Ladder(List<Row> ladder) {
         this.ladder = ladder;
     }
 
-    public void createLadder(ConnectionGenerator connectionGenerator) {
-        for (int i = 0; i < COLUMN_LENGTH; i++) {
-            ladder.add(Row.of(ROW_LENGTH - 1, connectionGenerator));
+    public void createLadder(int width, int height, ConnectionGenerator connectionGenerator) {
+        for (int i = 0; i < height; i++) {
+            ladder.add(Row.of(width - 1, connectionGenerator));
         }
     }
 

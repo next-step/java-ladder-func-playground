@@ -9,7 +9,7 @@ public class Row {
     private final List<Boolean> row;
 
     public Row(List<Boolean> connections) {
-        this.row = connections;
+        this.row = new ArrayList<>(connections);
     }
 
     public static Row of(int length, ConnectionGenerator connectionGenerator) {
@@ -24,6 +24,16 @@ public class Row {
 
     public List<Boolean> getRow() {
         return new ArrayList<>(row);
+    }
+
+    public int move(int position) {
+        if (position > 0 && row.get(position - 1) == true) {
+            return position - 1;
+        }
+        if (position < row.size() && row.get(position) == true) {
+            return position + 1;
+        }
+        return position;
     }
 
     private static void appendFalse(List<Boolean> row, boolean isConnected, int length) {

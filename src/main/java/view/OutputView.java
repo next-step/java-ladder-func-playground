@@ -5,7 +5,7 @@ import dto.PrizeResult;
 import java.util.List;
 
 public class OutputView {
-    private static final int TEXT_WIDTH = 4;
+    private static final int TEXT_WIDTH = 5;
     private static final int LADDER_WIDTH = 4;
 
     public void printLadder(List<List<Boolean>> ladder, List<String> playerName, List<String> prizes) {
@@ -22,10 +22,20 @@ public class OutputView {
         System.out.println();
     }
 
+    public void printOneResult(PrizeResult prizeResult) {
+        System.out.println("실행결과");
+        System.out.println(prizeResult.prize());
+        System.out.println();
+    }
+
     public void printAllResult(List<PrizeResult> prizeResults) {
         for (PrizeResult prizeResult : prizeResults) {
             System.out.println(prizeResult.playerName() + " : " + prizeResult.prize());
         }
+    }
+
+    public void printErrorMessage(String message) {
+        System.out.println("[ERROR] " + message);
     }
 
     private String padCenter(String text) {
@@ -39,6 +49,7 @@ public class OutputView {
     }
 
     private void printRow(List<Boolean> row) {
+        System.out.print("  ");
         for (Boolean aBoolean : row) {
             System.out.print("|");
             printConnection(aBoolean);

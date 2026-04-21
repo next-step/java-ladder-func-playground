@@ -1,8 +1,8 @@
 package controller;
 
-import domain.LadderResult;
 import domain.Ladder;
 import domain.LadderGame;
+import domain.LadderResult;
 import domain.Players;
 import dto.PrizeResult;
 import generator.ConnectionGenerator;
@@ -10,6 +10,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class LadderController {
     private final InputView inputView;
@@ -23,9 +24,9 @@ public class LadderController {
     }
 
     public void run() {
-        Players players = Players.of(inputView.readPlayerNames());
-        LadderResult ladderResult = new LadderResult(inputView.readPlayResult());
-        Ladder ladder = Ladder.of(players.size(), inputView.readHeight(), connectionGenerator);
+        Players players = retryUntilValid(() -> Players.of(inputView.readPlayerNames()));
+        LadderResult ladderResult = retryUntilValid(() -> new LadderResult(inputView.readPlayResult()));
+        Ladder ladder = retryUntilValid(() -> Ladder.of(ladderResult.size(), inputView.readHeight(), connectionGenerator));
         LadderGame ladderGame = new LadderGame(ladder);
         outputView.printLadder(ladder.toBooleanLists(), players.getPlayerNames(), ladderResult.getPrizes());
         List<PrizeResult> prizeResults = PrizeResult.from(ladderResult.matchPrize(ladderGame.play(players)));
@@ -33,24 +34,40 @@ public class LadderController {
     }
 
     private void printResult(List<PrizeResult> prizeResults) {
-        String input = inputView.readWantResult();
+        while (true) {
+            PrizeResult result = retryUntilValid(() -> {
+                String name = inputView.readWantResult();
 
-        while (!input.equals("all")) {
-            PrizeResult result = findByName(prizeResults, input);
-            System.out.println("실행결과");
-            System.out.println(result.prize());
-            System.out.println();
+                if (name.equals("all")) {
+                    outputView.printAllResult(prizeResults);
+                    return null;
+                }
 
-            input = inputView.readWantResult();
+                return findByName(prizeResults, name);
+            });
+
+            if (result == null) {
+                return;
+            }
+
+            outputView.printOneResult(result);
         }
-
-        outputView.printAllResult(prizeResults);
     }
 
     private PrizeResult findByName(List<PrizeResult> prizeResults, String name) {
         return prizeResults.stream()
                 .filter(result -> result.playerName().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("해당 이름의 결과가 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException("해당 이름의 플레이어는 없습니다."));
+    }
+
+    private <T> T retryUntilValid(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e.getMessage());
+            }
+        }
     }
 }

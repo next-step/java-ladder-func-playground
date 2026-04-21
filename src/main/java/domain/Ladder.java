@@ -13,6 +13,7 @@ public class Ladder {
     }
 
     public static Ladder of(int width, int height, ConnectionGenerator connectionGenerator) {
+        validateLadder(height);
         List<Row> ladder = new ArrayList<>();
         for (int i = 0; i < height; i++) {
             ladder.add(Row.of(width - 1, connectionGenerator));
@@ -20,8 +21,8 @@ public class Ladder {
         return new Ladder(ladder);
     }
 
-    public int rideLadder(int position){
-        for(Row row: ladder){
+    public int rideLadder(int position) {
+        for (Row row : ladder) {
             position = row.move(position);
         }
         return position;
@@ -31,5 +32,11 @@ public class Ladder {
         return ladder.stream()
                 .map(Row::getRow)
                 .toList();
+    }
+
+    private static void validateLadder(int height) {
+        if (height < 1) {
+            throw new IllegalArgumentException("사다리의 높이는 1이상이어야합니다.");
+        }
     }
 }

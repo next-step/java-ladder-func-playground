@@ -7,9 +7,10 @@ public class Ladder {
     private final List<Line> ladder = new ArrayList<>();
     int width;
     int height;
+
     public Ladder(int height, int width) {
-        this.width=width;
-        this.height=height;
+        this.width = width;
+        this.height = height;
         makeLadder();
     }
 
@@ -24,11 +25,11 @@ public class Ladder {
         return ladder;
     }
 
-    public int getWidth(){
+    public int getWidth() {
         return width;
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return height;
     }
 }

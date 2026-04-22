@@ -12,28 +12,38 @@ public class Controller {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
 
-    public void run() {
-        String names = inputView.readNames();
-        String targets = inputView.readTargets();
+    int COUNT = 2;
 
-        List<String> nameList = StringUtil.splitByComma(names);
-        List<String> targetList = StringUtil.splitByComma(targets);
+    public void run() {
+        List<String> nameList = inputNames();
+        List<String> targetList = inputTargets();
 
         int width = nameList.size() - 1;
         int height = inputView.readHeight();
 
-
         Ladder ladder = new Ladder(height, width);
+
         outputView.printLadder(ladder, nameList, targetList);
 
         LadderResult ladderResult = new LadderResult(width, ladder, nameList, targetList);
 
-        String getTarget1 = inputView.readTargetResult();
+        showTarget(ladderResult, nameList);
+    }
 
-        outputView.printTarget(getTarget1, ladderResult, nameList);
+    private List<String> inputNames() {
+        String names = inputView.readNames();
+        return StringUtil.splitByComma(names);
+    }
 
-        String getTarget2 = inputView.readTargetResult();
+    private List<String> inputTargets() {
+        String targets = inputView.readTargets();
+        return StringUtil.splitByComma(targets);
+    }
 
-        outputView.printTarget(getTarget2, ladderResult, nameList);
+    private void showTarget(LadderResult ladderResult, List<String> nameList) {
+        for (int i = 0; i < COUNT; i++) {
+            String getTarget = inputView.readTargetResult();
+            outputView.printTarget(getTarget, ladderResult, nameList);
+        }
     }
 }

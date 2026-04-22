@@ -1,18 +1,19 @@
 package model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LadderResult {
     Map<Integer,Integer> ladderResult=new HashMap<>();
-    int width;
+    Map<String,String>ladderGameResult=new HashMap<>();
 
-    public LadderResult(int width, Ladder ladder){
+    int width;
+    public LadderResult(int width, Ladder ladder,List<String>names,List<String>targets){
         this.width=width;
         initLadderResult();
-        for(int i=0;i<width+1;i++){
-            playLadder(ladder,i);
-        }
+        playLadder(ladder);
+        stringLadderResult(names,targets);
     }
 
 
@@ -21,7 +22,13 @@ public class LadderResult {
             ladderResult.put(i,i);
         }
     }
-    public void playLadder(Ladder ladder,int playerStart){
+
+    public void playLadder(Ladder ladder){
+        for(int i=0;i<width+1;i++){
+            movePlayer(ladder,i);
+        }
+    }
+    public void movePlayer(Ladder ladder,int playerStart){
         int current=playerStart;
         for(Line line:ladder.getLadder()){
             current=line.move(current);
@@ -29,7 +36,14 @@ public class LadderResult {
         ladderResult.put(playerStart,current);
     }
 
-    public Map<Integer,Integer> getLadderResult(){
-        return ladderResult;
+    public void stringLadderResult(List<String> names,List<String> targets){
+        for(int i=0;i<width+1;i++){
+            ladderGameResult.put(names.get(i),targets.get(i));
+        }
     }
+
+    public String getTargetLadderResult(String name){
+        return ladderGameResult.get(name);
+    }
+
 }

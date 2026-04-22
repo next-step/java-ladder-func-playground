@@ -8,7 +8,7 @@ import java.util.List;
 public class Row {
     private final List<Boolean> row;
 
-    public Row(List<Boolean> connections) {
+    private Row(List<Boolean> connections) {
         this.row = new ArrayList<>(connections);
     }
 

@@ -3,6 +3,7 @@ package controller;
 import model.Ladder;
 import model.LadderResult;
 import util.StringUtil;
+import util.Validator;
 import view.InputView;
 import view.OutputView;
 
@@ -11,7 +12,6 @@ import java.util.List;
 public class Controller {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-
     int COUNT = 2;
 
     public void run() {
@@ -19,7 +19,8 @@ public class Controller {
         List<String> targetList = inputTargets();
 
         int width = nameList.size() - 1;
-        int height = inputView.readHeight();
+        int height = inputHeight();
+
 
         Ladder ladder = new Ladder(height, width);
 
@@ -32,12 +33,24 @@ public class Controller {
 
     private List<String> inputNames() {
         String names = inputView.readNames();
-        return StringUtil.splitByComma(names);
+        Validator.validateCommaSeparatedFormat(names);
+        List<String> nameList = StringUtil.splitByComma(names);
+        for (String name : nameList) {
+            Validator.validateSingleName(name);
+        }
+        return nameList;
     }
 
     private List<String> inputTargets() {
         String targets = inputView.readTargets();
+        Validator.validateCommaSeparatedFormat(targets);
         return StringUtil.splitByComma(targets);
+    }
+
+    private int inputHeight(){
+        String input=inputView.readHeight();
+        Validator.validateInteger(input);
+        return Integer.parseInt(input);
     }
 
     private void showTarget(LadderResult ladderResult, List<String> nameList) {

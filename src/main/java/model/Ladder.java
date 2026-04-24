@@ -1,5 +1,7 @@
 package model;
 
+import util.LineGenerator;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +18,7 @@ public class Ladder {
 
     private void makeLadder() {
         for (int i = 0; i < height; i++) {
-            Line line = new Line(width);
+            Line line = new Line(width, LineGenerator.makeLine(width));
             ladder.add(line);
         }
     }

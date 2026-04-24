@@ -1,4 +1,4 @@
-package util;
+package validator;
 
 public class Validator {
     private  static final int MAX_NAME_LENGTH=5;

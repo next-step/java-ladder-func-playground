@@ -24,7 +24,7 @@ public class LineTest {
         //when
         Line line = new Line(width, LineGenerator.makeLine(width));
         //then
-        Assertions.assertEquals(width, line.getLine());
+        Assertions.assertEquals(width, line.getLine().size());
     }
 
     @Test
@@ -35,6 +35,36 @@ public class LineTest {
 
         int player = 1;
         int playerMoveAfter = 0;
+
+        //when
+        Line line = new Line(width, lineValue);
+
+        Assertions.assertEquals(playerMoveAfter, line.move(player));
+    }
+
+    @Test
+    public void player가_오른쪽으로이동하는지_test() {
+        //given
+        int width = 2;
+        List<Boolean> lineValue = Arrays.asList(false, true);
+
+        int player = 1;
+        int playerMoveAfter = 2;
+
+        //when
+        Line line = new Line(width, lineValue);
+
+        Assertions.assertEquals(playerMoveAfter, line.move(player));
+    }
+
+    @Test
+    public void player가_불필요할때_안움직이는지_test() {
+        //given
+        int width = 2;
+        List<Boolean> lineValue = Arrays.asList(false, false);
+
+        int player = 1;
+        int playerMoveAfter = 1;
 
         //when
         Line line = new Line(width, lineValue);

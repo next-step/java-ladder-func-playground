@@ -1,7 +1,5 @@
 package model;
 
-import util.LineGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +7,9 @@ public class Line {
     private List<Boolean> line = new ArrayList<>();
     int width;
 
-    public Line(int width) {
+    public Line(int width,List<Boolean> line) {
         this.width = width;
-        this.line = LineGenerator.makeLine(width);
+        this.line = line;
     }
 
     public List<Boolean> getLine() {

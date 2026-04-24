@@ -3,7 +3,7 @@ package controller;
 import model.Ladder;
 import model.LadderResult;
 import util.StringUtil;
-import util.Validator;
+import validator.Validator;
 import view.InputView;
 import view.OutputView;
 

@@ -32,13 +32,19 @@ public class Controller {
     }
 
     private List<String> inputNames() {
-        String names = inputView.readNames();
-        Validator.validateCommaSeparatedFormat(names);
-        List<String> nameList = StringUtil.splitByComma(names);
-        for (String name : nameList) {
-            Validator.validateSingleName(name);
+        while (true) {
+            try {
+                String names = inputView.readNames();
+                Validator.validateCommaSeparatedFormat(names);
+                List<String> nameList = StringUtil.splitByComma(names);
+                for (String name : nameList) {
+                    Validator.validateSingleName(name);
+                }
+                return nameList;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
-        return nameList;
     }
 
     private List<String> inputTargets() {
@@ -47,8 +53,8 @@ public class Controller {
         return StringUtil.splitByComma(targets);
     }
 
-    private int inputHeight(){
-        String input=inputView.readHeight();
+    private int inputHeight() {
+        String input = inputView.readHeight();
         Validator.validateInteger(input);
         return Integer.parseInt(input);
     }

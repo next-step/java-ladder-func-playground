@@ -26,7 +26,7 @@ public class Controller {
 
         outputView.printLadder(ladder, nameList, targetList);
 
-        LadderResult ladderResult = new LadderResult(width, ladder, nameList, targetList);
+        LadderResult ladderResult = new LadderResult(ladder, nameList, targetList);
 
         showTarget(ladderResult, nameList);
     }

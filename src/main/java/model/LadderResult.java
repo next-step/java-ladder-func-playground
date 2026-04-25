@@ -1,27 +1,24 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LadderResult {
-    Map<Integer, Integer> ladderResult = new HashMap<>();
-    Map<String, String> ladderGameResult = new HashMap<>();
+    Map<Integer, Integer> ladderIntegerResult = new HashMap<>();
+    Map<String, String> ladderStringResult = new HashMap<>();
+    List<String> names = new ArrayList<>();
+    List<String> targets = new ArrayList<>();
 
     int width;
 
-    public LadderResult(int width, Ladder ladder, List<String> names, List<String> targets) {
-        this.width = width;
-        initLadderResult();
+    public LadderResult(Ladder ladder, List<String> names, List<String> targets) {
+        this.width = ladder.getWidth();
+        this.names = names;
+        this.targets = targets;
         playLadder(ladder);
-        stringLadderResult(names, targets);
-    }
-
-
-    public void initLadderResult() {
-        for (int i = 0; i < width + 1; i++) {
-            ladderResult.put(i, i);
-        }
+        makeStringLadderResult(names, targets);
     }
 
     public void playLadder(Ladder ladder) {
@@ -35,17 +32,32 @@ public class LadderResult {
         for (Line line : ladder.getLadder()) {
             current = line.move(current);
         }
-        ladderResult.put(playerStart, current);
+        ladderIntegerResult.put(playerStart, current);
     }
 
-    public void stringLadderResult(List<String> names, List<String> targets) {
+    public void makeStringLadderResult(List<String> names, List<String> targets) {
         for (int i = 0; i < width + 1; i++) {
-            ladderGameResult.put(names.get(i), targets.get(i));
+            ladderStringResult.put(names.get(i), targets.get(ladderIntegerResult.get(i)));
         }
     }
 
     public String getTargetLadderResult(String name) {
-        return ladderGameResult.get(name);
+        return ladderStringResult.get(name);
     }
 
+    public List<String> getNames() {
+        return names;
+    }
+
+    public List<String> getTargets() {
+        return targets;
+    }
+
+    public Map<Integer,Integer> getLadderIntegerResult(){
+        return ladderIntegerResult;
+    }
+
+    public Map<String,String> getLadderStringResult(){
+        return ladderStringResult;
+    }
 }

@@ -1,9 +1,11 @@
 package model;
 
+import constants.LadderConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class LadderBuilderTest {
@@ -29,11 +31,14 @@ class LadderBuilderTest {
     @DisplayName("height가 0이면 빈 lineList를 가진 Ladder 반환")
     void testGenerateLadderWithZeroHeight() {
         //given
-        Line predefinedLine = new Line(List.of(new Step(true)));
-        LineBuilder lineBuilder = new TestLineBuilder(predefinedLine);
+        List<Step> predefinedLine = new ArrayList<>();
+        for(int i = 0; i < LadderConstants.MINIMUM_LINE_WIDTH; i++) {
+            predefinedLine.add(new Step(true));
+        }
+        LineBuilder lineBuilder = new TestLineBuilder(new Line(predefinedLine));
         ladderBuilder = new LadderBuilder(lineBuilder);
         //when
-        Ladder ladder = ladderBuilder.generateLadder(0, 1);
+        Ladder ladder = ladderBuilder.generateLadder(0, LadderConstants.MINIMUM_LINE_WIDTH);
         //then
         Assertions.assertEquals(0, ladder.lineList().size());
     }

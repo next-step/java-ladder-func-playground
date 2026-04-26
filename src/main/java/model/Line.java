@@ -1,23 +1,35 @@
 package model;
 
-import java.util.List;
+import constants.ErrorMessage;
+import constants.LadderConstants;
 
-import static constants.ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW;
+import java.util.List;
 
 public record Line (List<Step> steps){
     public Line(List<Step> steps) {
         this.varifyLine(steps);
-        this.steps = steps;
+        this.steps = List.copyOf(steps);
     }
 
-    private void varifyLine(List<Step> steps) {
-        int width = steps.size();
+    private void varifyLine(List<Step> stepList) {
+        this.checkIfLineIsWideEnough(stepList);
+        this.checkIfStepsAppearConsecutively(stepList);
+    }
+
+    private void checkIfLineIsWideEnough(List<Step> stepList) {
+        if (stepList.isEmpty() || stepList.size() < LadderConstants.MINIMUM_LINE_WIDTH) {
+            throw new IllegalArgumentException(ErrorMessage.LINE_NOT_LONG_ENOUGH);
+        }
+    }
+
+    private void checkIfStepsAppearConsecutively(List<Step> stepList) {
+        int width = stepList.size();
         for (int i = 0; i < width - 1; i++) {
-            boolean currentStepIsBlank = steps.get(i).isBlank();
-            boolean nextStepIsBlank= steps.get(i + 1).isBlank();
+            boolean currentStepIsBlank = stepList.get(i).isBlank();
+            boolean nextStepIsBlank= stepList.get(i + 1).isBlank();
 
             if(!currentStepIsBlank && !nextStepIsBlank) {
-                throw new IllegalArgumentException(CONSECUTIVE_STEPS_IN_A_ROW);
+                throw new IllegalArgumentException(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW);
             }
         }
     }

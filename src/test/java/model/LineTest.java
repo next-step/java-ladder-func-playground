@@ -1,9 +1,11 @@
 package model;
 
+import constants.LadderConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 class LineTest {
@@ -28,5 +30,44 @@ class LineTest {
         Line line = new Line(steps);
         //then
         Assertions.assertEquals(4, line.steps().size());
+    }
+
+    @Test
+    @DisplayName("연속된 두 Step이 모두 연결되어 있으면 IllegalArgumentException 발생")
+    void testLineWithConsecutiveConnectionsThrows() {
+        //given
+        List<Step> invalidSteps = List.of(new Step(false), new Step(false));
+        //when & then
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Line(invalidSteps)
+        );
+    }
+
+    @Test
+    @DisplayName("중간에 연속된 두 Step이 모두 연결되어 있으면 IllegalArgumentException 발생")
+    void testLineWithConsecutiveConnectionsInMiddleThrows() {
+        //given
+        List<Step> invalidSteps = List.of(new Step(true), new Step(false), new Step(false), new Step(true));
+        //when & then
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Line(invalidSteps)
+        );
+    }
+
+    @Test
+    @DisplayName("Line의 width가 최소값 미만이면 IllegalArgumentException 발생")
+    void testLineWithInsufficientWidthThrows() {
+        //given
+        List<Step> tooNarrowSteps = new ArrayList<>();
+        for(int i = 0; i < LadderConstants.MINIMUM_LINE_WIDTH - 1; i++) {
+            tooNarrowSteps.add(new Step(true));
+        }
+        //when & then
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Line(tooNarrowSteps)
+        );
     }
 }

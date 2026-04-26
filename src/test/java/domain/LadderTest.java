@@ -13,7 +13,11 @@ public class LadderTest {
     private static final int LADDER_HEIGHT = 3;
     private static final int START_POSITION = 0;
     private static final int EXPECTED_END_POSITION = 1;
-    private static final List<Boolean> TFT_ROW = List.of(true, false, true);
+    private static final List<Boolean> TFT_ROW = List.of(
+            true, false, true,
+            true, false, true,
+            true, false, true
+    );
 
     @Test
     void 사다리의_높이는_1이상이다() {

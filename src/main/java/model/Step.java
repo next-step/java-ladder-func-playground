@@ -3,7 +3,7 @@ package model;
 public class Step {
     private final boolean isBlank;
 
-    Step(boolean isBlank){
+    public Step(boolean isBlank){
         this.isBlank = isBlank;
     }
 

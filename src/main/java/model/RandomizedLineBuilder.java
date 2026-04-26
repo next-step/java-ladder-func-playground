@@ -12,7 +12,7 @@ public class RandomizedLineBuilder implements LineBuilder {
 
     public Line buildLine(int width) {
         List<Step> result = new ArrayList<Step>();
-        for (int i = 0; i < width; i ++) {
+        for (int i = 0; i < width - 1; i ++) {
             Step newStep = getNextStep(result);
             result.add(newStep);
         }
@@ -25,7 +25,7 @@ public class RandomizedLineBuilder implements LineBuilder {
             return getRandomStep();
         }
 
-        return new Step(false);
+        return new Step(true);
     }
 
     private Step getRandomStep() {

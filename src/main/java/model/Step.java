@@ -10,4 +10,13 @@ public class Step {
     public boolean isBlank() {
         return isBlank;
     }
+
+    @Override
+    public String toString() {
+        if (this.isBlank) {
+            return "     ";
+        }
+
+        return "-----";
+    }
 }

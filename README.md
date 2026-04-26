@@ -8,5 +8,5 @@
 - [x] LineBuilder 구현
 - [x] Line 구현
 - [x] Steps 구현
-- [ ] OutputView 구현
-- [ ] Main 구현
+- [x] OutputView 구현
+- [x] Main 구현

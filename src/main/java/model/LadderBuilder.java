@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LadderBuilder {
     private final LineBuilder lineBuilder;
-    LadderBuilder(LineBuilder lineBuilder) {
+    public LadderBuilder(LineBuilder lineBuilder) {
         this.lineBuilder = lineBuilder;
     }
 

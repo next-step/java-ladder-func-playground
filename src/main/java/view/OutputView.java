@@ -12,7 +12,6 @@ public class OutputView {
     public void printLadder(Ladder ladder, List<String> nameList, List<String> targetList) {
         System.out.println("\n사다리결과");
         printNames(nameList);
-        System.out.println(" ");
         for (Line line : ladder.getLadder()) {
             printLine(line);
         }

@@ -10,9 +10,9 @@ public class RandomizedLineBuilder implements LineBuilder {
     private final Integer RANDOM_MIN_INT = 1;
     private final Integer RETURNING_TRUE_LIMIT = (RANDOM_MAX_INT - RANDOM_MIN_INT + 1) / 2;
 
-    public Line buildLine(int n) {
+    public Line buildLine(int width) {
         List<Step> result = new ArrayList<Step>();
-        for (int i = 0; i < n; i ++) {
+        for (int i = 0; i < width; i ++) {
             Step newStep = getNextStep(result);
             result.add(newStep);
         }

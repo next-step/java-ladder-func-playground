@@ -1,3 +1,5 @@
+package modelTest;
+
 import model.Ladder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -32,24 +32,17 @@ public class Controller {
     }
 
     private List<String> inputNames() {
-        while (true) {
-            try {
-                String names = inputView.readNames();
-                Validator.validateCommaSeparatedFormat(names);
-                List<String> nameList = StringUtil.splitByComma(names);
-                for (String name : nameList) {
-                    Validator.validateSingleName(name);
-                }
-                return nameList;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+        String names = inputView.readNames();
+
+        List<String> nameList = StringUtil.splitByComma(names);
+        for (String name : nameList) {
+            Validator.validateSingleName(name);
         }
+        return nameList;
     }
 
     private List<String> inputTargets() {
         String targets = inputView.readTargets();
-        Validator.validateCommaSeparatedFormat(targets);
         return StringUtil.splitByComma(targets);
     }
 

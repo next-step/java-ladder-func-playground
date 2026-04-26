@@ -13,7 +13,6 @@ public class RowTest {
     private static final int CENTER = 1;
     private static final int RIGHT = 2;
 
-
     @Test
     void TRUE_다음은_FALSE다() {
         Row row = Row.of(ROW_SIZE, new TestConnectionGenerator(List.of(true, true)));

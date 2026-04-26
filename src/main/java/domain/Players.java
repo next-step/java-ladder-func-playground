@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Players {
@@ -11,7 +10,7 @@ public class Players {
         this.players = new ArrayList<>(players);
     }
 
-    public static Players of(String[] playerNames){
+    public static Players of(List<String> playerNames) {
         validate(playerNames);
         List<Player> players = new ArrayList<>();
         int position = 0;
@@ -35,9 +34,9 @@ public class Players {
                 .toList();
     }
 
-    private static void validate(String[] playerNames) {
-        long distinctCount = Arrays.stream(playerNames).distinct().count();
-        if (distinctCount != playerNames.length) {
+    private static void validate(List<String> playerNames) {
+        long distinctCount = playerNames.stream().distinct().count();
+        if (distinctCount != playerNames.size()) {
             throw new IllegalArgumentException("플레이어 이름은 중복될 수 없습니다.");
         }
     }

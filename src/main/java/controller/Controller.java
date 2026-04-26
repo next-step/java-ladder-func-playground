@@ -3,7 +3,7 @@ package controller;
 import model.Ladder;
 import model.LadderResult;
 import util.StringUtil;
-import validator.Validator;
+import validator.ContentValidator;
 import view.InputView;
 import view.OutputView;
 
@@ -32,13 +32,13 @@ public class Controller {
     }
 
     private List<String> inputNames() {
-        String names = inputView.readNames();
-
-        List<String> nameList = StringUtil.splitByComma(names);
-        for (String name : nameList) {
-            Validator.validateSingleName(name);
+        while(true){
+            String names=inputView.readNames();
+            List<String> nameList=StringUtil.splitByComma(names);
+            if(ContentValidator.validateNameList(nameList)){
+                return nameList;
+            }
         }
-        return nameList;
     }
 
     private List<String> inputTargets() {
@@ -48,14 +48,20 @@ public class Controller {
 
     private int inputHeight() {
         String input = inputView.readHeight();
-        Validator.validateInteger(input);
         return Integer.parseInt(input);
     }
 
     private void showTarget(LadderResult ladderResult, List<String> nameList) {
         for (int i = 0; i < COUNT; i++) {
-            String getTarget = inputView.readTargetResult();
-            outputView.printTarget(getTarget, ladderResult, nameList);
+            while(true){
+                String input = inputView.readTargetResult();
+                if(ContentValidator.validateGetTarget(input,nameList)){
+                    outputView.printTarget(input, ladderResult, nameList);
+                    break;
+                }
+                System.out.println("ERROR: 결과를 보고 싶은 사람을 제대로 입력하세요.");
+            }
+
         }
     }
 }

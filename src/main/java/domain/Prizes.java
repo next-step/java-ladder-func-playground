@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Prizes {
     private static final int MAX_LENGTH = 5;
+
     private final List<String> prizeNames;
 
     public Prizes(List<String> prizeNames, int playerCount) {
@@ -23,6 +24,9 @@ public class Prizes {
     }
 
     private void validateLength(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("이름은 비어 있거나 공백일 수 없습니다.");
+        }
         if (name.length() > MAX_LENGTH) {
             throw new IllegalArgumentException("실행 결과명은 5글자를 넘을 수 없습니다.");
         }

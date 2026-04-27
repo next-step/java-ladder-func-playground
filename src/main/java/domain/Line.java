@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Line {
+    private final static int MIN_WIDTH = 2;
+
     private final List<Boolean> points;
 
     private Line(int width, BooleanGenerator booleanGenerator) {
@@ -44,8 +46,8 @@ public class Line {
     }
 
     private void validateWidth(int width) {
-        if (width < 2) {
-            throw new IllegalArgumentException("사다리 너비는 2 이상이어야 합니다.");
+        if (width < MIN_WIDTH) {
+            throw new IllegalArgumentException("사다리 너비는 " + MIN_WIDTH + " 이상이어야 합니다.");
         }
     }
 }

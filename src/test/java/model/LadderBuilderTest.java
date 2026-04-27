@@ -17,13 +17,20 @@ class LadderBuilderTest {
     @DisplayName("주어진 height만큼의 Line을 가진 Ladder 생성")
     void testGenerateLadderHeight() {
         //given
-        Line predefinedLine = new Line(List.of(new Step(true), new Step(false), new Step(true), new Step(false)));
+        Line predefinedLine = new Line(List.of(new Step(true),
+                new Step(false),
+                new Step(true),
+                new Step(false)
+        ));
+
         LineBuilder lineBuilder = new TestLineBuilder(predefinedLine);
         ladderBuilder = new LadderBuilder(lineBuilder);
         int height = 4;
         int width = 4;
+
         //when
         Ladder ladder = ladderBuilder.generateLadder(height, width);
+
         //then
         Assertions.assertEquals(height, ladder.lineList().size());
     }
@@ -33,13 +40,15 @@ class LadderBuilderTest {
     void testGenerateLadderWithZeroHeight() {
         //given
         List<Step> predefinedLine = new ArrayList<>();
-        for(int i = 0; i < LadderConstants.MINIMUM_LINE_WIDTH; i++) {
+        for (int i = 0; i < LadderConstants.MINIMUM_LINE_WIDTH; i++) {
             predefinedLine.add(new Step(true));
         }
         LineBuilder lineBuilder = new TestLineBuilder(new Line(predefinedLine));
         ladderBuilder = new LadderBuilder(lineBuilder);
+
         //when
         Ladder ladder = ladderBuilder.generateLadder(0, LadderConstants.MINIMUM_LINE_WIDTH);
+
         //then
         Assertions.assertEquals(0, ladder.lineList().size());
     }

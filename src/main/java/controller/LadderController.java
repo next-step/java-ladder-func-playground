@@ -5,6 +5,7 @@ import domain.LadderGame;
 import domain.LadderResult;
 import domain.Players;
 import dto.PrizeResult;
+import dto.PrizeResults;
 import generator.ConnectionGenerator;
 import view.InputView;
 import view.OutputView;
@@ -28,22 +29,23 @@ public class LadderController {
         LadderResult ladderResult = retryUntilValid(() -> new LadderResult(List.of(inputView.readPlayResult())));
         Ladder ladder = retryUntilValid(() -> Ladder.of(ladderResult.size(), inputView.readHeight(), connectionGenerator));
         outputView.printLadder(ladder.toBooleanLists(), players.getPlayerNames(), ladderResult.getPrizes());
+
         LadderGame ladderGame = new LadderGame(ladder, players);
-        List<PrizeResult> prizeResults = PrizeResult.from(ladderGame.play(ladderResult.getPrizes()));
+        PrizeResults prizeResults = PrizeResults.from(ladderGame.play(ladderResult.getPrizes()));
         printResult(prizeResults);
     }
 
-    private void printResult(List<PrizeResult> prizeResults) {
+    private void printResult(PrizeResults prizeResults) {
         while (true) {
             PrizeResult result = retryUntilValid(() -> {
                 String name = inputView.readWantResult();
 
                 if (name.equals("all")) {
-                    outputView.printAllResult(prizeResults);
+                    outputView.printAllResult(prizeResults.toList());
                     return null;
                 }
 
-                return findByName(prizeResults, name);
+                return prizeResults.findByName(name);
             });
 
             if (result == null) {
@@ -52,13 +54,6 @@ public class LadderController {
 
             outputView.printOneResult(result);
         }
-    }
-
-    private PrizeResult findByName(List<PrizeResult> prizeResults, String name) {
-        return prizeResults.stream()
-                .filter(result -> result.playerName().equals(name))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("해당 이름의 플레이어는 없습니다."));
     }
 
     private <T> T retryUntilValid(Supplier<T> supplier) {

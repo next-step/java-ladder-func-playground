@@ -37,6 +37,21 @@ public class LadderGameController {
         showResult(ladderResult, players);
     }
 
+    private Players readPlayers() {
+        outputView.printPlayerNameGuide();
+        return new Players(inputView.readInputSeparateByComma());
+    }
+
+    private Prizes readPrizes(int playerCount) {
+        outputView.printPrizeNameGuide();
+        return new Prizes(inputView.readInputSeparateByComma(), playerCount);
+    }
+
+    private int readHeight() {
+        outputView.printHeightGuide();
+        return validator.validateLadderSpec(inputView.readInput());
+    }
+
     private void showResult(LadderResult ladderResult, Players players) {
         boolean isRunning = true;
         while (isRunning) {
@@ -63,27 +78,12 @@ public class LadderGameController {
 
     private boolean processCommand(LadderResult ladderResult, String target) {
         if (target.equals("all")) {
-            outputView.printTotalTarget(ladderResult.getAllResults());
+            outputView.printTotalTargetResult(ladderResult.getAllResults());
             return false;
         }
 
-        outputView.printTarget(ladderResult.getResultByPlayerName(new Player(target)));
+        outputView.printTargetResult(ladderResult.getResultByPlayerName(new Player(target)));
         return true;
-    }
-
-    private Players readPlayers() {
-        outputView.printPlayerNameGuide();
-        return new Players(inputView.readInputSeparateByComma());
-    }
-
-    private Prizes readPrizes(int playerCount) {
-        outputView.printPrizeNameGuide();
-        return new Prizes(inputView.readInputSeparateByComma(), playerCount);
-    }
-
-    private int readHeight() {
-        outputView.printHeightGuide();
-        return validator.validateLadderSpec(inputView.readInput());
     }
 
     private <T> T repeatUntilSuccess(Supplier<T> callBack) {

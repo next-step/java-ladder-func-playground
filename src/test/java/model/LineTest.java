@@ -1,5 +1,6 @@
 package model;
 
+import constants.ErrorMessage;
 import constants.LadderConstants;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -38,10 +39,12 @@ class LineTest {
         //given
         List<Step> invalidSteps = List.of(new Step(false), new Step(false));
         //when & then
-        Assertions.assertThrows(
+        Exception exception = Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> new Line(invalidSteps)
         );
+
+        Assertions.assertEquals(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW, exception.getMessage());
     }
 
     @Test
@@ -50,10 +53,12 @@ class LineTest {
         //given
         List<Step> invalidSteps = List.of(new Step(true), new Step(false), new Step(false), new Step(true));
         //when & then
-        Assertions.assertThrows(
+        Exception exception = Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> new Line(invalidSteps)
         );
+
+        Assertions.assertEquals(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW, exception.getMessage());
     }
 
     @Test
@@ -65,9 +70,11 @@ class LineTest {
             tooNarrowSteps.add(new Step(true));
         }
         //when & then
-        Assertions.assertThrows(
+        Exception exception = Assertions.assertThrows(
                 IllegalArgumentException.class,
                 () -> new Line(tooNarrowSteps)
         );
+
+        Assertions.assertEquals(ErrorMessage.LINE_NOT_LONG_ENOUGH, exception.getMessage());
     }
 }

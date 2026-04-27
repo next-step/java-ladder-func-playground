@@ -10,3 +10,10 @@
 - [x] Steps 구현
 - [x] OutputView 구현
 - [x] Main 구현
+# 2단계 - 사다리 생성
+## 기능 요구사항
+- 사다리는 크기를 입력 받아 생성할 수 있다 
+## 구현 목록
+- [x] InputView 구현
+- [x] InputView를 컨트롤러에 주입
+- [ ] test 업데이트

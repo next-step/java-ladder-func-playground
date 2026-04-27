@@ -1,5 +1,7 @@
 package domain;
 
+import domain.strategy.BooleanGenerator;
+
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -7,10 +9,10 @@ public class Ladder {
     private final List<Line> lines;
     private final int width;
 
-    public Ladder(int width, int height) {
+    public Ladder(int width, int height, BooleanGenerator booleanGenerator) {
         validateHeight(height);
         this.lines = IntStream.range(0, height)
-                .mapToObj(i -> Line.create(width))
+                .mapToObj(i -> Line.create(width, booleanGenerator))
                 .toList();
         this.width = width;
     }

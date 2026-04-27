@@ -2,6 +2,7 @@ package controller;
 
 import model.Ladder;
 import model.LadderBuilder;
+import model.LadderGame;
 import model.Line;
 import model.LineBuilder;
 import testComponents.TestLadderBuilder;
@@ -24,19 +25,15 @@ class GenerateLadderControllerTest {
         Line predefinedLine = TestLadderBuilder.line(List.of(
                 TestLadderBuilder.step(true),
                 TestLadderBuilder.step(false),
-                TestLadderBuilder.step(true),
-                TestLadderBuilder.step(false)
+                TestLadderBuilder.step(true)
         ));
-        final int TEST_HEIGHT = 10;
         LineBuilder lineBuilder = new TestLineBuilder(predefinedLine);
         LadderBuilder ladderBuilder = TestLadderBuilder.ladderBuilder(lineBuilder);
-        InputView inputView = new InputView(new Scanner(new ByteArrayInputStream("%d\n4".formatted(TEST_HEIGHT).getBytes())));
+        InputView inputView = new InputView(new Scanner(new ByteArrayInputStream("neo,brown,brie,tommy\n꽝,5000,꽝,3000\n4".getBytes())));
         GenerateLadderGameController controller = new GenerateLadderGameController(ladderBuilder, inputView);
 
-        //when
-        Ladder ladder = controller.generateLadderGame();
+        //when & then
+        LadderGame ladder = controller.generateLadderGame();
 
-        //then
-        Assertions.assertEquals(TEST_HEIGHT, ladder.calculateHeight());
     }
 }

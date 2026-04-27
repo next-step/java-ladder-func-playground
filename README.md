@@ -35,7 +35,7 @@
 - [x] LadderEntry 클래스 구현
   - [x] String 의 컬랙선
   - [x] element의 인덱스 반환
-- [ ] GameController 구현
+- [x] GameController 구현
 
 # 5단계 - 리팩터링
 ## 요구 사항

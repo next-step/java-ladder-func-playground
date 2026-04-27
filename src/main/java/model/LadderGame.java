@@ -1,18 +1,16 @@
 package model;
 
 import constants.ErrorMessage;
+import constants.LadderConstants;
 import dto.GameResultDto;
 import dto.LadderResultDto;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LadderGame {
-    private static final int ENTRY_FIELD_WIDTH = 5;
-    private static final String LADDER_INDENT = "    ";
-    private static final String ENTRY_SEPARATOR = " ";
-
     private final Player player;
     private final Prize prize;
     private final Ladder ladder;
@@ -39,7 +37,14 @@ public class LadderGame {
         return this.ladderResultDtoToGameResultDto(ladderResultDto);
     }
 
-    public GameResultDto ladderResultDtoToGameResultDto(LadderResultDto ladderResultDto) {
+    public List<GameResultDto> calculateEveryResult() {
+        return IntStream.range(0, player.entryCount())
+                .mapToObj(ladder::calculateSingleResultAsDto)
+                .map(this::ladderResultDtoToGameResultDto)
+                .toList();
+    }
+
+    private GameResultDto ladderResultDtoToGameResultDto(LadderResultDto ladderResultDto) {
         return new GameResultDto(player.getEntryByIndex(ladderResultDto.startIndex()),prize.getEntryByIndex(ladderResultDto.endIndex()));
     }
 
@@ -52,13 +57,13 @@ public class LadderGame {
 
     private String formatEntries(LadderEntry entry) {
         return IntStream.range(0, entry.entryCount())
-                .mapToObj(i -> String.format("%" + ENTRY_FIELD_WIDTH + "s", entry.getEntryByIndex(i)))
-                .collect(Collectors.joining(ENTRY_SEPARATOR));
+                .mapToObj(i -> String.format("%" + LadderConstants.ENTRY_FIELD_WIDTH + "s", entry.getEntryByIndex(i)))
+                .collect(Collectors.joining(LadderConstants.ENTRY_SEPARATOR));
     }
 
     private String formatLadder() {
         return ladder.toString().lines()
-                .map(line -> LADDER_INDENT + line)
+                .map(line -> LadderConstants.LADDER_INDENT + line)
                 .collect(Collectors.joining("\n"));
     }
 }

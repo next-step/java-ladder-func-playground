@@ -19,6 +19,12 @@ public class InputView {
         return convertStringToInteger(userInput);
     }
 
+    public String getStringFromUserAfterShowingScript(String script) {
+        System.out.println(script);
+        String userInput = scanner.nextLine();
+        return userInput.strip();
+    }
+
     protected int convertStringToInteger(String stringToConvert) {
         try {
             return Integer.parseInt(stringToConvert);

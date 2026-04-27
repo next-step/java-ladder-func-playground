@@ -1,6 +1,5 @@
 package controller;
 
-import constants.ScriptConstants;
 import model.LadderGame;
 import view.OutputView;
 

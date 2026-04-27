@@ -3,6 +3,8 @@ package domain;
 import java.util.Objects;
 
 public class Player {
+    private static final int MAX_LENGTH = 5;
+
     private final String name;
 
     public Player(String name) {
@@ -14,13 +16,12 @@ public class Player {
         return name;
     }
 
-    public boolean nameEquals(String name) {
-        return equals(new Player(name));
-    }
-
     private void validateNameLength(String name) {
-        if (name.length() > 5) {
-            throw new IllegalArgumentException("이름은 최대 5글자까지 가능합니다.");
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("이름은 비어 있거나 공백일 수 없습니다.");
+        }
+        if (name.length() > MAX_LENGTH) {
+            throw new IllegalArgumentException("이름은 최대 +" + MAX_LENGTH + "글자까지 가능합니다.");
         }
     }
 

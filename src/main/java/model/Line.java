@@ -34,6 +34,32 @@ public record Line (List<Step> steps){
         }
     }
 
+    public Integer moveAlongTheRow(Integer index) {
+        if(this.checkIfMovableToLeft(index)) {
+            return index - 1;
+        }
+
+        if (this.checkIfMovableToRight(index)) {
+            return index + 1;
+        }
+
+        return index;
+    }
+
+    private boolean checkIfMovableToLeft(Integer index) {
+        if (index <= 0) return false;
+        return !steps.get(index -1).isBlank();
+    }
+
+    private boolean checkIfMovableToRight(Integer index) {
+        if (index >= steps().size()) return false;
+        return !steps.get(index).isBlank();
+    }
+
+    public Integer calculateWidth() {
+        return steps.size();
+    }
+
     @Override
     public String toString() {
         String result = "|";

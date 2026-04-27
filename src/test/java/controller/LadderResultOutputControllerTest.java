@@ -39,6 +39,6 @@ class LadderResultOutputControllerTest {
 
         //when
         //then
-        Assertions.assertDoesNotThrow(controller::printLadder);
+        Assertions.assertDoesNotThrow(controller::printLadderResults);
     }
 }

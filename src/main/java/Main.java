@@ -20,6 +20,6 @@ public class Main {
         Ladder ladder = generateLadderController.generateLadder();
 
         LadderResultOutputController ladderResultOutputController = new LadderResultOutputController(ladder, outputView);
-        ladderResultOutputController.printLadder();
+        ladderResultOutputController.printLadderResults();
     }
 }

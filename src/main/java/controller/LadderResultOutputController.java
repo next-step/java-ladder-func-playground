@@ -12,7 +12,19 @@ public class LadderResultOutputController {
         this.outputView = outputView;
     }
 
-    public void printLadder() {
+    public void printLadderResults() {
+        printLadder();
+        printAllLadderPair();
+    }
+
+    private void printLadder() {
         outputView.printSingleString(ladder.toString());
+    }
+
+    private void printAllLadderPair() {
+        outputView.printLineBreak();
+        for (int i = 0 ; i < ladder.calculateWidth(); i++) {
+            outputView.printSingleString(ladder.calculateSingleResultAsDto(i).toString());
+        }
     }
 }

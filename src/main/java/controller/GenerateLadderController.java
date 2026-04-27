@@ -4,7 +4,6 @@ import constants.ScriptConstants;
 import model.Ladder;
 import model.LadderBuilder;
 import view.InputView;
-import view.OutputView;
 
 public class GenerateLadderController {
     private final LadderBuilder ladderBuilder;

@@ -4,7 +4,13 @@ import dto.LadderResultDto;
 
 import java.util.List;
 
-public record Ladder(List<Line> lineList) {
+public class Ladder {
+    private final List<Line> lineList;
+
+    public Ladder(List<Line> lineList) {
+        this.lineList = lineList;
+    }
+
     public LadderResultDto calculateSingleResultAsDto(Integer index) {
         int result = this.calculateResult(index);
         return new LadderResultDto(index, result);

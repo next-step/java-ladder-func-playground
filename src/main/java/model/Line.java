@@ -5,7 +5,8 @@ import constants.LadderConstants;
 
 import java.util.List;
 
-public record Line (List<Step> steps){
+public class Line {
+    private final List<Step> steps;
     public Line(List<Step> steps) {
         this.varifyLine(steps);
         this.steps = List.copyOf(steps);
@@ -48,11 +49,11 @@ public record Line (List<Step> steps){
 
     private boolean checkIfMovableToLeft(Integer index) {
         if (index <= 0) return false;
-        return !steps.get(index -1).isBlank();
+        return !this.steps.get(index -1).isBlank();
     }
 
     private boolean checkIfMovableToRight(Integer index) {
-        if (index >= steps().size()) return false;
+        if (index >= this.steps.size()) return false;
         return !steps.get(index).isBlank();
     }
 
@@ -60,15 +61,18 @@ public record Line (List<Step> steps){
         return steps.size();
     }
 
+    public List<Step> getSteps() {
+        return List.copyOf(this.steps);
+    }
     @Override
     public String toString() {
-        String result = "|";
+        StringBuilder result = new StringBuilder("|");
 
-        for (Step currentStep: steps) {
-            result += currentStep.toString();
-            result += "|";
+        for (Step currentStep: this.steps) {
+            result.append(currentStep.toString());
+            result.append("|");
         }
 
-        return result;
+        return result.toString();
     }
 }

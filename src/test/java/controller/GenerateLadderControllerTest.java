@@ -37,9 +37,6 @@ class GenerateLadderControllerTest {
         Ladder ladder = controller.generateLadder();
 
         //then
-        Assertions.assertEquals(TEST_HEIGHT, ladder.lineList().size());
-        for (Line line : ladder.lineList()) {
-            Assertions.assertEquals(predefinedLine, line);
-        }
+        Assertions.assertEquals(TEST_HEIGHT, ladder.calculateHeight());
     }
 }

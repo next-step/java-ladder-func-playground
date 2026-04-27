@@ -32,7 +32,7 @@ class LadderBuilderTest {
         Ladder ladder = ladderBuilder.generateLadder(height, width);
 
         //then
-        Assertions.assertEquals(height, ladder.lineList().size());
+        Assertions.assertEquals(height, ladder.calculateHeight());
     }
 
     @Test
@@ -50,6 +50,6 @@ class LadderBuilderTest {
         Ladder ladder = ladderBuilder.generateLadder(0, LadderConstants.MINIMUM_LINE_WIDTH);
 
         //then
-        Assertions.assertEquals(0, ladder.lineList().size());
+        Assertions.assertEquals(0, ladder.calculateHeight());
     }
 }

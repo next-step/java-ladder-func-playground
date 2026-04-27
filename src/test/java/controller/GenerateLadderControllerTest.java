@@ -9,8 +9,11 @@ import testComponents.TestLineBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import view.InputView;
 
+import java.io.ByteArrayInputStream;
 import java.util.List;
+import java.util.Scanner;
 
 class GenerateLadderControllerTest {
 
@@ -24,15 +27,17 @@ class GenerateLadderControllerTest {
                 TestLadderBuilder.step(true),
                 TestLadderBuilder.step(false)
         ));
+        final int TEST_HEIGHT = 10;
         LineBuilder lineBuilder = new TestLineBuilder(predefinedLine);
         LadderBuilder ladderBuilder = TestLadderBuilder.ladderBuilder(lineBuilder);
-        GenerateLadderController controller = new GenerateLadderController(ladderBuilder);
+        InputView inputView = new InputView(new Scanner(new ByteArrayInputStream("%d\n4".formatted(TEST_HEIGHT).getBytes())));
+        GenerateLadderController controller = new GenerateLadderController(ladderBuilder, inputView);
 
         //when
         Ladder ladder = controller.generateLadder();
 
         //then
-        Assertions.assertEquals(4, ladder.lineList().size());
+        Assertions.assertEquals(TEST_HEIGHT, ladder.lineList().size());
         for (Line line : ladder.lineList()) {
             Assertions.assertEquals(predefinedLine, line);
         }

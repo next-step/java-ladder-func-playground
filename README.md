@@ -16,4 +16,4 @@
 ## 구현 목록
 - [x] InputView 구현
 - [x] InputView를 컨트롤러에 주입
-- [ ] test 업데이트
+- [x] test 업데이트

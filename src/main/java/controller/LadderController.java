@@ -4,7 +4,6 @@ import domain.Ladder;
 import domain.LadderGame;
 import domain.LadderResult;
 import domain.Players;
-import dto.PrizeResult;
 import dto.PrizeResults;
 import generator.ConnectionGenerator;
 import view.InputView;
@@ -35,25 +34,23 @@ public class LadderController {
         printResult(prizeResults);
     }
 
+    private static final String ALL_RESULT_COMMAND = "all";
+
     private void printResult(PrizeResults prizeResults) {
-        while (true) {
-            PrizeResult result = retryUntilValid(() -> {
-                String name = inputView.readWantResult();
-
-                if (name.equals("all")) {
-                    outputView.printAllResult(prizeResults.toList());
-                    return null;
-                }
-
-                return prizeResults.findByName(name);
-            });
-
-            if (result == null) {
-                return;
-            }
-
-            outputView.printOneResult(result);
+        while (retryUntilValid(() -> printResultByName(prizeResults))) {
         }
+    }
+
+    private boolean printResultByName(PrizeResults prizeResults) {
+        String name = inputView.readWantResult();
+
+        if (name.equals(ALL_RESULT_COMMAND)) {
+            outputView.printAllResult(prizeResults.toList());
+            return false;
+        }
+
+        outputView.printOneResult(prizeResults.findByName(name));
+        return true;
     }
 
     private <T> T retryUntilValid(Supplier<T> supplier) {

@@ -32,9 +32,9 @@
 - 개인별 이름을 입력하면 개인별 결과를 출력하고, "all"을 입력하면 전체 참여자의 실행 결과를 출력한다.
 
 ## 구현 목록
-- [ ] LadderEntry 클래스 구현
-  - [ ] String 의 컬랙선
-  - [ ] element의 인덱스 반환
+- [x] LadderEntry 클래스 구현
+  - [x] String 의 컬랙선
+  - [x] element의 인덱스 반환
 - [ ] GameController 구현
 
 # 5단계 - 리팩터링

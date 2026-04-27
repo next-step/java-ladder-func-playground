@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 public class Ladder {
+    private final static int MIN_HEIGHT = 1;
+
     private final List<Line> lines;
     private final int width;
 
@@ -37,8 +39,8 @@ public class Ladder {
     }
 
     private void validateHeight(int height) {
-        if (height < 1) {
-            throw new IllegalArgumentException("사다리 높이는 1 이상이어야 합니다.");
+        if (height < MIN_HEIGHT) {
+            throw new IllegalArgumentException("사다리 높이는 " + MIN_HEIGHT +  " 이상이어야 합니다.");
         }
     }
 }

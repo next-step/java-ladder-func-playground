@@ -31,10 +31,10 @@ class GenerateLadderControllerTest {
         LineBuilder lineBuilder = new TestLineBuilder(predefinedLine);
         LadderBuilder ladderBuilder = TestLadderBuilder.ladderBuilder(lineBuilder);
         InputView inputView = new InputView(new Scanner(new ByteArrayInputStream("%d\n4".formatted(TEST_HEIGHT).getBytes())));
-        GenerateLadderController controller = new GenerateLadderController(ladderBuilder, inputView);
+        GenerateLadderGameController controller = new GenerateLadderGameController(ladderBuilder, inputView);
 
         //when
-        Ladder ladder = controller.generateLadder();
+        Ladder ladder = controller.generateLadderGame();
 
         //then
         Assertions.assertEquals(TEST_HEIGHT, ladder.calculateHeight());

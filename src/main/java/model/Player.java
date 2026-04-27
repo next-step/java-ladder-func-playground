@@ -7,10 +7,12 @@ import java.util.List;
 public class Player extends LadderEntry {
     public Player(List<String> entries) {
         super(entries);
+        this.validatePlayer(entries);
     }
 
     private void validatePlayer(List<String> entries) {
-
+        validateNoDuplicatePlayerNames(entries);
+        validatePlayerNameLength(entries);
     }
 
     private void validatePlayerNameLength(List<String> entries) {

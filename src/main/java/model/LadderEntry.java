@@ -19,4 +19,12 @@ class LadderEntry {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ENTRY_NOT_PRESENT));
     }
+
+    public String getEntryByIndex(int index) {
+        return entries.get(index);
+    }
+
+    public Integer entryCount() {
+        return entries.size();
+    }
 }

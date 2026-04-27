@@ -1,7 +1,8 @@
-import controller.GenerateLadderController;
+import controller.GenerateLadderGameController;
 import controller.LadderResultOutputController;
 import model.Ladder;
 import model.LadderBuilder;
+import model.LadderGame;
 import model.LineBuilder;
 import model.RandomizedLineBuilder;
 import view.InputView;
@@ -16,10 +17,10 @@ public class Main {
         InputView inputView = new InputView(new Scanner(System.in));
         OutputView outputView = new OutputView();
 
-        GenerateLadderController generateLadderController = new GenerateLadderController(ladderBuilder, inputView);
-        Ladder ladder = generateLadderController.generateLadder();
+        GenerateLadderGameController generateLadderGameController = new GenerateLadderGameController(ladderBuilder, inputView);
+        LadderGame ladderGame = generateLadderGameController.generateLadderGame();
 
-        LadderResultOutputController ladderResultOutputController = new LadderResultOutputController(ladder, outputView);
+        LadderResultOutputController ladderResultOutputController = new LadderResultOutputController(ladderGame, outputView);
         ladderResultOutputController.printLadderResults();
     }
 }

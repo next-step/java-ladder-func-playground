@@ -20,7 +20,7 @@ public class OutputView {
         printList(outputs);
     }
 
-    public void printTotalTarget(Map<String, String> targets) {
+    public void printTotalTargetResult(Map<String, String> targets) {
         System.out.println("\n실행결과");
         String formattedResult = targets.entrySet().stream()
                 .map(entry -> String.format(
@@ -31,9 +31,9 @@ public class OutputView {
         System.out.println(formattedResult);
     }
 
-    public void printTarget(String target) {
+    public void printTargetResult(String result) {
         System.out.println("\n실행결과");
-        System.out.println(target);
+        System.out.println(result);
     }
 
     public void printTargetName() {
@@ -54,7 +54,7 @@ public class OutputView {
     }
 
     public void printErrorMessage(String message) {
-        System.out.println("[ERROR]" + message);
+        System.out.println("[ERROR] " + message);
     }
 
     private void printLines(Ladder ladder) {

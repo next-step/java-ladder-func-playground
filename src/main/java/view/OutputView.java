@@ -1,12 +1,14 @@
 package view;
 import domain.Ladder;
+import domain.LadderResult;
 import domain.Line;
+import domain.Position;
 
 public class OutputView {
     private static final String VERTICAL_LINE = "|";
     private static final String CONNECTED_LINE = "-----";
     private static final String DISCONNECTED_LINE = "     ";
-    private static final String RESULT_MESSAGE = "실행결과\n";
+    private static final String RESULT_MESSAGE = "\n실행결과\n";
 
     public void printLadder(Ladder ladder) {
         System.out.println(RESULT_MESSAGE);
@@ -30,5 +32,14 @@ public class OutputView {
             return CONNECTED_LINE;
         }
         return DISCONNECTED_LINE;
+    }
+
+    public void printLadderResult(LadderResult result) {
+        System.out.println();
+        result.getResults().forEach(this::printSingleResult);
+    }
+
+    private void printSingleResult(Position start, Position end) {
+        System.out.println(start.getValue() + " -> " + end.getValue());
     }
 }

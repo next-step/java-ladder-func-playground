@@ -1,18 +1,32 @@
 package view;
-import domain.Ladder;
-import domain.LadderResult;
-import domain.Line;
-import domain.Position;
+import domain.*;
+
+import java.util.stream.Collectors;
 
 public class OutputView {
     private static final String VERTICAL_LINE = "|";
     private static final String CONNECTED_LINE = "-----";
     private static final String DISCONNECTED_LINE = "     ";
-    private static final String RESULT_MESSAGE = "\n실행결과\n";
 
-    public void printLadder(Ladder ladder) {
-        System.out.println(RESULT_MESSAGE);
+    public void printLadderBoard(Players players, Ladder ladder, Rewards rewards) {
+        System.out.println("\n사다리 결과\n");
+        printNames(players);
         ladder.getLines().forEach(this::printLine);
+        printRewards(rewards);
+    }
+
+    private void printNames(Players players) {
+        String names = players.getNames().stream()
+                .map(name -> String.format("%-6s", name.getValue()))
+                .collect(Collectors.joining());
+        System.out.println(names);
+    }
+
+    private void printRewards(Rewards rewards) {
+        String items = rewards.getItems().stream()
+                .map(reward -> String.format("%-6s", reward.getValue()))
+                .collect(Collectors.joining());
+        System.out.println(items);
     }
 
     private void printLine(Line line) {
@@ -34,12 +48,17 @@ public class OutputView {
         return DISCONNECTED_LINE;
     }
 
-    public void printLadderResult(LadderResult result) {
-        System.out.println();
-        result.getResults().forEach(this::printSingleResult);
+    public void printSingleResult(Player player) {
+        System.out.println("\n실행 결과");
+        System.out.println(player.getReward().getValue());
     }
 
-    private void printSingleResult(Position start, Position end) {
-        System.out.println(start.getValue() + " -> " + end.getValue());
+    public void printAllResults(GameResult gameResult) {
+        System.out.println("\n실행 결과");
+        gameResult.getAll().forEach(this::printFormattedResult);
+    }
+
+    private void printFormattedResult(Player player) {
+        System.out.println(player.getName().getValue() + " : " + player.getReward().getValue());
     }
 }

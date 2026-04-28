@@ -1,17 +1,21 @@
 package controller;
 
+import constant.ErrorMessage;
 import domain.Ladder;
 import domain.LadderResult;
 import domain.Player;
 import domain.Players;
 import domain.Prizes;
 import domain.strategy.BooleanGenerator;
+import dto.LadderResponse;
 import view.InputView;
 import view.OutputView;
 
 import java.util.function.Supplier;
 
 public class LadderGameController {
+    private final static String ALL_PRINT_CONDITION = "all";
+
     private final InputView inputView;
     private final OutputView outputView;
     private final Validator validator;
@@ -32,7 +36,8 @@ public class LadderGameController {
                 players.getPlayerCount(), ladderHeight, booleanGenerator
         ));
 
-        outputView.printResult(ladder, players.getPlayersName(), prizes.getPrizeNames());
+        LadderResponse ladderResponse = LadderResponse.from(ladder);
+        outputView.printResult(ladderResponse, players.getPlayersName(), prizes.getPrizeNames());
         LadderResult ladderResult = new LadderResult(players, prizes, ladder.getAllResult());
         showResult(ladderResult, players);
     }
@@ -62,22 +67,22 @@ public class LadderGameController {
     }
 
     private String readCommand(Players players) {
-        outputView.printTargetName();
+        outputView.printTargetNameGuide();
         String input = inputView.readInput();
 
-        if (input.equals("all")) {
+        if (input.equals(ALL_PRINT_CONDITION)) {
             return input;
         }
 
         if (!players.containsPlayer(new Player(input))) {
-            throw new IllegalArgumentException("존재하지 않는 이름입니다.");
+            throw new IllegalArgumentException(ErrorMessage.NOT_FOUND_NAME.getMessage());
         }
 
         return input;
     }
 
     private boolean processCommand(LadderResult ladderResult, String target) {
-        if (target.equals("all")) {
+        if (target.equals(ALL_PRINT_CONDITION)) {
             outputView.printTotalTargetResult(ladderResult.getAllResults());
             return false;
         }

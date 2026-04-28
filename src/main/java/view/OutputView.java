@@ -1,7 +1,7 @@
 package view;
 
-import domain.Ladder;
-import domain.Line;
+import dto.LadderResponse;
+import dto.LineResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -13,10 +13,10 @@ public class OutputView {
     private static final String EMPTY_LINE = "     ";
     private static final int NAME_WIDTH = 5;
 
-    public void printResult(Ladder ladder, List<String> inputs, List<String> outputs) {
+    public void printResult(LadderResponse ladderResponse, List<String> inputs, List<String> outputs) {
         System.out.println("\n사다리 결과\n");
         printList(inputs);
-        printLines(ladder);
+        printLines(ladderResponse);
         printList(outputs);
     }
 
@@ -36,7 +36,7 @@ public class OutputView {
         System.out.println(result);
     }
 
-    public void printTargetName() {
+    public void printTargetNameGuide() {
         System.out.println("\n결과를 보고 싶은 사람은?");
     }
 
@@ -50,18 +50,10 @@ public class OutputView {
 
     public void printHeightGuide() {
         System.out.println("\n최대 사다리 높이는 몇 개인가요?");
-
     }
 
     public void printErrorMessage(String message) {
         System.out.println("[ERROR] " + message);
-    }
-
-    private void printLines(Ladder ladder) {
-        String result = ladder.getLines().stream()
-                .map(this::hasLine)
-                .collect(Collectors.joining("\n"));
-        System.out.println(result);
     }
 
     private void printList(List<String> stringList) {
@@ -71,8 +63,15 @@ public class OutputView {
         System.out.println();
     }
 
-    private String hasLine(Line line) {
-        return line.getPoints().stream()
+    private void printLines(LadderResponse ladderResponse) {
+        String result = ladderResponse.ladder().stream()
+                .map(this::hasLine)
+                .collect(Collectors.joining("\n"));
+        System.out.println(result);
+    }
+
+    private String hasLine(LineResponse lineResponse) {
+        return lineResponse.lines().stream()
                 .map(hasPoint -> hasPoint ? CONNECT_LINE : EMPTY_LINE)
                 .collect(Collectors.joining(DELIMITER, "    " + DELIMITER, DELIMITER));
     }

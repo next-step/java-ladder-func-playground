@@ -5,7 +5,6 @@ import constant.ErrorMessage;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LadderResult {
     private final Map<Player, String> results;

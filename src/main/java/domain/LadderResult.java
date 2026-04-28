@@ -14,23 +14,10 @@ public class LadderResult {
         this.results = calculateResult(players, prizes.getPrizeNames(), endIndex);
     }
 
-    private Map<Player, String> calculateResult(Players players, List<String> prizesName, List<Integer> endIndex) {
-        Map<Player, String> results = new LinkedHashMap<>();
-        List<Player> playerList = players.getPlayers();
-
-        for (int i = 0; i < playerList.size(); i++) {
-            results.put(playerList.get(i), prizesName.get(endIndex.get(i)));
-        }
-
-        return results;
-    }
-
     public Map<String, String> getAllResults() {
-        return results.entrySet().stream()
-                .collect(Collectors.toUnmodifiableMap(
-                        entry -> entry.getKey().getName(),
-                        Map.Entry::getValue
-                ));
+        Map<String, String> allResults = new LinkedHashMap<>();
+        results.forEach(((player, string) -> allResults.put(player.getName(), string)));
+        return allResults;
     }
 
     public String getResultByPlayerName(Player player) {
@@ -41,5 +28,16 @@ public class LadderResult {
                 .map(Map.Entry::getValue)
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.PLAYER_NOT_FOUND.getMessage()));
+    }
+
+    private Map<Player, String> calculateResult(Players players, List<String> prizesName, List<Integer> endIndex) {
+        Map<Player, String> results = new LinkedHashMap<>();
+        List<Player> playerList = players.getPlayers();
+
+        for (int i = 0; i < playerList.size(); i++) {
+            results.put(playerList.get(i), prizesName.get(endIndex.get(i)));
+        }
+
+        return results;
     }
 }

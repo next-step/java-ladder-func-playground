@@ -1,5 +1,7 @@
 package domain;
 
+import constant.ErrorMessage;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +40,6 @@ public class LadderResult {
                 )
                 .map(Map.Entry::getValue)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("해당 참가자가 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.PLAYER_NOT_FOUND.getMessage()));
     }
 }

@@ -1,5 +1,6 @@
 package domain;
 
+import constant.ErrorMessage;
 import domain.strategy.BooleanGenerator;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +16,7 @@ public class LadderTest {
     void 사다리의_높이가_1_미만이면_예외가_발생한다() {
         assertThatThrownBy(() -> new Ladder(2, 0, () -> true))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("사다리 높이는 " + MIN_HEIGHT +  " 이상이어야 합니다.");
+                .hasMessageContaining(ErrorMessage.INVALID_LADDER_HEIGHT.getIntFormattedMessage(MIN_HEIGHT));
     }
 
     @Test

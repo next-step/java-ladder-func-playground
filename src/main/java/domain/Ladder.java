@@ -1,5 +1,6 @@
 package domain;
 
+import constant.ErrorMessage;
 import domain.strategy.BooleanGenerator;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class Ladder {
 
     private void validateHeight(int height) {
         if (height < MIN_HEIGHT) {
-            throw new IllegalArgumentException("사다리 높이는 " + MIN_HEIGHT +  " 이상이어야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LADDER_HEIGHT.getIntFormattedMessage(MIN_HEIGHT));
         }
     }
 }

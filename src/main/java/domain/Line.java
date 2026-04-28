@@ -1,5 +1,6 @@
 package domain;
 
+import constant.ErrorMessage;
 import domain.strategy.BooleanGenerator;
 
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Line {
 
     private void validateWidth(int width) {
         if (width < MIN_WIDTH) {
-            throw new IllegalArgumentException("사다리 너비는 " + MIN_WIDTH + " 이상이어야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_LADDER_WIDTH.getIntFormattedMessage(MIN_WIDTH));
         }
     }
 }

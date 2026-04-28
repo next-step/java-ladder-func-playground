@@ -1,5 +1,6 @@
 package domain;
 
+import constant.ErrorMessage;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -20,7 +21,7 @@ public class PrizesTest {
         // when-then
         assertThatThrownBy(() -> new Prizes(prizeNames, playerCount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("인원 수와 상품 수는 같아야 합니다.");
+                .hasMessageContaining(ErrorMessage.MISMATCH_PLAYER_AND_PRIZE.getMessage());
     }
 
     @Test
@@ -32,7 +33,7 @@ public class PrizesTest {
         // when-then
         assertThatThrownBy(() -> new Prizes(prizeNames, playerCount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(MAX_LENGTH + "글자를 넘을 수 없습니다.");
+                .hasMessageContaining(ErrorMessage.INVALID_NAME_LENGTH.getIntFormattedMessage(MAX_LENGTH));
     }
 
     @ParameterizedTest
@@ -45,6 +46,6 @@ public class PrizesTest {
         // when-then
         assertThatThrownBy(() -> new Prizes(prizeNames, playerCount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("비어 있거나 공백일 수 없습니다.");
+                .hasMessageContaining(ErrorMessage.EMPTY_OR_BLANK_NAME.getMessage());
     }
 }

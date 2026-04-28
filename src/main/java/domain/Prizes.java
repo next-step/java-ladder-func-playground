@@ -1,5 +1,7 @@
 package domain;
 
+import constant.ErrorMessage;
+
 import java.util.List;
 
 public class Prizes {
@@ -19,16 +21,16 @@ public class Prizes {
 
     private void validateCount(List<String> prizeNames, int playerCount) {
         if (prizeNames.size() != playerCount) {
-            throw new IllegalArgumentException("인원 수와 상품 수는 같아야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.MISMATCH_PLAYER_AND_PRIZE.getMessage());
         }
     }
 
     private void validateLength(String name) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("이름은 비어 있거나 공백일 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_OR_BLANK_NAME.getMessage());
         }
         if (name.length() > MAX_LENGTH) {
-            throw new IllegalArgumentException("실행 결과명은 5글자를 넘을 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NAME_LENGTH.getIntFormattedMessage(MAX_LENGTH));
         }
     }
 }

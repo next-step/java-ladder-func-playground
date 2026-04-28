@@ -1,5 +1,7 @@
 package controller;
 
+import constant.ErrorMessage;
+
 public class Validator {
 
     public int validateLadderSpec(String spec) {
@@ -12,13 +14,13 @@ public class Validator {
         try {
             return Integer.parseInt(value);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("정수를 입력하세요.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_INTEGER.getMessage());
         }
     }
 
     private void validatePositive(int value) {
         if (value <= 0) {
-            throw new IllegalArgumentException("0보다 큰 값을 입력하세요.");
+            throw new IllegalArgumentException(ErrorMessage.NOT_POSITIVE_NUMBER.getMessage());
         }
     }
 }

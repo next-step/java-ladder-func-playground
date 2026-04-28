@@ -1,5 +1,6 @@
 package domain;
 
+import constant.ErrorMessage;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,7 +13,7 @@ public class LineTest {
     void 사다리의_너비가_2미만_이면_예외가_발생한다() {
         assertThatThrownBy(() -> Line.create(1, () -> false))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining("사다리 너비는 " + MIN_WIDTH + " 이상이어야 합니다.");
+                .hasMessageContaining(ErrorMessage.INVALID_LADDER_WIDTH.getIntFormattedMessage(MIN_WIDTH));
     }
 
     @Test

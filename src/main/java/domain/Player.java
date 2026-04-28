@@ -1,5 +1,7 @@
 package domain;
 
+import constant.ErrorMessage;
+
 import java.util.Objects;
 
 public class Player {
@@ -18,10 +20,10 @@ public class Player {
 
     private void validateNameLength(String name) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("이름은 비어 있거나 공백일 수 없습니다.");
+            throw new IllegalArgumentException(ErrorMessage.EMPTY_OR_BLANK_NAME.getMessage());
         }
         if (name.length() > MAX_LENGTH) {
-            throw new IllegalArgumentException("이름은 최대 +" + MAX_LENGTH + "글자까지 가능합니다.");
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NAME_LENGTH.getIntFormattedMessage(MAX_LENGTH));
         }
     }
 

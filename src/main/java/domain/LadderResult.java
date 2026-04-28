@@ -1,6 +1,4 @@
 package domain;
-
-import java.util.Collections;
 import java.util.Map;
 
 
@@ -13,9 +11,5 @@ public class LadderResult {
 
     public Position getEndPosition(Position start) {
         return results.get(start);
-    }
-
-    public Map<Position, Position> getResults() {
-        return Collections.unmodifiableMap(results);
     }
 }

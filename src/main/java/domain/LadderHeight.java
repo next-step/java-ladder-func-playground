@@ -17,6 +17,7 @@ public class LadderHeight {
         }
     }
 
+
     public int getValue() {
         return value;
     }

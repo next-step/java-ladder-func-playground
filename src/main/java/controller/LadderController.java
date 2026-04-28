@@ -20,7 +20,9 @@ public class LadderController {
         BooleanGenerator generator = new RandomBooleanGenerator();
 
         Ladder ladder = Ladder.generate(width, height, generator);
-
         outputView.printLadder(ladder);
+
+        LadderResult result = ladder.play(width);
+        outputView.printLadderResult(result);
     }
 }

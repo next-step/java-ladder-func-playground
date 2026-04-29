@@ -25,13 +25,19 @@ public class LadderController {
 
     public void run() {
         Players players = retryUntilValid(() -> Players.of(List.of(inputView.readPlayerNames())));
-        LadderResult ladderResult = retryUntilValid(() -> new LadderResult(List.of(inputView.readPlayResult())));
+        LadderResult ladderResult = retryUntilValid(() -> createLadderResult(players.size()));
         Ladder ladder = retryUntilValid(() -> Ladder.of(ladderResult.size(), inputView.readHeight(), connectionGenerator));
         outputView.printLadder(ladder.toBooleanLists(), players.getPlayerNames(), ladderResult.getPrizes());
 
         LadderGame ladderGame = new LadderGame(ladder, players);
         PrizeResults prizeResults = PrizeResults.from(ladderGame.play(ladderResult.getPrizes()));
         printResult(prizeResults);
+    }
+
+    private LadderResult createLadderResult(int playerSize) {
+        LadderResult ladderResult = new LadderResult(List.of(inputView.readPlayResult()));
+        ladderResult.validateEnoughSize(playerSize);
+        return ladderResult;
     }
 
     private static final String ALL_RESULT_COMMAND = "all";

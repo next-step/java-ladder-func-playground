@@ -9,8 +9,8 @@ import java.util.List;
 
 class LadderTest {
     @Test
-    @DisplayName("사다리의 높이 테스트")
-    void testCalculateHeight() {
+    @DisplayName("calculateHeight는 Ladder가 보유한 Line의 개수를 반환한다")
+    void calculateHeightReturnsNumberOfLines() {
         //given
         Line line = new Line(List.of(new Step(false), new Step(true), new Step(false)));
         Ladder ladder = new Ladder(List.of(line, line, line));
@@ -21,8 +21,8 @@ class LadderTest {
     }
 
     @Test
-    @DisplayName("calculateWidth는 첫 Line의 step 개수 + 1을 반환")
-    void testCalculateWidth() {
+    @DisplayName("calculateWidth는 첫 Line의 step 개수 + 1을 반환한다")
+    void calculateWidthReturnsFirstLineStepCountPlusOne() {
         //given
         Line line = new Line(List.of(new Step(false), new Step(true), new Step(false)));
         Ladder ladder = new Ladder(List.of(line));
@@ -33,8 +33,8 @@ class LadderTest {
     }
 
     @Test
-    @DisplayName("calculateSingleResultAsDto: 각 Line의 moveAlongTheRow가 직전 결과를 인자로 순서대로 호출됨")
-    void testCalculateSingleResultAsDtoMovesLeft() {
+    @DisplayName("calculateSingleResultAsDto는 각 Line의 moveAlongTheRow를 직전 결과를 인자로 순서대로 호출한다")
+    void calculateSingleResultAsDtoCallsEachLineMoveAlongTheRowInOrder() {
         //given
         List<Step> steps = List.of(new Step(false), new Step(true), new Step(false));
         MoveTrackingLine firstLine = new MoveTrackingLine(steps, 2);

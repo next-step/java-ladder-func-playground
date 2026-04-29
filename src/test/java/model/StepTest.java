@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 class StepTest {
 
     @Test
-    @DisplayName("isBlank이 true인 Step은 isBlank()가 true를 반환")
-    void testIsBlankReturnsTrue() {
+    @DisplayName("비어있는 Step은 isBlank()가 true를 반환한다")
+    void blankStepReturnsTrueOnIsBlank() {
         //given
         Step step = new Step(true);
         //when
@@ -18,8 +18,8 @@ class StepTest {
     }
 
     @Test
-    @DisplayName("isBlank이 false인 Step은 isBlank()가 false를 반환")
-    void testIsBlankReturnsFalse() {
+    @DisplayName("연결된 Step은 isBlank()가 false를 반환한다")
+    void connectedStepReturnsFalseOnIsBlank() {
         //given
         Step step = new Step(false);
         //when

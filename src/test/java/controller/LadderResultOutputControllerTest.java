@@ -34,8 +34,8 @@ class LadderResultOutputControllerTest {
     }
 
     @Test
-    @DisplayName("계층 통합 테스트: 사다리 출력 컨트롤러")
-    void printLadder_calls_intended_functions() {
+    @DisplayName("사다리 게임 결과를 예외 없이 출력한다")
+    void printLadderResultsExecutesWithoutException() {
         //given
         LadderResultOutputController controller = new LadderResultOutputController(ladderGame, outputView);
 

@@ -14,8 +14,8 @@ class LadderBuilderTest {
     LadderBuilder ladderBuilder;
 
     @Test
-    @DisplayName("주어진 height만큼의 Line을 가진 Ladder 생성")
-    void testGenerateLadderHeight() {
+    @DisplayName("주어진 height만큼의 Line을 가진 Ladder를 생성한다")
+    void generateLadderCreatesLadderWithGivenHeight() {
         //given
         Line predefinedLine = new Line(List.of(new Step(true),
                 new Step(false),
@@ -36,8 +36,8 @@ class LadderBuilderTest {
     }
 
     @Test
-    @DisplayName("height가 0이면 빈 lineList를 가진 Ladder 반환")
-    void testGenerateLadderWithZeroHeight() {
+    @DisplayName("height가 0이면 빈 lineList를 가진 Ladder를 반환한다")
+    void generateLadderReturnsEmptyLadderWhenHeightIsZero() {
         //given
         List<Step> predefinedLine = new ArrayList<>();
         for (int i = 0; i < LadderConstants.MINIMUM_LINE_WIDTH; i++) {

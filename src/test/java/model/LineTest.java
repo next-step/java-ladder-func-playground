@@ -12,8 +12,8 @@ import java.util.List;
 class LineTest {
 
     @Test
-    @DisplayName("Line 생성 시 전달한 steps 목록을 보유")
-    void testLineHoldsGivenGetSteps() {
+    @DisplayName("Line은 생성 시 전달한 steps 목록을 그대로 보유한다")
+    void lineHoldsGivenSteps() {
         //given
         List<Step> steps = List.of(new Step(true), new Step(false), new Step(true));
         //when
@@ -23,8 +23,8 @@ class LineTest {
     }
 
     @Test
-    @DisplayName("Line의 steps 크기는 전달한 목록의 크기와 동일")
-    void testLineGetStepsSize() {
+    @DisplayName("Line의 steps 크기는 전달한 목록의 크기와 동일하다")
+    void getStepsSizeMatchesGivenStepsSize() {
         //given
         List<Step> steps = List.of(new Step(true), new Step(false), new Step(true), new Step(false));
         //when
@@ -34,8 +34,8 @@ class LineTest {
     }
 
     @Test
-    @DisplayName("연속된 두 Step이 모두 연결되어 있으면 IllegalArgumentException 발생")
-    void testLineWithConsecutiveConnectionsThrows() {
+    @DisplayName("연속된 두 Step이 모두 연결되어 있으면 IllegalArgumentException을 던진다")
+    void consecutiveConnectedStepsThrowIllegalArgumentException() {
         //given
         List<Step> invalidSteps = List.of(new Step(false), new Step(false));
         //when & then
@@ -48,8 +48,8 @@ class LineTest {
     }
 
     @Test
-    @DisplayName("중간에 연속된 두 Step이 모두 연결되어 있으면 IllegalArgumentException 발생")
-    void testLineWithConsecutiveConnectionsInMiddleThrows() {
+    @DisplayName("중간에 연속된 두 Step이 모두 연결되어 있어도 IllegalArgumentException을 던진다")
+    void consecutiveConnectedStepsInMiddleThrowIllegalArgumentException() {
         //given
         List<Step> invalidSteps = List.of(new Step(true), new Step(false), new Step(false), new Step(true));
         //when & then
@@ -62,8 +62,8 @@ class LineTest {
     }
 
     @Test
-    @DisplayName("Line의 width가 최소값 미만이면 IllegalArgumentException 발생")
-    void testLineWithInsufficientWidthThrows() {
+    @DisplayName("Line의 width가 최소값 미만이면 IllegalArgumentException을 던진다")
+    void widthLessThanMinimumThrowsIllegalArgumentException() {
         //given
         List<Step> tooNarrowSteps = new ArrayList<>();
         for(int i = 0; i < LadderConstants.MINIMUM_LINE_WIDTH - 1; i++) {
@@ -79,8 +79,8 @@ class LineTest {
     }
 
     @Test
-    @DisplayName("moveAlongTheRow: 왼쪽 step이 연결되어 있으면 index가 1 감소")
-    void testMoveAlongTheRowMovesLeft() {
+    @DisplayName("왼쪽 step이 연결되어 있으면 moveAlongTheRow는 index를 1 감소시킨다")
+    void moveAlongTheRowDecreasesIndexWhenLeftStepIsConnected() {
         //given
         Line line = new Line(List.of(new Step(false), new Step(true), new Step(false)));
         //when
@@ -90,8 +90,8 @@ class LineTest {
     }
 
     @Test
-    @DisplayName("moveAlongTheRow: 오른쪽 step이 연결되어 있으면 index가 1 증가")
-    void testMoveAlongTheRowMovesRight() {
+    @DisplayName("오른쪽 step이 연결되어 있으면 moveAlongTheRow는 index를 1 증가시킨다")
+    void moveAlongTheRowIncreasesIndexWhenRightStepIsConnected() {
         //given
         Line line = new Line(List.of(new Step(false), new Step(true), new Step(false)));
         //when
@@ -101,8 +101,8 @@ class LineTest {
     }
 
     @Test
-    @DisplayName("moveAlongTheRow: 양쪽 step이 모두 비어있으면 index 유지")
-    void testMoveAlongTheRowStaysWhenBothBlank() {
+    @DisplayName("양쪽 step이 모두 비어있으면 moveAlongTheRow는 index를 유지한다")
+    void moveAlongTheRowKeepsIndexWhenBothSidesAreBlank() {
         //given
         Line line = new Line(List.of(new Step(true), new Step(false), new Step(true)));
         //when

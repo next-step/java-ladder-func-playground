@@ -1,10 +1,10 @@
 package view;
 
 import dto.LadderResponse;
+import dto.LadderResultResponse;
 import dto.LineResponse;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -20,9 +20,9 @@ public class OutputView {
         printList(outputs);
     }
 
-    public void printTotalTargetResult(Map<String, String> targets) {
+    public void printTotalTargetResult(LadderResultResponse ladderResultResponse) {
         System.out.println("\n실행결과");
-        String formattedResult = targets.entrySet().stream()
+        String formattedResult = ladderResultResponse.results().entrySet().stream()
                 .map(entry -> String.format(
                         "%s : %s", entry.getKey(), entry.getValue()
                 ))

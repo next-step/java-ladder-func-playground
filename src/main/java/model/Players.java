@@ -42,11 +42,11 @@ public class Players {
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ENTRY_NOT_PRESENT));
     }
 
-    public String getEntryByIndex(int index) {
+    public String getPlayerNameByIndex(int index) {
         return this.playerNames.get(index);
     }
 
-    public Integer entryCount() {
+    public Integer playerCount() {
         return this.playerNames.size();
     }
 }

@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+
 class LineTest {
 
     @Test
@@ -39,12 +41,9 @@ class LineTest {
         //given
         List<Step> invalidSteps = List.of(new Step(false), new Step(false));
         //when & then
-        Exception exception = Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> new Line(invalidSteps)
-        );
-
-        Assertions.assertEquals(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW, exception.getMessage());
+        assertThatThrownBy(() -> new Line(invalidSteps))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW);
     }
 
     @Test
@@ -53,12 +52,10 @@ class LineTest {
         //given
         List<Step> invalidSteps = List.of(new Step(true), new Step(false), new Step(false), new Step(true));
         //when & then
-        Exception exception = Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> new Line(invalidSteps)
-        );
+        assertThatThrownBy(() -> new Line(invalidSteps))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW);
 
-        Assertions.assertEquals(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW, exception.getMessage());
     }
 
     @Test
@@ -69,13 +66,11 @@ class LineTest {
         for(int i = 0; i < LadderConstants.MINIMUM_LINE_WIDTH - 1; i++) {
             tooNarrowSteps.add(new Step(true));
         }
-        //when & then
-        Exception exception = Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> new Line(tooNarrowSteps)
-        );
 
-        Assertions.assertEquals(ErrorMessage.LINE_NOT_LONG_ENOUGH, exception.getMessage());
+        //when & then
+        assertThatThrownBy(() -> new Line(tooNarrowSteps))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW);
     }
 
     @Test

@@ -23,9 +23,9 @@ public class LadderGame {
     }
 
     private void validateGame(Players players, Prizes prizes, Ladder ladder) {
-        if (!Objects.equals(players.entryCount(), prizes.prizeCount())
+        if (!Objects.equals(players.playerCount(), prizes.prizeCount())
                 || !Objects.equals(prizes.prizeCount(), ladder.calculateWidth())
-                || !Objects.equals(ladder.calculateWidth(), players.entryCount())){
+                || !Objects.equals(ladder.calculateWidth(), players.playerCount())){
             throw new IllegalArgumentException(ErrorMessage.MADE_IMPOSSIBLE_GAME);
         }
     }
@@ -38,14 +38,14 @@ public class LadderGame {
     }
 
     public List<GameResultDto> calculateEveryResult() {
-        return IntStream.range(0, players.entryCount())
+        return IntStream.range(0, players.playerCount())
                 .mapToObj(ladder::calculateSingleResultAsDto)
                 .map(this::ladderResultDtoToGameResultDto)
                 .toList();
     }
 
     private GameResultDto ladderResultDtoToGameResultDto(LadderResultDto ladderResultDto) {
-        return new GameResultDto(players.getEntryByIndex(ladderResultDto.startIndex()), prizes.getPrizeByIndex(ladderResultDto.endIndex()));
+        return new GameResultDto(players.getPlayerNameByIndex(ladderResultDto.startIndex()), prizes.getPrizeByIndex(ladderResultDto.endIndex()));
     }
 
     @Override
@@ -56,8 +56,8 @@ public class LadderGame {
     }
 
     private String formatPlayerNames(Players players) {
-        return IntStream.range(0, players.entryCount())
-                .mapToObj(i -> String.format("%" + LadderConstants.ENTRY_FIELD_WIDTH + "s", players.getEntryByIndex(i)))
+        return IntStream.range(0, players.playerCount())
+                .mapToObj(i -> String.format("%" + LadderConstants.ENTRY_FIELD_WIDTH + "s", players.getPlayerNameByIndex(i)))
                 .collect(Collectors.joining(LadderConstants.ENTRY_SEPARATOR));
     }
 

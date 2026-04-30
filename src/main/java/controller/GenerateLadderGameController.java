@@ -20,7 +20,7 @@ public class GenerateLadderGameController {
         Players players = new Players(inputView.getListOfStringAfterShowingScript(ScriptConstants.ENTER_USER));
         Prizes prizes = new Prizes(inputView.getListOfStringAfterShowingScript(ScriptConstants.ENTER_PRIZE));
         int height= inputView.getSingleIntegerFromUserAfterShowingAScript(ScriptConstants.INPUT_HEIGHT_SCRIPT);
-        Ladder ladder = ladderBuilder.generateLadder(height, players.entryCount());
+        Ladder ladder = ladderBuilder.generateLadder(height, players.playerCount());
 
         return new LadderGame(players, prizes, ladder);
     }

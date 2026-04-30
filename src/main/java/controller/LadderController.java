@@ -25,7 +25,7 @@ public class LadderController {
     }
 
     public void run() {
-        Players players = retryUntilValid(() -> Players.of(List.of(inputView.readPlayerNames())));
+        Players players = retryUntilValid(() -> Players.from(List.of(inputView.readPlayerNames())));
         LadderResult ladderResult = retryUntilValid(() -> createLadderResult(players.size()));
         Ladder ladder = retryUntilValid(() -> Ladder.of(ladderResult.size(), inputView.readHeight(), connectionGenerator));
         outputView.printLadder(ladder.toBooleanLists(), players.getPlayerNames(), ladderResult.getPrizes());

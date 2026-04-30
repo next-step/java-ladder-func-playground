@@ -14,7 +14,7 @@ public class LadderGame {
     }
 
     public Map<String, String> play(List<String> prize) {
-        Players afterPlayers = new Players(players.toList().stream()
+        Players afterPlayers = Players.fromPlayers(players.toList().stream()
                 .map(player -> new Player(player.name(), ladder.rideLadder(player.position())))
                 .toList());
         return matchPrize(afterPlayers, prize);

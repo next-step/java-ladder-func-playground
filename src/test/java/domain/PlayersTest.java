@@ -10,7 +10,7 @@ public class PlayersTest {
 
     @Test
     void 플레이어의_이름은_중복될_수_없다() {
-        assertThatThrownBy(() -> Players.of(List.of("pobi", "pobi")))
+        assertThatThrownBy(() -> Players.from(List.of("pobi", "pobi")))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

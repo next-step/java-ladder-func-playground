@@ -5,7 +5,7 @@ import constant.ErrorMessage;
 import java.util.Objects;
 
 public class Player {
-    private static final int MAX_LENGTH = 5;
+    private static final int MAX_NAME_LENGTH = 5;
 
     private final String name;
 
@@ -22,8 +22,8 @@ public class Player {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException(ErrorMessage.EMPTY_OR_BLANK_NAME.getMessage());
         }
-        if (name.length() > MAX_LENGTH) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_NAME_LENGTH.getIntFormattedMessage(MAX_LENGTH));
+        if (name.length() > MAX_NAME_LENGTH) {
+            throw new IllegalArgumentException(ErrorMessage.INVALID_NAME_LENGTH.getIntFormattedMessage(MAX_NAME_LENGTH));
         }
     }
 

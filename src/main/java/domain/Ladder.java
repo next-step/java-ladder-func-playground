@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Ladder {
     private final List<Line> ladder = new ArrayList<>();
-    int width;
-    int height;
+    final int width;
+    final int height;
 
     public Ladder(int height, int width) {
         this.width = width;

@@ -4,7 +4,7 @@ import domain.Ladder;
 import domain.LadderGame;
 import domain.LadderResult;
 import domain.Players;
-import dto.PrizeResults;
+import domain.PrizeResults;
 import generator.ConnectionGenerator;
 import view.InputView;
 import view.OutputView;

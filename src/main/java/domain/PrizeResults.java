@@ -1,4 +1,6 @@
-package dto;
+package domain;
+
+import dto.PrizeResult;
 
 import java.util.ArrayList;
 import java.util.List;

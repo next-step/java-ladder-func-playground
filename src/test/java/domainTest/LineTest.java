@@ -70,7 +70,7 @@ public class LineTest {
 
         //when
         Line line = new Line(width, lineValue);
-
+        //then
         Assertions.assertEquals(playerMoveAfter, line.move(player));
     }
 }

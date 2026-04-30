@@ -17,15 +17,19 @@ public class Line {
     }
 
     public int move(int playerPosition) {
-        if (playerPosition > 0 && line.get(playerPosition - 1)) {
-            return playerPosition - 1;
-        }
-        if (playerPosition < line.size() && line.get(playerPosition)) {
-            return playerPosition + 1;
-        }
-        return playerPosition;
+        Direction direction=findDirection(playerPosition);
+        return direction.move(playerPosition);
     }
 
+    private Direction findDirection(int playerPosition){
+        if(playerPosition>0 &&line.get(playerPosition-1)){
+            return Direction.LEFT;
+        }
+        if(playerPosition<line.size() &&line.get(playerPosition)){
+            return Direction.RIGHT;
+        }
+        return Direction.DOWN;
+    }
     public int getWidth() {
         return width;
     }

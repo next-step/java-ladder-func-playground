@@ -1,4 +1,4 @@
-package modelTest;
+package domainTest;
 
 import domain.Ladder;
 import domain.LadderResult;

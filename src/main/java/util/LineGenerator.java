@@ -10,12 +10,8 @@ public class LineGenerator {
     public static List<Boolean> makeLine(int width) {
         List<Boolean> points = new ArrayList<>();
         for (int i = 0; i < width; i++) {
-            boolean value;
-            if (i > 0 && points.get(i - 1)) {
-                value = false;
-            } else {
-                value = random.nextBoolean();
-            }
+            boolean blocked=i>0 &&points.get(i-1);
+            boolean value=!blocked && random.nextBoolean();
             points.add(value);
         }
         return points;

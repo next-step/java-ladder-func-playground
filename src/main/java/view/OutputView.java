@@ -34,8 +34,12 @@ public class OutputView {
 
     public void printLine(Line line) {
         System.out.print("ㅣ");
-        for (int i = 0; i < line.getWidth(); i++) {
-            System.out.print(line.getLine().get(i) ? "-----ㅣ" : "     ㅣ");
+        for (int i = 0; i < line.getWidth();i++) {
+            if(line.getLine().get(i)){
+                System.out.print("-----ㅣ");
+                continue;
+            }
+            System.out.println("     ㅣ");
         }
         System.out.println(" ");
     }

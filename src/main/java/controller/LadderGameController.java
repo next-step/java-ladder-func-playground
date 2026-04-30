@@ -8,6 +8,7 @@ import domain.Players;
 import domain.Prizes;
 import domain.strategy.BooleanGenerator;
 import dto.LadderResponse;
+import dto.LadderResultResponse;
 import view.InputView;
 import view.OutputView;
 
@@ -36,10 +37,7 @@ public class LadderGameController {
                 players.getPlayerCount(), ladderHeight, booleanGenerator
         ));
 
-        LadderResponse ladderResponse = LadderResponse.from(ladder);
-        outputView.printResult(ladderResponse, players.getPlayersName(), prizes.getPrizeNames());
-        LadderResult ladderResult = new LadderResult(players, prizes, ladder.getAllResult());
-        showResult(ladderResult, players);
+        processResults(ladder, players, prizes);
     }
 
     private Players readPlayers() {
@@ -57,7 +55,19 @@ public class LadderGameController {
         return validator.validateLadderSpec(inputView.readInput());
     }
 
-    private void showResult(LadderResult ladderResult, Players players) {
+    private void processResults(Ladder ladder, Players players, Prizes prizes) {
+        displayLadder(ladder, players, prizes);
+
+        LadderResult ladderResult =new LadderResult(players, prizes, ladder.getAllResult());
+        queryResults(ladderResult, players);
+    }
+
+    private void displayLadder(Ladder ladder, Players players, Prizes prizes) {
+        LadderResponse ladderResponse = LadderResponse.from(ladder);
+        outputView.printGameBoard(ladderResponse, players.getPlayersName(), prizes.getPrizeNames());
+    }
+
+    private void queryResults(LadderResult ladderResult, Players players) {
         boolean isRunning = true;
         while (isRunning) {
             String target = repeatUntilSuccess(() -> readCommand(players));
@@ -83,11 +93,12 @@ public class LadderGameController {
 
     private boolean processCommand(LadderResult ladderResult, String target) {
         if (target.equals(ALL_PRINT_CONDITION)) {
-            outputView.printTotalTargetResult(ladderResult.getAllResults());
+            LadderResultResponse ladderResultResponse = LadderResultResponse.from(ladderResult);
+            outputView.printTotalTargetResult(ladderResultResponse);
             return false;
         }
 
-        outputView.printTargetResult(ladderResult.getResultByPlayerName(new Player(target)));
+        outputView.printTargetResult(ladderResult.getResultByPlayer(new Player(target)));
         return true;
     }
 

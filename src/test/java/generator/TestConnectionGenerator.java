@@ -18,15 +18,8 @@ public class TestConnectionGenerator implements ConnectionGenerator {
 
         Boolean connection = connections.get(index);
         index++;
-        skipAppendFalse(connection);
 
         return connection;
-    }
-
-    private void skipAppendFalse(Boolean connection) {
-        if (connection && index < connections.size()) {
-            index++;
-        }
     }
 
     private void validateIndex() {

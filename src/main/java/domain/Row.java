@@ -7,6 +7,7 @@ import java.util.List;
 
 public class Row {
     private static final int START_POSITION = 0;
+    private static final int ONE_STEP = 1;
     private final List<Boolean> row;
 
     private Row(List<Boolean> connections) {
@@ -15,10 +16,9 @@ public class Row {
 
     public static Row of(int length, ConnectionGenerator connectionGenerator) {
         List<Boolean> row = new ArrayList<>();
-        while (row.size() < length) {
-            boolean isConnected = connectionGenerator.generate();
-            row.add(isConnected);
-            appendFalse(row, isConnected, length);
+
+        for (int position = START_POSITION; position < length; position++) {
+            row.add(canConnect(row, position, connectionGenerator));
         }
         return new Row(row);
     }
@@ -29,17 +29,20 @@ public class Row {
 
     public int move(int position) {
         if (position > START_POSITION && row.get(position - 1) == true) {
-            return position - 1;
+            return position - ONE_STEP;
         }
         if (position < row.size() && row.get(position) == true) {
-            return position + 1;
+            return position + ONE_STEP;
         }
         return position;
     }
 
-    private static void appendFalse(List<Boolean> row, boolean isConnected, int length) {
-        if (isConnected && row.size() < length) {
-            row.add(false);
-        }
+    private static boolean canConnect(List<Boolean> row, int position, ConnectionGenerator connectionGenerator) {
+        return isBeforeDisconnected(row, position)
+                && connectionGenerator.generate();
+    }
+
+    private static boolean isBeforeDisconnected(List<Boolean> row, int position) {
+        return position == START_POSITION || !row.get(position - ONE_STEP);
     }
 }

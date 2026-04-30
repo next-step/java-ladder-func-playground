@@ -9,7 +9,8 @@ public enum ErrorMessage {
     INVALID_NAME_LENGTH("이름은 최대 %d글자까지 가능합니다."),
     INVALID_LADDER_HEIGHT("사다리 높이는 %d 이상이어야 합니다."),
     INVALID_LADDER_WIDTH("사다리 너비는 %d 이상이어야 합니다."),
-    MISMATCH_PLAYER_AND_PRIZE("인원 수와 상품 수는 같아야 합니다.");
+    MISMATCH_PLAYER_AND_PRIZE("인원 수와 상품 수는 같아야 합니다."),
+    DUPLICATE_PLAYER_NAME("참가자의 이름에는 중복이 없어야 합니다.");
 
     private final String message;
 

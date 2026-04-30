@@ -1,7 +1,7 @@
 package modelTest;
 
-import model.Ladder;
-import model.LadderResult;
+import domain.Ladder;
+import domain.LadderResult;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

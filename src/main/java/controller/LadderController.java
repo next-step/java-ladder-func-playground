@@ -42,7 +42,9 @@ public class LadderController {
     }
 
     private void printResult(PrizeResults prizeResults) {
-        while (retryUntilValid(() -> printResultByName(prizeResults))) {
+        boolean shouldContinue = true;
+        while (shouldContinue) {
+            shouldContinue = retryUntilValid(() -> printResultByName(prizeResults));
         }
     }
 

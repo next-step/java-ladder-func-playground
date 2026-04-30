@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class LadderController {
+    private static final String ALL_RESULT_COMMAND = "all";
     private final InputView inputView;
     private final OutputView outputView;
     private final ConnectionGenerator connectionGenerator;
@@ -39,8 +40,6 @@ public class LadderController {
         ladderResult.validateEnoughSize(playerSize);
         return ladderResult;
     }
-
-    private static final String ALL_RESULT_COMMAND = "all";
 
     private void printResult(PrizeResults prizeResults) {
         while (retryUntilValid(() -> printResultByName(prizeResults))) {

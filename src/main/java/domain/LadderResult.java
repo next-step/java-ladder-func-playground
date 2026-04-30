@@ -2,6 +2,7 @@ package domain;
 
 import constant.ErrorMessage;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,16 +14,14 @@ public class LadderResult {
         this.results = calculateResult(players, prizes.getPrizeNames(), endIndex);
     }
 
-    public Map<String, String> getAllResults() {
-        Map<String, String> allResults = new LinkedHashMap<>();
-        results.forEach(((player, string) -> allResults.put(player.getName(), string)));
-        return allResults;
+    public Map<Player, String> getAllResults() {
+        return Collections.unmodifiableMap(results);
     }
 
-    public String getResultByPlayerName(Player player) {
+    public String getResultByPlayer(Player player) {
         return results.entrySet().stream()
                 .filter(
-                        entry -> entry.getKey().getName().equals(player.getName())
+                        entry -> entry.getKey().equals(player)
                 )
                 .map(Map.Entry::getValue)
                 .findFirst()

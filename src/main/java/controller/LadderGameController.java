@@ -58,7 +58,7 @@ public class LadderGameController {
     private void processResults(Ladder ladder, Players players, Prizes prizes) {
         displayLadder(ladder, players, prizes);
 
-        LadderResult ladderResult =new LadderResult(players, prizes, ladder.getAllResult());
+        LadderResult ladderResult = new LadderResult(players, prizes, ladder.getAllResult());
         queryResults(ladderResult, players);
     }
 

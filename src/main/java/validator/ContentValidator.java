@@ -11,11 +11,11 @@ public class ContentValidator {
     }
 
     public static boolean validateGetTarget(String input,List<String> nameList){
+        if(input.equals("all")){
+            return true;
+        }
         for(String name:nameList){
             if(input.equals(name)){
-                return true;
-            }
-            if(input.equals("all")){
                 return true;
             }
         }

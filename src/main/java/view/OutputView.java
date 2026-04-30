@@ -1,8 +1,8 @@
 package view;
 
-import model.Ladder;
-import model.LadderResult;
-import model.Line;
+import domain.Ladder;
+import domain.LadderResult;
+import domain.Line;
 
 import java.util.List;
 

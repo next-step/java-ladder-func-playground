@@ -1,7 +1,7 @@
 package controller;
 
-import model.Ladder;
-import model.LadderResult;
+import domain.Ladder;
+import domain.LadderResult;
 import util.StringUtil;
 import validator.ContentValidator;
 import view.InputView;

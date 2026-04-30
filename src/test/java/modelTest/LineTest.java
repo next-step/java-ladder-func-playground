@@ -1,6 +1,6 @@
 package modelTest;
 
-import model.Line;
+import domain.Line;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import util.LineGenerator;

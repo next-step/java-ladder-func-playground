@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Row {
+    private static final int START_POSITION = 0;
     private final List<Boolean> row;
 
     private Row(List<Boolean> connections) {
@@ -27,7 +28,7 @@ public class Row {
     }
 
     public int move(int position) {
-        if (position > 0 && row.get(position - 1) == true) {
+        if (position > START_POSITION && row.get(position - 1) == true) {
             return position - 1;
         }
         if (position < row.size() && row.get(position) == true) {

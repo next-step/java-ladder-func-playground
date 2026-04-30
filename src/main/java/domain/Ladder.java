@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ladder {
+    private static final int MIN_LADDER_HEIGHT = 1;
     private final List<Row> ladder;
 
     private Ladder(List<Row> ladder) {
@@ -15,8 +16,9 @@ public class Ladder {
     public static Ladder of(int width, int height, ConnectionGenerator connectionGenerator) {
         validateLadder(height);
         List<Row> ladder = new ArrayList<>();
+        int connectionCount = width - 1;
         for (int i = 0; i < height; i++) {
-            ladder.add(Row.of(width - 1, connectionGenerator));
+            ladder.add(Row.of(connectionCount, connectionGenerator));
         }
         return new Ladder(ladder);
     }
@@ -35,8 +37,8 @@ public class Ladder {
     }
 
     private static void validateLadder(int height) {
-        if (height < 1) {
-            throw new IllegalArgumentException("사다리의 높이는 1이상이어야합니다.");
+        if (height < MIN_LADDER_HEIGHT) {
+            throw new IllegalArgumentException("사다리의 높이는 " + MIN_LADDER_HEIGHT + "이상이어야합니다.");
         }
     }
 }

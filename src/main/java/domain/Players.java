@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Players {
+    private static final int START_POSITION = 0;
     private final List<Player> players;
 
     public Players(List<Player> players) {
@@ -13,7 +14,7 @@ public class Players {
     public static Players of(List<String> playerNames) {
         validate(playerNames);
         List<Player> players = new ArrayList<>();
-        int position = 0;
+        int position = START_POSITION;
         for (String name : playerNames) {
             players.add(new Player(name, position++));
         }

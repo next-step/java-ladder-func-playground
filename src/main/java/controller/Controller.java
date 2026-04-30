@@ -67,9 +67,8 @@ public class Controller {
         ResultType type=ResultType.from(input);
         if(type.isAll()){
             outputView.printTotalResult(ladderResult,nameList);
+            return;
         }
-        else{
-            outputView.printTarget(input, ladderResult, nameList);
-        }
+        outputView.printTarget(input, ladderResult, nameList);
     }
 }

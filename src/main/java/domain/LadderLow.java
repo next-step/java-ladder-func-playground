@@ -21,10 +21,6 @@ public class LadderLow {
         }
     }
 
-    public static Line create(int width, BooleanGenerator booleanGenerator) {
-        return new Line(width, booleanGenerator);
-    }
-
     public List<Boolean> getConnections() {
         return List.copyOf(connections);
     }

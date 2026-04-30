@@ -13,7 +13,7 @@ public class OutputView {
     private static final String EMPTY_LINE = "     ";
     private static final int NAME_WIDTH = 5;
 
-    public void printResult(LadderResponse ladderResponse, List<String> inputs, List<String> outputs) {
+    public void printGameBoard(LadderResponse ladderResponse, List<String> inputs, List<String> outputs) {
         System.out.println("\n사다리 결과\n");
         printList(inputs);
         printLines(ladderResponse);
@@ -72,7 +72,15 @@ public class OutputView {
 
     private String hasLine(LineResponse lineResponse) {
         return lineResponse.lines().stream()
-                .map(hasPoint -> hasPoint ? CONNECT_LINE : EMPTY_LINE)
+                .map(this::convertToLineSymbol)
                 .collect(Collectors.joining(DELIMITER, "    " + DELIMITER, DELIMITER));
+    }
+
+    private String convertToLineSymbol(boolean hasConnection) {
+        if (hasConnection) {
+            return CONNECT_LINE;
+        }
+
+        return EMPTY_LINE;
     }
 }

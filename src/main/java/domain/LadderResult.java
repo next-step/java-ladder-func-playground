@@ -20,13 +20,13 @@ public class LadderResult {
         makeStringLadderResult(names, targets);
     }
 
-    public void playLadder(Ladder ladder) {
+    private void playLadder(Ladder ladder) {
         for (int i = 0; i < width + 1; i++) {
             movePlayer(ladder, i);
         }
     }
 
-    public void movePlayer(Ladder ladder, int playerStart) {
+    private void movePlayer(Ladder ladder, int playerStart) {
         int current = playerStart;
         for (Line line : ladder.getLadder()) {
             current = line.move(current);
@@ -34,7 +34,7 @@ public class LadderResult {
         ladderIntegerResult.put(playerStart, current);
     }
 
-    public void makeStringLadderResult(List<String> names, List<String> targets) {
+    private void makeStringLadderResult(List<String> names, List<String> targets) {
         for (int i = 0; i < width + 1; i++) {
             ladderStringResult.put(names.get(i), targets.get(ladderIntegerResult.get(i)));
         }

@@ -29,7 +29,7 @@ public class Players {
     }
 
     public List<String> getPlayerNames(){
-        return new ArrayList<>(players).stream()
+        return players.stream()
                 .map(Player::name)
                 .toList();
     }

@@ -1,15 +1,14 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class LadderResult {
-    Map<Integer, Integer> ladderIntegerResult = new HashMap<>();
-    Map<String, String> ladderStringResult = new HashMap<>();
-    List<String> names = new ArrayList<>();
-    List<String> targets = new ArrayList<>();
+    private final Map<Integer, Integer> ladderIntegerResult = new HashMap<>();
+    private final Map<String, String> ladderStringResult = new HashMap<>();
+    private final List<String> names;
+    private final List<String> targets;
 
     int width;
 
@@ -53,11 +52,11 @@ public class LadderResult {
         return targets;
     }
 
-    public Map<Integer,Integer> getLadderIntegerResult(){
+    public Map<Integer, Integer> getLadderIntegerResult() {
         return ladderIntegerResult;
     }
 
-    public Map<String,String> getLadderStringResult(){
+    public Map<String, String> getLadderStringResult() {
         return ladderStringResult;
     }
 }

@@ -1,11 +1,10 @@
 package domain;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Line {
-    private List<Boolean> line = new ArrayList<>();
-    int width;
+    private final List<Boolean> line;
+    private final int width;
 
     public Line(int width,List<Boolean> line) {
         this.width = width;

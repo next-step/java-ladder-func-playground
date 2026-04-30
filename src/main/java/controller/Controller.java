@@ -2,6 +2,7 @@ package controller;
 
 import domain.Ladder;
 import domain.LadderResult;
+import domain.ResultType;
 import util.StringUtil;
 import validator.ContentValidator;
 import view.InputView;
@@ -29,6 +30,7 @@ public class Controller {
         LadderResult ladderResult = new LadderResult(ladder, nameList, targetList);
 
         showTarget(ladderResult, nameList);
+        showTarget(ladderResult,nameList);
     }
 
     private List<String> inputNames() {
@@ -52,16 +54,22 @@ public class Controller {
     }
 
     private void showTarget(LadderResult ladderResult, List<String> nameList) {
-        for (int i = 0; i < COUNT; i++) {
-            while(true){
-                String input = inputView.readTargetResult();
-                if(ContentValidator.validateGetTarget(input,nameList)){
-                    outputView.printTarget(input, ladderResult, nameList);
-                    break;
-                }
-                System.out.println("ERROR: 결과를 보고 싶은 사람을 제대로 입력하세요.");
+        while(true){
+            String input = inputView.readTargetResult();
+            if(ContentValidator.validateGetTarget(input,nameList)){
+                processTargetResult(input,ladderResult,nameList);
+                break;
             }
 
+        }
+    }
+    private void processTargetResult(String input,LadderResult ladderResult,List<String> nameList){
+        ResultType type=ResultType.from(input);
+        if(type.isAll()){
+            outputView.printTotalResult(ladderResult,nameList);
+        }
+        else{
+            outputView.printTarget(input, ladderResult, nameList);
         }
     }
 }

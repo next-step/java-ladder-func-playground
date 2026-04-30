@@ -9,8 +9,9 @@ import java.util.Set;
 public class Players {
     private final List<Player> players;
 
-    public Players(List<String> players) {
-        this.players = players.stream()
+    public Players(List<String> playerNames) {
+        validateNameDuplicate(playerNames);
+        this.players = playerNames.stream()
                 .map(Player::new)
                 .toList();
     }

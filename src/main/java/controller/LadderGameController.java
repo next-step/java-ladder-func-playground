@@ -3,10 +3,7 @@ package controller;
 import constants.LadderConstants;
 import constants.ScriptConstants;
 import dto.GameResultDto;
-import model.Ladder;
 import model.LadderGame;
-import model.Player;
-import model.Prize;
 import view.InputView;
 import view.OutputView;
 

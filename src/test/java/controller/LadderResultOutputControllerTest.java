@@ -3,8 +3,8 @@ package controller;
 import model.Ladder;
 import model.LadderGame;
 import model.Line;
-import model.Player;
-import model.Prize;
+import model.Players;
+import model.Prizes;
 import testComponents.TestLadderBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,9 +27,9 @@ class LadderResultOutputControllerTest {
                 TestLadderBuilder.step(true)
         ));
         Ladder ladder = TestLadderBuilder.ladderOfSameLines(4, line);
-        Player player = new Player(List.of("neo", "brown", "brie", "tomy"));
-        Prize prize = new Prize(List.of("꽝", "5000", "꽝", "3000"));
-        this.ladderGame = new LadderGame(player, prize, ladder);
+        Players players = new Players(List.of("neo", "brown", "brie", "tomy"));
+        Prizes prizes = new Prizes(List.of("꽝", "5000", "꽝", "3000"));
+        this.ladderGame = new LadderGame(players, prizes, ladder);
         this.outputView = new OutputView();
     }
 

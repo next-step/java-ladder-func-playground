@@ -4,8 +4,8 @@ import constants.ScriptConstants;
 import model.Ladder;
 import model.LadderBuilder;
 import model.LadderGame;
-import model.Player;
-import model.Prize;
+import model.Players;
+import model.Prizes;
 import view.InputView;
 
 public class GenerateLadderGameController {
@@ -17,11 +17,11 @@ public class GenerateLadderGameController {
     }
 
     public LadderGame generateLadderGame() {
-        Player player = new Player(inputView.getListOfStringAfterShowingScript(ScriptConstants.ENTER_USER));
-        Prize prize = new Prize(inputView.getListOfStringAfterShowingScript(ScriptConstants.ENTER_PRIZE));
+        Players players = new Players(inputView.getListOfStringAfterShowingScript(ScriptConstants.ENTER_USER));
+        Prizes prizes = new Prizes(inputView.getListOfStringAfterShowingScript(ScriptConstants.ENTER_PRIZE));
         int height= inputView.getSingleIntegerFromUserAfterShowingAScript(ScriptConstants.INPUT_HEIGHT_SCRIPT);
-        Ladder ladder = ladderBuilder.generateLadder(height, player.entryCount());
+        Ladder ladder = ladderBuilder.generateLadder(height, players.entryCount());
 
-        return new LadderGame(player, prize, ladder);
+        return new LadderGame(players, prizes, ladder);
     }
 }

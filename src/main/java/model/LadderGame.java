@@ -11,53 +11,59 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LadderGame {
-    private final Player player;
-    private final Prize prize;
+    private final Players players;
+    private final Prizes prizes;
     private final Ladder ladder;
 
-    public LadderGame(Player player, Prize prize, Ladder ladder) {
-        this.validateGame(player, prize, ladder);
-        this.player = player;
-        this.prize = prize;
+    public LadderGame(Players players, Prizes prizes, Ladder ladder) {
+        this.validateGame(players, prizes, ladder);
+        this.players = players;
+        this.prizes = prizes;
         this.ladder = ladder;
     }
 
-    private void validateGame(Player player, Prize prize, Ladder ladder) {
-        if (!Objects.equals(player.entryCount(), prize.entryCount())
-                || !Objects.equals(prize.entryCount(), ladder.calculateWidth())
-                || !Objects.equals(ladder.calculateWidth(), player.entryCount())){
+    private void validateGame(Players players, Prizes prizes, Ladder ladder) {
+        if (!Objects.equals(players.entryCount(), prizes.prizeCount())
+                || !Objects.equals(prizes.prizeCount(), ladder.calculateWidth())
+                || !Objects.equals(ladder.calculateWidth(), players.entryCount())){
             throw new IllegalArgumentException(ErrorMessage.MADE_IMPOSSIBLE_GAME);
         }
     }
 
     public GameResultDto checkSingleEntry(String playerName) {
-        int startIndex = player.calculateIndexOfEntry(playerName);
+        int startIndex = players.calculateIndexOfPlayerName(playerName);
         LadderResultDto ladderResultDto = ladder.calculateSingleResultAsDto(startIndex);
 
         return this.ladderResultDtoToGameResultDto(ladderResultDto);
     }
 
     public List<GameResultDto> calculateEveryResult() {
-        return IntStream.range(0, player.entryCount())
+        return IntStream.range(0, players.entryCount())
                 .mapToObj(ladder::calculateSingleResultAsDto)
                 .map(this::ladderResultDtoToGameResultDto)
                 .toList();
     }
 
     private GameResultDto ladderResultDtoToGameResultDto(LadderResultDto ladderResultDto) {
-        return new GameResultDto(player.getEntryByIndex(ladderResultDto.startIndex()),prize.getEntryByIndex(ladderResultDto.endIndex()));
+        return new GameResultDto(players.getEntryByIndex(ladderResultDto.startIndex()), prizes.getPrizeByIndex(ladderResultDto.endIndex()));
     }
 
     @Override
     public String toString() {
-        return formatEntries(player) + "\n"
+        return formatPlayerNames(players) + "\n"
                 + formatLadder() + "\n"
-                + formatEntries(prize);
+                + formatPrizes(prizes);
     }
 
-    private String formatEntries(LadderEntry entry) {
-        return IntStream.range(0, entry.entryCount())
-                .mapToObj(i -> String.format("%" + LadderConstants.ENTRY_FIELD_WIDTH + "s", entry.getEntryByIndex(i)))
+    private String formatPlayerNames(Players players) {
+        return IntStream.range(0, players.entryCount())
+                .mapToObj(i -> String.format("%" + LadderConstants.ENTRY_FIELD_WIDTH + "s", players.getEntryByIndex(i)))
+                .collect(Collectors.joining(LadderConstants.ENTRY_SEPARATOR));
+    }
+
+    private String formatPrizes(Prizes prizes) {
+        return IntStream.range(0, prizes.prizeCount())
+                .mapToObj(i -> String.format("%" + LadderConstants.ENTRY_FIELD_WIDTH + "s", prizes.getPrizeByIndex(i)))
                 .collect(Collectors.joining(LadderConstants.ENTRY_SEPARATOR));
     }
 

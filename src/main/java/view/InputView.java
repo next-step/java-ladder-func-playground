@@ -25,7 +25,7 @@ public class InputView {
         return userInput.strip();
     }
 
-    protected int convertStringToInteger(String stringToConvert) {
+    private int convertStringToInteger(String stringToConvert) {
         try {
             return Integer.parseInt(stringToConvert);
         } catch (Exception e) {
@@ -38,7 +38,7 @@ public class InputView {
         return this.parseByDelimiter(scanner.nextLine());
     }
 
-    protected List<String> parseByDelimiter(String userInput) {
+    private List<String> parseByDelimiter(String userInput) {
         List<String> result = new ArrayList<String>();
 
         for (String x: userInput.split(this.DELIMITER)) {

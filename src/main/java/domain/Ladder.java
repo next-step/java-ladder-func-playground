@@ -9,18 +9,18 @@ import java.util.stream.IntStream;
 public class Ladder {
     private final static int MIN_HEIGHT = 1;
 
-    private final List<Line> lines;
+    private final List<LadderLow> lines;
     private final int width;
 
     public Ladder(int width, int height, BooleanGenerator booleanGenerator) {
         validateHeight(height);
         this.lines = IntStream.range(0, height)
-                .mapToObj(i -> Line.create(width, booleanGenerator))
+                .mapToObj(i -> new LadderLow(width, booleanGenerator))
                 .toList();
         this.width = width;
     }
 
-    public List<Line> getLines() {
+    public List<LadderLow> getLines() {
         return List.copyOf(lines);
     }
 
@@ -33,8 +33,8 @@ public class Ladder {
 
     private int getResult(int index) {
         int currentIndex = index;
-        for (Line line : lines) {
-            currentIndex = line.move(currentIndex);
+        for (LadderLow line : lines) {
+            currentIndex = line.calculateNextPosition(currentIndex);
         }
         return currentIndex;
     }

@@ -6,18 +6,18 @@ import domain.strategy.BooleanGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Line {
+public class LadderLow {
     private final static int MIN_WIDTH = 2;
 
-    private final List<Boolean> points;
+    private final List<Boolean> connections;
 
-    private Line(int width, BooleanGenerator booleanGenerator) {
+    public LadderLow(int width, BooleanGenerator booleanGenerator) {
         validateWidth(width);
-        this.points = new ArrayList<>();
+        this.connections = new ArrayList<>();
 
         for (int i = 0; i < width - 1; i++) {
             boolean step = drawStep(i, booleanGenerator);
-            points.add(step);
+            connections.add(step);
         }
     }
 
@@ -25,22 +25,22 @@ public class Line {
         return new Line(width, booleanGenerator);
     }
 
-    public List<Boolean> getPoints() {
-        return List.copyOf(points);
+    public List<Boolean> getConnections() {
+        return List.copyOf(connections);
     }
 
-    public int move(int index) {
-        if (index < points.size() && points.get(index)) {
-            return index + 1;
+    public int calculateNextPosition(int currentPosition) {
+        if (currentPosition < connections.size() && connections.get(currentPosition)) {
+            return currentPosition + 1;
         }
-        if (index > 0 && points.get(index - 1)) {
-            return index - 1;
+        if (currentPosition > 0 && connections.get(currentPosition - 1)) {
+            return currentPosition - 1;
         }
-        return index;
+        return currentPosition;
     }
 
     private boolean drawStep(int index, BooleanGenerator booleanGenerator) {
-        if (index > 0 && points.get(index - 1)) {
+        if (index > 0 && connections.get(index - 1)) {
             return false;
         }
         return booleanGenerator.generate();

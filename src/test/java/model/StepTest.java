@@ -14,7 +14,7 @@ class StepTest {
         //when
         boolean result = step.isBlank();
         //then
-        Assertions.assertEquals(true, result);
+        Assertions.assertTrue(result);
     }
 
     @Test
@@ -25,6 +25,6 @@ class StepTest {
         //when
         boolean result = step.isBlank();
         //then
-        Assertions.assertEquals(false, result);
+        Assertions.assertFalse(result);
     }
 }

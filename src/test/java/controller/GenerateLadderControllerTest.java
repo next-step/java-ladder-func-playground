@@ -4,6 +4,7 @@ import model.LadderBuilder;
 import model.LadderGame;
 import model.Line;
 import model.LineBuilder;
+import org.junit.jupiter.api.Assertions;
 import testComponents.TestLadderBuilder;
 import testComponents.TestLineBuilder;
 import org.junit.jupiter.api.DisplayName;
@@ -33,7 +34,6 @@ class GenerateLadderControllerTest {
         GenerateLadderGameController controller = new GenerateLadderGameController(ladderBuilder, inputView);
 
         //when & then
-        LadderGame ladder = controller.generateLadderGame();
-
+        Assertions.assertDoesNotThrow(controller::generateLadderGame);
     }
 }

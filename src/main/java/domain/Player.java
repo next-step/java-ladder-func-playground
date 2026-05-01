@@ -1,6 +1,5 @@
 package domain;
 
-
 public class Player {
     private final PlayerName name;
     private final Reward reward;
@@ -11,7 +10,7 @@ public class Player {
     }
 
     public boolean hasName(String targetName) {
-        return this.name.getValue().equals(targetName);
+        return this.name.equals(new PlayerName(targetName));
     }
 
     public PlayerName getName() {

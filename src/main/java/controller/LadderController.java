@@ -1,6 +1,4 @@
 package controller;
-
-
 import domain.LadderGenerator;
 import domain.LadderHeight;
 import domain.Players;

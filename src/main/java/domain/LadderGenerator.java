@@ -41,4 +41,5 @@ public class LadderGenerator {
     private static boolean isEmptyInterval(Ladder ladder, int index) {
         return ladder.getLines().stream().noneMatch(line -> line.isConnectedAt(index));
     }
+
 }

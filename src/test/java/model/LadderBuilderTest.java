@@ -17,11 +17,7 @@ class LadderBuilderTest {
     @DisplayName("주어진 height만큼의 Line을 가진 Ladder를 생성한다")
     void generateLadderCreatesLadderWithGivenHeight() {
         //given
-        Line predefinedLine = new Line(List.of(new Step(true),
-                new Step(false),
-                new Step(true),
-                new Step(false)
-        ));
+        Line predefinedLine = new Line(List.of(new Step(true), new Step(false), new Step(true), new Step(false)));
 
         LineBuilder lineBuilder = new TestLineBuilder(predefinedLine);
         ladderBuilder = new LadderBuilder(lineBuilder);

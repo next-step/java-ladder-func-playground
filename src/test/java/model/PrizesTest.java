@@ -24,10 +24,7 @@ class PrizesTest {
         //given
         List<String> prizes = List.of("꽝", "1000000");
         //when
-        IllegalArgumentException exception = Assertions.assertThrows(
-                IllegalArgumentException.class,
-                () -> new Prizes(prizes)
-        );
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new Prizes(prizes));
         //then
         Assertions.assertEquals(ErrorMessage.NAME_LONGER_THAN_LIMIT, exception.getMessage());
     }

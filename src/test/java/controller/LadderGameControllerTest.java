@@ -24,11 +24,7 @@ class LadderGameControllerTest {
 
     @BeforeEach
     void setupTest() {
-        Line line = TestLadderBuilder.line(List.of(
-                TestLadderBuilder.step(true),
-                TestLadderBuilder.step(false),
-                TestLadderBuilder.step(true)
-        ));
+        Line line = TestLadderBuilder.line(List.of(TestLadderBuilder.step(true), TestLadderBuilder.step(false), TestLadderBuilder.step(true)));
         Ladder ladder = TestLadderBuilder.ladderOfSameLines(4, line);
         Players players = new Players(List.of("neo", "brown", "brie", "tomy"));
         Prizes prizes = new Prizes(List.of("꽝", "5000", "꽝", "3000"));

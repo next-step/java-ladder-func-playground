@@ -9,19 +9,25 @@ import java.util.stream.IntStream;
 public class Ladder {
     private final static int MIN_HEIGHT = 1;
 
-    private final List<LadderLow> lines;
+    private final List<LadderBridge> ladderBridges;
     private final int width;
 
-    public Ladder(int width, int height, BooleanGenerator booleanGenerator) {
+     Ladder(int width, int height, List<LadderBridge> ladderBridges) {
         validateHeight(height);
-        this.lines = IntStream.range(0, height)
-                .mapToObj(i -> new LadderLow(width, booleanGenerator))
-                .toList();
         this.width = width;
+        this.ladderBridges = ladderBridges;
     }
 
-    public List<LadderLow> getLines() {
-        return List.copyOf(lines);
+    public static Ladder of(int width, int height, BooleanGenerator booleanGenerator) {
+        List<LadderBridge> ladderBridges = IntStream.range(0, height)
+                .mapToObj(i -> new LadderBridge(width, booleanGenerator))
+                .toList();
+
+        return new Ladder(width, height, ladderBridges);
+    }
+
+    public List<LadderBridge> getBridges() {
+        return List.copyOf(ladderBridges);
     }
 
     public List<Integer> getAllResult() {
@@ -33,7 +39,7 @@ public class Ladder {
 
     private int getResult(int index) {
         int currentIndex = index;
-        for (LadderLow line : lines) {
+        for (LadderBridge line : ladderBridges) {
             currentIndex = line.calculateNextPosition(currentIndex);
         }
         return currentIndex;

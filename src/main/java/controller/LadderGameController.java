@@ -29,7 +29,7 @@ public class LadderGameController {
                 return;
             }
 
-            GameResultDto gameResultDto = ladderGame.checkSingleEntry(entry);
+            GameResultDto gameResultDto = ladderGame.checkSinglePlayer(entry);
             outputView.printSingleString(ScriptConstants.RESULT_HEADER);
             outputView.printSingleString(gameResultDto.prizeEntry());
         }

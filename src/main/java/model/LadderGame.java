@@ -10,6 +10,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+
 public class LadderGame {
     private final Players players;
     private final Prizes prizes;
@@ -25,12 +26,12 @@ public class LadderGame {
     private void validateGame(Players players, Prizes prizes, Ladder ladder) {
         if (!Objects.equals(players.playerCount(), prizes.prizeCount())
                 || !Objects.equals(prizes.prizeCount(), ladder.calculateWidth())
-                || !Objects.equals(ladder.calculateWidth(), players.playerCount())){
+                || !Objects.equals(ladder.calculateWidth(), players.playerCount())) {
             throw new IllegalArgumentException(ErrorMessage.MADE_IMPOSSIBLE_GAME);
         }
     }
 
-    public GameResultDto checkSingleEntry(String playerName) {
+    public GameResultDto checkSinglePlayer(String playerName) {
         int startIndex = players.calculateIndexOfPlayerName(playerName);
         LadderResultDto ladderResultDto = ladder.calculateSingleResultAsDto(startIndex);
 

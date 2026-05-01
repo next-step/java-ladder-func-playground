@@ -10,12 +10,6 @@ public class Players {
         this.names = names;
     }
 
-    public void validateMatch(Rewards rewards) {
-        if (this.names.size() != rewards.size()) {
-            throw new IllegalArgumentException("사람 수와 결과 수가 일치하지 않습니다.");
-        }
-    }
-
     public int size() {
         return names.size();
     }

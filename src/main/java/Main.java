@@ -1,7 +1,6 @@
 import controller.GenerateLadderGameController;
 import controller.LadderGameController;
 import controller.LadderResultOutputController;
-import model.Ladder;
 import model.LadderBuilder;
 import model.LadderGame;
 import model.LineBuilder;
@@ -24,7 +23,7 @@ public class Main {
         LadderResultOutputController ladderResultOutputController = new LadderResultOutputController(ladderGame, outputView);
         ladderResultOutputController.printLadderResults();
 
-        LadderGameController ladderGameController = new LadderGameController(inputView,outputView, ladderGame);
+        LadderGameController ladderGameController = new LadderGameController(inputView, outputView, ladderGame);
         ladderGameController.playGame();
     }
 }

@@ -13,10 +13,6 @@ public class LadderResultOutputController {
     }
 
     public void printLadderResults() {
-        printLadder();
-    }
-
-    private void printLadder() {
         outputView.printSingleString(ladderGame.toString());
     }
 }

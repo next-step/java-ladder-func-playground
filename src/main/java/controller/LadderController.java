@@ -1,6 +1,15 @@
 package controller;
 
-import domain.*;
+
+import domain.LadderGenerator;
+import domain.LadderHeight;
+import domain.Players;
+import domain.Rewards;
+import domain.GameResult;
+import domain.Ladder;
+import domain.LadderWidth;
+import domain.LadderResult;
+import domain.RandomBooleanGenerator;
 import view.InputView;
 import view.OutputView;
 
@@ -18,7 +27,7 @@ public class LadderController {
         Rewards rewards = inputRewards(players);
         LadderHeight height = new LadderHeight(inputView.readHeight());
 
-        Ladder ladder = Ladder.generate(new LadderWidth(players.size()), height, new RandomBooleanGenerator());
+        Ladder ladder = LadderGenerator.generate(new LadderWidth(players.size()), height, new RandomBooleanGenerator());
         outputView.printLadderBoard(players, ladder, rewards);
 
         GameResult gameResult = createGameResult(players, rewards, ladder);

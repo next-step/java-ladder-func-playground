@@ -6,12 +6,12 @@ import domain.strategy.BooleanGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LadderLow {
+public class LadderBridge {
     private final static int MIN_WIDTH = 2;
 
     private final List<Boolean> connections;
 
-    public LadderLow(int width, BooleanGenerator booleanGenerator) {
+    public LadderBridge(int width, BooleanGenerator booleanGenerator) {
         validateWidth(width);
         this.connections = new ArrayList<>();
 

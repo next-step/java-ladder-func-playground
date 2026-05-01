@@ -1,50 +1,29 @@
 package domain;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.List;
+import static org.assertj.core.api.Assertions.*;
 
 class LineTest {
 
     @Test
-    @DisplayName("가로 라인은 연속으로 생성되지 않는다.")
-    void generateFirst() {
-        Line line = Line.generateFirst(new LadderWidth(3), () -> true);
-
-        assertThat(line.isConnectedAt(0)).isTrue();
-        assertThat(line.isConnectedAt(1)).isFalse();
+    void 왼쪽이_연결되어_있으면_왼쪽으로_이동한다() {
+        Line line = new Line(List.of(true, false));
+        Position current = new Position(1);
+        assertThat(line.move(current)).isEqualTo(new Position(0));
     }
 
     @Test
-    @DisplayName("현재 위치에서 연결된 방향으로 이동한다.")
-    void move() {
-        Line line = new Line(Arrays.asList(true, false));
-
-        assertThat(line.move(new Position(0))).isEqualTo(new Position(1));
-        assertThat(line.move(new Position(1))).isEqualTo(new Position(0));
-        assertThat(line.move(new Position(2))).isEqualTo(new Position(2));
+    void 오른쪽이_연결되어_있으면_오른쪽으로_이동한다() {
+        Line line = new Line(List.of(true, false));
+        Position current = new Position(0);
+        assertThat(line.move(current)).isEqualTo(new Position(1));
     }
 
     @Test
-    @DisplayName("주입된 불리언 제너레이터의 반환값에 따라 사다리 라인이 검증된다.")
-    void generateWithSequentialRandom() {
-        BooleanGenerator sequentialGenerator = new BooleanGenerator() {
-            private boolean flag = false;
-
-            @Override
-            public boolean generate() {
-                flag = !flag;
-                return flag; // true, false, true, false 순서로 반환
-            }
-        };
-
-        Line line = Line.generateFirst(new LadderWidth(4), sequentialGenerator);
-
-        assertThat(line.isConnectedAt(0)).isTrue();
-        assertThat(line.isConnectedAt(1)).isFalse();
-        assertThat(line.isConnectedAt(2)).isTrue();
+    void 양쪽_모두_연결되어_있지_않으면_그대로_머문다() {
+        Line line = new Line(List.of(false, false));
+        Position current = new Position(1);
+        assertThat(line.move(current)).isEqualTo(new Position(1));
     }
 }

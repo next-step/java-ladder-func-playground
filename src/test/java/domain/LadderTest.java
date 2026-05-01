@@ -14,7 +14,7 @@ public class LadderTest {
 
     @Test
     void 사다리의_높이가_1_미만이면_예외가_발생한다() {
-        assertThatThrownBy(() -> new Ladder(2, 0, () -> true))
+        assertThatThrownBy(() -> Ladder.of(2, 0, () -> true))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(ErrorMessage.INVALID_LADDER_HEIGHT.getIntFormattedMessage(MIN_HEIGHT));
     }
@@ -35,7 +35,7 @@ public class LadderTest {
          */
         // given
         BooleanGenerator booleanGenerator = new IncrementalBooleanGenerator();
-        Ladder ladder = new Ladder(3, 2, booleanGenerator);
+        Ladder ladder = Ladder.of(3, 2, booleanGenerator);
         // when
         List<Integer> results = ladder.getAllResult();
         // then

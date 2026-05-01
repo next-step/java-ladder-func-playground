@@ -27,7 +27,9 @@ public class LadderController {
 
     private Rewards inputRewards(Players players) {
         Rewards rewards = inputView.readRewards();
-        players.validateMatch(rewards);
+        if (players.size() != rewards.size()) {
+            throw new IllegalArgumentException("사람 수와 결과 수가 일치하지 않습니다.");
+        }
         return rewards;
     }
 

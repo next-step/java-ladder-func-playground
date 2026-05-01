@@ -21,7 +21,7 @@ public class Main {
         LadderGame ladderGame = generateLadderGameController.generateLadderGame();
 
         LadderResultOutputController ladderResultOutputController = new LadderResultOutputController(ladderGame, outputView);
-        ladderResultOutputController.printLadderResults();
+        ladderResultOutputController.printFullLadder();
 
         LadderGameController ladderGameController = new LadderGameController(inputView, outputView, ladderGame);
         ladderGameController.playGame();

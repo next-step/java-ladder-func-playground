@@ -12,7 +12,7 @@ public class LadderResultOutputController {
         this.outputView = outputView;
     }
 
-    public void printLadderResults() {
-        outputView.printSingleString(ladderGame.toString());
+    public void printFullLadder() {
+        outputView.printFullLadderInGame(ladderGame.toString());
     }
 }

@@ -30,16 +30,12 @@ public class LadderGameController {
             }
 
             GameResultDto gameResultDto = ladderGame.checkSinglePlayer(entry);
-            outputView.printSingleString(ScriptConstants.RESULT_HEADER);
-            outputView.printSingleString(gameResultDto.prizeEntry());
+            outputView.printPlayerResult(gameResultDto);
         }
     }
 
     private void printAllResult() {
         List<GameResultDto> gameResultDtos = ladderGame.calculateEveryResult();
-        outputView.printSingleString(ScriptConstants.RESULT_HEADER);
-        for (GameResultDto gameResultDto : gameResultDtos) {
-            outputView.printSingleString(gameResultDto.toString());
-        }
+        outputView.printAllPlayerResult(gameResultDtos);
     }
 }

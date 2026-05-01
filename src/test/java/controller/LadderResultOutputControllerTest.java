@@ -35,12 +35,12 @@ class LadderResultOutputControllerTest {
 
     @Test
     @DisplayName("사다리 게임 결과를 예외 없이 출력한다")
-    void printLadderResultsExecutesWithoutException() {
+    void printFullLadderExecutesWithoutException() {
         //given
         LadderResultOutputController controller = new LadderResultOutputController(ladderGame, outputView);
 
         //when
         //then
-        Assertions.assertDoesNotThrow(controller::printLadderResults);
+        Assertions.assertDoesNotThrow(controller::printFullLadder);
     }
 }

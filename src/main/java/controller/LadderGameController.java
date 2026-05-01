@@ -33,7 +33,7 @@ public class LadderGameController {
         Players players = repeatUntilSuccess(this::readPlayers);
         Prizes prizes = repeatUntilSuccess(() -> readPrizes(players.getPlayerCount()));
         int ladderHeight = repeatUntilSuccess(this::readHeight);
-        Ladder ladder = repeatUntilSuccess(() -> new Ladder(
+        Ladder ladder = repeatUntilSuccess(() -> Ladder.of(
                 players.getPlayerCount(), ladderHeight, booleanGenerator
         ));
 
@@ -58,7 +58,7 @@ public class LadderGameController {
     private void processResults(Ladder ladder, Players players, Prizes prizes) {
         displayLadder(ladder, players, prizes);
 
-        LadderResult ladderResult = new LadderResult(players, prizes, ladder.getAllResult());
+        LadderResult ladderResult = LadderResult.of(players, prizes, ladder.getAllResult());
         queryResults(ladderResult, players);
     }
 

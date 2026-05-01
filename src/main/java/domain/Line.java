@@ -22,25 +22,28 @@ public class Line {
 
     public static Line generateNext(LadderWidth width, BooleanGenerator generator, Line previousLine) {
         List<Boolean> points = new ArrayList<>();
-        boolean previous = false;
+        boolean isConnectedLeft = false;
         for (int i = 0; i < width.getIntervalCount(); i++) {
-            boolean above = previousLine.isConnectedAt(i);
-            previous = addPoint(points, previous, above, generator);
+            boolean isConnectedAbove = previousLine.isConnectedAt(i);
+            isConnectedLeft = addPoint(points, isConnectedLeft, isConnectedAbove, generator);
         }
         return new Line(points);
     }
 
-    private static boolean addPoint(List<Boolean> points, boolean previous, boolean above, BooleanGenerator gen) {
-        boolean nextPoint = determineNext(previous, above, gen);
+    private static boolean addPoint(List<Boolean> points, boolean isConnectedLeft, boolean isConnectedAbove, BooleanGenerator gen) {
+        boolean nextPoint = determineNext(isConnectedLeft, isConnectedAbove, gen);
         points.add(nextPoint);
+
         return nextPoint;
     }
 
-    private static boolean determineNext(boolean previous, boolean above, BooleanGenerator gen) {
-        if (previous || above) {
+    private static boolean determineNext(boolean isConnectedLeft, boolean isConnectedAbove, BooleanGenerator generator
+    ) {
+        if (isConnectedLeft || isConnectedAbove) {
             return false;
         }
-        return gen.generate();
+
+        return generator.generate();
     }
 
     public boolean isConnectedAt(int index) {

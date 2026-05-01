@@ -16,7 +16,7 @@ public class Ladder {
 
     public static Ladder generate(LadderWidth width, LadderHeight height, BooleanGenerator generator) {
         Ladder ladder = createLadder(width, height, generator);
-        while (ladder.hasEmptyInterval(width)) {
+        while (ladder.hasEmptyInterval(width)) { // 불량이 있을 경우에만
             ladder = createLadder(width, height, generator);
         }
         return ladder;
@@ -43,7 +43,7 @@ public class Ladder {
                 .anyMatch(this::isEmptyInterval);
     }
 
-    private boolean isEmptyInterval(int index) {
+    private boolean isEmptyInterval(int index) { // 불량 판정
         return lines.stream().noneMatch(line -> line.isConnectedAt(index));
     }
 

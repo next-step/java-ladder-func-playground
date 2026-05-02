@@ -14,10 +14,18 @@ public class LadderGame {
     }
 
     public Map<String, String> play(List<String> prize) {
-        Players afterPlayers = Players.fromPlayers(players.toList().stream()
-                .map(player -> new Player(player.name(), ladder.rideLadder(player.position())))
-                .toList());
+        Players afterPlayers = movePlayers();
         return matchPrize(afterPlayers, prize);
+    }
+
+    private Players movePlayers() {
+        return Players.fromPlayers(players.toList().stream()
+                .map(this::rideLadder)
+                .toList());
+    }
+
+    private Player rideLadder(Player player) {
+        return new Player(player.name(), ladder.rideLadder(player.position()));
     }
 
     private Map<String, String> matchPrize(Players players, List<String> prize) {

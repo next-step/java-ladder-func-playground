@@ -31,7 +31,7 @@ public class LadderController {
         outputView.printLadder(ladder.toDisplayLines(), players.getPlayerNames(), ladderResult.getPrizes());
 
         LadderGame ladderGame = new LadderGame(ladder, players);
-        PrizeResults prizeResults = PrizeResults.from(ladderGame.play(ladderResult.getPrizes()));
+        PrizeResults prizeResults = ladderGame.play(ladderResult.getPrizes());
         printResult(prizeResults);
     }
 

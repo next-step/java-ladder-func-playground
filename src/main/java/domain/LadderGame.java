@@ -13,7 +13,7 @@ public class LadderGame {
         this.players = players;
     }
 
-    public Map<String, String> play(List<String> prize) {
+    public PrizeResults play(List<String> prize) {
         Players afterPlayers = movePlayers();
         return matchPrize(afterPlayers, prize);
     }
@@ -28,11 +28,13 @@ public class LadderGame {
         return new Player(player.name(), ladder.rideLadder(player.position()));
     }
 
-    private Map<String, String> matchPrize(Players players, List<String> prize) {
-        return players.toList().stream()
+    private PrizeResults matchPrize(Players players, List<String> prizes) {
+        Map<String, String> matchedPrizes = players.toList().stream()
                 .collect(Collectors.toMap(
                         Player::name,
-                        player -> prize.get(player.position())
+                        player -> prizes.get(player.position())
                 ));
+
+        return PrizeResults.from(matchedPrizes);
     }
 }

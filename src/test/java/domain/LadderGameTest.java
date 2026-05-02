@@ -21,15 +21,19 @@ public class LadderGameTest {
     void 사다리_실행_결과의_위치에_있는_상품을_플레이어에게_매칭한다() {
         Ladder ladder = Ladder.of(LADDER_WIDTH, LADDER_HEIGHT, new TestConnectionGenerator(TRUE_FALSE_TRUE_ROWS));
         Players players = Players.from(List.of("pobi", "crong", "loopy", "eddy"));
-        List<String> prize = List.of("crocodile", "bear", "fox", "beaver");
+        List<String> prizes = List.of("crocodile", "bear", "fox", "beaver");
         LadderGame ladderGame = new LadderGame(ladder, players);
-        Map<String, String> gameResult = ladderGame.play(prize);
 
-        assertThat(gameResult).isEqualTo(Map.of(
-                "pobi", "bear",
-                "crong", "crocodile",
-                "loopy", "beaver",
-                "eddy", "fox"
-        ));
+        PrizeResults gameResult = ladderGame.play(prizes);
+
+        assertThat(gameResult)
+                .usingRecursiveComparison()
+                .ignoringCollectionOrder()
+                .isEqualTo(PrizeResults.from(Map.of(
+                        "pobi", "bear",
+                        "crong", "crocodile",
+                        "loopy", "beaver",
+                        "eddy", "fox"
+                )));
     }
 }

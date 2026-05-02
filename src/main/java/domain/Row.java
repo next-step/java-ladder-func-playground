@@ -28,10 +28,10 @@ public class Row {
     }
 
     public int move(int position) {
-        if (position > START_POSITION && row.get(position - 1) == true) {
+        if (position > START_POSITION && row.get(position - 1)) {
             return position - ONE_STEP;
         }
-        if (position < row.size() && row.get(position) == true) {
+        if (position < row.size() && row.get(position)) {
             return position + ONE_STEP;
         }
         return position;

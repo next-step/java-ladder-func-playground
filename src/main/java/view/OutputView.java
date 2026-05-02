@@ -9,7 +9,7 @@ import java.util.List;
 
 public class OutputView {
 
-    private void printLadder(Ladder ladder, List<String> nameList, List<String> targetList) {
+    public void printLadder(Ladder ladder, List<String> nameList, List<String> targetList) {
         System.out.println("\n사다리결과");
         printNames(nameList);
         for (Line line : ladder.getLadder()) {
@@ -39,12 +39,12 @@ public class OutputView {
                 System.out.print("-----ㅣ");
                 continue;
             }
-            System.out.println("     ㅣ");
+            System.out.print("     ㅣ");
         }
         System.out.println(" ");
     }
 
-    private void printTarget(String input, LadderResult ladderResult, List<String> names) {
+    public void printTarget(String input, LadderResult ladderResult, List<String> names) {
         if (input.equals("all")) {
             printTotalResult(ladderResult, names);
         } else {
@@ -53,7 +53,7 @@ public class OutputView {
         }
     }
 
-    private void printTotalResult(LadderResult ladderResult, List<String> names) {
+    public void printTotalResult(LadderResult ladderResult, List<String> names) {
         System.out.println("\n실행 결과");
         for (String name : names) {
             System.out.println(name + " : " + ladderResult.getTargetLadderResult(name));

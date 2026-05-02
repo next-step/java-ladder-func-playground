@@ -30,7 +30,7 @@ public class LadderTest {
     void 입력한_높이만큼_사다리_행이_생성된다() {
         Ladder ladder = Ladder.of(LADDER_WIDTH, LADDER_HEIGHT, new TestConnectionGenerator(TRUE_FALSE_TRUE_ROWS));
 
-        assertThat(ladder.toBooleanLists()).hasSize(LADDER_HEIGHT);
+        assertThat(ladder.toDisplayLines()).hasSize(LADDER_HEIGHT);
     }
 
     @Test

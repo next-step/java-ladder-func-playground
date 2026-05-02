@@ -30,7 +30,7 @@ public class Ladder {
         return position;
     }
 
-    public List<List<Boolean>> toBooleanLists() {
+    public List<List<Boolean>> toDisplayLines() {
         return ladder.stream()
                 .map(Row::getRow)
                 .toList();

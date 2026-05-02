@@ -1,10 +1,10 @@
 package domain;
 
+import dto.PrizeResult;
 import generator.TestConnectionGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,12 +28,11 @@ public class LadderGameTest {
 
         assertThat(gameResult)
                 .usingRecursiveComparison()
-                .ignoringCollectionOrder()
-                .isEqualTo(PrizeResults.from(Map.of(
-                        "pobi", "bear",
-                        "crong", "crocodile",
-                        "loopy", "beaver",
-                        "eddy", "fox"
+                .isEqualTo(PrizeResults.from(List.of(
+                        new PrizeResult("pobi", "bear"),
+                        new PrizeResult("crong", "crocodile"),
+                        new PrizeResult("loopy", "beaver"),
+                        new PrizeResult("eddy", "fox")
                 )));
     }
 }

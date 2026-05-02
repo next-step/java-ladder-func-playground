@@ -1,8 +1,8 @@
 package domain;
 
+import dto.PrizeResult;
+
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class LadderGame {
     private final Ladder ladder;
@@ -13,9 +13,9 @@ public class LadderGame {
         this.players = players;
     }
 
-    public PrizeResults play(List<String> prize) {
+    public PrizeResults play(List<String> prizes) {
         Players afterPlayers = movePlayers();
-        return matchPrize(afterPlayers, prize);
+        return matchPrize(afterPlayers, prizes);
     }
 
     private Players movePlayers() {
@@ -29,12 +29,13 @@ public class LadderGame {
     }
 
     private PrizeResults matchPrize(Players players, List<String> prizes) {
-        Map<String, String> matchedPrizes = players.toList().stream()
-                .collect(Collectors.toMap(
-                        Player::name,
-                        player -> prizes.get(player.position())
-                ));
+        List<PrizeResult> prizeResults = players.toList().stream()
+                .map(player -> new PrizeResult(
+                        player.name(),
+                        prizes.get(player.position())
+                ))
+                .toList();
 
-        return PrizeResults.from(matchedPrizes);
+        return PrizeResults.from(prizeResults);
     }
 }

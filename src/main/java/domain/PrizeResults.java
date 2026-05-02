@@ -4,7 +4,6 @@ import dto.PrizeResult;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class PrizeResults {
     private final List<PrizeResult> prizeResults;
@@ -13,10 +12,8 @@ public class PrizeResults {
         this.prizeResults = new ArrayList<>(prizeResults);
     }
 
-    public static PrizeResults from(Map<String, String> ladderResult) {
-        return new PrizeResults(ladderResult.entrySet().stream()
-                .map(PrizeResult::from)
-                .toList());
+    public static PrizeResults from(List<PrizeResult> prizeResults) {
+        return new PrizeResults(prizeResults);
     }
 
     public PrizeResult findByName(String name) {

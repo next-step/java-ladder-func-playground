@@ -22,7 +22,8 @@ public class LadderTest {
     @Test
     void 사다리의_높이는_1이상이다() {
         assertThatThrownBy(() -> Ladder.of(LADDER_WIDTH, 0, new TestConnectionGenerator(TFT_ROW)))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("사다리의 높이는 1이상이어야합니다.");
     }
 
     @Test

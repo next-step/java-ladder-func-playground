@@ -19,6 +19,7 @@ public class PlayersTest {
     @Test
     void 플레이어의_이름은_중복될_수_없다() {
         assertThatThrownBy(() -> Players.from(List.of("pobi", "pobi")))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("플레이어 이름은 중복될 수 없습니다.");
     }
 }

@@ -5,6 +5,7 @@ import domain.LadderResult;
 import domain.ResultType;
 import util.StringUtil;
 import validator.ContentValidator;
+import validator.FormatValidator;
 import view.InputView;
 import view.OutputView;
 
@@ -13,11 +14,10 @@ import java.util.List;
 public class Controller {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
-    int COUNT = 2;
 
     public void run() {
         List<String> nameList = inputNames();
-        List<String> targetList = inputTargets();
+        List<String> targetList = inputTargets(nameList.size());
 
         int width = nameList.size() - 1;
         int height = inputHeight();
@@ -43,9 +43,13 @@ public class Controller {
         }
     }
 
-    private List<String> inputTargets() {
-        String targets = inputView.readTargets();
-        return StringUtil.splitByComma(targets);
+    private List<String> inputTargets(int nameCount) {
+        while(true) {
+            String input = inputView.readTargets();
+            if(FormatValidator.validateTargetsCount(input,nameCount)){
+                return StringUtil.splitByComma(input);
+            }
+        }
     }
 
     private int inputHeight() {

@@ -1,5 +1,9 @@
 package validator;
 
+import util.StringUtil;
+
+import java.util.List;
+
 public class FormatValidator {
     public static boolean validateCommaSeparatedFormat(String input) {
         if (input.isBlank()) {
@@ -12,6 +16,14 @@ public class FormatValidator {
             Integer.parseInt(input);
             return true;
         }catch (NumberFormatException e){
+            return false;
+        }
+    }
+    public static boolean validateTargetsCount(String input,int count){
+        try{
+            List<String> targets= StringUtil.splitByComma(input);
+            return targets.size()== count;
+        }catch (Exception e){
             return false;
         }
     }

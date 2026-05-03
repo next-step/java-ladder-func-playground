@@ -24,22 +24,22 @@ public class Players {
                 .filter(name -> name.length() > 5)
                 .findAny()
                 .ifPresent(name -> {
-                    throw new IllegalArgumentException(ErrorMessage.NAME_LONGER_THAN_LIMIT);
+                    throw new IllegalArgumentException(ErrorMessage.NAME_LONGER_THAN_LIMIT.getMessage());
                 });
     }
 
     private void validateNoDuplicatePlayerNames(List<String> playerNames) {
         int reducedCount = Math.toIntExact(playerNames.stream().distinct().count());
         if (reducedCount != playerNames.size()) {
-            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NAMES);
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATE_NAMES.getMessage());
         }
     }
 
     public Integer calculateIndexOfPlayerName(String playerName) {
         return IntStream.range(0, this.playerNames.size())
-                .filter(i-> Objects.equals(this.playerNames.get(i), playerName))
+                .filter(i -> Objects.equals(this.playerNames.get(i), playerName))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ENTRY_NOT_PRESENT));
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ENTRY_NOT_PRESENT.getMessage()));
     }
 
     public String getPlayerNameByIndex(int index) {

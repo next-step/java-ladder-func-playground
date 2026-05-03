@@ -36,7 +36,7 @@ class LadderTest {
     @DisplayName("calculateSingleResultAsDto는 각 Line의 moveAlongTheRow를 직전 결과를 인자로 순서대로 호출한다")
     void calculateSingleResultAsDtoCallsEachLineMoveAlongTheRowInOrder() {
         //given
-        List<Step> stepsFirst = List.of(new Step(false),new Step(true), new Step(true));
+        List<Step> stepsFirst = List.of(new Step(false), new Step(true), new Step(true));
         List<Step> stepsSecond = List.of(new Step(true), new Step(false), new Step(true));
         List<Step> stepsThird = List.of(new Step(true), new Step(true), new Step(false));
         Line firstLine = new Line(stepsFirst);

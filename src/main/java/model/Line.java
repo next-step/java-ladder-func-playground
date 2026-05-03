@@ -5,9 +5,7 @@ import constants.LadderConstants;
 
 import java.util.List;
 
-public class Line {
-    private final List<Step> steps;
-
+public record Line(List<Step> steps) {
     public Line(List<Step> steps) {
         this.validateLine(steps);
         this.steps = List.copyOf(steps);
@@ -20,7 +18,7 @@ public class Line {
 
     private void checkIfLineIsWideEnough(List<Step> stepList) {
         if (stepList.isEmpty() || stepList.size() < LadderConstants.MINIMUM_LINE_WIDTH) {
-            throw new IllegalArgumentException(ErrorMessage.LINE_NOT_LONG_ENOUGH);
+            throw new IllegalArgumentException(ErrorMessage.LINE_NOT_LONG_ENOUGH.getMessage());
         }
     }
 
@@ -31,7 +29,7 @@ public class Line {
             boolean nextStepIsBlank = stepList.get(i + 1).isBlank();
 
             if (!currentStepIsBlank && !nextStepIsBlank) {
-                throw new IllegalArgumentException(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW);
+                throw new IllegalArgumentException(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW.getMessage());
             }
         }
     }
@@ -62,7 +60,8 @@ public class Line {
         return steps.size();
     }
 
-    public List<Step> getSteps() {
+    @Override
+    public List<Step> steps() {
         return List.copyOf(this.steps);
     }
 

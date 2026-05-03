@@ -1,6 +1,5 @@
 package model;
 
-import constants.ErrorMessage;
 import constants.LadderConstants;
 import dto.GameResultDto;
 import dto.LadderResultDto;
@@ -9,6 +8,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import static constants.ErrorMessage.MADE_IMPOSSIBLE_GAME;
 
 
 public class LadderGame {
@@ -27,7 +28,7 @@ public class LadderGame {
         if (!Objects.equals(players.playerCount(), prizes.prizeCount())
                 || !Objects.equals(prizes.prizeCount(), ladder.calculateWidth())
                 || !Objects.equals(ladder.calculateWidth(), players.playerCount())) {
-            throw new IllegalArgumentException(ErrorMessage.MADE_IMPOSSIBLE_GAME);
+            throw new IllegalArgumentException(MADE_IMPOSSIBLE_GAME.getMessage());
         }
     }
 

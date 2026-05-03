@@ -21,7 +21,7 @@ class LineTest {
         //when
         Line line = new Line(steps);
         //then
-        Assertions.assertEquals(steps, line.getSteps());
+        Assertions.assertEquals(steps, line.steps());
     }
 
     @Test
@@ -32,7 +32,7 @@ class LineTest {
         //when
         Line line = new Line(steps);
         //then
-        Assertions.assertEquals(4, line.getSteps().size());
+        Assertions.assertEquals(4, line.steps().size());
     }
 
     @Test
@@ -43,7 +43,7 @@ class LineTest {
         //when & then
         assertThatThrownBy(() -> new Line(invalidSteps))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW);
+                .hasMessage(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW.getMessage());
     }
 
     @Test
@@ -54,7 +54,7 @@ class LineTest {
         //when & then
         assertThatThrownBy(() -> new Line(invalidSteps))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW);
+                .hasMessage(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW.getMessage());
 
     }
 
@@ -63,14 +63,14 @@ class LineTest {
     void widthLessThanMinimumThrowsIllegalArgumentException() {
         //given
         List<Step> tooNarrowSteps = new ArrayList<>();
-        for(int i = 0; i < LadderConstants.MINIMUM_LINE_WIDTH - 1; i++) {
+        for (int i = 0; i < LadderConstants.MINIMUM_LINE_WIDTH - 1; i++) {
             tooNarrowSteps.add(new Step(true));
         }
 
         //when & then
         assertThatThrownBy(() -> new Line(tooNarrowSteps))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW);
+                .hasMessage(ErrorMessage.CONSECUTIVE_STEPS_IN_A_ROW.getMessage());
     }
 
     @Test

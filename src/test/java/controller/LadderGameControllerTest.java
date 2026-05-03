@@ -5,11 +5,11 @@ import model.LadderGame;
 import model.Line;
 import model.Players;
 import model.Prizes;
-import testComponents.TestLadderBuilder;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import testComponents.TestLadderBuilder;
 import view.InputView;
 import view.OutputView;
 

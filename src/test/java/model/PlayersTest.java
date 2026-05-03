@@ -29,7 +29,7 @@ class PlayersTest {
                 () -> new Players(names)
         );
         //then
-        Assertions.assertEquals(ErrorMessage.NAME_LONGER_THAN_LIMIT, exception.getMessage());
+        Assertions.assertEquals(ErrorMessage.NAME_LONGER_THAN_LIMIT.getMessage(), exception.getMessage());
     }
 
     @Test
@@ -43,7 +43,7 @@ class PlayersTest {
                 () -> new Players(names)
         );
         //then
-        Assertions.assertEquals(ErrorMessage.DUPLICATE_NAMES, exception.getMessage());
+        Assertions.assertEquals(ErrorMessage.DUPLICATE_NAMES.getMessage(), exception.getMessage());
     }
 
     @Test
@@ -68,7 +68,7 @@ class PlayersTest {
                 () -> players.calculateIndexOfPlayerName("ghost")
         );
         //then
-        Assertions.assertEquals(ErrorMessage.ENTRY_NOT_PRESENT, exception.getMessage());
+        Assertions.assertEquals(ErrorMessage.ENTRY_NOT_PRESENT.getMessage(), exception.getMessage());
     }
 
     @Test

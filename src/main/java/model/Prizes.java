@@ -20,7 +20,9 @@ public class Prizes {
         prizes.stream()
                 .filter(name -> name.length() > 5)
                 .findAny()
-                .ifPresent(name -> {throw new IllegalArgumentException(ErrorMessage.NAME_LONGER_THAN_LIMIT);});
+                .ifPresent(name -> {
+                    throw new IllegalArgumentException(ErrorMessage.NAME_LONGER_THAN_LIMIT.getMessage());
+                });
     }
 
 

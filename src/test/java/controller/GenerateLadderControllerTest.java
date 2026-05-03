@@ -1,14 +1,13 @@
 package controller;
 
 import model.LadderBuilder;
-import model.LadderGame;
 import model.Line;
 import model.LineBuilder;
 import org.junit.jupiter.api.Assertions;
-import testComponents.TestLadderBuilder;
-import testComponents.TestLineBuilder;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import testComponents.TestLadderBuilder;
+import testComponents.TestLineBuilder;
 import view.InputView;
 
 import java.io.ByteArrayInputStream;

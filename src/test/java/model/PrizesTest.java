@@ -26,7 +26,7 @@ class PrizesTest {
         //when
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> new Prizes(prizes));
         //then
-        Assertions.assertEquals(ErrorMessage.NAME_LONGER_THAN_LIMIT, exception.getMessage());
+        Assertions.assertEquals(ErrorMessage.NAME_LONGER_THAN_LIMIT.getMessage(), exception.getMessage());
     }
 
     @Test

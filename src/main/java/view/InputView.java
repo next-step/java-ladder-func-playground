@@ -1,4 +1,5 @@
 package view;
+
 import constants.ErrorMessage;
 
 import java.util.ArrayList;
@@ -29,7 +30,7 @@ public class InputView {
         try {
             return Integer.parseInt(stringToConvert);
         } catch (Exception e) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_A_NUMBER);
+            throw new IllegalArgumentException(ErrorMessage.NOT_A_NUMBER.getMessage());
         }
     }
 
@@ -41,7 +42,7 @@ public class InputView {
     private List<String> parseByDelimiter(String userInput) {
         List<String> result = new ArrayList<String>();
 
-        for (String x: userInput.split(this.DELIMITER)) {
+        for (String x : userInput.split(this.DELIMITER)) {
             String strippedName = x.strip();
             result.add(strippedName);
         }

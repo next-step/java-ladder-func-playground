@@ -1,5 +1,7 @@
 package validator;
 
+import domain.ResultType;
+
 import java.util.List;
 
 public class ContentValidator {
@@ -11,14 +13,9 @@ public class ContentValidator {
     }
 
     public static boolean validateGetTarget(String input,List<String> nameList){
-        if(input.equals("all")){
+        if(ResultType.from(input).isAll()){
             return true;
         }
-        for(String name:nameList){
-            if(input.equals(name)){
-                return true;
-            }
-        }
-        return false;
+        return nameList.contains(input);
     }
 }

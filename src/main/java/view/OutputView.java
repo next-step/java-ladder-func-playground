@@ -1,0 +1,86 @@
+package view;
+
+import dto.LadderResponse;
+import dto.LadderResultResponse;
+import dto.LineResponse;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class OutputView {
+    private static final String DELIMITER = "|";
+    private static final String CONNECT_LINE = "-----";
+    private static final String EMPTY_LINE = "     ";
+    private static final int NAME_WIDTH = 5;
+
+    public void printGameBoard(LadderResponse ladderResponse, List<String> inputs, List<String> outputs) {
+        System.out.println("\n사다리 결과\n");
+        printList(inputs);
+        printLines(ladderResponse);
+        printList(outputs);
+    }
+
+    public void printTotalTargetResult(LadderResultResponse ladderResultResponse) {
+        System.out.println("\n실행결과");
+        String formattedResult = ladderResultResponse.results().entrySet().stream()
+                .map(entry -> String.format(
+                        "%s : %s", entry.getKey(), entry.getValue()
+                ))
+                .collect(Collectors.joining("\n"));
+
+        System.out.println(formattedResult);
+    }
+
+    public void printTargetResult(String result) {
+        System.out.println("\n실행결과");
+        System.out.println(result);
+    }
+
+    public void printTargetNameGuide() {
+        System.out.println("\n결과를 보고 싶은 사람은?");
+    }
+
+    public void printPlayerNameGuide() {
+        System.out.println("\n참여할 사람 이름을 입력하세요. (이름은 쉼표(,)로 구분하세요)");
+    }
+
+    public void printPrizeNameGuide() {
+        System.out.println("\n실행 결과를 입력하세요. (결과는 쉼표(,)로 구분하세요)");
+    }
+
+    public void printHeightGuide() {
+        System.out.println("\n최대 사다리 높이는 몇 개인가요?");
+    }
+
+    public void printErrorMessage(String message) {
+        System.out.println("[ERROR] " + message);
+    }
+
+    private void printList(List<String> stringList) {
+        for (String string : stringList) {
+            System.out.printf("%" + NAME_WIDTH + "s ", string);
+        }
+        System.out.println();
+    }
+
+    private void printLines(LadderResponse ladderResponse) {
+        String result = ladderResponse.ladder().stream()
+                .map(this::hasLine)
+                .collect(Collectors.joining("\n"));
+        System.out.println(result);
+    }
+
+    private String hasLine(LineResponse lineResponse) {
+        return lineResponse.lines().stream()
+                .map(this::convertToLineSymbol)
+                .collect(Collectors.joining(DELIMITER, "    " + DELIMITER, DELIMITER));
+    }
+
+    private String convertToLineSymbol(boolean hasConnection) {
+        if (hasConnection) {
+            return CONNECT_LINE;
+        }
+
+        return EMPTY_LINE;
+    }
+}
